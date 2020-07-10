@@ -1,4 +1,4 @@
-T-Wiki at DTU Fysik
+IT-Wiki at DTU Fysik
 ====================
 
 .. Contents::
