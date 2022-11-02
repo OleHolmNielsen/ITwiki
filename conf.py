@@ -45,4 +45,4 @@ html_theme_options = {
 }
 
 # html_theme = 'classic'
-html_static_path = ['_static']
+# html_static_path = ['_static']
