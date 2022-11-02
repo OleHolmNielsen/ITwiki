@@ -1,0 +1,27 @@
+*** /usr/share/perl5/vendor_perl/Net/SNMP/Message.pm.orig	2005-10-20 16:17:02.000000000 +0200
+--- /usr/share/perl5/vendor_perl/Net/SNMP/Message.pm	2015-09-17 13:11:53.024040052 +0200
+***************
+*** 22,27 ****
+--- 22,30 ----
+  
+  ## Version of the Net::SNMP::Message module
+  
++ # Added by NeDi:
++ use Time::HiRes;
++ 
+  our $VERSION = v2.0.3;
+  
+  ## Handle importing/exporting of symbols
+***************
+*** 644,649 ****
+--- 647,656 ----
+     }
+  
+     DEBUG_INFO('transport address %s', $this->{_transport}->dest_taddress);
++ 
++ # Added by NeDi
++    $this->{_transport}->{_send_time} = Time::HiRes::time;
++ 
+     $this->_buffer_dump;
+  
+     my $bytes = $this->{_transport}->send($this->{_buffer});

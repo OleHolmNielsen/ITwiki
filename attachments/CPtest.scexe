@@ -1,0 +1,10 @@
+#!/bin/bash
+#!scexe
+
+. CPINIT
+if test $? -eq 0
+then
+	echo SUCCESS sourcing script CPINIT
+else
+	echo ERROR sourcing script CPINIT
+fi

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Save the iptables chain BLACKLIST DROP lines for restarting sshblack
+# This script should be run regularly from crontab, for example:
+# */5 * * * * /usr/local/sbin/sshblack-save-state
+
+CHAIN=BLACKLIST
+SSHBLACK_HOME=/var/lib/sshblack
+if test ! -d $SSHBLACK_HOME
+then
+	echo Creating SSHBLACK_HOME directory $SSHBLACK_HOME
+	mkdir -v -p $SSHBLACK_HOME
+fi
+
+# Get the BLACKLIST DROP lines and create iptables commands.
+# Use sort and uniq to avoid duplicates.
+/sbin/iptables -S $CHAIN | grep DROP | sort -k 4 -n | uniq | sed 's/^/iptables /' > $SSHBLACK_HOME/restart.sh
+chmod 755 $SSHBLACK_HOME/restart.sh

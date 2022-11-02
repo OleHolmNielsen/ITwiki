@@ -1,0 +1,15 @@
+[Unit]
+Description=NeDi monitor daemon
+Requires=mariadb.service NetworkManager.service 
+# Before=crond.service
+After=mariadb.service NetworkManager.service 
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/libexec/nedi-monitor start
+ExecStop=/usr/libexec/nedi-monitor stop
+ExecReload=/usr/libexec/nedi-monitor reload
+
+[Install]
+WantedBy=basic.target

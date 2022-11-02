@@ -1,0 +1,15 @@
+[Unit]
+Description=NeDi syslog daemon
+Requires=mariadb.service NetworkManager.service 
+# Before=crond.service
+After=mariadb.service NetworkManager.service 
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/libexec/nedi-syslog start
+ExecStop=/usr/libexec/nedi-syslog stop
+ExecReload=/usr/libexec/nedi-syslog reload
+
+[Install]
+WantedBy=basic.target

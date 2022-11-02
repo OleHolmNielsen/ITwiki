@@ -1,0 +1,14 @@
+*** arpwatch-2.1a15/db.c.orig	2000-10-01 01:39:58.000000000 +0200
+--- arpwatch-2.1a15/db.c	2015-03-22 13:23:53.460820051 +0100
+***************
+*** 95,100 ****
+--- 95,103 ----
+  	u_char *e2;
+  	time_t t2;
+  
++ 	/* Ignore 0.0.0.0 ip address */
++ 	if (a == 0) return (1);
++ 
+  	/* Lookup ip address */
+  	ap = ainfo_find(a);
+  

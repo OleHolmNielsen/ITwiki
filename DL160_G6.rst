@@ -1,0 +1,392 @@
+.. _DL160_G6:
+
+HP DL160 G6 Intel Nehalem compute node
+======================================
+
+.. Contents::
+
+In May/June 2009 we expect to receive the first HP DL160 G6 Intel Nehalem compute nodes.
+
+HP product info and support
+-----------------------------------
+
+Product information and specifications for 
+`HP ProLiant DL160 G6 Server series <http://h10010.www1.hp.com/wwpc/us/en/en/WF25a/15351-15351-3328412-241644-3328421-3884343.html>`_.
+There are `Quickspecs <http://h18004.www1.hp.com/products/quickspecs/13247_div/13247_div.html>`_ 
+and `Manuals <http://h20000.www2.hp.com/bizsupport/TechSupport/DocumentIndex.jsp?contentType=SupportManual&lang=en&cc=us&docIndexId=64180&taskId=101&prodTypeId=15351&prodSeriesId=3884343>`_
+for DL160 G6.
+
+There is a page with `DL160 G6 drivers and downloads <http://h20000.www2.hp.com/bizsupport/TechSupport/SoftwareIndex.jsp?lang=en&cc=us&prodNameId=3884344&prodTypeId=15351&prodSeriesId=3884343&swLang=13&taskId=135&swEnvOID=4004>`_ 
+for Red Hat Enterprise Linux 5 Server (x86-64).
+
+DL160 CPLD upgrade
+-----------------------------------
+
+**False error messages** about power supplies will be logged to the system.
+This problem does not affect the operation of the server, but is still annoying.
+
+The `Advisory  c02499696 <https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-c02499696>`_
+*ProLiant 100-Series Servers - Certain ProLiant 100-Series Servers Configured with HP ProLiant Server Health Driver Version 8.50 (or Earlier) And Red Hat Linux 5 Update 4 May Display False Power Supply Status Messages*
+states::
+
+  Certain ProLiant 100-series servers configured with the HP ProLiant Server Health Driver Version 8.50 (or earlier) and Red Hat Linux 5 Update 4 may, on rare occasions, display the following false power supply status messages in the /var/log/messages file:
+  Jun 5 01:08:09 localhost hpasmpld[4181]: CRITICAL: System Power Supply Removed (Power Supply 1)
+  Jun 5 01:08:19 localhost hpasmpld[4181]: NOTICE: System Power Supply Inserted (Power Supply 1)
+  The error message may be logged every few days or weekly. This typically occurs when a single power supply is installed in the server.
+
+This also applies to Windows servers, see `Advisory c03027164 <https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-c03027164&docLocale=en_US>`_.
+
+The solution is to download and install SoftPaq SP50423 **CPLD Version 1.12** from
+https://downloads.hpe.com/pub/softlib2/software1/pubsw-windows/p3231552/v64980/SP50423.exe
+
+Installation instructions are missing, but they are:
+
+1. Execute ``SP50423.exe`` on a Windows PC.
+
+2. Go to the folder ``C:\\swsetup\\SP50423`` and create either a bootable CD or a bootable USB key from the subfolders.
+
+3. Boot the DL160 G6 server to the CD or USB key and follow instructions.
+
+4. After the CPLD version 1.12 upgrade is completed, **physically unplug power for 1 minute**.
+
+
+DL160 G6 Diagnostics
+-----------------------------------
+
+To perform a hardware inventory or hardware diagnostics, you need to boot the *HP ProLiant DL160 G6 Easy Set-up CD*
+downloadable from the above mentioned downloads page.
+With this CD there is a tool to create a bootable USB memory stick, however, to enable boot from USB devices see the advice below.
+
+Select the *HP Insight Diagnostics Offline Edition* for inventory or diagnostics.
+
+Please note that version 2.00 has a bug described in this Advisory: 
+`Processor Temperature Test" Incorrectly Fails Under HP Insight Diagnostics Offline Edition 8.2.5.3157 When Launched from the Easy Setup CD <http://h20000.www2.hp.com/bizsupport/TechSupport/Document.jsp?lang=en&cc=us&taskId=110&prodSeriesId=3884343&prodTypeId=15351&prodSeriesId=3884343&objectID=c01751803>`_.
+For each processor, uncheck the *System->Processor Package 1->Processor Temperature Test* to prevent the test from running and therefore returning an incorrect result.
+
+DL160 G6 BIOS settings
+-----------------------------------
+
+A number of factory default BIOS settings must be changed:
+
+ * **Advanced->CPU Configuration**::
+
+     *Intel VT-d*                      = Disabled (Virtualization I/O - was in Advanced menu until BIOS 20100519).
+     *Intel Virtualization Technology* = Disabled (Virtualization).
+     *Intel HT technology*             = Disabled (Hyperthreading).
+
+ * The **Advanced->SATA Configuration:** = Compatibility **MUST** be changed prior to OS installation::
+
+     SATA#1 Controller Mode = AHCI
+
+ * **Advanced:** *Power Efficiency Mode* = Performance.
+
+ * The **Boot->Standard Boot Order:** is changed so that *Network* is before *Hard drive*.
+
+ * The **Boot->Boot Settings Configuration:** is changed so that *Num Lock* = Disabled.
+
+ * The **Boot->Boot Settings Configuration:** is changed so that *Quiet Boot* = Disabled.
+
+Booting from an USB device
+--------------------------
+
+The HP DL100 series servers' BIOS seem to detect USB disk devices and memory sticks as a built-in hard disk.
+This means that the boot order is confusing, but you can boot different devices like this:
+
+1. USB CD-ROM drives will always be the 1st boot device (maybe there's a BIOS setting to modify this?).
+
+2. USB disk devices and memory sticks will become hard drive #1, making the built-in hard disk #2.
+
+3. If PXE is the first boot device, PXE booting can be interrupted by pressing the keyboard **ESC** button, causing the BIOS to boot from the hard disk #1 device,
+   which is the USB disk device (if inserted before starting the server).
+
+If you need to boot a HP Diagnostics or other USB disk device, use method 3. above.
+
+CentOS installation on DL160 G6
+-----------------------------------
+
+Disk performance problem
+------------------------
+
+If you use the::
+
+  SATA Configuration = Compatibility
+
+BIOS setting, you will have serious disk performance problems.
+This can to some extent be alleviated by the procedure below, but it is recommended to use the **AHCI setting** as shown above.
+
+The initial CentOS 5.3 installation has very bad disk performance even with `pci=conf1`, and this needs to be replaced in ``/etc/grub.conf`` by::
+
+  pci=nomsi,nommconf hda=noprobe hdc=noprobe
+
+See https://bugzilla.redhat.com/show_bug.cgi?id=439391 (postings at the end).
+
+**Note**: after the kickstart installation please make sure that ``/etc/grub.conf`` contains
+the necessary kernel flags.
+
+CentOS 5.3 does **not** fix this problem (tested with kernel 2.6.18-128.1.6.el5PAE), so `noprobe` flags are still needed.
+This solution obsoletes the kernel replacement stuff documented below.
+
+DL160 G6 BIOS upgrades
+-----------------------------------
+
+BIOS upgrade from Linux
+-----------------------
+
+BIOS upgrades can be performed from Linux using the *Online ROM Flash Component for Linux - HP ProLiant DL160 G6 Servers* from the above download page.
+
+Run the script as root, for example::
+
+  sh CP010987.scexe
+
+BIOS upgrade from PXE boot
+--------------------------
+
+HP also delivers ROMPAQ BIOS upgrades for USB key media, and *flat files*, in a Windows executable .EXE file.
+However, the BIOS flat files can be copied to a 1.44 MB diskette image which may be used as a PXE-bootable image file.
+
+Unpack the ROMPAQ SPxxxxx.EXE file on a Windows PC and copy the folders to a Linux system.
+
+Before running an unattended BIOS upgrade from DOS, first check the available command flags which are::
+
+  > rompaq.exe /?
+
+  Usage:    ROMPAQ [options]
+  Options:
+   /B[ootblock]   (Simulate disaster recovery mode)
+   /C[ompress]    infile product_id rom_index rom_revision
+                  [iterate_size (in Kbytes)]
+                  (Compress infile using specified args in header)
+   /CS            infile
+                  (Short form compression.  Driver must support this feature.
+   /D[ecompress]  infile outfile
+                  (Decompress infile to outfile)
+   /F[actory]     driver product_id
+                  (Run in factory mode and update specified product ROM)
+   /H[elp] or /?  (Display this message)
+   /R[emote]      (Run in remote mode)
+   /S[pawned]     (Return non-zero val if spawning program should reboot)
+   /T[ext]        (Use text mode interface instead of graphics)
+   /U[nattended]  driver image_file
+                  (Run in unattended mode and update specified product ROM)
+   /V[erify]      infile
+                  (Verify the checksum of infile)
+   /X [test]      (Pass test mode flag to drivers)
+   /! [Halt]      (Halt machine instead of exiting to DOS)
+
+Creating a bootable DOS diskette image
+--------------------------------------
+
+We need to obtain a DOS bootable diskette image from some alternative source.
+A very minimal DOS image is required because of the 1.44 MB diskette image size limit.
+
+We have used the http://www.bootdisk.com/bootdisk.htm image `Special Disk For Bios Flashing <http://www.rloe.com/ken/drdflash.zip>`_.
+Unzip the DRDFLASH files to an empty directory and mount the image::
+
+  mkdir drdflash
+  cd drdflash
+  unzip ../drdflash.zip
+  cp DRDFLASH.IMG /tmp/dl160g6_bios.img
+  mount -o loop /tmp/dl160g6_bios.img /mnt
+
+Changing boot diskette from 1.44MB to 2.88MB
+--------------------------------------------
+
+The files to be copied to the boot diskette image may cause a *disk full* error on 1.44MB diskettes.
+
+It is however possible to change the ``DRDFLASH.IMG`` image from 1.44MB to 2.88MB using the shareware tool `WinImage <http://www.winimage.com/download.htm>`_ on a Windows PC.
+Open the ``DRDFLASH.IMG`` image with *WinImage* and select the menu item *Image->Change format...* and select *Standard format: 2.88 MB*.
+Save the image and exit *WinImage*.
+
+Creating a ROMPAQ boot diskette image
+-------------------------------------
+
+Mount the above mentioned DOS bootable diskette image as described above.
+
+First copy the ROMPAQ files to a Linux PC as described above.  Then copy the ROMPAQ files to the image::
+
+  cp .../ROMPaq Flat Files/* /mnt/
+
+Edit the DRDFLASH file */mnt/autoexec.bat* (make sure that the file contains CR-LF at the end, use *od -c autoexec.bat*) to append a line similar to::
+
+  ROMPAQ /T /U CPQSRVR2.CPU CPQO3302.xxx
+
+Here CPQSRVR2.CPU is the driver and CPQO3302.xxx is the image file.
+**Remember** to change the **filename CPQO3302.xxx** in *autoexec.bat* according to the filenames in the ROMPAQ !
+
+The ``/U`` and ``/T`` flags should be used for unattended BIOS upgrades.
+
+Unmount the image and copy it to /tftpboot on the TFTP boot server::
+
+  umount /mnt
+  scp /tmp/dl160g6_bios.img root@ymer:/tftpboot/dl160g6/
+
+
+For standard interactive BIOS upgrade the *autoexec.bat* file should contain::
+
+  ROMPAQ.EXE /L:US /!
+
+This line can only be seen from the USB key upgrade media, it doesn't seem to be documented (and the /L flag is undocumented).
+
+AFUDOS BIOS upgrades
+--------------------
+
+BIOS upgrades newer than 07/06/2011 use the AMI BIOS AFUDOS.EXE *AMI FLASH UTILITY for DOS*.
+The default AUTOEXEC.BAT file on the DOS upgrade image calls a file FBB.BAT containing::
+
+  echo Flashing Main BIOS & Boot Block...
+  afudos 18DIM243.ROM /p /b /s /q
+
+This will do an unattended BIOS upgrade and leave at the DOS prompt, from which the user must reboot manually.
+To list all command flags do::
+
+  afudos /h
+
+DL160 G6 BIOS parameter replication
+-----------------------------------
+
+The DL160 G6 BIOS parameter settings can be saved or restored by means of the HP *SmartStart Scripting Toolkit for Linux* (see the downloads page).
+However, `version 2.20 <http://h20000.www2.hp.com/bizsupport/TechSupport/SoftwareDescription.jsp?lang=en&cc=us&prodTypeId=15351&prodSeriesId=3884343&prodNameId=3884344&swEnvOID=4004&swLang=13&mode=2&taskId=135&swItem=MTX-1df77aded07e4f62b55a101a82>`_
+or greater of this toolkit is required for use with the DL100 series servers.
+
+When running under Linux (using e.g. CentOS or SmartStart), use this command on a DL160 G6 node to save the BIOS settings to a file::
+
+  cd /home/ymer/SmartStartScripting-2.20/utilities
+  ./conrep -s -f /tmp/conrep.xml -x ../conrep_xml/ConrepDL160G6.xml
+
+The file ``/tmp/conrep.xml`` contains the BIOS settings that can be restored by::
+
+    cd /home/ymer/SmartStartScripting-2.20/utilities
+  ./conrep -l -f /tmp/conrep.xml -x ../conrep_xml/ConrepDL160G6.xml
+
+The *conrep* command syntax is::
+
+  Usage conrep -s | -l [-f output filename] [-x xml configuration filename] [-?]
+
+  -s Saves the current configuration to a file.
+  -l Loads configuration setting from a file.
+  -f Name of the output file.
+  -x Name of the XML definition file.
+        If not present, the XML configuration will default to conrep.xml
+        If not present, the output filename default to conrep.dat
+
+  Error Codes:
+        0 - Success
+        1 - Bad XML File
+        2 - Bad Data File
+        4 - Admin Password set
+        5 - No XML Tag
+
+
+DL160G6 BMC
+-----------------------------------
+
+The on-board BMC controller is documented in the manual 
+`Lights-Out 100 User Guide
+<http://h20000.www2.hp.com/bizsupport/TechSupport/CoreRedirect.jsp?redirectReason=DocIndexPDF&prodSeriesId=3884343&targetPage=http%3A%2F%2Fbizsupport1.austin.hp.com%2Fbc%2Fdocs%2Fsupport%2FSupportManual%2Fc02063205%2Fc02063205.pdf>`_.
+
+The BMC MAC address is found in the *Setup* screen *IPMI Configuration->Lan Configuration* where you can also configure DHCP.
+You enable the LO100 Shared Ethernet network access as described on pages 7 and 9 with the IP-address being assigned by DHCP:
+
+1. Boot into BIOS Setup (F10).
+2. Go to the setup window *IPMI Configuration->Set LAN Configuration*.
+3. Set the item *BMC NIC Allocation* to *Shared* (default is *Dedicated*).
+
+You can also use the IPMI interface to configure the BMC, but you **cannot** change the *BMC NIC Allocation*!
+
+BMC firmware updates
+--------------------
+
+HP has released BMC firmware updates that can be executed under Linux.
+In the software download page see the item *Online Firmware Flash Component for Linux - HP ProLiant G6/G7 Lights-Out 100 Remote Management*
+which was first released in June 2010.
+
+Download and execute the BMC firmware update file on-line under Linux.
+However, due to the bad way HP's utilities handle the IPMI interface, special care must be done when upgrading the BMC.
+You **must** manually handle the starting and stopping of IPMI in the following way::
+
+  service ipmi restart  # Initialize IPMI correctly
+  sh CP013308.scexe     # Run firmware upgrade tool
+  service ipmi restart  # Reinitialize IPMI correctly after upgrade
+  service ipmi stop     # Stop IPMI correctly
+
+If you neglect to perform the mentioned IPMI commands, a superfluous CPU load of 1.0 will be permanently added to your system!
+
+BMC firmware updates on CentOS6/RHEL6
+.....................................
+
+On CentOS6/RHEL6 the BMC firmware update script doesn't work, you get this error::
+
+  # ./CP017117.scexe
+  ./hpsetup: line 2: .: lo100.sh: file not found
+  Parameters are: --source /root
+  ./hpsetup: line 7: lo100main: command not found
+
+First you must install this package::
+
+  yum install libstdc++-4.4.6-3.el6.i686
+
+The problem seems to be the newer version of *bash* in RHEL6.
+A simple workaround is to prepend "." to the PATH::
+
+  PATH=.:${PATH}
+  ./CP017117.scexe
+
+See advice in http://jfut.integ.jp/2012/04/20/update-hp-firmware-error-on-rhel6-another/.
+
+Another method: Extract the contents of the CPxxxxxx.scexe package::
+
+   ./CP017117.scexe  --unpack=setup
+
+which will extract to the directory ``setup``.
+In the script ``hpsetup`` change the shell from *sh* to *bash*, see http://jfut.integ.jp/2012/03/18/update-hp-firmware-error-on-rhel6/.
+Then run the ``hpsetup`` script.
+
+Alternative method of network updating
+......................................
+
+The section "Remotely updating the firmware" on the manual's page 11 first creates an uncompressed binary image file::
+
+   rompaq /d CPQQ1402.272 ldrimage.bin 
+
+You can now telnet to the BMC IP-address using the default username/password of **admin/admin**.
+
+To upgrade the BMC firmware from the telnet prompt::
+
+  cd map1/firmware
+  load -source //10.2.128.2/dl160g6/LDRIMAGE.BIN -oemhpfiletype csr 
+
+However, this doesn't seem to work (June 25, 2009), and neither does update from a web browser.
+
+DL100 series SETSYS (setting the serial number)
+---------------------------------------------------------------------
+
+When the system board is replaced, the `Setsys Utility for HP ProLiant 100 series G5 and G6 Servers (For USB Key-Media) 
+<http://h20000.www2.hp.com/bizsupport/TechSupport/SoftwareDescription.jsp?lang=en&cc=us&prodTypeId=15351&prodSeriesId=3580694&prodNameId=3580695&swEnvOID=2081&swLang=8&mode=2&taskId=135&swItem=MTX-1d48ae3f19d945b481c20736d6>`_ 
+must be booted to set the serial number in the new system board.
+
+You can find updated versions of SETSYS under the *DL160 G5* with 
+`DR-DOS operating system <http://h20000.www2.hp.com/bizsupport/TechSupport/SoftwareIndex.jsp?lang=en&cc=us&prodNameId=3580695&prodTypeId=15351&prodSeriesId=3580694&swLang=8&taskId=135&swEnvOID=2081>`_
+(not yet with *DL160 G6*).
+
+To make a PXE-bootable image with SETSYS, prepare a minimal DOS image as shown above for the BIOS.
+Unpack the HP utility and copy the files from the *Flat Files* folder to the image.
+
+Usage information for SETSYS is obtained by::
+
+  SETSYS /?
+
+The HP SETSYS utility command to update the serial number must be typed in UPPER CASE:
+
+* Type the following (with the appropriate Serial Number)::
+
+      SETSYS /S=GBxxxxxxx
+
+* Run just SETSYS (no switches) to verify change.
+
+
+
+DL160 power supply
+-----------------------------------
+
+Our DL160 G6 nodes all use the *HP High Efficiency 460W Power Supply Kit* (P/N 535684-B21).
+If you want to buy a spare part power supply, the part number is P/N **511777-001**.

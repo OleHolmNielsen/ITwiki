@@ -1,0 +1,880 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Setting Up Subversion for One or Multiple Projects</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="/sites/linuxjournal.com/themes/linuxjournal/favicon.ico" type="image/x-icon" />
+  <style type="text/css" media="all">@import "/modules/aggregator/aggregator.css";</style>
+<style type="text/css" media="all">@import "/modules/book/book.css";</style>
+<style type="text/css" media="all">@import "/modules/node/node.css";</style>
+<style type="text/css" media="all">@import "/modules/system/defaults.css";</style>
+<style type="text/css" media="all">@import "/modules/system/system.css";</style>
+<style type="text/css" media="all">@import "/modules/user/user.css";</style>
+<style type="text/css" media="all">@import "/sites/linuxjournal.com/themes/linuxjournal/style.css";</style>
+<link rel="stylesheet" type="text/css" href="/sites/linuxjournal.com/themes/linuxjournal/css/magazine.css" />
+
+  <!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" href="/sites/linuxjournal.com/themes/linuxjournal/css/ie6.css" />
+  <![endif]-->
+ <!--[if IE 7]>
+    <link rel="stylesheet" type="text/css" href="/sites/linuxjournal.com/themes/linuxjournal/css/ie7.css" />
+  <![endif]--> 
+
+  <script type="text/javascript" src="/misc/jquery.js"></script>
+<script type="text/javascript" src="/misc/drupal.js"></script>
+  <script src="/sites/linuxjournal.com/themes/linuxjournal/js/ljcustom.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/sites/linuxjournal.com/themes/linuxjournal/js/openads.js" type="text/javascript" charset="utf-8"></script>
+<!-- MRF
+  <script src="/sites/linuxjournal.com/local/linuxjournal.js" type="text/javascript" charset="utf-8"></script>
+-->
+</head>
+
+<body class="not-logged-in ntype-xmlnode">
+  <div id="container">
+    <div id="innercontainer">
+
+      <!-- HEADER START ================================================== -->
+      <div id="header">
+        <h1><a href="/" title="Home"></a></h1>
+      
+        <div id="leaderboard-adblock" class="adblock leaderboard-adblock">
+<script language='JavaScript' type='text/javascript'>
+<!--
+phpads_show_ad("http://ads.linuxjournal.com", "8");
+//-->
+</script>
+</div>
+      
+        <div id="header_menubar">
+          
+<ul class="menu">
+<li class="leaf"><a href="/">Home</a></li>
+<li class="expanded"><a href="/topics">Topics</a>
+<ul class="menu">
+<li class="leaf"><a href="/taxonomy/term/28">Audio/Video</a></li>
+<li class="leaf"><a href="/taxonomy/term/18">Community</a></li>
+<li class="leaf"><a href="/taxonomy/term/25">Education</a></li>
+<li class="leaf"><a href="/taxonomy/term/27">Embedded</a></li>
+<li class="leaf"><a href="/taxonomy/term/23">Hardware</a></li>
+<li class="leaf"><a href="/taxonomy/term/19">HOWTOs</a></li>
+<li class="leaf"><a href="/taxonomy/term/30">International</a></li>
+<li class="leaf"><a href="/taxonomy/term/20">Reviews</a></li>
+<li class="leaf"><a href="/taxonomy/term/31">Security</a></li>
+<li class="leaf"><a href="/taxonomy/term/17">Software</a></li>
+<li class="leaf"><a href="/taxonomy/term/21">SysAdmin</a></li>
+<li class="leaf"><a href="/taxonomy/term/24">Webmaster</a></li>
+
+</ul>
+</li>
+<li class="expanded"><a href="/blog">Blogs</a>
+<ul class="menu">
+<li class="leaf"><a href="/blog/801140">Tom Adelstein</a></li>
+<li class="leaf"><a href="/blog/801137">Pat Eyler</a></li>
+<li class="leaf"><a href="/blog/1000864">Jon &quot;maddog&quot; Hall</a></li>
+<li class="leaf"><a href="/blog/800285">Doc Searls</a></li>
+
+</ul>
+</li>
+<li class="expanded"><a href="/node/1000427">eNewsletters</a>
+<ul class="menu">
+<li class="leaf"><a href="/weeklynewsnotes">LJ Weekly News Notes</a></li>
+<li class="leaf"><a href="/offtheshelf">Off the Shelf</a></li>
+
+</ul>
+</li>
+<li class="expanded"><a href="/xstatic/community">Community Resources</a>
+<ul class="menu">
+<li class="leaf"><a href="/xstatic/community/whatislinux">What Is Linux?</a></li>
+<li class="leaf"><a href="/getlinux">How to Get Linux</a></li>
+<li class="leaf"><a href="/supportedhardware">Supported Hardware</a></li>
+<li class="leaf"><a href="/software">Software</a></li>
+<li class="leaf"><a href="/gettinghelp">Getting Help</a></li>
+<li class="leaf"><a href="/xstatic/community/events">Industry Events</a></li>
+
+</ul>
+</li>
+<li class="expanded"><a href="/magazine">Magazine</a>
+<ul class="menu">
+<li class="leaf"><a href="/magazine">Read</a></li>
+<li class="leaf"><a href="/subscriptions">Subscribe</a></li>
+<li class="leaf"><a href="https://secure.linuxjournal.com/allsubs/plj.php?action=login">Renew</a></li>
+<li class="leaf"><a href="/xstatic/subs/customer_service.html">Customer Service</a></li>
+<li class="leaf"><a href="/archivecd">Archive CD</a></li>
+<li class="leaf"><a href="/xstatic/aboutus/FAQ">FAQ</a></li>
+<li class="leaf"><a href="/xstatic/staff/index">Masthead</a></li>
+<li class="leaf"><a href="/xstatic/author/index">Write for Us</a></li>
+<li class="leaf"><a href="/xstatic/advertising/">Advertise</a></li>
+
+</ul>
+</li>
+
+</ul>
+                      <a class="button" href="/user/login">Login</a>
+                    <form action="/search/node"  method="post" id="search-theme-form">
+<div><div id="search" class="container-inline"><div class="form-item">
+ <input type="text" maxlength="128" name="search_theme_form_keys" id="edit-search-theme-form-keys"  size="15" value="" title="Enter the terms you wish to search for." class="form-text" />
+</div>
+<input type="submit" name="op" id="edit-submit" value="Search"  class="form-submit" />
+<input type="hidden" name="form_id" id="edit-search-theme-form" value="search_theme_form"  />
+</div>
+</div></form>
+        </div>
+    
+                  <div id="header_breadcrumb"><a href="/">Home</a></div>
+              </div>
+      <!-- HEADER END ==================================================== -->
+
+
+
+      <!-- CONTENT START ================================================= -->
+      <div id="content">
+      
+        <!-- CONTENT LEFT -->
+        <div id="content_left">
+          
+          <!-- CONTENT HEADER -->
+                    <!-- END CONTENT HEADER -->
+      
+          <!-- CONTENT BODY -->
+          <div id="content_body">
+                      
+                    
+                    
+                                    <div class="node ntype-xmlnode" id="node-7655">
+  <div class="head">
+
+      <h3>Setting Up Subversion for One or Multiple Projects</h3>
+  
+        <h4>July 2nd, 2004 by <a href="/user/801436" title="View user profile.">Cristiano Paris</a><span class="taxonomy"> in<ul class="links inline"><li class="first last taxonomy_term_21"><a href="/taxonomy/term/21" rel="tag" title="" class="taxonomy_term_21">SysAdmin</a></li>
+</ul></span>    </h4>
+      </div>
+  
+  <div class="content">
+        Deploying a secure and manageable Subversion installation that uses Apache 2.0 as a central authentication checkpoint and SSL for data integrity and confidentiality.    <div class="article" lang="en"><div class="simplesect" lang="en"><div class="titlepage"><a name="N0xa50890.0xb44a68"></a></div><p>
+   The history of versioning systems is quite extensive. They have proven to be
+   effective during the many stages of project development, from source code management to documentation and publishing. In
+   the Open Source community, the Concurrent Versioning System (CVS)
+   has become the standard in the development process, being an
+   essential tool to coordinate the efforts of tens to hundreds of
+   developers around the world.
+</p><p>
+   After many years' worth of success stories, however, CVS has begun to show
+   problems, mostly related to security and to the lack of such important
+   features as atomic commits. Recently, many CVS-replacement candidates
+   have begun to appear on the scene. Some of them still are immature for
+   critical deployments, while others propose radically new approaches,
+   making them inadequate for a smooth migration.
+</p><p>
+   Among this plethora of new players, Subversion is receiving the
+   attention of many open-source developers due to its robustness,
+   similarity to CVS and innovative architecture. Having recently marked its 1.0 version release, Subversion
+is being used in many open-source projects, including SpamAssassin, the Linux 1394 FireWire support project and the SILO Sparc Boot 
+loader.
+</p><p>
+   As with any new toy that comes into a system administrator's hands,
+   security is the first concern when dealing with Subversion. The good news is Subversion has been developed in
+   these hard times, in which few can be trusted. Subversion
+   takes the smart approach of coupling with the Apache Web Server and delegating many security functions to Apache. This approach
+   has many advantages:
+</p><div class="itemizedlist"><ul type="disc"><li><p>Apache is a mature and well understood platform for handling 
+       security functionalities, such as authentication, access control,
+       confidentiality and so on.</p></li><li><p>Apache is monitored strictly for security bugs: response times to
+       a new vulnerability are very low.</p></li><li><p>Apache adopts many of the most recent standards, making it an
+       always current platform.</p></li><li><p>Apache often is present in the established network infrastructure, so there's
+       no need to open new network ports and adapt your firewall
+       accordingly.</p></li><li><p>Apache's flexibility in log management eases the task of
+       security auditing, which can be accomplished using well-known
+       tools.</p></li></ul></div><p>
+   In this article I deal with a complex Subversion repository
+   deployment and show how security concerns can be addressed from a
+   system administrator's point-of-view.
+</p></div><div class="simplesect" lang="en"><div class="titlepage"><a name="N0xa50890.0xb45098"></a>Environment Description and Requirements</div><p>
+Our task is to deploy a Subversion repository for our projects; it must
+   be accessible both from our internal network and the Internet. Our
+   organization already runs an Apache Web Server, so we will use it as our
+   gateway to the repository. Thus, the Subversion configuration must meet the following
+   requirements:
+</p><div class="itemizedlist"><ul type="disc"><li><p>We want to host multiple projects in the repository, grouped as
+       public and private.</p></li><li><p>We want our developers to have unlimited access the projects in
+       which they are involved from anywhere around the world.</p></li><li><p>We want other people to have read-only access to our public
+       projects.</p></li></ul></div><p>
+   Given these requirements, we must configure the Subversion server properly to
+    manage authentication, access control, data confidentiality
+   and integrity. But, in what form does the Subversion server come?
+   There's no unique answer to this question, but a common strategy is to build the
+   Subversion server as an Apache 2.0 shared module by extending
+   the built-in mod_dav.so Apache module. In such a configuration,
+   Apache takes care of many of the aforementioned security aspects, 
+   so you don't need to learn another configuration language. Simply
+   adapt the familiar Apache configuration files to your new needs.
+</p><p>
+   Even if Subversion requires Apache 2.0, this is a minor problem,
+   because you are not required to migrate your current Apache installation
+   to the 2.0 series. A simple and effective strategy consists of letting
+   the Apache 1.3 Web Server proxy any Subversion HTTP requests to the
+   Apache 2.0 Web Server. You can migrate your Apache 1.3 installation at
+   a later time or never migrate if you aren't forced to.
+</p><p>
+   Figure 1 illustrates the environment with which we are working. Subversion clients
+   connect to the server from the Internet or from a trusted subnetwork.
+   Here the term "trusted" means passwords won't be sniffed either
+   because we trust users or because we adopted other countermeasures.
+   The HTTP request--possibly sent over a secure channel--enters the
+   server and contains DAV methods from the Delta-V extensions. Then, 
+   Apache 1.3 proxies the request to the Apache 2.0 Web Server, which
+   begins the examination. The user issuing the request is authenticated
+   via plain HTTP authentication or through the use of client-side
+   certificates. Then, an access-control decision is taken and the access
+   control rules are enforced. Accepted requests are passed to the
+   Subversion module, which generates a response.
+</p><div       class="mediaobject"><a href="/files/linuxjournal.com/linuxjournal/articles/076/7655/7655f1.png" ><img src="/files/linuxjournal.com/linuxjournal/articles/076/7655/7655f1.inline.png"></a><div class="caption"><p>Figure 1. Our Subversion Environment</p></div></div></div><div class="simplesect" lang="en"><div class="titlepage"><a name="N0xa50890.0xb456c8"></a>Installation</div><p>
+   Before installing Subversion, we need to install the Apache 2.0 Web
+   Server. So, download and unpack the source tarball and start the
+   configure script:
+</p><pre     class="programlisting">
+
+sackville httpd-2.0.49 # ./configure --enable-mods-shared=most
+
+</pre><p>
+   The command-line option enables most of the Apache modules,
+   building them as shared modules. You may need to fine tune the command-line 
+options to include (or exclude) more modules; for example, you
+   may need LDAP modules to authenticate against an LDAP server. To
+   install the Apache Web Server, issue a <tt  >make &amp;&amp; make install</tt>.
+</p><p>
+   Next, grab the latest Subversion source tarball, unpack the sources and start the configure script:
+</p><pre     class="programlisting">
+
+sackville subversion-1.0.1 # ./configure
+--with-apxs=/path/to/apache2/bin/apxs \
+                                         --with-ssl
+
+</pre><p>
+   The option <tt  >-with-apxs</tt> may not be required if you installed Apache2 in
+   a default location. Likewise, the option <tt  > -with-ssl</tt> is not needed if
+   you plan to install a server-only Subversion, because SSL support is 
+provided by Apache's built-in mod_ssl.so module. In addition you may
+   need to specify locations for your shared libraries. In particular, 
+   many users seem to have trouble with the Berkeley DB libraries.
+   Carefully read the Subversion users' mailing list if you encounter
+   problems.
+</p><p>
+   Issue <tt  >make &amp;&amp; make install</tt> to build and install mod_dav_svn.so
+   modules. If everything went well, you'll find mod_dav_svn.so among your
+   modules.
+</p></div><div class="simplesect" lang="en"><div class="titlepage"><a name="N0xa50890.0xb45b40"></a>Configuration</div><p>
+   The Subversion installation process should have created the proper
+   entries in your Apache configuration file to activate the
+   mod_dav_svn.so module. In addition, you should see entries for a
+   mod_authz_svn.so module; it's part of the access control machinery of
+   Subversion and we'll take a look at it later.
+</p><p>
+   In our setup, Apache2 must reside side by side with Apache1, so we need
+   to tell Apache2 to listen to a port other than 80--assume it's the
+   8080 port. Because Apache2 is accessed through Apache1, you should
+   block that port in your firewall configuration or make Apache2 bind 
+   to the loopback interface. The latter solution is better than the
+   former, because we don't need to rely on a firewall to drop incoming
+   connections from external hosts. You also should apply common security
+   tips to enhance Apache2 security, which I won't describe here. For
+   example, Apache with Subversion modules tends to be a little too
+   verbose in its error messages, showing version numbers for most
+   activated modules (SSL, DAV, Subversion and so on). Security purists
+   call this behaviour information leakage; to minimize it act on the
+   ServerTokens directive.
+</p><p>
+   Now it's time to decide where the repository will live. We must answer 
+the following questions:
+</p><div class="itemizedlist"><ul type="disc"><li><p>Where in the Apache2 URL's space will our repository be
+       accessible? Because Apache2 is being used as a Subversion-only
+       server, we decide to have the server root be the root of our
+       repository.</p></li><li><p>Where in the server's filesystem is the repository physically located? We have no constraints here, so we choose /svn to
+       contain all the Subversion-related files.</p></li><li><p>Where in the external Apache1 URL's space will our repository live? 
+A common strategy is to put Subversion repositories in the
+       /svn directory.</p></li></ul></div><p>
+   The layout of the /svn directory thus is:
+</p><div class="itemizedlist"><ul type="disc"><li><p>/svn/conf: contains all the files needed for Apache2 and
+       Subversion to work, such as user authentication information,
+       access control policies and so on.</p></li><li><p>/svn/repository: contains two subdirectories for public
+       and private projects. Inside each subdirectory we create a
+       project using svnadmin's create command.</p></li></ul></div><p>
+   In the Apache2 httpd.conf file we add the following lines:
+</p><pre     class="programlisting">
+
+&lt;IfModule mod_dav_svn.c&gt;
+Include /svn/conf/mod_dav_svn.conf
+&lt;/IfModule&gt;
+
+</pre><p>
+   Including the file /svn/conf/mod_dav_svn.conf, we centralize any
+   Subversion-related information in the same place, that is, the directory
+   /svn.
+</p><p>
+   To proxy all the HTTP requests from Apache1 to Apache2, add the
+   following entry to your Apache1 configuration file:
+</p><pre     class="programlisting">
+
+Proxy /svn/ http://localhost:8080/
+
+</pre></div><div class="simplesect" lang="en"><div class="titlepage"><a name="N0xa50890.0xb46328"></a>Default HTTP Policies</div><p>
+   When defining the access control policy, we must distinguish plain HTTP
+   connections from HTTPS connections, because passwords are not protected
+   over a plain HTTP connection. In the following lines, we define the
+   default policy for HTTP connections. We add the following entries to the 
+/svn/conf/mod_dav_svn.conf file:
+</p><pre     class="programlisting">
+
+Include /svn/conf/public_default_policy.conf
+Include /svn/conf/private_default_policy.conf
+
+</pre><p>
+   Each *_default_policy.conf contains the default access control
+   policy for the corresponding project group. We want read-only HTTP
+   public access for public projects, so add the following lines to your
+   /svn/conf/public_default_policy.conf file:
+</p><pre     class="programlisting">
+
+&lt;Location /public&gt;
+        Dav svn # Tell Apache to use Subversion's own module
+                # for HTTP's Dav extensions.
+
+        SVNParentPath /svn/repository/public
+
+        &lt;LimitExcept GET PROPFIND OPTIONS REPORT&gt;
+            Order deny,allow
+            Deny from all
+        &lt;/LimitExcept&gt;
+&lt;/Location&gt;
+
+</pre><p>
+   This configuration denies access to any HTTP method except GET,
+   PROPFIND, OPTIONS and REPORT, which are used during a read-only
+   session. If you have a trusted subnet (assume 192.168.0.0/24) you want
+   to allow write access from, you may change the above configuration
+   snippet to:
+</p><pre     class="programlisting">
+
+&lt;Location /public&gt;
+        Dav svn
+        SVNParentPath /svn/repository/public
+
+        &lt;LimitExcept GET PROPFIND OPTIONS REPORT&gt;
+            Order deny,allow
+            Deny from all
+            Allow from 192.168.0.0/24
+        &lt;/LimitExcept&gt;
+&lt;/Location&gt;
+
+</pre><p>
+   Notice, however, that if you don't add more access control rules to
+   restrict access, anyone connecting from the subnet 192.168.0.0/24 can 
+write to the repository. If you need strict user-based
+   access control, then I advise you not to use this default policy.
+</p><p>
+   The access control policy for the private project group denies 
+access to anyone over an HTTP connection. The corresponding
+   configuration snippet you must put in your
+   /svn/conf/private_default_policy.conf is:
+</p><pre     class="programlisting">
+
+&lt;Location /private&gt;
+        Dav svn
+        SVNParentPath /svn/repository/private
+
+        Order deny,allow
+        Deny from all
+&lt;/Location&gt;
+
+</pre><p>
+   If you wish to allow access from the trusted subnet, use the
+   following:
+</p><pre     class="programlisting">
+
+&lt;Location /private&gt;
+        Dav svn
+        SVNParentPath /svn/repository/private
+
+        Order deny,allow
+        Deny from all
+        Allow from 192.168.0.0/24
+&lt;/Location&gt;
+
+</pre></div><div class="simplesect" lang="en"><div class="titlepage"><a name="N0xa50890.0xb3d0f0"></a>Per-Project Configuration</div><p>
+   To achieve greater granularity in the access control management, we
+   want to define separated policies for each project. The case in which
+   we have a trusted subnet will be analysed here because it's much more
+   involved. In this scenario we allow password-based authentication over
+   HTTP only from the trusted subnet. We specify the policy for each project in a separate file contained in
+   the /svn/conf/private and /svn/conf/public. To achieve this, add the
+   following lines to your /svn/conf/mod_dav_svn.conf file:
+</p><pre     class="programlisting">
+
+Include /svn/conf/policies/public/*
+Include /svn/conf/policies/private/*
+
+</pre><p>
+   Suppose we have foo and bar public projects. John and Bob are foo's
+   developers, while John and Mike are bar's developers. We want one
+   project's developers to have full access only to the project they
+   develop over HTTP from the trusted subnet. First of all, let's fill in 
+the users' password file:
+</p><pre     class="programlisting">
+
+sackville apache2 # bin/htpasswd -c /svn/conf/svnpasswd john *****
+sackville apache2 # bin/htpasswd /svn/conf/svnpasswd bob *****
+....
+
+</pre><p>
+   Then, we create the users' group file: each project is associated with 
+a group whose name has the form (public|private)_projectname and
+   contains the users participating in the project:
+</p><pre     class="programlisting">
+
+public_foo: john bob
+public_bar: john mike
+
+</pre><p>
+   We save this file as /svn/conf/svngroups. The last operation consists
+   of associating a file in the /svn/conf/policies/public directory with a
+   project. foo's access control policy file is called
+   /svn/conf/policies/public/foo and contains the following lines:
+</p><pre     class="programlisting">
+
+&lt;Location /public/foo&gt;
+        &lt;LimitExcept GET PROPFIND OPTIONS REPORT&gt;
+                AuthType Basic
+                AuthName "Public Subversion repository for project Foo"
+                AuthUserFile /svn/conf/svnpasswd
+                AuthGroupFile /svn/conf/svngroups
+
+                Require group public_foo
+        &lt;/LimitExcept&gt;
+&lt;/Location&gt;
+
+</pre><p>
+   We could move AuthType, AuthUserFile and AuthGroupFile to the default
+   policy file to avoid replication of configuration entries. We had to
+   add the Satisfy directive to require users to authenticate from the
+   trusted subnet during a read/write session. So modify your
+   public_default_policy.conf file in this way:
+</p><pre     class="programlisting">
+
+&lt;Location /public&gt;
+        Dav svn
+        SVNParentPath /svn/repository/public
+
+        &lt;LimitExcept GET PROPFIND OPTIONS REPORT&gt;
+            Order deny,allow
+            Deny from all
+            Allow from 192.168.0.0/24
+
+            Satisfy all
+        &lt;/LimitExcept&gt;
+&lt;/Location&gt;
+
+</pre><p>
+   The configuration for private projects is quite similar; we simply
+   discard any LimitExcept directive so the public_default_policy.conf
+   becomes:
+</p><pre     class="programlisting">
+
+&lt;Location /private&gt;
+        Dav svn
+        SVNParentPath /svn/repository/private
+
+        Order deny,allow
+        Deny from all
+        Allow from 192.168.0.0/24
+
+        Satisfy all
+&lt;/Location&gt;
+
+</pre><p>
+   and the private project worldconquest's access control policy file is:
+</p><pre     class="programlisting">
+
+&lt;Location /private/worldconquest&gt;
+        AuthType Basic
+        AuthName "Private Subversion repository for project WorldConquest"
+        AuthUserFile /svn/conf/svnpasswd
+        AuthGroupFile /svn/conf/svngroups
+
+        Require group private_worldconquest
+&lt;/Location&gt;
+
+</pre></div><div class="simplesect" lang="en"><div class="titlepage"><a name="N0xa50890.0xb3d670"></a>HTTPS Configuration</div><p>
+   Now it's time to consider HTTPS connections, which allow users around
+   the world to access the repository, granting password confidentiality
+   and data integrity over insecure channels such as the Internet. Apache
+   manages HTTPS in a separate virtual host space, which is set up using a
+   configuration like this one:
+</p><pre     class="programlisting">
+
+&lt;VirtualHost _default_:443&gt;
+...
+&lt;/VirtualHost&gt;
+
+</pre><p>
+   But which Apache are we talking about? External Apache1 or internal
+   Apache2 plus Subversion? Subversion clients using HTTPS can connect to the
+   external Apache1 Web server, of course, and try to establish secure
+   connections to it. So we must configure HTTPS for our external Apache1
+   Web server. There's no need for proxy requests to the internal Apache2
+   Web server to be delivered over a secure connection too, but because we
+   want to centralize access control policies in our Apache2 Web server,
+   we must provide a mechanism for Apache2 to discriminate proxy requests
+   coming from an external secure channel.
+</p><p>
+   We use another port (assume 8081) to discriminate when an HTTP
+   request has been delivered to the Apache1 Web server using SSL. So
+   when an HTTP request hits Apache1 over SSL, it is proxied internally 
+   in clear to port 8081, where Apache2 is listening. As usual, remember
+   to block incoming connections to port 8081 from external hosts or to
+   bind Apache2 to the loopback interface (or both).
+</p><p>
+   In the Apache1 configuration file, add the following line to the SSL
+   virtual host directive:
+</p><pre     class="programlisting">
+
+Proxy /svn/ http://localhost:8081/
+
+</pre><p>
+   Now tell Apache2 to listen to port 8081, adding the following entry to
+   your httpd.conf file: <tt  >Listen localhost:8081</tt>.
+</p><p>
+   Now we must set up a virtual host environment for access through port
+   8081. The main difference with respect to HTTP connections is related
+   to source-based access control: using HTTPS connections we drop the
+   notion of trusted and untrusted subnet. HTTPS requests can arrive from
+   just anywhere.
+</p><p>
+   Thus, the default policy files must include a VirtualHost directive for
+   the port 8081. Here's the one for public projects that we put in the
+   /svn/conf/public_default_policy.conf file:
+</p><pre     class="programlisting">
+
+&lt;VirtualHost _default_:8081&gt;
+&lt;Location /public&gt;
+        Dav svn
+        SVNParentPath /svn/conf/repository/public
+
+        Order allow,deny
+        Allow from all
+
+        &lt;LimitExcept GET PROPFIND OPTIONS REPORT&gt;
+                Order deny,allow
+                Deny from all
+
+                Satisfy all
+        &lt;/LimitExcept&gt;
+&lt;/Location&gt;
+
+Include /tmp/LJ/policies/public/*
+
+&lt;/VirtualHost&gt;
+
+</pre><p>
+   As usual, using the Satisfy clause allows us to write access only to
+   authenticated users. In addition, we recycled the per-project
+   configuration files (see the Include directive) because they do not
+   depend on the source-based access control policy, but we can specialize
+   them for another purpose if we need to. The default policy for private
+   projects is similar:
+</p><pre     class="programlisting">
+
+&lt;VirtualHost _default_:8081&gt;
+&lt;Location /private&gt;
+        Dav svn
+        SVNParentPath /svn/conf/repository/private
+
+        Order allow,deny
+        Allow from all
+
+        Satisfy all
+&lt;/Location&gt;
+
+Include /tmp/LJ/policies/private/*
+
+&lt;/VirtualHost&gt;
+
+</pre></div><div class="simplesect" lang="en"><div class="titlepage"><a name="N0xa50890.0xb3db98"></a>Per-Directory Configuration</div><p>
+   In the configuration section I mentioned the mod_authz_svn.so module,
+   created and installed by the Subversion installation process. This
+   module allows us to define the access control policy on a directory basis, 
+   thus increasing the level of granularity.
+</p><p>
+   Why do we need a separate module to take care of directory-based access
+   control? Couldn't we use Apache configuration primitives? The
+   problem here is the URL passed to Apache to access a repository, which
+   is of the form:
+</p><pre     class="programlisting">
+
+/public/foo/!svn/act/b2a07a33-85d9-0310-857b-b13ae1b9c55b
+
+</pre><p>
+As we can see, only the project path and name is visible: the project's
+accessed directory is hidden in the numeric code. Thus, we cannot
+directly apply Apache Location-based access control primitives. The
+solution consists of delegating directory access control to the
+mod_authz_svn.so module, which is able to parse the numeric code and
+identify the accessed directory.
+</p><p>
+The mod_authz_svn.so's access control policy is specified in a
+plain-text file with a simple syntax. Here's the one we use 
+for our public projects (/svn/conf/policies/public_svn_authz):
+</p><pre     class="programlisting">
+
+[groups]
+foo = john, bob
+bar = john, mike
+
+[/]
+* = r
+
+[foo:/]
+@foo = rw
+
+[foo:/branch/john]
+bob = r
+
+[foo:/branch/bob]
+john = r
+
+[bar:/]
+@bar = rw
+
+</pre><p>
+We first define the groups of users we want to specify the policy for,
+then we list the access control rules. The one under the [/] section
+specifies that any user can read the content of any project. For
+each project (for example [foo:/]) we specify a global access control
+policy, specifying it for the inner directories. There's
+no need to specify an access control rule for user john in the
+/branch/john directory, because it's inherited from the one in the upper-level
+directory.
+</p><p>
+In addition, we had to specify again the different groups'
+composition. We should avoid replication of such configuration
+directives as a good security practice. This problem is solved simply
+by removing any AuthGroupFile directive from the project configuration
+files and changing the related Require directive to a Require
+valid-user one, thus delegating group management to the
+mod_authz_svn.so module.
+</p><p>
+At this point all that remains is to add the directive AuthzSVNAccessFile to
+the default policy files in order to tell Apache that we intend to use the
+mod_authz_svn.so module as an access control facility. To do so, we must specify its
+configuration file. Here's the one for public projects:
+</p><pre     class="programlisting">
+
+&lt;Location /public&gt;
+Dav svn
+
+SVNParentPath /tmp/LJ/svn/repository/public
+
+&lt;LimitExcept GET PROPFIND OPTIONS REPORT&gt;
+	Order deny,allow
+	Deny from all
+	Allow from 127.0.0.1
+
+	Satisfy all
+&lt;/LimitExcept&gt;
+
+AuthzSVNAccessFile /tmp/LJ/svn/conf/public_svn_authz
+&lt;/Location&gt;
+
+&lt;VirtualHost _default_:8081&gt;
+&lt;Location /public&gt;
+Dav svn
+SVNParentPath /tmp/LJ/svn/repository/public
+
+Order allow,deny
+Allow from all
+
+&lt;LimitExcept GET PROPFIND OPTIONS REPORT&gt;
+       Order deny,allow
+       Deny from all
+
+       Satisfy all
+&lt;/LimitExcept&gt;
+
+AuthzSVNAccessFile /tmp/LJ/svn/conf/public_svn_authz
+&lt;/Location&gt;
+
+Include /tmp/LJ/svn/conf/policies/public/*
+
+&lt;/VirtualHost&gt;
+
+</pre><p>
+You may ask why we didn't use the mod_authz_svn.so module before. If we
+hadn't any trusted subnets, we could throw away most of the Apache
+access control machinery and rely solely on the mod_authz_svn.so, even
+if this is true only from Subversion 1.0.1. But because mod_authz_svn.so's
+access control strategy is user-based when in the scenario with a
+trusted subnet, we need a mix of source-based access control and
+user-based access control.
+</p></div></div>
+<div class="authorblurb"><p>
+
+</p></div>
+
+  </div>
+  
+    <div class="links"><ul class="links inline"><li class="first comment_add"><a href="/comment/reply/7655#comment-form" title="Share your thoughts and opinions related to this posting." class="comment_add">Add new comment</a></li>
+<li class="service_links_digg"><a href="http://digg.com/submit?phase=2&amp;url=http%3A%2F%2Fwww2.linuxjournal.com%2Farticle%2F7655&amp;title=Setting+Up+Subversion+for+One+or+Multiple+Projects" title="Digg this post on digg.com." rel="nofollow" class="service_links_digg"><img src="/sites/linuxjournal.com/modules/service_links/digg.png" alt="Digg" /> Digg</a></li>
+<li class="last service_links_reddit"><a href="http://reddit.com/submit?url=http%3A%2F%2Fwww2.linuxjournal.com%2Farticle%2F7655&amp;title=Setting+Up+Subversion+for+One+or+Multiple+Projects" title="Submit this post on reddit.com." rel="nofollow" class="service_links_reddit"><img src="/sites/linuxjournal.com/modules/service_links/reddit.png" alt="Reddit" /> Reddit</a></li>
+</ul></div>
+    </div>
+    <div class="contentad">
+    <script language='JavaScript' type='text/javascript'>
+    <!--
+    phpads_show_ad("http://ads.linuxjournal.com", "32");
+    //-->
+  </script>
+  </div>
+  <div id="comments"></div>                      </div>
+      
+          <div class="clear"></div>
+          <!-- END CONTENT BODY -->
+          
+        </div>
+        <!-- END CONTENT LEFT -->
+        
+        <!-- CONTENT RIGHT -->
+        <div id="content_right">
+          <div id="subscribe">
+            <h3>Subscribe now!</h3>
+            
+<ul class="menu">
+<li class="leaf"><a href="/subscriptions" title="Subscribe">Subscribe</a></li>
+<li class="leaf"><a href="https://secure.linuxjournal.com/allsubs/plj.php?action=login" title="Renew your subscription">Renew</a></li>
+<li class="leaf"><a href="/archivecd">Archive CD</a></li>
+<li class="leaf"><a href="/xstatic/subs/customer_service.html">Customer service</a></li>
+
+</ul>
+          </div>
+          
+          <div id="block-block-44" class="block block-block"> 
+    <div class="content">
+    <div id="bigbox-adblock" class="adblock bigbox-adblock">
+<script language='JavaScript' type='text/javascript'>
+<!--
+phpads_show_ad("http://ads.linuxjournal.com", "24");
+//-->
+</script>
+</div>  </div>  
+</div>
+<div id="block-views-breaking_news" class="block block-views"> 
+      <h3>Breaking News</h3>
+    <div class="content">
+    <div class='view view-breaking-news'><div class='view-content view-content-breaking-news'><div class="item-list"><ul><li><div class='view-item view-item-breaking-news'><div class='view-field view-data-node-title'><a href="/node/1000525">Linspire Loses to Ubuntu</a></div></div>
+</li><li><div class='view-item view-item-breaking-news'><div class='view-field view-data-node-title'><a href="/node/1000522">Ubuntu Gets Gutsy</a></div></div>
+</li><li><div class='view-item view-item-breaking-news'><div class='view-field view-data-node-title'><a href="/node/1000521">Microsoft Goes Open Source?</a></div></div>
+</li><li><div class='view-item view-item-breaking-news'><div class='view-field view-data-node-title'><a href="/node/1000520">Linux Foundation Announces Third Annual Survey</a></div></div>
+</li><li><div class='view-item view-item-breaking-news'><div class='view-field view-data-node-title'><a href="/node/1000516">OOXML Still Causing Problems</a></div></div>
+</li></ul></div></div><div class='more-link'><a href="/breaking_news">more</a></div></div>
+  </div>  
+</div>
+<div id="block-views-tech_tip" class="block block-views"> 
+      <h3>Tech Tip</h3>
+    <div class="content">
+    <div class='view view-tech-tip'><div class='view-content view-content-tech-tip'><div class="node ntype-tech-tips" id="node-1000432">
+  <div class="head">
+
+      <h3><a href="/node/1000432">A Full Root Partition</a></h3>
+  
+        <h4>October 18th, 2007 by <a href="/user/1" title="View user profile.">admin</a>    </h4>
+      </div>
+  
+  <div class="content">
+            <p>Recently I needed to solve the problem of an apparently 100%-full root partition on a server that I am responsible for monitoring. This was unexpected and sudden, as the partition's usage has been at a constant 30% for quite some time.</p>
+  </div>
+  
+    <div class="links"><ul class="links inline"><li class="first comment_comments"><a href="/node/1000432#comments" title="Jump to the first comment of this posting." class="comment_comments">1 comment</a></li>
+<li class="last node_read_more"><a href="/node/1000432" title="Read the rest of this posting." class="node_read_more">Read more</a></li>
+</ul></div>
+    </div>
+  </div><div class='more-link'><a href="/tech_tip">more</a></div></div>
+  </div>  
+</div>
+<div id="block-views-dot_org" class="block block-views"> 
+      <h3>Dot Org of the Week</h3>
+    <div class="content">
+    <div class='view view-dot-org'><div class='view-content view-content-dot-org'><div class="node ntype-dot-org" id="node-1000434">
+  <div class="head">
+
+      <h3><a href="/node/1000434">Environmentally Friendly Computers</a></h3>
+  
+        <h4>October 18th, 2007 by <a href="/user/1" title="View user profile.">admin</a>    </h4>
+      </div>
+  
+  <div class="content">
+            <p>ComputerEcology is a group that discusses ways to make computers less harmful to our environment and to solve many ecological issues. They explain how to use Linux to save power and consumables like paper and ink. Since it does not require big hardware, Linux may be used with old computers to make their life cycle longer.</p>
+  </div>
+  
+    <div class="links"><ul class="links inline"><li class="first comment_comments"><a href="/node/1000434#comments" title="Jump to the first comment of this posting." class="comment_comments">1 comment</a></li>
+<li class="last node_read_more"><a href="/node/1000434" title="Read the rest of this posting." class="node_read_more">Read more</a></li>
+</ul></div>
+    </div>
+  </div><div class='more-link'><a href="/dot_org">more</a></div></div>
+  </div>  
+</div>
+<div id="block-block-45" class="block block-block"> 
+    <div class="content">
+    <div id="smallbox-adblock" class="adblock smallbox-adblock">
+<script language='JavaScript' type='text/javascript'>
+<!--
+phpads_show_ad("http://ads.linuxjournal.com", "31");
+//-->
+</script>
+</div>
+
+
+  </div>  
+</div>
+<div id="block-user-1" class="block block-user"> 
+      <h3>Navigation</h3>
+    <div class="content">
+    
+<ul class="menu">
+<li class="leaf"><a href="/tracker">Recent posts</a></li>
+<li class="collapsed"><a href="/aggregator">News aggregator</a></li>
+
+</ul>
+  </div>  
+</div>
+        </div>
+        <!-- END CONTENT RIGHT -->
+      
+       <div class="clear"></div>
+      </div>
+      <!-- CONTENT END =================================================== -->
+
+
+
+      <!-- FOOTER START ================================================== -->
+      <div id="footer">
+        
+<ul class="menu">
+<li class="leaf"><a href="/xstatic/advertising/" title="Advertise with us!">Advertise</a></li>
+<li class="leaf"><a href="/xstatic/community" title="Community">Community</a></li>
+<li class="leaf"><a href="/xstatic/aboutus" title="Contact us">Contact us</a></li>
+<li class="leaf"><a href="/node/1000321">Privacy statement</a></li>
+<li class="leaf"><a href="mailto:webmaster@linuxjournal.com">Report problems</a></li>
+<li class="leaf"><a href="/rss_feeds">RSS Feeds</a></li>
+
+</ul>
+        <p class="copyright">Copyright &copy; 1994 - 2007 <a href="http://www.linuxjournal.com"><cite>Linux Journal</cite></a>. All rights reserved.</p>
+                <p class="message">
+</p>
+        
+              </div>
+      <!-- FOOTER END ==================================================== -->
+
+          </div>
+  </div>
+</body>
+</html>
