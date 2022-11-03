@@ -73,6 +73,10 @@ Create a simple zpool_ named *tank* with 4 unused drives (sde sdf sdg sdh)::
   zpool status tank
   df -Ph /tank
 
+Define the mount point for the dataset add this option::
+
+  -m <mountpoint>
+
 Destroy the testing zpool_::
 
   zpool destroy tank
@@ -86,3 +90,16 @@ A RAID 0+1 pool::
   zpool create tank mirror sde sdf mirror sdg sdh
 
 .. _zpool: https://openzfs.github.io/openzfs-docs/man/8/zpool.8.html
+
+Useful ZFS commands
+-------------------
+
+List ZFS_ filesystems::
+
+  zfs list
+
+Get and set mountpoint::
+
+  zfs get mountpoint <name>
+  zfs set mountpoint=/u/zfs <name>
+
