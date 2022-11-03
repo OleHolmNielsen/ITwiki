@@ -27,9 +27,11 @@ ZFS documentation
 
 * `ZFS man-pages <https://openzfs.github.io/openzfs-docs/man/index.html>`_.
 
-* Lustre_ uses ZFS_, see https://wiki.lustre.org/ZFS.
-  A `ZFS setup for Lustre <https://github.com/ucphhpc/storage/blob/main/zfs/docs/zfs.rst>`_.
-  A `JBOD Setup <https://github.com/ucphhpc/storage/blob/main/jbod/doc/jbod.rst>`_ page.
+* Lustre_ and ZFS_:
+
+  - Lustre_ uses ZFS_, see https://wiki.lustre.org/ZFS.
+  - A `ZFS setup for Lustre <https://github.com/ucphhpc/storage/blob/main/zfs/docs/zfs.rst>`_.
+  - A `JBOD Setup <https://github.com/ucphhpc/storage/blob/main/jbod/doc/jbod.rst>`_ page.
 
 * `Zpool Concepts <https://openzfs.github.io/openzfs-docs/man/7/zpoolconcepts.7.html>`_.
 
