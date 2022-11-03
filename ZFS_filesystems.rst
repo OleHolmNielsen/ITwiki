@@ -25,9 +25,10 @@ ZFS documentation
 
 * `ZFS Basic Concepts <https://openzfs.github.io/openzfs-docs/Basic%20Concepts/index.html>`_.
 
-* Lustre_ uses ZFS_, see https://wiki.lustre.org/ZFS
+* `ZFS man-pages <https://openzfs.github.io/openzfs-docs/man/index.html>`_.
 
-* A `ZFS setup for Lustre <https://github.com/ucphhpc/storage/blob/main/zfs/docs/zfs.rst>`_.
+* Lustre_ uses ZFS_, see https://wiki.lustre.org/ZFS.
+  A `ZFS setup for Lustre <https://github.com/ucphhpc/storage/blob/main/zfs/docs/zfs.rst>`_.
   A `JBOD Setup <https://github.com/ucphhpc/storage/blob/main/jbod/doc/jbod.rst>`_ page.
 
 * `Zpool Concepts <https://openzfs.github.io/openzfs-docs/man/7/zpoolconcepts.7.html>`_.
@@ -42,8 +43,7 @@ Installation of ZFS
 =========================
 
 We assume an EL8_ OS in this page.
-Following the RHEL-based-distro_ guide,
-enable the *zfs_release* repo from ZFS_on_Linux_::
+Following the RHEL-based-distro_ guide, enable the *zfs-release* repo from ZFS_on_Linux_::
 
   dnf install https://zfsonlinux.org/epel/zfs-release-2-2$(rpm --eval "%{dist}").noarch.rpm
 
@@ -75,7 +75,7 @@ Destroy the testing zpool_::
 
   zpool destroy tank
 
-A mirrored pool where data are mirrored 4 times::
+A mirrored pool where all data are mirrored 4 times::
 
   zpool create tank mirror sde sdf sdg sdh
 
