@@ -10,6 +10,8 @@ Linux documentation
    Libreswan_IPsec_VPN
    Multi_factor_authentication_on_Linux
    Linux_firewall_configuration
+   LinuxSoftwareRAID
+   XFS_filesystems
    Kickstart
    PXE_booting
    DNS-servers
