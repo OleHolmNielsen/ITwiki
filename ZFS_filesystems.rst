@@ -23,13 +23,20 @@ ZFS documentation
 
 * OpenZFS_Newcomers_ documentation.
 
-* `ZFS setup for Lustre <https://github.com/ucphhpc/storage/blob/main/zfs/docs/zfs.rst>`_.
-  There is a `JBOD Setup <https://github.com/ucphhpc/storage/blob/main/jbod/doc/jbod.rst>`_ page.
+* `ZFS Basic Concepts <https://openzfs.github.io/openzfs-docs/Basic%20Concepts/index.html>`_.
+
+* Lustre_ uses ZFS_, see https://wiki.lustre.org/ZFS
+
+* A `ZFS setup for Lustre <https://github.com/ucphhpc/storage/blob/main/zfs/docs/zfs.rst>`_.
+  A `JBOD Setup <https://github.com/ucphhpc/storage/blob/main/jbod/doc/jbod.rst>`_ page.
+
+* `Zpool Concepts <https://openzfs.github.io/openzfs-docs/man/7/zpoolconcepts.7.html>`_.
 
 .. _Getting_Started: https://openzfs.github.io/openzfs-docs/Getting%20Started/index.html
 .. _RHEL-based-distro: https://openzfs.github.io/openzfs-docs/Getting%20Started/RHEL-based%20distro/index.html
 .. _Aaron_Toponce: https://pthree.org/2012/12/04/zfs-administration-part-i-vdevs/
 .. _OpenZFS_Newcomers: https://openzfs.org/wiki/Newcomers
+.. _Lustre: https://wiki.lustre.org/Main_Page
 
 Installation of ZFS
 =========================
@@ -56,7 +63,7 @@ The alternative *kABI-tracking kmod* installation method may break the ZFS_on_Li
 Trying out ZFS
 ====================
 
-Aaron_Toponce_ 's page has some simple examples.
+Aaron_Toponce_ 's page has some initial examples.
 
 Create a simple zpool_ named *tank* with 4 unused drives (sde sdf sdg sdh)::
 
@@ -68,7 +75,7 @@ Destroy the testing zpool_::
 
   zpool destroy tank
 
-A mirrored pool::
+A mirrored pool where data are mirrored 4 times::
 
   zpool create tank mirror sde sdf sdg sdh
 
