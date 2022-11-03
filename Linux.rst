@@ -12,6 +12,7 @@ Linux documentation
    Linux_firewall_configuration
    LinuxSoftwareRAID
    XFS_filesystems
+   ZFS_filesystems
    Kickstart
    PXE_booting
    DNS-servers
