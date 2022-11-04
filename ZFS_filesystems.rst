@@ -7,7 +7,8 @@ ZFS filesystems
 .. Contents::
 
 The ZFS_ filesystem is an alternative to XFS.
-While introduced originally in Solaris_ OS, ZFS_ has been ported to ZFS_on_Linux_.
+While introduced originally in the Solaris_ OS,
+ZFS_ has been ported to ZFS_on_Linux_.
 See also the OpenZFS_ developers page.
 
 .. _ZFS: https://en.wikipedia.org/wiki/ZFS
@@ -35,6 +36,9 @@ ZFS documentation
   - A `JBOD Setup <https://github.com/ucphhpc/storage/blob/main/jbod/doc/jbod.rst>`_ page.
 
 * `Zpool Concepts <https://openzfs.github.io/openzfs-docs/man/7/zpoolconcepts.7.html>`_.
+
+* `ZFS 101—Understanding ZFS storage and performance <https://arstechnica.com/information-technology/2020/05/zfs-101-understanding-zfs-storage-and-performance/>`_
+  and `ZFS fans, rejoice—RAIDz expansion will be a thing very soon <https://arstechnica.com/gadgets/2021/06/raidz-expansion-code-lands-in-openzfs-master/>`_.
 
 .. _Getting_Started: https://openzfs.github.io/openzfs-docs/Getting%20Started/index.html
 .. _RHEL-based-distro: https://openzfs.github.io/openzfs-docs/Getting%20Started/RHEL-based%20distro/index.html
@@ -74,7 +78,7 @@ Create a simple zpool_ named *tank* with 4 unused drives (sde sdf sdg sdh)::
   zpool status tank
   df -Ph /tank
 
-Define the mount point for the dataset add this option::
+Define the mount point for the dataset by adding this option::
 
   -m <mountpoint>
 
@@ -86,11 +90,21 @@ A mirrored pool where all data are mirrored 4 times::
 
   zpool create tank mirror sde sdf sdg sdh
 
-A RAID 0+1 pool::
+A RAID 0+1 pool with 2+2 disks::
 
   zpool create tank mirror sde sdf mirror sdg sdh
 
 .. _zpool: https://openzfs.github.io/openzfs-docs/man/8/zpool.8.html
+
+Configuring RAIDZ disks
+------------------------
+
+Some examples of RAIDZ_ pools: 
+To setup a zpool with RAIDZ-1, we use the "raidz1" VDEV, using only 3 drives::
+
+  zpool create tank raidz1 sde sdf sdg
+
+.. _RAIDZ: https://www.raidz-calculator.com/raidz-types-reference.aspx
 
 Useful ZFS commands
 -------------------
