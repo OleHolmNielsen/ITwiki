@@ -101,15 +101,35 @@ Configuring RAIDZ disks
 ------------------------
 
 Some examples of RAIDZ_ pools: 
-To setup a zpool with RAIDZ-1, we use the "raidz1" VDEV, using only 3 drives::
+To setup a zpool_ with RAIDZ-1, we use the "raidz1" VDEV, using only 3 drives::
 
   zpool create tank raidz1 sde sdf sdg
 
-To setup a zpool with RAIDZ-2, we use the "raidz2" VDEV::
+To setup a zpool_ with RAIDZ-2, we use the "raidz2" VDEV::
 
   zpool create tank raidz2 sde sdf sdg sdh
 
 .. _RAIDZ: https://www.raidz-calculator.com/raidz-types-reference.aspx
+
+Adding an SLOG
+--------------
+
+Read about the **SLOG** in the *ZFS Intent Log* (ZIL_) page.
+Use ``/dev/disk/by-id/`` disk names in stead of ``/dev/sd*`` which may be renamed.
+
+To add the (current) disks ``/dev/sdb`` and ``/dev/sdc`` to the SLOG, first identify the device names::
+
+  ls -l /dev/disk/by-id/* | grep sdb$
+  ls -l /dev/disk/by-id/* | grep sdc$
+
+and add a mirrored SLOG with the devices found to the zpool_::
+
+  zpool add tank log mirror \
+   /dev/disk/by-id/wwn-0x600508b1001c978de94b7497de2aa015 \
+   /dev/disk/by-id/wwn-0x600508b1001c0be9159fde47f74dd4bc
+  zpool status
+
+.. _ZIL: https://pthree.org/2012/12/06/zfs-administration-part-iii-the-zfs-intent-log/
 
 Useful ZFS commands
 -------------------
