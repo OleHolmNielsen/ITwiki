@@ -7,12 +7,13 @@ ZFS filesystems
 .. Contents::
 
 The ZFS_ filesystem is an alternative to XFS.
-It has a ZFS_on_Linux_ port.
+While introduced originally in Solaris_ OS, ZFS_ has been ported to ZFS_on_Linux_.
 See also the OpenZFS_ developers page.
 
 .. _ZFS: https://en.wikipedia.org/wiki/ZFS
 .. _ZFS_on_Linux: https://zfsonlinux.org/
 .. _OpenZFS: https://openzfs.org/wiki/Main_Page
+.. _Solaris: https://en.wikipedia.org/wiki/Oracle_Solaris
 
 ZFS documentation
 ============================
@@ -97,6 +98,7 @@ Useful ZFS commands
 List ZFS_ filesystems::
 
   zfs list
+  zpool status <name>
 
 Get and set mountpoint::
 
