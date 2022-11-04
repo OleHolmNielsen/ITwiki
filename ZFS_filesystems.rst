@@ -23,7 +23,7 @@ ZFS documentation
 
 * First time OpenZFS users are encouraged to check out Aaron_Toponce_ ’s excellent documentation.
 
-* OpenZFS_Newcomers_ documentation.
+* OpenZFS_Newcomers_ documentation and FAQ_.
 
 * `ZFS Basic Concepts <https://openzfs.github.io/openzfs-docs/Basic%20Concepts/index.html>`_.
 
@@ -45,6 +45,7 @@ ZFS documentation
 .. _Aaron_Toponce: https://pthree.org/2012/12/04/zfs-administration-part-i-vdevs/
 .. _OpenZFS_Newcomers: https://openzfs.org/wiki/Newcomers
 .. _Lustre: https://wiki.lustre.org/Main_Page
+.. _FAQ: https://openzfs.github.io/openzfs-docs/Project%20and%20Community/FAQ.html
 
 Installation of ZFS
 =========================
@@ -103,6 +104,10 @@ Some examples of RAIDZ_ pools:
 To setup a zpool with RAIDZ-1, we use the "raidz1" VDEV, using only 3 drives::
 
   zpool create tank raidz1 sde sdf sdg
+
+To setup a zpool with RAIDZ-2, we use the "raidz2" VDEV::
+
+  zpool create tank raidz2 sde sdf sdg sdh
 
 .. _RAIDZ: https://www.raidz-calculator.com/raidz-types-reference.aspx
 
