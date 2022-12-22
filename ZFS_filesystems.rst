@@ -68,6 +68,14 @@ The alternative *kABI-tracking kmod* installation method may break the ZFS_on_Li
 .. _DKMS: https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support
 .. _EL8: https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives
 
+List disks in the system
+=================================
+
+The disks in the system must be identified.
+The following commands are useful::
+
+  lsscsi --wwn --size
+
 Trying out ZFS
 ====================
 
@@ -114,7 +122,7 @@ To setup a zpool_ with RAIDZ-2, we use the "raidz2" VDEV::
 Adding an SLOG
 --------------
 
-Read about the **SLOG** in the *ZFS Intent Log* (ZIL_) page.
+Read about the *Separate Intent Logging Device* (SLOG) in the *ZFS Intent Log* (ZIL_) page.
 Use ``/dev/disk/by-id/`` disk names in stead of ``/dev/sd*`` which may be renamed.
 
 To add the (current) disks ``/dev/sdb`` and ``/dev/sdc`` to the SLOG, first identify the device names::
@@ -122,7 +130,10 @@ To add the (current) disks ``/dev/sdb`` and ``/dev/sdc`` to the SLOG, first iden
   ls -l /dev/disk/by-id/* | grep sdb$
   ls -l /dev/disk/by-id/* | grep sdc$
 
-and add a mirrored SLOG with the devices found to the zpool_::
+**TODO:** Partition the disk with 5 GB for ZIL and the rest for ARC.
+The EL8 parted does not support "zfs" partitions???
+
+Add a mirrored SLOG with the devices found to the zpool_::
 
   zpool add tank log mirror \
    /dev/disk/by-id/wwn-0x600508b1001c978de94b7497de2aa015 \
