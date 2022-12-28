@@ -144,6 +144,29 @@ Add a mirrored SLOG with the devices found to the zpool_::
 
 .. _ZIL: https://pthree.org/2012/12/06/zfs-administration-part-iii-the-zfs-intent-log/
 
+Add SLOG and ZIL on Optane persistent memory
+-----------------------------------------------
+
+Configure an `L2ARC cache <https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/>`_
+using NVDIMM_ 3D_XPoint_ known as *Intel Optane* persistent memory DIMM modules.
+
+To correlate a namespace to a PMem device, use the following command::
+
+  lsblk
+
+Partiton the NVDIMM_ disks::
+
+  parted /dev/pmem0 unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
+  parted /dev/pmem1 unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
+
+and then add the partitions as ZFS cache and log::
+
+  zpool add <pool-name> cache /dev/pmem0p2 /dev/pmem1p2 log mirror /dev/pmem0p1 /dev/pmem1p1
+
+.. _NVDIMM: https://en.wikipedia.org/wiki/NVDIMM
+.. _3D_XPoint: https://en.wikipedia.org/wiki/3D_XPoint
+
+
 Useful ZFS commands
 -------------------
 
