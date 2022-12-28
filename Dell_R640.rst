@@ -396,6 +396,39 @@ Miscellaneous Settings menu
 
 * **Keyboard NumLock** = **Off**.
 
+NVDIMM Optane persistent memory setup
+=========================================
+
+To configure NVDIMM_ 3D_XPoint_ known as *Intel Optane* persistent memory DIMM modules go to the *System BIOS Settings* boot menus.
+Select the *Memory Settings* and then *Persistent Memory* and *Intel Persistent Memory*.
+Select the *DIMM Configuration* menu and view NVDIMM_ modules.
+
+Configuration of persistent memory is described in the manual *Dell EMC PMem 200 Series User's Guide* 
+in the `server documentation <https://www.dell.com/support/home/en-uk/product-support/product/poweredge-r750/docs>`_.
+Install this package::
+
+  dnf install ndctl
+
+and list all physical devices::
+
+  ndctl list -DHi
+
+To create a namespace on one of the persistent memory modules::
+
+  ndctl create-namespace
+
+See the manual for ``ndctl-create-namespace``.
+List namespaces::
+
+  ndctl list -N
+
+To correlate a namespace to a PMem device, use the following command::
+
+  lsblk
+
+.. _NVDIMM: https://en.wikipedia.org/wiki/NVDIMM
+.. _3D_XPoint: https://en.wikipedia.org/wiki/3D_XPoint
+
 PXE boot setup
 ==============
 
