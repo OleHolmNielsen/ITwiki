@@ -399,6 +399,12 @@ Miscellaneous Settings menu
 NVDIMM Optane persistent memory setup
 =========================================
 
+Read RHEL documentation of 
+`Persistent Memory: NVDIMMs <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/ch-persistent-memory-nvdimms>`_
+(RHEL7)
+and `Using NVDIMM persistent memory storage <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_storage_devices/using-nvdimm-persistent-memory-storage_managing-storage-devices>`_
+(RHEL8).
+
 To configure NVDIMM_ 3D_XPoint_ known as *Intel Optane* persistent memory DIMM modules go to the *System BIOS Settings* boot menus.
 Select the *Memory Settings* and then *Persistent Memory* and *Intel Persistent Memory*.
 Select the *DIMM Configuration* menu and view NVDIMM_ modules.
