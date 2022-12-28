@@ -6,7 +6,7 @@ ZFS filesystems
 
 .. Contents::
 
-The ZFS_ filesystem is an alternative to XFS.
+The ZFS_ filesystem is an alternative to XFS_.
 While introduced originally in the Solaris_ OS,
 ZFS_ has been ported to ZFS_on_Linux_.
 See also the OpenZFS_ developers page.
@@ -15,6 +15,7 @@ See also the OpenZFS_ developers page.
 .. _ZFS_on_Linux: https://zfsonlinux.org/
 .. _OpenZFS: https://openzfs.org/wiki/Main_Page
 .. _Solaris: https://en.wikipedia.org/wiki/Oracle_Solaris
+.. _XFS: http://en.wikipedia.org/wiki/XFS
 
 ZFS documentation
 ============================
@@ -72,8 +73,9 @@ List disks in the system
 =================================
 
 The disks in the system must be identified.
-The following commands are useful::
+The following commands are useful for listing disk block devices::
 
+  lsblk
   lsscsi --wwn --size
 
 Trying out ZFS
@@ -155,3 +157,10 @@ Get and set mountpoint::
   zfs get mountpoint <name>
   zfs set mountpoint=/u/zfs <name>
 
+NFS sharing ZFS file systems
+================================
+
+Use the zfs_ command to set or list NFS shared::
+
+  zfs set sharenfs='rw=192.168.122.203' pool1/fs1
+  zfs get sharenfs pool1/fs1
