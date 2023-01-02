@@ -453,6 +453,7 @@ For example, display the NVDIMM_ in the system::
    0x1001 | 126.742 GiB | Disabled, Frozen | Healthy     | 02.02.00.1553
 
 .. _ipmctl: https://github.com/intel/ipmctl
+.. _EPEL: https://docs.fedoraproject.org/en-US/epel/
 
 PXE boot setup
 ==============

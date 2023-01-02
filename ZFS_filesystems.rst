@@ -154,7 +154,7 @@ To correlate a namespace to a PMem device, use the following command::
 
   lsblk
 
-Partiton the NVDIMM_ disks::
+Partition the NVDIMM_ disks::
 
   parted /dev/pmem0 unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
   parted /dev/pmem1 unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
