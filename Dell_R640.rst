@@ -436,6 +436,24 @@ To correlate a namespace to a PMem device, use the following command::
 .. _NVDIMM_Wiki: https://nvdimm.wiki.kernel.org/
 .. _3D_XPoint: https://en.wikipedia.org/wiki/3D_XPoint
 
+Managing NVDIMMs with ipmctl
+---------------------------------
+
+The ipmctl_ is a utility for configuring and managing Intel® Optane™ Persistent Memory modules (PMem).
+On EL8 systems install this package from EPEL_::
+
+  dnf install ipmctl
+
+For example, display the NVDIMM_ in the system::
+
+  $ ipmctl show -dimm
+   DimmID | Capacity    | LockState        | HealthState | FWVersion    
+  ======================================================================
+   0x0001 | 126.742 GiB | Disabled, Frozen | Healthy     | 02.02.00.1553
+   0x1001 | 126.742 GiB | Disabled, Frozen | Healthy     | 02.02.00.1553
+
+.. _ipmctl: https://github.com/intel/ipmctl
+
 PXE boot setup
 ==============
 
