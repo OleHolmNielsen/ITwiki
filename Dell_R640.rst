@@ -444,6 +444,7 @@ On EL8 systems install this package from EPEL_::
 
   dnf install ipmctl
 
+Read the ipmctl_ manual page.
 For example, display the NVDIMM_ in the system::
 
   $ ipmctl show -dimm
