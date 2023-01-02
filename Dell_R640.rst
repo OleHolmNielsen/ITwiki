@@ -452,6 +452,11 @@ For example, display the NVDIMM_ in the system::
    0x0001 | 126.742 GiB | Disabled, Frozen | Healthy     | 02.02.00.1553
    0x1001 | 126.742 GiB | Disabled, Frozen | Healthy     | 02.02.00.1553
 
+Other useful commands::
+
+  $ ipmctl help
+  $ ipmctl show -topology -socket
+
 .. _ipmctl: https://github.com/intel/ipmctl
 .. _EPEL: https://docs.fedoraproject.org/en-US/epel/
 
