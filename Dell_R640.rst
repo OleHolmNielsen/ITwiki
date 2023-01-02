@@ -399,11 +399,11 @@ Miscellaneous Settings menu
 NVDIMM Optane persistent memory setup
 =========================================
 
-Read RHEL documentation of 
-`Persistent Memory: NVDIMMs <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/ch-persistent-memory-nvdimms>`_
-(RHEL7)
-and `Using NVDIMM persistent memory storage <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_storage_devices/using-nvdimm-persistent-memory-storage_managing-storage-devices>`_
-(RHEL8).
+Documentation of NVDIMM_:
+
+* NVDIMM_Wiki_ at kernel.org.
+* `Using NVDIMM persistent memory storage <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_storage_devices/using-nvdimm-persistent-memory-storage_managing-storage-devices>`_ (RHEL8).
+* `Persistent Memory: NVDIMMs <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/ch-persistent-memory-nvdimms>`_ (RHEL7)
 
 To configure NVDIMM_ 3D_XPoint_ known as *Intel Optane* persistent memory DIMM modules go to the *System BIOS Settings* boot menus.
 Select the *Memory Settings* and then *Persistent Memory* and *Intel Persistent Memory*.
@@ -433,6 +433,7 @@ To correlate a namespace to a PMem device, use the following command::
   lsblk
 
 .. _NVDIMM: https://en.wikipedia.org/wiki/NVDIMM
+.. _NVDIMM_Wiki: https://nvdimm.wiki.kernel.org/
 .. _3D_XPoint: https://en.wikipedia.org/wiki/3D_XPoint
 
 PXE boot setup
