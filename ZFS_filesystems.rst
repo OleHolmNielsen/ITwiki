@@ -180,10 +180,38 @@ Get and set mountpoint::
   zfs get mountpoint <name>
   zfs set mountpoint=/u/zfs <name>
 
+Disk quotas for ZFS
+======================
+
+We assume a ZFS filesystem <name> and a specific user's name <username> in these examples.
+
+Define a user's disk quota::
+
+  zfs set userquota@<username>=100G <name>
+
+Unfortunately, the OpenZFS_ has no **default user quota** option.
+This is only available in the Oracle ZFS implementation.
+So you must set disk quotas individually for all users.
+
+View the user disk usage and quotas::
+
+  zfs userspace <name>
+
 NFS sharing ZFS file systems
 ================================
 
-Use the zfs_ command to set or list NFS shared::
+The zfsprops_ manual page explains about the **sharenfs** option and using the normal exports_ file::
+
+  Controls whether the file system is shared via NFS, and what options are to be used.
+  A file system with a sharenfs property of off is managed with the exportfs(8) command and entries in the /etc/exports file.
+  Otherwise, the file system is automatically shared and unshared with the zfs share and zfs unshare commands.
+  If the property is set to on, the dataset is shared using the default options:
+  sec=sys,rw,crossmnt,no_subtree_check
+
+Alternatively to the exports_ file, use the zfs_ command to set or list NFS shared::
 
   zfs set sharenfs='rw=192.168.122.203' pool1/fs1
   zfs get sharenfs pool1/fs1
+
+.. _zfsprops: https://openzfs.github.io/openzfs-docs/man/7/zfsprops.7.html
+.. _exports: https://linux.die.net/man/5/exports
