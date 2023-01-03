@@ -192,14 +192,15 @@ Define a user's disk quota ``userquota`` and number-of-files quota ``userobjquot
   zfs set userquota@<username>=1TB userobjquota@<username>=1M <pool-name>
 
 Unfortunately, the OpenZFS_ has no **default user quota** option.
-This is only available in the Oracle Solaris ZFS implementation.
-So you must set disk quotas individually for all users.
+This is only available in the Oracle_Solaris_ZFS_ implementation,
+so you must set disk quotas individually for all users.
 
 View the user disk usage and quotas::
 
   zfs userspace <pool-name>
 
 .. _zfs-userspace: https://openzfs.github.io/openzfs-docs/man/8/zfs-userspace.8.html
+.. _Oracle_Solaris_ZFS: https://docs.oracle.com/cd/E23824_01/html/821-1448/zfsover-2.html
 
 NFS sharing ZFS file systems
 ================================
