@@ -200,18 +200,17 @@ View the user disk usage and quotas::
 NFS sharing ZFS file systems
 ================================
 
-The zfsprops_ manual page explains about the **sharenfs** option and using the normal exports_ file::
+The zfsprops_ manual page explains about the sharenfs_ option:
 
-  Controls whether the file system is shared via NFS, and what options are to be used.
-  A file system with a sharenfs property of off is managed with the exportfs(8) command and entries in the /etc/exports file.
-  Otherwise, the file system is automatically shared and unshared with the zfs share and zfs unshare commands.
-  If the property is set to on, the dataset is shared using the default options:
-  sec=sys,rw,crossmnt,no_subtree_check
+* A file system with a sharenfs_ property of **off** is managed with the exportfs_ command and entries in the /etc/ exports_ file.
+  Otherwise, the file system is automatically shared and unshared with the ``zfs share`` and ``zfs unshare`` commands.
 
-Alternatively to the exports_ file, use the zfs_ command to set or list NFS shared::
+Alternatively to the exports_ file, use the zfs_ command to set or list NFS shares like in this example::
 
   zfs set sharenfs='rw=192.168.122.203' pool1/fs1
   zfs get sharenfs pool1/fs1
 
+.. _sharenfs: https://openzfs.github.io/openzfs-docs/man/7/zfsprops.7.html#sharenfs
 .. _zfsprops: https://openzfs.github.io/openzfs-docs/man/7/zfsprops.7.html
 .. _exports: https://linux.die.net/man/5/exports
+.. _exportfs: https://linux.die.net/man/8/exportfs
