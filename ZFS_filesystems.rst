@@ -170,32 +170,36 @@ and then add the partitions as ZFS cache and log::
 Useful ZFS commands
 -------------------
 
-List ZFS_ filesystems::
+List ZFS_ filesystems and their properties::
 
   zfs list
-  zpool status <name>
+  zpool status <pool-name>
+  zpool get all <pool-name>
 
-Get and set mountpoint::
+Get and set a mountpoint::
 
-  zfs get mountpoint <name>
-  zfs set mountpoint=/u/zfs <name>
+  zfs get mountpoint <pool-name>
+  zfs set mountpoint=/u/zfs <pool-name>
 
 Disk quotas for ZFS
 ======================
 
-We assume a ZFS filesystem <name> and a specific user's name <username> in these examples.
+Read the zfs-userspace_ manual page to display space and quotas of a ZFS dataset.
+We assume a ZFS filesystem ``<pool-name>`` and a specific user's name ``<username>`` in the examples below.
 
-Define a user's disk quota::
+Define a user's disk quota ``userquota`` and number-of-files quota ``userobjquota``::
 
-  zfs set userquota@<username>=100G <name>
+  zfs set userquota@<username>=1TB userobjquota@<username>=1M <pool-name>
 
 Unfortunately, the OpenZFS_ has no **default user quota** option.
-This is only available in the Oracle ZFS implementation.
+This is only available in the Oracle Solaris ZFS implementation.
 So you must set disk quotas individually for all users.
 
 View the user disk usage and quotas::
 
-  zfs userspace <name>
+  zfs userspace <pool-name>
+
+.. _zfs-userspace: https://openzfs.github.io/openzfs-docs/man/8/zfs-userspace.8.html
 
 NFS sharing ZFS file systems
 ================================
