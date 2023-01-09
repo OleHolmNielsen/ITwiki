@@ -191,14 +191,12 @@ Scrubbing can be made regularly with crontab, for example monthly::
 
   0 2 1 * * /sbin/zpool scrub <pool-name>
 
-or alternatively with Systemd_:
+or alternatively on machines using Systemd_, scrub timers can be enabled on per-pool basis.
+See the ``systemd.timer(5)`` manual page.
+Weekly and monthly timer units are provided::
 
-* On machines using systemd, scrub timers can be enabled on per-pool basis.
-  See the systemd.timer(5) manual page.
-  Weekly and monthly timer units are provided::
-
-    systemctl enable zfs-scrub-weekly@<pool-name>.timer --now
-    systemctl enable zfs-scrub-monthly@<pool-name>.timer --now
+  systemctl enable zfs-scrub-weekly@<pool-name>.timer --now
+  systemctl enable zfs-scrub-monthly@<pool-name>.timer --now
 
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
 
