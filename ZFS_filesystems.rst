@@ -181,6 +181,25 @@ Get and set a mountpoint::
   zfs get mountpoint <pool-name>
   zfs set mountpoint=/u/zfs <pool-name>
 
+Scrub and Resilver disks
+--------------------------
+
+With ZFS on Linux, detecting and correcting silent data errors is done through scrubbing the disks, see
+https://pthree.org/2012/12/11/zfs-administration-part-vi-scrub-and-resilver/
+
+Scrubbing can be made regularly with crontab, for example monthly::
+
+  0 2 1 * * /sbin/zpool scrub <pool-name>
+
+or alternatively with Systemd_:
+
+* On machines using systemd, scrub timers can be enabled on per-pool basis.
+  See the systemd.timer(5) manual page.
+  Weekly and monthly timer units are provided::
+
+    systemctl enable zfs-scrub-weekly@<pool-name>.timer --now
+    systemctl enable zfs-scrub-monthly@<pool-name>.timer --now
+
 Disk quotas for ZFS
 ======================
 
@@ -193,7 +212,7 @@ Define a user's disk quota ``userquota`` and number-of-files quota ``userobjquot
 
 Unfortunately, the OpenZFS_ has no **default user quota** option.
 This is only available in the Oracle_Solaris_ZFS_ implementation,
-so you must set disk quotas individually for all users.
+so with Linux OpenZFS_ you must set disk quotas individually for each user.
 
 View the user disk usage and quotas::
 
