@@ -200,6 +200,8 @@ or alternatively with Systemd_:
     systemctl enable zfs-scrub-weekly@<pool-name>.timer --now
     systemctl enable zfs-scrub-monthly@<pool-name>.timer --now
 
+.. _Systemd: https://en.wikipedia.org/wiki/Systemd
+
 Disk quotas for ZFS
 ======================
 
