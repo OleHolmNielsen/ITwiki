@@ -24,6 +24,8 @@ ZFS documentation
 
 * First time OpenZFS users are encouraged to check out Aaron_Toponce_ ’s excellent documentation.
 
+* Best_practices_ and caveats.
+
 * OpenZFS_Newcomers_ documentation and FAQ_.
 
 * `ZFS Basic Concepts <https://openzfs.github.io/openzfs-docs/Basic%20Concepts/index.html>`_.
@@ -44,6 +46,7 @@ ZFS documentation
 .. _Getting_Started: https://openzfs.github.io/openzfs-docs/Getting%20Started/index.html
 .. _RHEL-based-distro: https://openzfs.github.io/openzfs-docs/Getting%20Started/RHEL-based%20distro/index.html
 .. _Aaron_Toponce: https://pthree.org/2012/12/04/zfs-administration-part-i-vdevs/
+.. _Best_practices: https://pthree.org/2012/12/13/zfs-administration-part-viii-zpool-best-practices-and-caveats/
 .. _OpenZFS_Newcomers: https://openzfs.org/wiki/Newcomers
 .. _Lustre: https://wiki.lustre.org/Main_Page
 .. _FAQ: https://openzfs.github.io/openzfs-docs/Project%20and%20Community/FAQ.html
@@ -173,8 +176,11 @@ Useful ZFS commands
 List ZFS_ filesystems and their properties::
 
   zfs list
+  zpool list
   zpool status <pool-name>
   zpool get all <pool-name>
+
+See the sub-command manual pages for details (for example ``man zpool-list``).
 
 Get and set a mountpoint::
 
@@ -209,10 +215,16 @@ Detecting broken disks is explained in the Scrub_and_Resilver_ page.
 See the zpool-status_ if any disks have failed::
 
   zpool status
+  zpool status -x
 
 Use the zpool-replace_ command to replace a failed disk, for example::
 
   zpool replace <pool-name> sde sde
+
+Hot spare disks will **not** be added to the VDEV to replace a failed drive by default.
+You MUST enable this feature.
+Set the ``autoreplace`` feature to on.
+Use ``zpool set autoreplace=on <pool-name>`` as an example.
 
 .. _zpool-status: https://openzfs.github.io/openzfs-docs/man/8/zpool-status.8.html
 .. _zpool-replace: https://openzfs.github.io/openzfs-docs/man/8/zpool-replace.8.html
