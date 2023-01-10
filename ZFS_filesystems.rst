@@ -184,8 +184,10 @@ Get and set a mountpoint::
 Scrub and Resilver disks
 --------------------------
 
-With ZFS on Linux, detecting and correcting silent data errors is done through scrubbing the disks, see
-https://pthree.org/2012/12/11/zfs-administration-part-vi-scrub-and-resilver/
+With ZFS on Linux, detecting and correcting silent data errors is done through scrubbing the disks,
+see the Scrub_and_Resilver_ page.
+
+.. _Scrub_and_Resilver: https://pthree.org/2012/12/11/zfs-administration-part-vi-scrub-and-resilver/
 
 Scrubbing can be made regularly with crontab, for example monthly::
 
@@ -199,6 +201,21 @@ Weekly and monthly timer units are provided::
   systemctl enable zfs-scrub-monthly@<pool-name>.timer --now
 
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
+
+Replacing defective disks
+-------------------------------
+
+Detecting broken disks is explained in the Scrub_and_Resilver_ page.
+See the zpool-status_ if any disks have failed::
+
+  zpool status
+
+Use the zpool-replace_ command to replace a failed disk, for example::
+
+  zpool replace <pool-name> sde sde
+
+.. _zpool-status: https://openzfs.github.io/openzfs-docs/man/8/zpool-status.8.html
+.. _zpool-replace: https://openzfs.github.io/openzfs-docs/man/8/zpool-replace.8.html
 
 Disk quotas for ZFS
 ======================
