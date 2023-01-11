@@ -43,6 +43,8 @@ ZFS documentation
 * `ZFS 101—Understanding ZFS storage and performance <https://arstechnica.com/information-technology/2020/05/zfs-101-understanding-zfs-storage-and-performance/>`_
   and `ZFS fans, rejoice—RAIDz expansion will be a thing very soon <https://arstechnica.com/gadgets/2021/06/raidz-expansion-code-lands-in-openzfs-master/>`_.
 
+* ZFS_checksums_ are a key feature of ZFS_ and an important differentiator for ZFS_ over other RAID implementations and filesystems. 
+
 .. _Getting_Started: https://openzfs.github.io/openzfs-docs/Getting%20Started/index.html
 .. _RHEL-based-distro: https://openzfs.github.io/openzfs-docs/Getting%20Started/RHEL-based%20distro/index.html
 .. _Aaron_Toponce: https://pthree.org/2012/12/04/zfs-administration-part-i-vdevs/
@@ -50,6 +52,7 @@ ZFS documentation
 .. _OpenZFS_Newcomers: https://openzfs.org/wiki/Newcomers
 .. _Lustre: https://wiki.lustre.org/Main_Page
 .. _FAQ: https://openzfs.github.io/openzfs-docs/Project%20and%20Community/FAQ.html
+.. _ZFS_checksums: https://openzfs.github.io/openzfs-docs/Basic%20Concepts/Checksums.html
 
 Installation of ZFS
 =========================
@@ -179,6 +182,7 @@ List ZFS_ filesystems and their properties::
   zpool list
   zpool status <pool-name>
   zpool get all <pool-name>
+  mount -l -t zfs
 
 See the sub-command manual pages for details (for example ``man zpool-list``).
 
@@ -232,6 +236,11 @@ Use ``zpool set autoreplace=on <pool-name>`` as an example.
 Disk quotas for ZFS
 ======================
 
+From the Best_practices_ page:
+
+* Keep ZFS_ pool capacity under 80% for best performance.
+  Due to the copy-on-write nature of ZFS_, the filesystem gets heavily fragmented.
+
 Read the zfs-userspace_ manual page to display space and quotas of a ZFS dataset.
 We assume a ZFS filesystem ``<pool-name>`` and a specific user's name ``<username>`` in the examples below.
 
@@ -246,6 +255,11 @@ so with Linux OpenZFS_ you must set disk quotas individually for each user.
 View the user disk usage and quotas::
 
   zfs userspace <pool-name>
+  zfs userspace <pool-name> -p
+  zfs userspace <pool-name> -H -p -o name,quota,used,objquota,objused
+
+The ``-p`` prints parseable numbers, the ``-H`` omits the heading.
+The ``-o`` displays only specific columns, this could be used to calculate *quota warnings*.
 
 .. _zfs-userspace: https://openzfs.github.io/openzfs-docs/man/8/zfs-userspace.8.html
 .. _Oracle_Solaris_ZFS: https://docs.oracle.com/cd/E23824_01/html/821-1448/zfsover-2.html
@@ -267,3 +281,11 @@ Alternatively to the exports_ file, use the zfs_ command to set or list NFS shar
 .. _zfsprops: https://openzfs.github.io/openzfs-docs/man/7/zfsprops.7.html
 .. _exports: https://linux.die.net/man/5/exports
 .. _exportfs: https://linux.die.net/man/8/exportfs
+
+ZFS quotas over NFS
+-------------------
+
+The quota tools for Linux has absolutely no knowledge about ZFS_ quotas, nor does rquotad_, and hence clients mounting via NFS are also unable to obtain this information.
+See a hack at https://aaronsplace.co.uk/blog/2019-02-12-zfsonline-nfs-quota.html
+
+.. _rquotad: https://linux.die.net/man/8/rpc.rquotad
