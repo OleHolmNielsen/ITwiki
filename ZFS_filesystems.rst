@@ -172,6 +172,24 @@ and then add the partitions as ZFS cache and log::
 .. _NVDIMM: https://en.wikipedia.org/wiki/NVDIMM
 .. _3D_XPoint: https://en.wikipedia.org/wiki/3D_XPoint
 
+Compression
+------------------
+
+Compression is transparent with ZFS_ if you enable it,
+see the Compression_and_Deduplication_ page.
+This means that every file you store in your pool can be compressed.
+From your point of view as an application, the file does not appear to be compressed, but appears to be stored uncompressed. 
+
+To enable compression on a dataset, we just need to modify the ``compression`` property.
+The valid values for that property are: "on", "off", "lzjb", "lz4", "gzip", "gzip[1-9]", and "zle"::
+
+  zfs set compression=lz4 <pool-name>
+
+Monitor compression::
+
+  zfs get compressratio <pool-name>
+
+.. _Compression_and_Deduplication: https://pthree.org/2012/12/18/zfs-administration-part-xi-compression-and-deduplication/
 
 Useful ZFS commands
 -------------------
