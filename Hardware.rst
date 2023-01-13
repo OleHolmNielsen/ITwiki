@@ -2,6 +2,8 @@
 Hardware documentation 
 ########################################
 
+This page contains documentation on some hardware at our site.
+
 .. toctree::
    :maxdepth: 1
 
