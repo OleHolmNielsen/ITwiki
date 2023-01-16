@@ -101,9 +101,10 @@ Some useful Galaxy_ packages include:
 
     ansible-galaxy install linux-system-roles.network
 
-  To upgrade the version install with the ``--force`` option::
+To upgrade a version from Galaxy_,
+you have to install it with the ``--force`` option::
 
-    ansible-galaxy install --force role-name>
+  ansible-galaxy install --force <galaxy-role-name>
 
 List installed Galaxy_ packages::
 
