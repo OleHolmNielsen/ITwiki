@@ -84,17 +84,31 @@ Roles
 -----
 
 * Roles_ documentation.
-* Galaxy_ provides pre-packaged units of work known to Ansible as roles.
+
+* `Red Hat Enterprise Linux (RHEL) System Roles <https://access.redhat.com/articles/3050101>`_.
+
+.. _Roles: http://docs.ansible.com/ansible/latest/playbooks_roles.html
+
+Galaxy
+-------
+
+Galaxy_ provides pre-packaged units of work known to Ansible as roles.
+
+Some useful Galaxy_ packages include:
+
 * `linux-system-roles/network <https://galaxy.ansible.com/linux-system-roles/network/>`_ This role enables users to configure network on target machines.
   Install by::
 
     ansible-galaxy install linux-system-roles.network
 
-  To upgrade the version use the *--force* option.
+  To upgrade the version install with the ``--force`` option::
 
-* `Red Hat Enterprise Linux (RHEL) System Roles <https://access.redhat.com/articles/3050101>`_.
+    ansible-galaxy install --force role-name>
 
-.. _Roles: http://docs.ansible.com/ansible/latest/playbooks_roles.html
+List installed Galaxy_ packages::
+
+  ansible-galaxy list
+
 .. _Galaxy: https://galaxy.ansible.com/
 
 Callbacks
