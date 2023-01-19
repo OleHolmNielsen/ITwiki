@@ -40,13 +40,13 @@ The boot items can be listed by::
 
 See `CentOS / RHEL 7 : Change default kernel (boot with old kernel) <https://www.thegeekdiary.com/centos-rhel-7-change-default-kernel-boot-with-old-kernel/>`_.
 
-Managing system services with systemd
+Managing system services with Systemd
 -------------------------------------
 
-RHEL7 system services are managed with systemd_.
+RHEL7 system services are managed with Systemd_.
 See `Chapter 6. Managing Services with systemd <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html>`_.
 
-.. _systemd: http://en.wikipedia.org/wiki/Systemd
+.. _Systemd: http://en.wikipedia.org/wiki/Systemd
 
 To list system services::
 
@@ -136,10 +136,10 @@ Also, each NFS client must permit user home directories on NFS by::
 
   setsebool -P use_nfs_home_dirs 1
 
-Network tools
-===============
+Networking services
+========================
 
-Documentation is in the Networking_Guide_.
+Networking documentation is in the Networking_Guide_.
 
 .. _Networking_Guide: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Networking_Guide/index.html
 
@@ -160,7 +160,7 @@ Source code is at https://code.blinkace.com/pdw/iftop.
 .. _iftop: http://www.ex-parrot.com/pdw/iftop/
 
 Network interface configuration with NetworkManager
-=========================================================
+---------------------------------------------------------
 
 Configuration of interfaces uses the NetworkManager_ tool::
 
@@ -244,7 +244,7 @@ Example ip commands::
   # ip route show
 
 ARP cache for large networks
-===================================
+------------------------------
 
 If the number of network devices (cluster nodes plus switches etc.) approaches or exceeds 512, 
 you must consider the Linux kernel's limited dynamic ARP-cache size. 
@@ -266,6 +266,231 @@ parameters by adding these lines to ``/etc/sysctl.conf``::
   net.ipv4.neigh.default.gc_stale_time = 3600
 
 Then run ``/sbin/sysctl -p`` to reread this configuration file.
+
+Firewall configuration
+====================================
+
+The default firewall service is firewalld_ and **not** the well-known *iptables* service.
+The dynamic firewall daemon firewalld_ provides a dynamically managed firewall with support for network “zones” to assign a level of trust to a network and its associated connections and interfaces. 
+See `Introduction to firewalld <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html>`_.
+
+.. _firewalld: https://fedoraproject.org/wiki/FirewallD
+
+Install firewalld_ by::
+
+  yum install firewalld firewall-config
+
+A graphical configuration tool::
+
+  firewall-config
+
+is used to configure firewalld_, which in turn uses *iptables* tool to communicate with *Netfilter* in the kernel which implements packet filtering. 
+
+The firewall configuration files are in the directory ``/etc/firewalld/zones/`` where XML files contain the firewall rules.
+
+To query all rules in zones::
+
+  firewall-cmd --list-all           # Only default zone
+  firewall-cmd --list-all-zones     # All zones
+
+IP_set firewall rules
+-------------------------
+
+IP_sets_ are a framework inside the Linux 2.4.x and 2.6.x kernel which can be used efficiently to create firewall rules for large numbers of IP subnets.
+We document configuration of this in Linux_firewall_configuration_.
+
+.. _IP_sets: http://ipset.netfilter.org/
+
+DNS servers
+================
+
+See the documentation on :ref:`DNS-servers`.
+
+Note that ``bind-chroot`` is no longer recommended, see ``man named``::
+
+  By default, Red Hat ships BIND with the most secure SELinux policy that will not prevent normal BIND operation and will prevent exploitation of all known BIND security vulnerabilities.
+  See the selinux(8) man page for information about SElinux.
+
+  It is not necessary to run named in a chroot environment if the Red Hat SELinux policy for named is enabled. When enabled, this policy is far more secure than a chroot environment.
+  Users are recommended to enable SELinux and remove the bind-chroot package.
+
+Install the BIND DNS server packages::
+
+  yum install bind-utils bind-libs bind
+  systemctl enable named 
+
+Copy the configuration file ``/etc/named.conf`` from another server (see below hints about configuration) and make sure it's correctly owned and protected::
+
+  chmod 640 /etc/named.conf
+  chgrp named /etc/named.conf
+
+Install SELinux packages and documentation::
+
+  yum install selinux-policy-doc libselinux-python libsemanage-python
+
+Configuring DNS master server
+--------------------------------
+
+The BIND configuration file is ``/etc/named.conf``.
+
+The authoritative DNS zone files are located in this directory ``/var/named``.
+
+Configuring DNS caching server
+--------------------------------
+
+For setup of **DNS cache server** see http://www.fatmin.com/2011/10/rhel6-how-to-setup-a-caching-only-dns-server.html.
+An example file is in ``intra4:/etc/named.conf``.
+
+**IMPORTANT:** In order for the DNS caching server to work correctly, it **must** be configured in the *DTU router filters*.
+The caching server's IP-address must be defined as in this example::
+
+  permit udp any eq domain host 130.225.87.35 gt 1023	! DNS cache return
+
+Configuring DNS slave server
+--------------------------------
+
+Apparently the configuration includes::
+
+  cd /var/named/
+  cp -p /usr/share/doc/bind-9.*/sample/var/named/named.* .
+  mkdir slaves dynamic data
+  chown named.named slaves dynamic data
+  chmod 770 slaves dynamic data
+
+Running the DNS server
+--------------------------------
+
+Configure the firewall to allow access to the DNS server::
+
+  firewall-cmd --permanent --add-port=53/udp
+  firewall-cmd --permanent --add-port=53/tcp
+  firewall-cmd --reload
+
+SElinux config for DNS server (see *man named_selinux* from the *selinux-policy-doc* RPM)::
+
+  setsebool -P named_write_master_zones 1
+
+Start the DNS server by::
+
+  systemctl enable named
+  systemctl start named
+  
+NFS server configuration
+=============================
+
+See the RHEL7 documentation `8.7. NFS Server Configuration <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Storage_Administration_Guide/nfs-serverconfig.html>`_.
+This includes a section *8.7.3. Running NFS Behind a Firewall*.
+
+See also `Quick NFS Server configuration on Redhat 7 Linux System  <http://linuxconfig.org/quick-nfs-server-configuration-on-redhat-7-linux>`_
+and `Setting Up NFS Server And Client On CentOS 7 <http://www.unixmen.com/setting-nfs-server-client-centos-7/>`_ and
+`About NFS (Shared File System Administration) <https://docs.oracle.com/cd/E52668_01/E54669/html/ol7-about-nfs.html>`_.
+
+First install these RPMs::
+
+  yum install nfs-utils quota
+
+Add this to ``/etc/sysconfig/nfs``::
+
+  RPCMOUNTDOPTS="-p 892"
+  LOCKD_TCPPORT=32803
+  LOCKD_UDPPORT=32769
+
+This scripts is sourced by ``/usr/lib/systemd/scripts/nfs-utils_env.sh``.
+
+Also, for heavily loaded NFS servers with large memory and many CPU cores you should increase this variable from the default value of 8 to perhaps 16, 32 or::
+
+  RPCNFSDCOUNT=64
+
+Some services (undocumented) must be enabled at reboot and started::
+
+  systemctl enable rpcbind
+  systemctl enable nfs-server
+  systemctl enable nfs-lock
+  systemctl enable nfs-idmap
+  systemctl enable rpc-rquotad.service
+  systemctl start rpcbind
+  systemctl start nfs-server
+  systemctl start nfs-lock
+  systemctl start nfs-idmap
+  systemctl start rpc-rquotad.service
+
+The NFS remote quota service **rpc-rquotad.service** (alias: nfs-rquotad.service) was added by Red Hat as late as March 2016, see the bug fix update https://rhn.redhat.com/errata/RHBA-2016-0557.html.
+There is a new configuration file ``/etc/sysconfig/rpc-rquotad`` in which you must define a fixed port 875::
+
+  RPCRQUOTADOPTS="-p 875"
+
+Then restart the *nfs* service::
+
+  systemctl restart nfs-server 
+
+Check that the required services are running::
+
+  # systemctl -l | grep nfs
+  proc-fs-nfsd.mount                       loaded active mounted   NFSD configuration filesystem
+  var-lib-nfs-rpc_pipefs.mount             loaded active mounted   RPC Pipe File System
+  nfs-config.service                       loaded active exited    Preprocess NFS configuration
+  nfs-idmapd.service                       loaded active running   NFSv4 ID-name mapping service
+  nfs-mountd.service                       loaded active running   NFS Mount Daemon
+  nfs-server.service                       loaded active exited    NFS server and services
+  nfs-client.target                        loaded active active    NFS client services
+
+RHEL 8 notes
+------------------
+
+See `Chapter 3. Exporting NFS shares <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/deploying_different_types_of_servers/exporting-nfs-shares_deploying-different-types-of-servers>`_.
+
+Install also this package::
+
+  dnf install quota-rpc
+
+NFS server configuration is now in ``/etc/nfs.conf``, an INI-like configuration file.
+Ports are defined in this file.
+
+NFS server firewall rules
+-----------------------------------
+
+Add the following firewall rules::
+
+  firewall-cmd --permanent --add-port=111/tcp
+  firewall-cmd --permanent --add-port=875/tcp
+  firewall-cmd --permanent --add-port=892/tcp
+  firewall-cmd --permanent --add-port=2049/tcp
+  firewall-cmd --permanent --add-port=20048/tcp
+  firewall-cmd --permanent --add-port=32803/tcp
+
+  firewall-cmd --permanent --add-port=111/udp
+  firewall-cmd --permanent --add-port=875/udp
+  firewall-cmd --permanent --add-port=892/udp
+  firewall-cmd --permanent --add-port=2049/udp
+  firewall-cmd --permanent --add-port=20048/udp
+  firewall-cmd --permanent --add-port=32769/udp
+
+  firewall-cmd --reload
+
+NFSv3 requires the *rpcbind* service,
+see `NFS and rpcbind <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Storage_Administration_Guide/s2-nfs-methodology-portmap.html>`_.
+Use this command to list ports used::
+
+  rpcinfo -p
+
+The services listed **must** be permitted by the firewall rules.
+
+We have seen some cases of heavy NFS client traffic load where the client syslog shows error messages::
+
+  kernel: lockd: server XXX not responding, still trying
+  kernel: xs_tcp_setup_socket: connect returned unhandled error -107
+
+It turned out that this was related to the firewalld_ service, despite the correct rules shown above.
+Maybe this is a performance issue in firewalld_?
+The way to test this is to shut down firewalld_ temporarily and see if the problem has been solved::
+
+  systemctl stop firewalld
+
+It seems that the problem is solved by explicitly whitelisting the IP subnets used by the NFS clients, for example for the 10.2 subnet::
+
+  firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT_direct 0 -s 10.2.0.0/16 -j ACCEPT
+  firewall-cmd --reload
+
 
 Chrony NTP time service
 ===================================
@@ -515,233 +740,6 @@ If the database must be accessed from remote hosts (on port 3306), then make a f
 
   firewall-cmd --zone=public --add-port=3306/tcp --permanent
 
-
-Firewall configuration
-====================================
-
-The default firewall service is firewalld_ and **not** the well-known *iptables* service.
-The dynamic firewall daemon firewalld_ provides a dynamically managed firewall with support for network “zones” to assign a level of trust to a network and its associated connections and interfaces. 
-See `Introduction to firewalld <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html>`_.
-
-.. _firewalld: https://fedoraproject.org/wiki/FirewallD
-
-Install firewalld_ by::
-
-  yum install firewalld firewall-config
-
-A graphical configuration tool::
-
-  firewall-config
-
-is used to configure firewalld_, which in turn uses *iptables* tool to communicate with *Netfilter* in the kernel which implements packet filtering. 
-
-The firewall configuration files are in the directory ``/etc/firewalld/zones/`` where XML files contain the firewall rules.
-
-To query all rules in zones::
-
-  firewall-cmd --list-all           # Only default zone
-  firewall-cmd --list-all-zones     # All zones
-
-IP_set firewall rules
--------------------------
-
-IP_sets_ are a framework inside the Linux 2.4.x and 2.6.x kernel which can be used efficiently to create firewall rules for large numbers of IP subnets.
-We document configuration of this in Linux_firewall_configuration_.
-
-.. _IP_sets: http://ipset.netfilter.org/
-
-
-DNS servers
-================
-
-See the documentation on :ref:`DNS-servers`.
-
-Note that ``bind-chroot`` is no longer recommended, see ``man named``::
-
-  By default, Red Hat ships BIND with the most secure SELinux policy that will not prevent normal BIND operation and will prevent exploitation of all known BIND security vulnerabilities.
-  See the selinux(8) man page for information about SElinux.
-
-  It is not necessary to run named in a chroot environment if the Red Hat SELinux policy for named is enabled. When enabled, this policy is far more secure than a chroot environment.
-  Users are recommended to enable SELinux and remove the bind-chroot package.
-
-Install the BIND DNS server packages::
-
-  yum install bind-utils bind-libs bind
-  systemctl enable named 
-
-Copy the configuration file ``/etc/named.conf`` from another server (see below hints about configuration) and make sure it's correctly owned and protected::
-
-  chmod 640 /etc/named.conf
-  chgrp named /etc/named.conf
-
-Install SELinux packages and documentation::
-
-  yum install selinux-policy-doc libselinux-python libsemanage-python
-
-Configuring DNS master server
---------------------------------
-
-The BIND configuration file is ``/etc/named.conf``.
-
-The authoritative DNS zone files are located in this directory ``/var/named``.
-
-Configuring DNS caching server
---------------------------------
-
-For setup of **DNS cache server** see http://www.fatmin.com/2011/10/rhel6-how-to-setup-a-caching-only-dns-server.html.
-An example file is in ``intra4:/etc/named.conf``.
-
-**IMPORTANT:** In order for the DNS caching server to work correctly, it **must** be configured in the *DTU router filters*.
-The caching server's IP-address must be defined as in this example::
-
-  permit udp any eq domain host 130.225.87.35 gt 1023	! DNS cache return
-
-Configuring DNS slave server
---------------------------------
-
-Apparently the configuration includes::
-
-  cd /var/named/
-  cp -p /usr/share/doc/bind-9.*/sample/var/named/named.* .
-  mkdir slaves dynamic data
-  chown named.named slaves dynamic data
-  chmod 770 slaves dynamic data
-
-Running the DNS server
---------------------------------
-
-Configure the firewall to allow access to the DNS server::
-
-  firewall-cmd --permanent --add-port=53/udp
-  firewall-cmd --permanent --add-port=53/tcp
-  firewall-cmd --reload
-
-SElinux config for DNS server (see *man named_selinux* from the *selinux-policy-doc* RPM)::
-
-  setsebool -P named_write_master_zones 1
-
-Start the DNS server by::
-
-  systemctl enable named
-  systemctl start named
-  
-NFS server configuration
-=============================
-
-See the RHEL7 documentation `8.7. NFS Server Configuration <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Storage_Administration_Guide/nfs-serverconfig.html>`_.
-This includes a section *8.7.3. Running NFS Behind a Firewall*.
-
-See also `Quick NFS Server configuration on Redhat 7 Linux System  <http://linuxconfig.org/quick-nfs-server-configuration-on-redhat-7-linux>`_
-and `Setting Up NFS Server And Client On CentOS 7 <http://www.unixmen.com/setting-nfs-server-client-centos-7/>`_ and
-`About NFS (Shared File System Administration) <https://docs.oracle.com/cd/E52668_01/E54669/html/ol7-about-nfs.html>`_.
-
-First install these RPMs::
-
-  yum install nfs-utils quota
-
-Add this to ``/etc/sysconfig/nfs``::
-
-  RPCMOUNTDOPTS="-p 892"
-  LOCKD_TCPPORT=32803
-  LOCKD_UDPPORT=32769
-
-This scripts is sourced by ``/usr/lib/systemd/scripts/nfs-utils_env.sh``.
-
-Also, for heavily loaded NFS servers with large memory and many CPU cores you should increase this variable from the default value of 8 to perhaps 16, 32 or::
-
-  RPCNFSDCOUNT=64
-
-Some services (undocumented) must be enabled at reboot and started::
-
-  systemctl enable rpcbind
-  systemctl enable nfs-server
-  systemctl enable nfs-lock
-  systemctl enable nfs-idmap
-  systemctl enable rpc-rquotad.service
-  systemctl start rpcbind
-  systemctl start nfs-server
-  systemctl start nfs-lock
-  systemctl start nfs-idmap
-  systemctl start rpc-rquotad.service
-
-The NFS remote quota service **rpc-rquotad.service** (alias: nfs-rquotad.service) was added by Red Hat as late as March 2016, see the bug fix update https://rhn.redhat.com/errata/RHBA-2016-0557.html.
-There is a new configuration file ``/etc/sysconfig/rpc-rquotad`` in which you must define a fixed port 875::
-
-  RPCRQUOTADOPTS="-p 875"
-
-Then restart the *nfs* service::
-
-  systemctl restart nfs-server 
-
-Check that the required services are running::
-
-  # systemctl -l | grep nfs
-  proc-fs-nfsd.mount                       loaded active mounted   NFSD configuration filesystem
-  var-lib-nfs-rpc_pipefs.mount             loaded active mounted   RPC Pipe File System
-  nfs-config.service                       loaded active exited    Preprocess NFS configuration
-  nfs-idmapd.service                       loaded active running   NFSv4 ID-name mapping service
-  nfs-mountd.service                       loaded active running   NFS Mount Daemon
-  nfs-server.service                       loaded active exited    NFS server and services
-  nfs-client.target                        loaded active active    NFS client services
-
-RHEL 8 notes
-------------------
-
-See `Chapter 3. Exporting NFS shares <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/deploying_different_types_of_servers/exporting-nfs-shares_deploying-different-types-of-servers>`_.
-
-Install also this package::
-
-  dnf install quota-rpc
-
-NFS server configuration is now in ``/etc/nfs.conf``, an INI-like configuration file.
-Ports are defined in this file.
-
-NFS server firewall rules
------------------------------------
-
-Add the following firewall rules::
-
-  firewall-cmd --permanent --add-port=111/tcp
-  firewall-cmd --permanent --add-port=875/tcp
-  firewall-cmd --permanent --add-port=892/tcp
-  firewall-cmd --permanent --add-port=2049/tcp
-  firewall-cmd --permanent --add-port=20048/tcp
-  firewall-cmd --permanent --add-port=32803/tcp
-
-  firewall-cmd --permanent --add-port=111/udp
-  firewall-cmd --permanent --add-port=875/udp
-  firewall-cmd --permanent --add-port=892/udp
-  firewall-cmd --permanent --add-port=2049/udp
-  firewall-cmd --permanent --add-port=20048/udp
-  firewall-cmd --permanent --add-port=32769/udp
-
-  firewall-cmd --reload
-
-NFSv3 requires the *rpcbind* service,
-see `NFS and rpcbind <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Storage_Administration_Guide/s2-nfs-methodology-portmap.html>`_.
-Use this command to list ports used::
-
-  rpcinfo -p
-
-The services listed **must** be permitted by the firewall rules.
-
-We have seen some cases of heavy NFS client traffic load where the client syslog shows error messages::
-
-  kernel: lockd: server XXX not responding, still trying
-  kernel: xs_tcp_setup_socket: connect returned unhandled error -107
-
-It turned out that this was related to the firewalld_ service, despite the correct rules shown above.
-Maybe this is a performance issue in firewalld_?
-The way to test this is to shut down firewalld_ temporarily and see if the problem has been solved::
-
-  systemctl stop firewalld
-
-It seems that the problem is solved by explicitly whitelisting the IP subnets used by the NFS clients, for example for the 10.2 subnet::
-
-  firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT_direct 0 -s 10.2.0.0/16 -j ACCEPT
-  firewall-cmd --reload
-
-
 Disabling the Login Screen User List
 ===========================================
 
@@ -768,11 +766,11 @@ Non-graphical run-level
 
 Servers don't need a graphical (GUI) login screen.
 In CentOS 6 the graphical/non-graphical run-level was controlled by ``/etc/inittab``.
-In Red Hat Enterprise Linux 7, the concept of runlevels has been replaced with systemd_ targets. 
+In Red Hat Enterprise Linux 7, the concept of runlevels has been replaced with Systemd_ targets. 
 See `8.3. Working with systemd Targets 
 <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/sect-Managing_Services_with_systemd-Targets.html#sect-Managing_Services_with_systemd-Targets-Change_Default>`_.
 
-With systemd_ its done like this::
+With Systemd_ its done like this::
 
   systemctl get-default
   systemctl set-default multi-user.target    # Non-graphical
