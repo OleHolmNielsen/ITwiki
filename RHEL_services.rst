@@ -300,7 +300,7 @@ IP_set firewall rules
 -------------------------
 
 IP_sets_ are a framework inside the Linux 2.4.x and 2.6.x kernel which can be used efficiently to create firewall rules for large numbers of IP subnets.
-We document configuration of this in Linux_firewall_configuration_.
+We document configuration of this in :ref:`Linux_firewall_configuration`.
 
 .. _IP_sets: http://ipset.netfilter.org/
 
@@ -578,7 +578,7 @@ Then restart the ``sendmail`` service::
 Sendmail server
 ---------------------
 
-The local mail server configuration is defined in our Ansible_configuration_ setup.
+The local mail server configuration is defined in our :ref:`Ansible_configuration` setup.
 The required configuration files in ``/etc/mail/`` include:
 
 1. local-host-names: Add hostname aliases for this server
@@ -681,7 +681,7 @@ where:
 * destination: logical name such as HP-LaserJet-p4015-b307-225
 * printer: ``socket:<IP-address>:9100``   **Must** use printer IP-address in socket name. Port 9100 is for HP JetDirect
 * driver: a driver PPD file such as drv:///hp/hpijs.drv/hp-laserjet_p4015dn-hpijs.ppd
-* braces {{ }} are used with Ansible_configuration_.
+* braces {{ }} are used with :ref:`Ansible_configuration`.
 
 List all printers on system::
 

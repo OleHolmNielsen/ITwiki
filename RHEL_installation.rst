@@ -69,6 +69,7 @@ Please put the entries in alphabetical order. Do not forget to::
 
   systemctl restart dhcpd
 
+.. _DHCP: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
 .. _MAC_address: https://en.wikipedia.org/wiki/MAC_address
 
 Installation procedure

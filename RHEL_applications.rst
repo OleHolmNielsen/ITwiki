@@ -6,6 +6,8 @@ Applications on RHEL and clones
 
 .. Contents::
 
+.. _EPEL: https://fedoraproject.org/wiki/EPEL
+
 Google Chrome browser
 ===============================
 
@@ -336,3 +338,4 @@ VLC_ media player for Red Hat Enterprise Linux is a free and open source cross-p
 Installation requires EPEL_ and RPM_Fusion_ repositories.
 
 .. _VLC: https://www.videolan.org/vlc/download-redhat.html
+.. _RPM_Fusion: https://rpmfusion.org/Configuration/
