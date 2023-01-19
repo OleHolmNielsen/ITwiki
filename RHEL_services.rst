@@ -1,4 +1,4 @@
-.. _RHEL_services
+.. _RHEL_services:
 
 ==================================
 Services on RHEL and clones
@@ -147,6 +147,8 @@ Ethernet device naming has changed, see CentOS7_FAQ_ question 2.
 Documentation is in `Consistent Network Device Naming <http://fedoraproject.org/wiki/Features/ConsistentNetworkDeviceNaming>`_ and 
 `Consistent Network Device Naming in Linux <http://linux.dell.com/biosdevname/>`_.
 
+.. _CentOS7_FAQ: http://wiki.centos.org/FAQ/CentOS7
+
 iftop network monitoring
 ------------------------------
 
@@ -158,6 +160,7 @@ First enable the EPEL_ repository, then install it::
 Source code is at https://code.blinkace.com/pdw/iftop.
 
 .. _iftop: http://www.ex-parrot.com/pdw/iftop/
+.. _EPEL: https://fedoraproject.org/wiki/EPEL
 
 Network interface configuration with NetworkManager
 ---------------------------------------------------------
@@ -575,7 +578,7 @@ Then restart the ``sendmail`` service::
 Sendmail server
 ---------------------
 
-The local mail server configuration is defined in our Ansible_ setup.
+The local mail server configuration is defined in our Ansible_configuration_ setup.
 The required configuration files in ``/etc/mail/`` include:
 
 1. local-host-names: Add hostname aliases for this server
@@ -678,7 +681,7 @@ where:
 * destination: logical name such as HP-LaserJet-p4015-b307-225
 * printer: ``socket:<IP-address>:9100``   **Must** use printer IP-address in socket name. Port 9100 is for HP JetDirect
 * driver: a driver PPD file such as drv:///hp/hpijs.drv/hp-laserjet_p4015dn-hpijs.ppd
-* braces {{ }} are used with Ansible_.
+* braces {{ }} are used with Ansible_configuration_.
 
 List all printers on system::
 
