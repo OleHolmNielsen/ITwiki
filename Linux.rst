@@ -5,7 +5,10 @@ Linux documentation
 .. toctree::
    :maxdepth: 1
 
+   RedHat_Enterprise_Linux
+   RHEL_installation
    RHEL_configuration
+   RHEL_applications
    Ansible_configuration
    Libreswan_IPsec_VPN
    Multi_factor_authentication_on_Linux
