@@ -172,7 +172,7 @@ and then add the partitions as ZFS cache and log::
 .. _NVDIMM: https://en.wikipedia.org/wiki/NVDIMM
 .. _3D_XPoint: https://en.wikipedia.org/wiki/3D_XPoint
 
-Compression
+ZFS Compression
 ------------------
 
 Compression is transparent with ZFS_ if you enable it,
@@ -190,6 +190,18 @@ Monitor compression::
   zfs get compressratio <pool-name>
 
 .. _Compression_and_Deduplication: https://pthree.org/2012/12/18/zfs-administration-part-xi-compression-and-deduplication/
+
+ZFS Snapshots and clones
+------------------------
+
+Snapshots with ZFS are similar to snapshots with Linux LVM, see Snapshots_and_clones_.
+
+Snapshot frequently and regularly.
+Snapshots are cheap, and can keep a plethora of file versions over time.
+Consider using something like the zfs-auto-snapshot_ script.
+
+.. _Snapshots_and_clones: https://pthree.org/2012/12/19/zfs-administration-part-xii-snapshots-and-clones/
+.. _zfs-auto-snapshot: https://github.com/zfsonlinux/zfs-auto-snapshot
 
 Useful ZFS commands
 -------------------
