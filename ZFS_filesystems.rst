@@ -194,7 +194,7 @@ Monitor compression::
 ZFS Snapshots and clones
 ------------------------
 
-Snapshots with ZFS are similar to snapshots with Linux LVM, see Snapshots_and_clones_.
+ZFS snapshots (see ``man zfs-snapshot``) are similar to snapshots with Linux LVM, see Snapshots_and_clones_.
 
 Snapshot frequently and regularly.
 Snapshots are cheap, and can keep a plethora of file versions over time.
@@ -214,10 +214,11 @@ A ZFS snapshot can be sent to a remote system like this example::
 
 There are several tools for performing such backups:
 
+* zfs-autobackup_ creates ZFS snapshots on a *source* machine and then replicates those snapshots to a *target* machine via SSH.
 * https://serverfault.com/questions/842531/how-to-perform-incremental-continuous-backups-of-zfs-pool
-* https://github.com/psy0rz/zfs_autobackup
 
 .. _Sending_and_receiving_filesystems: https://pthree.org/2012/12/20/zfs-administration-part-xiii-sending-and-receiving-filesystems/
+.. _zfs-autobackup: https://github.com/psy0rz/zfs_autobackup
 
 Useful ZFS commands
 -------------------
