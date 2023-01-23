@@ -203,6 +203,17 @@ Consider using something like the zfs-auto-snapshot_ script.
 .. _Snapshots_and_clones: https://pthree.org/2012/12/19/zfs-administration-part-xii-snapshots-and-clones/
 .. _zfs-auto-snapshot: https://github.com/zfsonlinux/zfs-auto-snapshot
 
+ZFS backups
+--------------
+
+Backup of ZFS filesystems to a remote storage may be done by Sending_and_receiving_filesystems_.
+
+A ZFS snapshot can be sent to a remote system like this example::
+
+  zfs send tank/test@tuesday | ssh user@server.example.com "zfs receive pool/test"
+
+.. _Sending_and_receiving_filesystems: https://pthree.org/2012/12/20/zfs-administration-part-xiii-sending-and-receiving-filesystems/
+
 Useful ZFS commands
 -------------------
 
