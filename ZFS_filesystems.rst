@@ -215,6 +215,7 @@ A ZFS snapshot can be sent to a remote system like this example::
 There are several tools for performing such backups:
 
 * zfs-autobackup_ creates ZFS snapshots on a *source* machine and then replicates those snapshots to a *target* machine via SSH.
+  See the `Getting Started <https://github.com/psy0rz/zfs_autobackup/wiki>`_ Wiki page.
 * https://serverfault.com/questions/842531/how-to-perform-incremental-continuous-backups-of-zfs-pool
 
 .. _Sending_and_receiving_filesystems: https://pthree.org/2012/12/20/zfs-administration-part-xiii-sending-and-receiving-filesystems/
