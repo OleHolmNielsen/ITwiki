@@ -212,6 +212,11 @@ A ZFS snapshot can be sent to a remote system like this example::
 
   zfs send tank/test@tuesday | ssh user@server.example.com "zfs receive pool/test"
 
+There are several tools for performing such backups:
+
+* https://serverfault.com/questions/842531/how-to-perform-incremental-continuous-backups-of-zfs-pool
+* https://github.com/psy0rz/zfs_autobackup
+
 .. _Sending_and_receiving_filesystems: https://pthree.org/2012/12/20/zfs-administration-part-xiii-sending-and-receiving-filesystems/
 
 Useful ZFS commands
