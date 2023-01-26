@@ -269,9 +269,12 @@ See the zpool-status_ if any disks have failed::
   zpool status
   zpool status -x
 
-Use the zpool-replace_ command to replace a failed disk, for example::
+Use the zpool-replace_ command to replace a failed disk, for example disk *sde*::
 
   zpool replace <pool-name> sde sde
+  zpool replace -f <pool-name> sde sde
+
+The ``-f`` flag may be required in case of errors such as ``invalid vdev specification``.
 
 Hot spare disks will **not** be added to the VDEV to replace a failed drive by default.
 You MUST enable this feature.
