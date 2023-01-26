@@ -251,6 +251,9 @@ E-mail notifications
 
 Using the *ZFS Event Daemon* (see ``man zed``),
 ZFS_ can send E-mail messages when zpool-events_ occur.
+Check the status of ZED by::
+
+  systemctl status zed
 
 The ZED configuration file ``/etc/zfs/zed.d/zed.rc`` defines the
 Email address of the zpool administrator for receipt of notifications;
@@ -258,8 +261,9 @@ multiple addresses can be specified if they are delimited by whitespace::
 
   ZED_EMAIL_ADDR="root"
 
-You should change ``root`` into a system administrator E-mail address. 
-Otherwise the domain ``localhost.localdomain`` will be used.
+You should change ``root`` into a system administrator E-mail address, 
+otherwise the domain ``root@localhost.localdomain`` will be used.
+Perhaps you need to do ``systemctl restart zed`` after changing the ``zed.rc`` file(?).
 
 .. _zpool-events: https://openzfs.github.io/openzfs-docs/man/8/zpool-events.8.html
 
