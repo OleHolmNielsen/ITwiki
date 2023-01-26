@@ -255,7 +255,7 @@ Check the status of ZED by::
 
   systemctl status zed
 
-The ZED configuration file ``/etc/zfs/zed.d/zed.rc`` defines the
+The ZED configuration file ``/etc/zfs/zed.d/zed.rc`` defines variables such as the
 Email address of the zpool administrator for receipt of notifications;
 multiple addresses can be specified if they are delimited by whitespace::
 
@@ -316,7 +316,6 @@ ZFS troubleshooting
 -------------------------
 
 There is a useful Troubleshooting_ page which includes a discussion of ZFS_events_.
-
 Some useful commands are::
 
   zpool events -v
