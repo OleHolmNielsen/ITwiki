@@ -312,6 +312,20 @@ Use ``zpool set autoreplace=on <pool-name>`` as an example.
 .. _zpool-status: https://openzfs.github.io/openzfs-docs/man/8/zpool-status.8.html
 .. _zpool-replace: https://openzfs.github.io/openzfs-docs/man/8/zpool-replace.8.html
 
+ZFS troubleshooting
+-------------------------
+
+There is a useful Troubleshooting_ page which includes a discussion of ZFS_events_.
+
+Some useful commands are::
+
+  zpool events -v
+  zpool history
+
+.. _Troubleshooting: https://openzfs.github.io/openzfs-docs/Basic%20Concepts/Troubleshooting.html
+.. _ZFS_events: https://openzfs.github.io/openzfs-docs/Basic%20Concepts/Troubleshooting.html#zfs-events
+
+
 Disk quotas for ZFS
 ======================
 
