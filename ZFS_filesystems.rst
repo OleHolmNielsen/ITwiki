@@ -246,6 +246,19 @@ Get and set a mountpoint::
   zfs get mountpoint <pool-name>
   zfs set mountpoint=/u/zfs <pool-name>
 
+E-mail notifications
+--------------------------
+
+ZFS_ can send E-mail messages when events occur.
+
+This is configured in the file ``/etc/zfs/zed.d/zed.rc`` which defines the
+Email address of the zpool administrator for receipt of notifications;
+multiple addresses can be specified if they are delimited by whitespace::
+
+  ZED_EMAIL_ADDR="root"
+
+You may want to change ``root`` into a system administrator E-mail address. 
+
 Scrub and Resilver disks
 --------------------------
 
