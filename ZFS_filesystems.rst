@@ -150,8 +150,8 @@ Add a mirrored SLOG with the devices found to the zpool_::
 
 .. _ZIL: https://pthree.org/2012/12/06/zfs-administration-part-iii-the-zfs-intent-log/
 
-Add SLOG and ZIL on Optane persistent memory
------------------------------------------------
+Add SLOG and ZIL on Optane NVDIMM persistent memory
+-----------------------------------------------------
 
 Configure an `L2ARC cache <https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/>`_
 using NVDIMM_ 3D_XPoint_ known as *Intel Optane* persistent memory DIMM modules.
