@@ -196,9 +196,16 @@ ZFS Snapshots and clones
 
 ZFS snapshots (see ``man zfs-snapshot``) are similar to snapshots with Linux LVM, see Snapshots_and_clones_.
 
-Snapshot frequently and regularly.
-Snapshots are cheap, and can keep a plethora of file versions over time.
-Consider using something like the zfs-auto-snapshot_ script.
+You can list snapshots by two methods::
+
+  zfs list
+  cd <mountpoint>/.zfs ; ls -l
+
+General snapshot advice:
+
+* Snapshot frequently and regularly.
+* Snapshots are cheap, and can keep a plethora of file versions over time.
+* Consider using something like the zfs-auto-snapshot_ script.
 
 .. _Snapshots_and_clones: https://pthree.org/2012/12/19/zfs-administration-part-xii-snapshots-and-clones/
 .. _zfs-auto-snapshot: https://github.com/zfsonlinux/zfs-auto-snapshot
