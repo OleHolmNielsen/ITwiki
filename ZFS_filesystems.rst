@@ -405,6 +405,8 @@ For optimizing the transfer of large files, increase the NFS_ read and write siz
 
   rsize=32768,wsize=32768
 
+Larger values (powers of 2, such as 131072) may also be tried.
+
 .. _nfsd: https://man7.org/linux/man-pages/man8/nfsd.8.html
 
 ZFS quotas over NFS
