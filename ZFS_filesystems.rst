@@ -241,10 +241,16 @@ List ZFS_ filesystems and their properties::
 
 See the sub-command manual pages for details (for example ``man zpool-list``).
 
+Display logical I/O statistics for ZFS storage pools with zpool-iostat_::
+
+  zpool iostat -v
+
 Get and set a mountpoint::
 
   zfs get mountpoint <pool-name>
   zfs set mountpoint=/u/zfs <pool-name>
+
+.. _zpool-iostat: https://openzfs.github.io/openzfs-docs/man/8/zpool-iostat.8.html
 
 E-mail notifications
 --------------------------
