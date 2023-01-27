@@ -401,7 +401,8 @@ Make sure that a sufficient number of nfsd_ threads are started by configuring t
 This number might be around the number of CPU cores in the server.
 A ``systemctl restart nfs-server`` is required to update the parameters.
 
-For optimizing the transfer of large files, increase the NFS_ read and write size in the NFS_ mount command, see ``man 5 nfs``::
+For optimizing the transfer of large files, increase the NFS_ read and write size in the NFS_ mount command on **NFS clients**,
+see ``man 5 nfs``::
 
   rsize=32768,wsize=32768
 
