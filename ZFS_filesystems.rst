@@ -376,6 +376,9 @@ Alternatively to the exports_ file, use the ``zfs set/get sharenfs`` command to 
   zfs set sharenfs='rw=192.168.122.203' pool1/fs1
   zfs get sharenfs pool1/fs1
 
+ZFS_ will update its ``/etc/zfs/exports`` file automatically.
+Never edit this file directly! 
+
 There are some discussions on NFS with ZFS:
 
 * https://klarasystems.com/articles/nfs-shares-with-zfs/
