@@ -366,7 +366,7 @@ The ``-o`` displays only specific columns, this could be used to calculate *quot
 NFS sharing ZFS file systems
 ================================
 
-The zfsprops_ manual page explains about the sharenfs_ option:
+The zfsprops_ manual page explains about the NFS_ sharenfs_ option:
 
 * A file system with a sharenfs_ property of **off** is managed with the exportfs_ command and entries in the /etc/ exports_ file.
   Otherwise, the file system is automatically shared and unshared with the ``zfs share`` and ``zfs unshare`` commands.
@@ -379,21 +379,38 @@ Alternatively to the exports_ file, use the ``zfs set/get sharenfs`` command to 
 ZFS_ will update its ``/etc/zfs/exports`` file automatically.
 Never edit this file directly! 
 
-There are some discussions on NFS with ZFS:
+There are some discussions on NFS_ with ZFS:
 
 * https://klarasystems.com/articles/nfs-shares-with-zfs/
 * https://svennd.be/sharenfs-on-zfs-and-mounting-with-autofs/
 * https://blog.programster.org/sharing-zfs-datasets-via-nfs
 
+.. _NFS: https://en.wikipedia.org/wiki/Network_File_System
 .. _sharenfs: https://openzfs.github.io/openzfs-docs/man/7/zfsprops.7.html#sharenfs
 .. _zfsprops: https://openzfs.github.io/openzfs-docs/man/7/zfsprops.7.html
 .. _exports: https://linux.die.net/man/5/exports
 .. _exportfs: https://linux.die.net/man/8/exportfs
 
+NFS tuning
+---------------
+
+Make sure that a sufficient number of nfsd_ threads are started by configuring the ``/etc/nfs.conf`` file::
+
+  threads=32
+
+This number might be around the number of CPU cores in the server.
+A ``systemctl restart nfs-server`` is required to update the parameters.
+
+For optimizing the transfer of large files, increase the NFS_ read and write size in the NFS_ mount command, see ``man 5 nfs``::
+
+  rsize=32768,wsize=32768
+
+.. _nfsd: https://man7.org/linux/man-pages/man8/nfsd.8.html
+
 ZFS quotas over NFS
 -------------------
 
-The quota tools for Linux has absolutely no knowledge about ZFS_ quotas, nor does rquotad_, and hence clients mounting via NFS are also unable to obtain this information.
+The quota tools for Linux has absolutely no knowledge about ZFS_ quotas, nor does rquotad_, and hence clients mounting via NFS_ are also unable to obtain this information.
 See a hack at https://aaronsplace.co.uk/blog/2019-02-12-zfsonline-nfs-quota.html
 
 .. _rquotad: https://linux.die.net/man/8/rpc.rquotad
