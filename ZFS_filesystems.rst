@@ -408,6 +408,8 @@ see ``man 5 nfs``::
 
 Larger values (powers of 2, such as 131072) may also be tried.
 
+See also `Optimizing Your NFS Filesystem <https://www.admin-magazine.com/HPC/Articles/Useful-NFS-Options-for-Tuning-and-Management>`_.
+
 .. _nfsd: https://man7.org/linux/man-pages/man8/nfsd.8.html
 
 ZFS quotas over NFS
