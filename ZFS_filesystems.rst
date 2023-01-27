@@ -255,13 +255,13 @@ Get and set a mountpoint::
 E-mail notifications
 --------------------------
 
-Using the *ZFS Event Daemon* (see ``man zed``),
+Using the *ZFS Event Daemon* (see ZED_ or ``man zed``),
 ZFS_ can send E-mail messages when zpool-events_ occur.
-Check the status of ZED by::
+Check the status of ZED_ by::
 
   systemctl status zed
 
-The ZED configuration file ``/etc/zfs/zed.d/zed.rc`` defines variables such as the
+The ZED_ configuration file ``/etc/zfs/zed.d/zed.rc`` defines variables such as the
 Email address of the zpool administrator for receipt of notifications;
 multiple addresses can be specified if they are delimited by whitespace::
 
@@ -271,6 +271,7 @@ You should change ``root`` into a system administrator E-mail address,
 otherwise the domain ``root@localhost.localdomain`` will be used.
 Perhaps you need to do ``systemctl restart zed`` after changing the ``zed.rc`` file(?).
 
+.. _ZED: https://openzfs.github.io/openzfs-docs/man/8/zed.8.html
 .. _zpool-events: https://openzfs.github.io/openzfs-docs/man/8/zpool-events.8.html
 
 Scrub and Resilver disks
@@ -370,10 +371,16 @@ The zfsprops_ manual page explains about the sharenfs_ option:
 * A file system with a sharenfs_ property of **off** is managed with the exportfs_ command and entries in the /etc/ exports_ file.
   Otherwise, the file system is automatically shared and unshared with the ``zfs share`` and ``zfs unshare`` commands.
 
-Alternatively to the exports_ file, use the zfs_ command to set or list NFS shares like in this example::
+Alternatively to the exports_ file, use the ``zfs set/get sharenfs`` command to set or list the sharenfs_ property like in this example::
 
   zfs set sharenfs='rw=192.168.122.203' pool1/fs1
   zfs get sharenfs pool1/fs1
+
+There are some discussions on NFS with ZFS:
+
+* https://klarasystems.com/articles/nfs-shares-with-zfs/
+* https://svennd.be/sharenfs-on-zfs-and-mounting-with-autofs/
+* https://blog.programster.org/sharing-zfs-datasets-via-nfs
 
 .. _sharenfs: https://openzfs.github.io/openzfs-docs/man/7/zfsprops.7.html#sharenfs
 .. _zfsprops: https://openzfs.github.io/openzfs-docs/man/7/zfsprops.7.html
