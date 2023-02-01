@@ -198,7 +198,7 @@ ZFS snapshots (see ``man zfs-snapshot``) are similar to snapshots with Linux LVM
 
 You can list snapshots by two methods::
 
-  zfs list
+  zfs list -t all
   cd <mountpoint>/.zfs ; ls -l
 
 General snapshot advice:
