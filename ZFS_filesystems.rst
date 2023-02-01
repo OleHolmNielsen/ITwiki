@@ -201,6 +201,13 @@ You can list snapshots by two methods::
   zfs list -t all
   cd <mountpoint>/.zfs ; ls -l
 
+You can access the files in a snapshot by mounting it, for example::
+
+  mount -t zfs zfstest/zfstest@finbul1-20230131080810 /mnt
+
+The files will be visible in ``/mnt``.
+Remember to unmount ``/mnt`` afterwards.
+
 General snapshot advice:
 
 * Snapshot frequently and regularly.
