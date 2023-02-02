@@ -229,11 +229,29 @@ A ZFS snapshot can be sent to a remote system like this example::
 There are several tools for performing such backups:
 
 * zfs-autobackup_ creates ZFS snapshots on a *source* machine and then replicates those snapshots to a *target* machine via SSH.
-  See the `Getting Started <https://github.com/psy0rz/zfs_autobackup/wiki>`_ Wiki page.
+
 * https://serverfault.com/questions/842531/how-to-perform-incremental-continuous-backups-of-zfs-pool
 
 .. _Sending_and_receiving_filesystems: https://pthree.org/2012/12/20/zfs-administration-part-xiii-sending-and-receiving-filesystems/
 .. _zfs-autobackup: https://github.com/psy0rz/zfs_autobackup
+
+zfs-autobackup
+..............
+
+See the `Getting Started <https://github.com/psy0rz/zfs_autobackup/wiki>`_ Wiki page.
+
+On the remote source machine, we set the ``autobackup:offsite1`` zfs property to true as follows::
+
+  [root@remote ~]# zfs set autobackup:offsite1=true <poolname>
+  [root@remote ~]# zfs get -t filesystem,volume autobackup:offsite1
+
+Running a *pull backup* from the remote host::
+
+  zfs-autobackup -v --ssh-source <remote> offsite1 <poolname>
+
+Since the path to zfs-autobackup_ is ``/usr/local/bin`` you must add it when running crontab jobs, for example::
+
+  0 4 * * * PATH=$PATH:/usr/local/bin; zfs-autobackup args...
 
 Useful ZFS commands
 -------------------
