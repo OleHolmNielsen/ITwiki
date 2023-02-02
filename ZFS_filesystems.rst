@@ -165,7 +165,7 @@ Partition the NVDIMM_ disks::
   parted /dev/pmem0 unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
   parted /dev/pmem1 unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
 
-and then add the partitions as ZFS cache and log::
+and then add the partitions as ZFS_ cache and log::
 
   zpool add <pool-name> cache /dev/pmem0p2 /dev/pmem1p2 log mirror /dev/pmem0p1 /dev/pmem1p1
 
@@ -194,7 +194,7 @@ Monitor compression::
 ZFS Snapshots and clones
 ------------------------
 
-ZFS snapshots (see ``man zfs-snapshot``) are similar to snapshots with Linux LVM, see Snapshots_and_clones_.
+ZFS_ snapshots (see ``man zfs-snapshot``) are similar to snapshots with Linux LVM, see Snapshots_and_clones_.
 
 You can list snapshots by two methods::
 
@@ -220,15 +220,15 @@ General snapshot advice:
 ZFS backups
 --------------
 
-Backup of ZFS filesystems to a remote storage may be done by Sending_and_receiving_filesystems_.
+Backup of ZFS_ filesystems to a remote storage may be done by Sending_and_receiving_filesystems_.
 
-A ZFS snapshot can be sent to a remote system like this example::
+A ZFS_ snapshot can be sent to a remote system like this example::
 
   zfs send tank/test@tuesday | ssh user@server.example.com "zfs receive pool/test"
 
 There are several tools for performing such backups:
 
-* zfs-autobackup_ creates ZFS snapshots on a *source* machine and then replicates those snapshots to a *target* machine via SSH.
+* zfs-autobackup_ creates ZFS_ snapshots on a *source* machine and then replicates those snapshots to a *target* machine via SSH.
 
 * https://serverfault.com/questions/842531/how-to-perform-incremental-continuous-backups-of-zfs-pool
 
@@ -249,7 +249,8 @@ Running a *pull backup* from the remote host::
 
   zfs-autobackup -v --ssh-source <remote> offsite1 <poolname>
 
-Since the path to zfs-autobackup_ is ``/usr/local/bin`` you must add it when running crontab jobs, for example::
+Since the path to zfs-autobackup_ is ``/usr/local/bin`` and ZFS_ commands are in ``/usr/sbin``,
+you must add these paths when running crontab jobs, for example::
 
   0 4 * * * PATH=$PATH:/usr/local/bin; zfs-autobackup args...
 
@@ -266,7 +267,7 @@ List ZFS_ filesystems and their properties::
 
 See the sub-command manual pages for details (for example ``man zpool-list``).
 
-Display logical I/O statistics for ZFS storage pools with zpool-iostat_::
+Display logical I/O statistics for ZFS_ storage pools with zpool-iostat_::
 
   zpool iostat -v
 
@@ -302,7 +303,7 @@ Perhaps you need to do ``systemctl restart zed`` after changing the ``zed.rc`` f
 Scrub and Resilver disks
 --------------------------
 
-With ZFS on Linux, detecting and correcting silent data errors is done through scrubbing the disks,
+With ZFS_ on Linux, detecting and correcting silent data errors is done through scrubbing the disks,
 see the Scrub_and_Resilver_ page.
 
 .. _Scrub_and_Resilver: https://pthree.org/2012/12/11/zfs-administration-part-vi-scrub-and-resilver/
@@ -365,8 +366,8 @@ From the Best_practices_ page:
 * Keep ZFS_ pool capacity under 80% for best performance.
   Due to the copy-on-write nature of ZFS_, the filesystem gets heavily fragmented.
 
-Read the zfs-userspace_ manual page to display space and quotas of a ZFS dataset.
-We assume a ZFS filesystem ``<pool-name>`` and a specific user's name ``<username>`` in the examples below.
+Read the zfs-userspace_ manual page to display space and quotas of a ZFS_ dataset.
+We assume a ZFS_ filesystem ``<pool-name>`` and a specific user's name ``<username>`` in the examples below.
 
 Define a user's disk quota ``userquota`` and number-of-files quota ``userobjquota``::
 
