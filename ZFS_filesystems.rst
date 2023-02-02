@@ -252,7 +252,7 @@ Running a *pull backup* from the remote host::
 Since the path to zfs-autobackup_ is ``/usr/local/bin`` and ZFS_ commands are in ``/usr/sbin``,
 you must add these paths when running crontab jobs, for example::
 
-  0 4 * * * PATH=$PATH:/usr/local/bin; zfs-autobackup args...
+  0 4 * * * PATH=$PATH:/usr/sbin:/usr/local/bin; zfs-autobackup args...
 
 Useful ZFS commands
 -------------------
