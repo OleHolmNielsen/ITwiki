@@ -254,6 +254,10 @@ you must add these paths when running crontab jobs, for example::
 
   0 4 * * * PATH=$PATH:/usr/sbin:/usr/local/bin; zfs-autobackup args...
 
+It is convenient to list all snapshots created by zfs-autobackup_::
+
+  zfs list -t all
+
 Useful ZFS commands
 -------------------
 
