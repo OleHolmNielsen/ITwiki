@@ -238,7 +238,7 @@ There are several tools for performing such backups:
 zfs-autobackup
 ..............
 
-See the `Getting Started <https://github.com/psy0rz/zfs_autobackup/wiki>`_ Wiki page.
+See the zfs-autobackup_ `Getting Started <https://github.com/psy0rz/zfs_autobackup/wiki>`_ Wiki page.
 
 On the remote source machine, we set the ``autobackup:offsite1`` zfs property to true as follows::
 
@@ -257,6 +257,8 @@ you must add these paths when running crontab jobs, for example::
 It is convenient to list all snapshots created by zfs-autobackup_::
 
   zfs list -t all
+
+You can mount a snapshot as shown above.
 
 Useful ZFS commands
 -------------------
