@@ -113,17 +113,21 @@ A RAID 0+1 pool with 2+2 disks::
 
 .. _zpool: https://openzfs.github.io/openzfs-docs/man/8/zpool.8.html
 
-Configuring RAIDZ disks
+Configuring ZFS
+===================
+
+The sections below describe how we have configured ZFS_.
+
+Create RAIDZ disks
 ------------------------
 
-Some examples of RAIDZ_ pools: 
-To setup a zpool_ with RAIDZ-1, we use the "raidz1" VDEV, using only 3 drives::
+To setup a RAIDZ_ pool ``<poolname>`` with RAIDZ-1, we use zpool_ with the "raidz1" VDEV, for example::
 
-  zpool create tank raidz1 sde sdf sdg
+  zpool create <poolname> raidz1 sde sdf sdg
 
-To setup a zpool_ with RAIDZ-2, we use the "raidz2" VDEV::
+To setup a RAIDZ_ pool with RAIDZ-2, we use the "raidz2" VDEV::
 
-  zpool create tank raidz2 sde sdf sdg sdh
+  zpool create <poolname> raidz2 sde sdf sdg sdh
 
 .. _RAIDZ: https://www.raidz-calculator.com/raidz-types-reference.aspx
 
@@ -143,7 +147,7 @@ The EL8 parted does not support "zfs" partitions???
 
 Add a mirrored SLOG with the devices found to the zpool_::
 
-  zpool add tank log mirror \
+  zpool add <poolname> log mirror \
    /dev/disk/by-id/wwn-0x600508b1001c978de94b7497de2aa015 \
    /dev/disk/by-id/wwn-0x600508b1001c0be9159fde47f74dd4bc
   zpool status
