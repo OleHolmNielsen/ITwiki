@@ -435,8 +435,11 @@ Now make a backup of the new files and copy your old configuration files::
   cp -p $HOME/nedi.conf nedi.conf.OLD
   cp $HOME/seedlist seedlist
 
-Now you have to **edit** (not copy) ``nedi.conf`` because changes always appear in new versions!
+Now you have to **edit** (do not copy) ``nedi.conf`` because changes always appear in new versions!
 You have to go through ``nedi.conf.OLD`` and copy any local changes into the new ``nedi.conf`` file.
+The `meld <https://meldmerge.org/>` command is extremely useful for comparing files, install it by::
+
+  yum install meld
 
 Set correct user and group ownership::
 
