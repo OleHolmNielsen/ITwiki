@@ -78,11 +78,14 @@ The alternative *kABI-tracking kmod* installation method may break the ZFS_on_Li
 Ansible management of ZFS
 ==============================
 
+See the page on :ref:`Ansible_configuration`.
 There are Ansible_ modules for ZFS_ management:
 
 * https://docs.ansible.com/ansible/2.9/modules/zfs_module.html
 
 There does not seem to be any module for zpool_ management, however.
+
+.. _Ansible: https://www.ansible.com/
 
 List disks in the system
 =================================
