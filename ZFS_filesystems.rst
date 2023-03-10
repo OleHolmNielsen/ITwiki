@@ -75,6 +75,15 @@ The alternative *kABI-tracking kmod* installation method may break the ZFS_on_Li
 .. _DKMS: https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support
 .. _EL8: https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives
 
+Ansible management of ZFS
+==============================
+
+There are Ansible_ modules for ZFS_ management:
+
+* https://docs.ansible.com/ansible/2.9/modules/zfs_module.html
+
+There does not seem to be any module for zpool_ management, however.
+
 List disks in the system
 =================================
 
@@ -194,6 +203,13 @@ Monitor compression::
   zfs get compressratio <pool-name>
 
 .. _Compression_and_Deduplication: https://pthree.org/2012/12/18/zfs-administration-part-xi-compression-and-deduplication/
+
+Create ZFS filesystems
+---------------------------
+
+You can create multiple separate filesystems within a ZFS_ pool, for example::
+
+  zfs create -o mountpoint=/u/test1 zfspool1/test1
 
 ZFS Snapshots and clones
 ------------------------
