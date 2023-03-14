@@ -169,7 +169,8 @@ Add a mirrored SLOG with the devices found to the zpool_::
 Add SLOG and ZIL disks
 -----------------------------------------------------
 
-Configure an `L2ARC cache <https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/>`_.
+This section show how to configure an L2ARC_cache_ on 2 disk devices.
+The disks should be as fast as possible, such as NVMe or SSD.
 
 To correlate a namespace to a disk device use the following command::
 
@@ -192,10 +193,12 @@ When the partitions have been created, add the disk partitions 1 and 2 as ZFS_ l
 
   zpool add <pool-name> log mirror /dev/sdb1 /dev/sdc1 cache /dev/sdb2 /dev/sdc2
 
+.. _L2ARC_cache: https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/
+
 Add SLOG and ZIL on Optane NVDIMM persistent memory
 -----------------------------------------------------
 
-Configure an `L2ARC cache <https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/>`_
+This section show how to configure an L2ARC_cache_
 using NVDIMM_ 3D_XPoint_ known as *Intel Optane* persistent memory DIMM modules.
 
 To correlate a namespace to a PMem_ device use the following command::
