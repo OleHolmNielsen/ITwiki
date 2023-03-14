@@ -151,18 +151,23 @@ Use ``/dev/disk/by-id/`` disk names in stead of ``/dev/sd*`` which may be rename
 
 To add the (current) disks ``/dev/sdb`` and ``/dev/sdc`` to the SLOG, first identify the device names::
 
-  ls -l /dev/disk/by-id/* | grep sdb$
-  ls -l /dev/disk/by-id/* | grep sdc$
+  ls -l /dev/disk/by-id/* | grep sdb
+  ls -l /dev/disk/by-id/* | grep sdc
 
-**TODO:** Partition the disk with 5 GB for ZIL and the rest for ARC.
-The EL8 parted does not support "zfs" partitions???
+The disks and their partitions may be listed as in this example::
 
-Add a mirrored SLOG with the devices found to the zpool_::
+  /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee -> ../../sdb
+  /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee-part1 -> ../../sdb1
+  /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee-part2 -> ../../sdb2
+
+Add a mirrored SLOG with the devices found above to the zpool_::
 
   zpool add <poolname> log mirror \
-   /dev/disk/by-id/wwn-0x600508b1001c978de94b7497de2aa015 \
-   /dev/disk/by-id/wwn-0x600508b1001c0be9159fde47f74dd4bc
+   /dev/disk/by-id/wwn-xxxx \
+   /dev/disk/by-id/wwn-yyyx
   zpool status
+
+Here you could also use the partitions ``/dev/disk/by-id/wwn-xxxx-part1`` etc.
 
 .. _ZIL: https://pthree.org/2012/12/06/zfs-administration-part-iii-the-zfs-intent-log/
 
@@ -189,9 +194,15 @@ Note: Perhaps it is necessary to use ``parted`` command line and make individual
   (parted) print
   (parted) quit
 
+The disks and their partitions may be listed as in this example::
+
+  /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee -> ../../sdb
+  /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee-part1 -> ../../sdb1
+  /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee-part2 -> ../../sdb2
+
 When the partitions have been created, add the disk partitions 1 and 2 as ZFS_ log and cache, respectively::
 
-  zpool add <pool-name> log mirror /dev/sdb1 /dev/sdc1 cache /dev/sdb2 /dev/sdc2
+  zpool add <pool-name> log mirror /dev/disk/by-id/wwn-xxx-part1 /dev/disk/by-id/wwn-yyy-part1 cache /dev/disk/by-id/wwn-xxx-part2 /dev/disk/by-id/wwn-yyy-part2
 
 .. _L2ARC_cache: https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/
 
