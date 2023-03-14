@@ -143,8 +143,8 @@ To setup a RAIDZ_ pool with RAIDZ-2, we use the "raidz2" VDEV::
 
 .. _RAIDZ: https://www.raidz-calculator.com/raidz-types-reference.aspx
 
-Adding an SLOG
---------------
+Adding disks for an SLOG
+------------------------------
 
 Read about the *Separate Intent Logging Device* (SLOG) in the *ZFS Intent Log* (ZIL_) page.
 The disks should be as fast as possible, such as NVMe or SSD.
@@ -153,24 +153,7 @@ To correlate a namespace to a disk device use the following command::
 
   lsblk
 
-Use ``/dev/disk/by-id/`` disk names in stead of ``/dev/sd*`` which could become renamed.
-
-To add 2 disks, for example ``/dev/sdb`` and ``/dev/sdc``, to the SLOG, first identify the device names::
-
-  ls -l /dev/disk/by-id/* | egrep 'sdb|sdc'
-
-The disks and their partitions may be listed as in this example::
-
-  /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee -> ../../sdb
-  /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee-part1 -> ../../sdb1
-  /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee-part2 -> ../../sdb2
-
-Add a mirrored SLOG with the devices found to the zpool_ similar to this example::
-
-  zpool add <poolname> log mirror /dev/disk/by-id/wwn-xxxx /dev/disk/by-id/wwn-yyyy
-  zpool status
-
-Here you could also use the partitions ``/dev/disk/by-id/wwn-xxxx-part1`` etc.
+Use ``/dev/disk/by-id/*`` disk names with ZFS_ in stead of ``/dev/sd*`` which could become renamed.
 
 .. _ZIL: https://pthree.org/2012/12/06/zfs-administration-part-iii-the-zfs-intent-log/
 
@@ -191,6 +174,12 @@ Note: Perhaps it is necessary to use the ``parted`` command line and make indivi
   (parted) mkpart primary 2048 4G mkpart primary 4G 120G
   (parted) print
   (parted) quit
+
+Use ``/dev/disk/by-id/*`` disk names with ZFS_ in stead of ``/dev/sd*`` which could become renamed.
+
+To add 2 disks, for example ``/dev/sdb`` and ``/dev/sdc``, to the SLOG, first identify the device names::
+
+  ls -l /dev/disk/by-id/* | egrep 'sdb|sdc'
 
 The disks and their partitions may be listed as in this example::
 
