@@ -147,12 +147,17 @@ Adding an SLOG
 --------------
 
 Read about the *Separate Intent Logging Device* (SLOG) in the *ZFS Intent Log* (ZIL_) page.
-Use ``/dev/disk/by-id/`` disk names in stead of ``/dev/sd*`` which may be renamed.
+The disks should be as fast as possible, such as NVMe or SSD.
 
-To add the (current) disks ``/dev/sdb`` and ``/dev/sdc`` to the SLOG, first identify the device names::
+To correlate a namespace to a disk device use the following command::
 
-  ls -l /dev/disk/by-id/* | grep sdb
-  ls -l /dev/disk/by-id/* | grep sdc
+  lsblk
+
+Use ``/dev/disk/by-id/`` disk names in stead of ``/dev/sd*`` which could become renamed.
+
+To add 2 disks, for example ``/dev/sdb`` and ``/dev/sdc``, to the SLOG, first identify the device names::
+
+  ls -l /dev/disk/by-id/* | egrep 'sdb|sdc'
 
 The disks and their partitions may be listed as in this example::
 
@@ -160,11 +165,9 @@ The disks and their partitions may be listed as in this example::
   /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee-part1 -> ../../sdb1
   /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee-part2 -> ../../sdb2
 
-Add a mirrored SLOG with the devices found above to the zpool_::
+Add a mirrored SLOG with the devices found to the zpool_ similar to this example::
 
-  zpool add <poolname> log mirror \
-   /dev/disk/by-id/wwn-xxxx \
-   /dev/disk/by-id/wwn-yyyx
+  zpool add <poolname> log mirror /dev/disk/by-id/wwn-xxxx /dev/disk/by-id/wwn-yyyy
   zpool status
 
 Here you could also use the partitions ``/dev/disk/by-id/wwn-xxxx-part1`` etc.
@@ -172,22 +175,17 @@ Here you could also use the partitions ``/dev/disk/by-id/wwn-xxxx-part1`` etc.
 .. _ZIL: https://pthree.org/2012/12/06/zfs-administration-part-iii-the-zfs-intent-log/
 
 Add SLOG and ZIL disks
------------------------------------------------------
+...........................
 
-This section show how to configure an L2ARC_cache_ on 2 disk devices.
-The disks should be as fast as possible, such as NVMe or SSD.
-
-To correlate a namespace to a disk device use the following command::
-
-  lsblk
+This section shows how to configure an L2ARC_cache_ on 2 disk devices.
 
 Assume that the 2 disks ``/dev/sdb`` and ``/dev/sdc`` will be used.
-Partition the disks::
+First partition the disks::
 
   parted /dev/sdb unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
   parted /dev/sdc unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
 
-Note: Perhaps it is necessary to use ``parted`` command line and make individual commands like::
+Note: Perhaps it is necessary to use the ``parted`` command line and make individual commands like::
 
   (parted) unit s mklabel gpt
   (parted) mkpart primary 2048 4G mkpart primary 4G 120G
@@ -200,28 +198,24 @@ The disks and their partitions may be listed as in this example::
   /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee-part1 -> ../../sdb1
   /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee-part2 -> ../../sdb2
 
-When the partitions have been created, add the disk partitions 1 and 2 as ZFS_ log and cache, respectively::
+When the partitions have been created, add the **disk partitions 1 and 2** as a ZFS_ mirrored log and cache, respectively::
 
   zpool add <pool-name> log mirror /dev/disk/by-id/wwn-xxx-part1 /dev/disk/by-id/wwn-yyy-part1 cache /dev/disk/by-id/wwn-xxx-part2 /dev/disk/by-id/wwn-yyy-part2
 
 .. _L2ARC_cache: https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/
 
 Add SLOG and ZIL on Optane NVDIMM persistent memory
------------------------------------------------------
+......................................................
 
 This section show how to configure an L2ARC_cache_
 using NVDIMM_ 3D_XPoint_ known as *Intel Optane* persistent memory DIMM modules.
-
-To correlate a namespace to a PMem_ device use the following command::
-
-  lsblk
 
 Partition the NVDIMM_ disks::
 
   parted /dev/pmem0 unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
   parted /dev/pmem1 unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
 
-and then add the partitions as ZFS_ cache and log::
+and then add the **disk partitions 1 and 2** as ZFS_ cache and log::
 
   zpool add <pool-name> log mirror /dev/pmem0p1 /dev/pmem1p1 cache /dev/pmem0p2 /dev/pmem1p2 
 
