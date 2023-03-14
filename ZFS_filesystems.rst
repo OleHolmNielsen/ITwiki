@@ -166,13 +166,39 @@ Add a mirrored SLOG with the devices found to the zpool_::
 
 .. _ZIL: https://pthree.org/2012/12/06/zfs-administration-part-iii-the-zfs-intent-log/
 
+Add SLOG and ZIL disks
+-----------------------------------------------------
+
+Configure an `L2ARC cache <https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/>`_.
+
+To correlate a namespace to a disk device use the following command::
+
+  lsblk
+
+Assume that the 2 disks ``/dev/sdb`` and ``/dev/sdc`` will be used.
+Partition the disks::
+
+  parted /dev/sdb unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
+  parted /dev/sdc unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
+
+Note: Perhaps it is necessary to use ``parted`` command line and make individual commands like::
+
+  (parted) unit s mklabel gpt
+  (parted) mkpart primary 2048 4G mkpart primary 4G 120G
+  (parted) print
+  (parted) quit
+
+When the partitions have been created, add the disk partitions 1 and 2 as ZFS_ log and cache, respectively::
+
+  zpool add <pool-name> log mirror /dev/sdb1 /dev/sdc1 cache /dev/sdb2 /dev/sdc2
+
 Add SLOG and ZIL on Optane NVDIMM persistent memory
 -----------------------------------------------------
 
 Configure an `L2ARC cache <https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/>`_
 using NVDIMM_ 3D_XPoint_ known as *Intel Optane* persistent memory DIMM modules.
 
-To correlate a namespace to a PMem device, use the following command::
+To correlate a namespace to a PMem_ device use the following command::
 
   lsblk
 
@@ -183,10 +209,11 @@ Partition the NVDIMM_ disks::
 
 and then add the partitions as ZFS_ cache and log::
 
-  zpool add <pool-name> cache /dev/pmem0p2 /dev/pmem1p2 log mirror /dev/pmem0p1 /dev/pmem1p1
+  zpool add <pool-name> log mirror /dev/pmem0p1 /dev/pmem1p1 cache /dev/pmem0p2 /dev/pmem1p2 
 
 .. _NVDIMM: https://en.wikipedia.org/wiki/NVDIMM
 .. _3D_XPoint: https://en.wikipedia.org/wiki/3D_XPoint
+.. _PMem: https://docs.pmem.io/persistent-memory/
 
 ZFS Compression
 ------------------
