@@ -181,9 +181,9 @@ Use ``/dev/disk/by-id/*`` disk names with ZFS_ in stead of ``/dev/sd*`` which co
 
 To add 2 disks, for example ``/dev/sdb`` and ``/dev/sdc``, to the SLOG, first identify the device WWN_ names::
 
-  ls -l /dev/disk/by-id/* | egrep 'sdb|sdc'
+  ls -l /dev/disk/by-id/* | egrep 'sdb|sdc' | grep wwn
 
-The disks and their partitions may be listed as in this example::
+The disks and their partitions ``part1`` etc. may be listed as in this example::
 
   /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee -> ../../sdb
   /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee-part1 -> ../../sdb1
