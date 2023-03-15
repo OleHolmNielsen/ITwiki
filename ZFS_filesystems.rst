@@ -170,8 +170,10 @@ First partition the disks::
 
 Note: Perhaps it is necessary to use the ``parted`` command line and make individual commands like::
 
-  (parted) unit s mklabel gpt
-  (parted) mkpart primary 2048 4G mkpart primary 4G 120G
+  (parted) unit s 
+  (parted) mklabel gpt
+  (parted) mkpart primary 2048 4G 
+  (parted) mkpart primary 4G 120G
   (parted) print
   (parted) quit
 
