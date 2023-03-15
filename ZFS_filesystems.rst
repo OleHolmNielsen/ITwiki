@@ -392,8 +392,9 @@ The ``-f`` flag may be required in case of errors such as ``invalid vdev specifi
 
 Hot spare disks will **not** be added to the VDEV to replace a failed drive by default.
 You MUST enable this feature.
-Set the ``autoreplace`` feature to on.
-Use ``zpool set autoreplace=on <pool-name>`` as an example.
+Set the ``autoreplace`` feature to on, for example::
+
+  zpool set autoreplace=on <pool-name>
 
 .. _zpool-status: https://openzfs.github.io/openzfs-docs/man/8/zpool-status.8.html
 .. _zpool-replace: https://openzfs.github.io/openzfs-docs/man/8/zpool-replace.8.html
