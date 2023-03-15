@@ -170,6 +170,7 @@ First partition the disks::
 
 Note: Perhaps it is necessary to use the ``parted`` command line and make individual commands like::
 
+  parted /dev/sdb
   (parted) unit s 
   (parted) mklabel gpt
   (parted) mkpart primary 2048 4G 
