@@ -183,11 +183,14 @@ To add 2 disks, for example ``/dev/sdb`` and ``/dev/sdc``, to the SLOG, first id
 
   ls -l /dev/disk/by-id/* | egrep 'sdb|sdc' | grep wwn
 
-The disks and their partitions ``part1`` etc. may be listed as in this example::
+The disks and their partitions ``partN`` may be listed as in this example::
 
   /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee -> ../../sdb
   /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee-part1 -> ../../sdb1
   /dev/disk/by-id/wwn-0x600508b1001c5db0139e52b3964d02ee-part2 -> ../../sdb2
+  /dev/disk/by-id/wwn-0x600508b1001c45bf78142b67cda9c82b -> ../../sdc
+  /dev/disk/by-id/wwn-0x600508b1001c45bf78142b67cda9c82b-part1 -> ../../sdc1
+  /dev/disk/by-id/wwn-0x600508b1001c45bf78142b67cda9c82b-part2 -> ../../sdc2
 
 When the partitions have been created, add the **disk partitions 1 and 2** as a ZFS_ mirrored log and cache, respectively::
 
