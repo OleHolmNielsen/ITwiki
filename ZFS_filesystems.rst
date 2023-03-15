@@ -177,7 +177,7 @@ Note: Perhaps it is necessary to use the ``parted`` command line and make indivi
 
 Use ``/dev/disk/by-id/*`` disk names with ZFS_ in stead of ``/dev/sd*`` which could become renamed.
 
-To add 2 disks, for example ``/dev/sdb`` and ``/dev/sdc``, to the SLOG, first identify the device names::
+To add 2 disks, for example ``/dev/sdb`` and ``/dev/sdc``, to the SLOG, first identify the device WWN_ names::
 
   ls -l /dev/disk/by-id/* | egrep 'sdb|sdc'
 
@@ -189,9 +189,12 @@ The disks and their partitions may be listed as in this example::
 
 When the partitions have been created, add the **disk partitions 1 and 2** as a ZFS_ mirrored log and cache, respectively::
 
-  zpool add <pool-name> log mirror /dev/disk/by-id/wwn-xxx-part1 /dev/disk/by-id/wwn-yyy-part1 cache /dev/disk/by-id/wwn-xxx-part2 /dev/disk/by-id/wwn-yyy-part2
+  zpool add <pool-name> log mirror /dev/disk/by-id/wwn-<name>-part1 /dev/disk/by-id/wwn-<name>-part1 cache /dev/disk/by-id/wwn-<name>-part2 /dev/disk/by-id/wwn-<name>-part2
+
+where the WWN_ names found above must be used.
 
 .. _L2ARC_cache: https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/
+.. _WWN: https://en.wikipedia.org/wiki/World_Wide_Name
 
 Add SLOG and ZIL on Optane NVDIMM persistent memory
 ......................................................
