@@ -15,5 +15,5 @@ Please see the Mail_FAQ_ on *Inside* which includes help on:
 * `Mac <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/it-systemer-og-vaerktoejer/it-systemer-ait/email/faq/mac>`_.
 * `Mozilla Thunderbird <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/it-systemer-og-vaerktoejer/it-systemer-ait/email/faq/thunderbird>`_.
 
-_Mail_FAQ: https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/it-systemer-og-vaerktoejer/it-systemer-ait/email/faq
+.. _Mail_FAQ: https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/it-systemer-og-vaerktoejer/it-systemer-ait/email/faq
 
