@@ -1,10 +1,8 @@
 .. _Email:
 
-=============
-E-mail at FYS
-=============
-
-.. Contents::
+=========================
+E-mail at DTU Fysik
+=========================
 
 Setting up an E-mail client
 ===========================
