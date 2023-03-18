@@ -289,7 +289,6 @@ There are several tools for performing such backups:
 * https://serverfault.com/questions/842531/how-to-perform-incremental-continuous-backups-of-zfs-pool
 
 .. _Sending_and_receiving_filesystems: https://pthree.org/2012/12/20/zfs-administration-part-xiii-sending-and-receiving-filesystems/
-.. _zfs-autobackup: https://github.com/psy0rz/zfs_autobackup
 
 zfs-autobackup
 ..............
@@ -315,6 +314,18 @@ It is convenient to list all snapshots created by zfs-autobackup_::
   zfs list -t all
 
 You can mount a snapshot as shown above.
+
+There is a zfs-autobackup_ `troubleshooting page <https://github.com/psy0rz/zfs_autobackup/wiki/Problems>`_.
+We have seen the error::
+
+  cannot receive incremental stream: destination has been modified since most recent snapshot
+
+which was resolved by zfs_rollback_::
+
+  zfs rollback <problem-snapshot-name>
+
+.. _zfs-autobackup: https://github.com/psy0rz/zfs_autobackup
+.. _zfs_rollback: https://openzfs.github.io/openzfs-docs/man/8/zfs-rollback.8.html
 
 Useful ZFS commands
 -------------------
