@@ -65,4 +65,4 @@ which is easily performed by configuring the DHCP server using ``pxeconfig``::
 
 Some more information is in https://wiki.fysik.dtu.dk/Niflheim_system/
 
-.. pxeconfig: https://gitlab.com/surfsara/pxeconfig
+.. _pxeconfig: https://gitlab.com/surfsara/pxeconfig
