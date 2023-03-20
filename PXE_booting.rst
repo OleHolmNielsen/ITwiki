@@ -57,12 +57,12 @@ The menu system must be configured, a simple ``default.menu`` file in ``/tftpboo
 Pxeconfig toolkit
 =================
 
-The `pxeconfig toolkit <https://subtrac.sara.nl/oss/pxeconfig>`_
-written by Bas van der Vlies automates 
-
-A reinstallation of a node ``nodename`` is easily performed by configuring the DHCP server using ``pxeconfig``::
+The pxeconfig_ toolkit written by Bas van der Vlies automates the reinstallation of a node ``nodename``,
+which is easily performed by configuring the DHCP server using ``pxeconfig``::
 
   pxeconfig nodename
     (select one of the available pxe configuration files)
 
 Some more information is in https://wiki.fysik.dtu.dk/Niflheim_system/
+
+.. pxeconfig: https://gitlab.com/surfsara/pxeconfig
