@@ -65,4 +65,4 @@ A reinstallation of a node ``nodename`` is easily performed by configuring the D
   pxeconfig nodename
     (select one of the available pxe configuration files)
 
-Some more information is in https://wiki.fysik.dtu.dk/niflheim/System_administration.
+Some more information is in https://wiki.fysik.dtu.dk/Niflheim_system/
