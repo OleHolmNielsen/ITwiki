@@ -29,4 +29,5 @@ Linux documentation
    Dovecot_configuration
    Fedora_Linux_Tips_and_Tricks
    Ceph_storage
+   Moin2Sphinx
    MoinMoin_Wiki
