@@ -70,6 +70,10 @@ Use the DKMS_ kernel module installation method::
   dnf install kernel-devel
   dnf install zfs
 
+Then activate the ZFS_ kernel module::
+
+  /sbin/modprobe zfs
+
 The alternative *kABI-tracking kmod* installation method may break the ZFS_on_Linux_ software after kernel upgrades.
 
 .. _DKMS: https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support
