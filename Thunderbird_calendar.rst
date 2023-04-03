@@ -62,7 +62,7 @@ Summary of the setup of DavMail in Thunderbird Lightning:
 
   At DTU Fysik, set the following network CalDAV_ server address::
 
-      https://davmail.fysik.dtu.dk:1080/users/USERNAME@win.dtu.dk/calendar
+      https://davmail.fysik.dtu.dk:1080/users/USERNAME@dtu.dk/calendar
 
   changing the *USERNAME*.  You **must** be a *mailbox user* on the Exchange server in order for this to work.
 
