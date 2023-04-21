@@ -467,6 +467,12 @@ The ``-o`` displays only specific columns, this could be used to calculate *quot
 .. _zfs-userspace: https://openzfs.github.io/openzfs-docs/man/8/zfs-userspace.8.html
 .. _Oracle_Solaris_ZFS: https://docs.oracle.com/cd/E23824_01/html/821-1448/zfsover-2.html
 
+Tools for managing ZFS disk quotas
+=======================================
+
+We have written some [tools for managing ZFS disk quotas](https://github.com/OleHolmNielsen/ZFS_tools),
+for example, providing commands similar to the standard Linux commands ``repquota`` and ``quota``.
+
 NFS sharing ZFS file systems
 ================================
 
