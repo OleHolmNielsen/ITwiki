@@ -1,8 +1,8 @@
 .. _ZFS_filesystems:
 
-===============
-ZFS filesystems
-===============
+===============================================
+Quick guide to configuring ZFS filesystems
+===============================================
 
 .. Contents::
 
