@@ -468,7 +468,7 @@ The ``-o`` displays only specific columns, this could be used to calculate *quot
 .. _Oracle_Solaris_ZFS: https://docs.oracle.com/cd/E23824_01/html/821-1448/zfsover-2.html
 
 Tools for managing ZFS disk quotas
-=======================================
+------------------------------------
 
 We have written some Tools_for_managing_ZFS_disk_quotas_ providing,
 for example, commands similar to the standard Linux commands ``repquota`` and ``quota``.
