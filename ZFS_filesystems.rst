@@ -470,8 +470,10 @@ The ``-o`` displays only specific columns, this could be used to calculate *quot
 Tools for managing ZFS disk quotas
 =======================================
 
-We have written some [tools for managing ZFS disk quotas](https://github.com/OleHolmNielsen/ZFS_tools),
-for example, providing commands similar to the standard Linux commands ``repquota`` and ``quota``.
+We have written some Tools_for_managing_ZFS_disk_quotas_ providing,
+for example, commands similar to the standard Linux commands ``repquota`` and ``quota``.
+
+.. _Tools_for_managing_ZFS_disk_quotas: https://github.com/OleHolmNielsen/ZFS_tools
 
 NFS sharing ZFS file systems
 ================================
