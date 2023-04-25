@@ -455,7 +455,7 @@ Unfortunately, the OpenZFS_ has no **default user quota** option.
 This is only available in the Oracle_Solaris_ZFS_ implementation,
 so with Linux OpenZFS_ you must set disk quotas individually for each user.
 
-View the user disk usage and quotas::
+The superuser can view the user disk usage and quotas::
 
   zfs userspace <pool-name>
   zfs userspace <pool-name> -p
@@ -463,6 +463,11 @@ View the user disk usage and quotas::
 
 The ``-p`` prints parseable numbers, the ``-H`` omits the heading.
 The ``-o`` displays only specific columns, this could be used to calculate *quota warnings*.
+
+Normal users are not allowed to read quotas with the above commands.
+The following command allows a normal user to print disk usage and quotas::
+
+  /usr/sbin/zfs get userquota@$USER,userused@$USER,userobjquota@$USER,userobjused@$USER <pool-name>
 
 .. _zfs-userspace: https://openzfs.github.io/openzfs-docs/man/8/zfs-userspace.8.html
 .. _Oracle_Solaris_ZFS: https://docs.oracle.com/cd/E23824_01/html/821-1448/zfsover-2.html
