@@ -458,11 +458,11 @@ this is only available in the Oracle_Solaris_ZFS_ implementation, see the defaul
 
 So with Linux OpenZFS_ you must set disk quotas individually for each user as shown above.
 
-The superuser can view the user disk usage and quotas::
+The superuser can view the user disk usage and quotas, see the zfs-userspace_ manual page::
 
-  zfs userspace <pool-name>
-  zfs userspace <pool-name> -p
-  zfs userspace <pool-name> -H -p -o name,quota,used,objquota,objused
+  zfs userspace filesystem|snapshot|path
+  zfs userspace -p filesystem|snapshot|path
+  zfs userspace -H -p -o name,quota,used,objquota,objused filesystem|snapshot|path
 
 The ``-p`` prints parseable numbers, the ``-H`` omits the heading.
 The ``-o`` displays only specific columns, this could be used to calculate *quota warnings*.
