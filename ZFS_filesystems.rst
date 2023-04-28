@@ -86,6 +86,7 @@ See the page on :ref:`Ansible_configuration`.
 There are Ansible_ modules for ZFS_ management:
 
 * https://docs.ansible.com/ansible/2.9/modules/zfs_module.html
+* Additional ZFS_ modules are found at https://docs.ansible.com/ansible/latest/collections/community/general/
 
 There does not seem to be any module for zpool_ management, however.
 
@@ -251,7 +252,7 @@ You can create multiple separate filesystems within a ZFS_ pool, for example::
 
   zfs create -o mountpoint=/u/test1 zfspool1/test1
 
-ZFS_ filesystems can be unmounted manually by these commands::
+ZFS_ filesystems can be unmounted and mounted manually by these commands::
 
   zfs unmount ...
   zfs mount ...
