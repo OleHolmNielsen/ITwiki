@@ -459,12 +459,7 @@ Define a user's disk quota ``userquota`` and number-of-files quota ``userobjquot
 
   zfs set userquota@<username>=1TB userobjquota@<username>=1M <pool-name>
 
-Unfortunately, the OpenZFS_ has no **default user quota** option,
-this is only available in the Oracle_Solaris_ZFS_ implementation, see the defaultuserquota_ page::
-
-  zfs set defaultuserquota=30gb <pool-name>
-
-So with Linux OpenZFS_ you must set disk quotas individually for each user as shown above.
+Using a quota value of ``none`` will remove the quota.
 
 The superuser can view the user disk usage and quotas, see the zfs-userspace_ manual page::
 
@@ -482,6 +477,17 @@ The following command allows a normal user to print disk usage and quotas::
 
 .. _zfs-userspace: https://openzfs.github.io/openzfs-docs/man/8/zfs-userspace.8.html
 .. _Oracle_Solaris_ZFS: https://docs.oracle.com/cd/E23824_01/html/821-1448/zfsover-2.html
+
+Default quotas
+------------------
+
+Unfortunately, the OpenZFS_ has no **default user quota** option,
+this is only available in the Oracle_Solaris_ZFS_ implementation, see the defaultuserquota_ page::
+
+  zfs set defaultuserquota=30gb <pool-name>
+
+So with Linux OpenZFS_ you must set disk quotas individually for each user as shown above.
+
 .. _defaultuserquota: https://docs.oracle.com/cd/E53394_01/html/E54801/gazvb.html#SVZFSgpwey
 
 Tools for managing ZFS disk quotas
