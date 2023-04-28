@@ -251,6 +251,13 @@ You can create multiple separate filesystems within a ZFS_ pool, for example::
 
   zfs create -o mountpoint=/u/test1 zfspool1/test1
 
+ZFS_ filesystems can be unmounted manually by these commands::
+
+  zfs unmount ...
+  zfs mount ...
+
+See ``man zfs-mount`` for usage of these commands.
+
 ZFS Snapshots and clones
 ------------------------
 
@@ -460,9 +467,9 @@ So with Linux OpenZFS_ you must set disk quotas individually for each user as sh
 
 The superuser can view the user disk usage and quotas, see the zfs-userspace_ manual page::
 
-  zfs userspace filesystem|snapshot|path
-  zfs userspace -p filesystem|snapshot|path
-  zfs userspace -H -p -o name,quota,used,objquota,objused filesystem|snapshot|path
+  zfs userspace filesystem|snapshot|path|mountpoint
+  zfs userspace -p filesystem|snapshot|path|mountpoint
+  zfs userspace -H -p -o name,quota,used,objquota,objused filesystem|snapshot|path|mountpoint
 
 The ``-p`` prints parseable numbers, the ``-H`` omits the heading.
 The ``-o`` displays only specific columns, this could be used to calculate *quota warnings*.
