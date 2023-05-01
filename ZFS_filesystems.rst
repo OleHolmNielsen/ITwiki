@@ -226,6 +226,27 @@ and then add the **disk partitions 1 and 2** as ZFS_ cache and log::
 .. _3D_XPoint: https://en.wikipedia.org/wiki/3D_XPoint
 .. _PMem: https://docs.pmem.io/persistent-memory/
 
+ZFS pool capacity should be under 80%
+-------------------------------------------
+
+From the Best_practices_ page:
+
+* Keep ZFS_ pool capacity under 80% for best performance.
+  Due to the copy-on-write nature of ZFS_, the filesystem gets heavily fragmented.
+
+* Email reports of capacity at least monthly.
+
+Use this command to view the ZFS_ pool capacity::
+
+  zpool list
+  zpool list -H -o name,capacity
+
+This crontab job for Monday mornings might be useful::
+
+  # ZFS list capacity
+  0 6 * * 1 /sbin/zpool list
+
+
 ZFS Compression
 ------------------
 
@@ -446,16 +467,6 @@ Some useful commands are::
 
 Disk quotas for ZFS
 ======================
-
-From the Best_practices_ page:
-
-* Keep ZFS_ pool capacity under 80% for best performance.
-  Due to the copy-on-write nature of ZFS_, the filesystem gets heavily fragmented.
-
-  Use this command to view the ZFS_ pool capacity::
-
-    zpool list
-    zpool list -H -o name,capacity
 
 Read the zfs-userspace_ manual page to display space and quotas of a ZFS_ dataset.
 We assume a ZFS_ filesystem ``<pool-name>`` and a specific user's name ``<username>`` in the examples below.
