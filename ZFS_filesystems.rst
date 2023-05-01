@@ -455,6 +455,7 @@ From the Best_practices_ page:
   Use this command to view the ZFS_ pool capacity::
 
     zpool list
+    zpool list -H -o name,capacity
 
 Read the zfs-userspace_ manual page to display space and quotas of a ZFS_ dataset.
 We assume a ZFS_ filesystem ``<pool-name>`` and a specific user's name ``<username>`` in the examples below.
