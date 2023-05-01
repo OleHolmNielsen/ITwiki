@@ -452,6 +452,10 @@ From the Best_practices_ page:
 * Keep ZFS_ pool capacity under 80% for best performance.
   Due to the copy-on-write nature of ZFS_, the filesystem gets heavily fragmented.
 
+  Use this command to view the ZFS_ pool capacity::
+
+    zpool list
+
 Read the zfs-userspace_ manual page to display space and quotas of a ZFS_ dataset.
 We assume a ZFS_ filesystem ``<pool-name>`` and a specific user's name ``<username>`` in the examples below.
 
