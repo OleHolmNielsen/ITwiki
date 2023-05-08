@@ -206,7 +206,8 @@ where the WWN_ names found above must be used.
 
 Cache and mirror devices can be removed, if necessary, by the zpool-remove_ command, for example::
 
-  zpool remove tank <mirror>
+  zpool remove <pool-name> <mirror>
+  zpool remove <pool-name> /dev/disk/by-id/wwn-<name>-part2
 
 where the disks are listed by the zpool-status_ command.
 
