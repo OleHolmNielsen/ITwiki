@@ -204,6 +204,14 @@ When the partitions have been created, add the **disk partitions 1 and 2** as a 
 
 where the WWN_ names found above must be used.
 
+Cache and mirror devices can be removed, if necessary, by the zpool-remove_ command, for example::
+
+  zpool remove tank <mirror>
+
+where the disks are listed by the zpool-status_ command.
+
+.. _zpool-remove: https://openzfs.github.io/openzfs-docs/man/8/zpool-remove.8.html
+
 .. _L2ARC_cache: https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/
 .. _WWN: https://en.wikipedia.org/wiki/World_Wide_Name
 
