@@ -458,6 +458,9 @@ Set the ``autoreplace`` feature to on, for example::
 
   zpool set autoreplace=on <pool-name>
 
+Replacing disks can come with big problems, see 
+`How to force ZFS to replace a failed drive in place <https://alchemycs.com/2019/05/how-to-force-zfs-to-replace-a-failed-drive-in-place/>`_.
+
 .. _zpool-status: https://openzfs.github.io/openzfs-docs/man/8/zpool-status.8.html
 .. _zpool-replace: https://openzfs.github.io/openzfs-docs/man/8/zpool-replace.8.html
 
