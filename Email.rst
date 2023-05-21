@@ -79,5 +79,3 @@ For **configuring calendar client software on your PC** we offer the following a
 
 * Microsoft `Outlook <http://en.wikipedia.org/wiki/Microsoft_Outlook>`_ users have built-in calendar functions.
 * Microsoft `Outlook Web Access <http://en.wikipedia.org/wiki/Outlook_Web_App>`_ (OWA): You simply log in to the `DTU Outlook Web Access server <https://mail.win.dtu.dk/>`_ using a web browser.
-* :ref:`Thunderbird_calendar` client setup at DTU.
-
