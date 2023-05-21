@@ -26,7 +26,7 @@ Please see AIT's Mail_FAQ_ on *Inside* which includes help on Microsoft's Outloo
 
 .. _Mail_FAQ: https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/it-systemer-og-vaerktoejer/it-systemer-ait/email/faq
 
-Non-Microsoft E-mail clients
+Apple E-mail clients
 -----------------------------
 
 **Note:** The Office365 mailboxes require OAuth2_ authentification using Azure_MFA_ and the Microsoft_Authenticator_ app on your smartphone.
@@ -40,7 +40,9 @@ If you use an Apple device the following pages may be helpful:
 
 * `How to Configure Office 365 in Mail on macOS <https://wikis.utexas.edu/display/cnsoitpublic/How+to+Configure+Office+365+in+Mail+on+macOS>`_.
 
-Linux mail clients:
+
+Linux E-mail clients
+-----------------------------
 
 * `Thunderbird <https://kb.wisc.edu/helpdesk/page.php?id=102005>`_.
 * `GNOME Evolution <https://oit.duke.edu/help/articles/kb0032012>`_.
