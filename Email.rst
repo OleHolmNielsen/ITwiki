@@ -14,8 +14,8 @@ DTU webmail service
 
 For web browser access to your DTU mail please use the DTU webmail service at https://mail.dtu.dk.
 
-Setting up an E-mail client
-===========================
+AIT guides on setting up an E-mail client
+==============================================
 
 Please see AIT's Mail_FAQ_ on *Inside* which includes help on Microsoft's Outlook E-mail clients:
 
@@ -26,13 +26,21 @@ Please see AIT's Mail_FAQ_ on *Inside* which includes help on Microsoft's Outloo
 
 .. _Mail_FAQ: https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/it-systemer-og-vaerktoejer/it-systemer-ait/email/faq
 
-Apple E-mail clients
------------------------------
+Non-Microsoft Email clients
+================================
 
 **Note:** The Office365 mailboxes require OAuth2_ authentification using Azure_MFA_ and the Microsoft_Authenticator_ app on your smartphone.
 Everyone will have to connect to this Azure mail server for IMAP_ (incoming mail) as well as SMTP_ (outgoing mail)::
 
   outlook.office365.com
+
+.. _OAuth2: https://en.wikipedia.org/wiki/OAuth
+.. _Microsoft_Authenticator: https://www.microsoft.com/en-us/security/mobile-authenticator-app
+.. _IMAP: https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol
+.. _SMTP: https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol
+
+Apple E-mail clients
+-----------------------------
 
 If you use an Apple device the following pages may be helpful:
 
@@ -66,11 +74,6 @@ In all IMAP/SMTP mail clients the following server settings must be used:
     Username: <DTU-initials>@dtu.dk
 
 Authentication of your login will proceed with Azure_MFA_ and the Microsoft_Authenticator_ app on your smartphone.
-
-.. _OAuth2: https://en.wikipedia.org/wiki/OAuth
-.. _Microsoft_Authenticator: https://www.microsoft.com/en-us/security/mobile-authenticator-app
-.. _IMAP: https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol
-.. _SMTP: https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol
 
 Calendar client setup at DTU
 ==================================
