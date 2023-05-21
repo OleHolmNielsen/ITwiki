@@ -34,7 +34,7 @@ Non-Microsoft Email clients
 In general AIT only supports Microsoft's Outlook E-mail clients.
 Therefore we have to look elsewhere for guides for non_Microsoft clients.
 
-**Note:** The Office365_ mailboxes require OAuth2_ authentification using Azure_MFA_ and the Microsoft_Authenticator_ app on your smartphone.
+**Note:** The Office365_ mailboxes require the so-called *Modern Authentication* (OAuth2_) using Azure_MFA_ and the Microsoft_Authenticator_ app on your smartphone.
 Everyone will have to connect to this Azure mail server for IMAP_ (incoming mail) as well as SMTP_ (outgoing mail)::
 
   outlook.office365.com
