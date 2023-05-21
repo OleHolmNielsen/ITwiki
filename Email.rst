@@ -17,7 +17,8 @@ For web browser access to your DTU mail please use the DTU webmail service at ht
 AIT guides on setting up an E-mail client
 ==============================================
 
-Please see AIT's Mail_FAQ_ on *Inside* which includes help on Microsoft's Outlook E-mail clients:
+In general AIT only supports Microsoft's Outlook E-mail clients.
+Please see AIT's Mail_FAQ_ on *Inside*:
 
 * AIT/DTU `Office 365 <https://www.inside.dtu.dk/da/medarbejder/it-og-telefoni/it-support-og-kontakt/guides/software/office365>`_.
 * `Mobile phones <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/it-systemer-og-vaerktoejer/it-systemer-ait/email/faq/mobil>`_.
@@ -28,6 +29,9 @@ Please see AIT's Mail_FAQ_ on *Inside* which includes help on Microsoft's Outloo
 
 Non-Microsoft Email clients
 ================================
+
+In general AIT only supports Microsoft's Outlook E-mail clients.
+Therefore we have to look elsewhere for guides.
 
 **Note:** The Office365 mailboxes require OAuth2_ authentification using Azure_MFA_ and the Microsoft_Authenticator_ app on your smartphone.
 Everyone will have to connect to this Azure mail server for IMAP_ (incoming mail) as well as SMTP_ (outgoing mail)::
