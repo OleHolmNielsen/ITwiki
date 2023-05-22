@@ -92,7 +92,7 @@ Thunderbird calendar and address book client
 ------------------------------------------------
 
 Thunderbird can use the Office365_ Global Address Book and Calendar,
-see the document Using-Thunderbird-with-O365_ from *University of Canterbury*:
+see the document Using-Thunderbird-with-O365_ from `University of Canterbury <https://www.canterbury.ac.nz>`_:
 
 * We need to add a couple of extensions to Thunderbird.
   Click on the ``Menu`` icon at the top right of the Thunderbird window and choose ``Addons and Themes`` from the menu.
