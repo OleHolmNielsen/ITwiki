@@ -33,12 +33,7 @@ AIT guides on setting up an E-mail client
 ==============================================
 
 In general AIT only supports Microsoft's Outlook E-mail clients.
-Please see AIT's Mail_FAQ_ on *Inside*:
-
-* AIT/DTU `Office 365 <https://www.inside.dtu.dk/da/medarbejder/it-og-telefoni/it-support-og-kontakt/guides/software/office365>`_.
-* `Mobile phones <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/it-systemer-og-vaerktoejer/it-systemer-ait/email/faq/mobil>`_.
-* `Mac <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/it-systemer-og-vaerktoejer/it-systemer-ait/email/faq/mac>`_.
-* `Mozilla Thunderbird <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/it-systemer-og-vaerktoejer/it-systemer-ait/email/faq/thunderbird>`_.
+Please see AIT's Mail_FAQ_ on *Inside*.
 
 .. _Mail_FAQ: https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/it-systemer-og-vaerktoejer/it-systemer-ait/email/faq
 
@@ -46,7 +41,7 @@ Non-Microsoft Email clients
 ================================
 
 In general AIT only supports Microsoft's Outlook E-mail clients.
-Therefore we have to look elsewhere for guides for non_Microsoft clients.
+We have found some guides for non-Microsoft clients as shown below.
 
 **Note:** The Office365_ mailboxes require the so-called *Modern Authentication* (OAuth2_) using Azure_MFA_ and the Microsoft_Authenticator_ app on your smartphone.
 Everyone will have to connect to this Azure mail server for IMAP_ (incoming mail) as well as SMTP_ (outgoing mail)::
