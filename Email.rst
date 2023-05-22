@@ -14,11 +14,14 @@ DTU webmail service
 ==========================
 
 For web browser access to your DTU mailbox please use the Office365_ OWA_ webmail service:
-  https://outlook.office365.com
-or:
-  https://outlook.office.com
-This is documented in this `Inside page <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/guides/adgang-til-webmail>`_.
 
+  https://outlook.office365.com
+
+or:
+
+  https://outlook.office.com
+
+This is documented in this `Inside page <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/guides/adgang-til-webmail>`_.
 The previous OWA_ site https://mail.dtu.dk **does not work** reliably for login to the Office365_ mailboxes.
 
 .. _OWA: https://www.microsoft.com/en-us/microsoft-365/outlook/web-email-login-for-outlook
