@@ -7,8 +7,12 @@ E-mail at DTU
 **Note:** Since May 2023 DTU users' mailboxes have been migrated to the Azure cloud service.
 Users must configure their Office365_ DTU account, and using Azure_MFA_ is required for access.
 
+In general AIT only supports Microsoft's Outlook E-mail clients.
+Please see AIT's Mail_FAQ_ on *Inside*.
+
 .. _Office365: https://en.wikipedia.org/wiki/Microsoft_365
 .. _Azure_MFA: https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks
+.. _Mail_FAQ: https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/it-systemer-og-vaerktoejer/it-systemer-ait/email/faq
 
 Outlook app on DTU Windows PCs
 ==================================
@@ -28,14 +32,6 @@ The changed web-site is documented in this `Inside page <https://www.inside.dtu.
 The previous OWA_ site https://mail.dtu.dk **does not work** correctly for login to the Office365_ mailboxes with certain web browsers.
 
 .. _OWA: https://www.microsoft.com/en-us/microsoft-365/outlook/web-email-login-for-outlook
-
-AIT guides on setting up an E-mail client
-==============================================
-
-In general AIT only supports Microsoft's Outlook E-mail clients.
-Please see AIT's Mail_FAQ_ on *Inside*.
-
-.. _Mail_FAQ: https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/it-systemer-og-vaerktoejer/it-systemer-ait/email/faq
 
 Non-Microsoft Email clients
 ================================
