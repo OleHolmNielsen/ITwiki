@@ -10,6 +10,13 @@ Users must configure their Office365_ DTU account, and using Azure_MFA_ is requi
 .. _Office365: https://en.wikipedia.org/wiki/Microsoft_365
 .. _Azure_MFA: https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks
 
+Outlook app on DTU Windows PCs
+==================================
+
+If you use a DTU Windows PC and the Outlook app from Microsoft Office,
+E-mail should work as before without any issues.
+A restart of the PC is recommended if anything is not working quite right.
+
 DTU webmail service
 ==========================
 
