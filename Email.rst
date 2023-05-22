@@ -13,7 +13,16 @@ Users must configure their Office365_ DTU account, and using Azure_MFA_ is requi
 DTU webmail service
 ==========================
 
-For web browser access to your DTU mail please use the DTU webmail service at https://mail.dtu.dk.
+For web browser access to your DTU mail please use the DTU OWA_ webmail service at https://mail.dtu.dk.
+
+**Note:** It seems that OWA_ logins currently fail for the Safari_ browser om Macs, 
+and the Firefox_ browser on Linux.
+The Chrome_ browser works on Mac and Linux.
+
+.. _OWA: https://www.microsoft.com/en-us/microsoft-365/outlook/web-email-login-for-outlook
+.. _Safari: https://www.apple.com/safari/
+.. _Firefox: https://www.mozilla.org/en-US/firefox/new/
+.. _Chrome: https://www.google.com/chrome/
 
 AIT guides on setting up an E-mail client
 ==============================================
@@ -103,7 +112,7 @@ see the document Using-Thunderbird-with-O365_ from `University of Canterbury <ht
 
 Now configure the TBSync_ plugin:
 
-* Return to your Inbox tab and then click on the TBSync_ icon in the top right corner, next to the ``Menu`` icon.
+* Return to your ``Inbox`` tab and then click on the TBSync_ icon in the top right corner, next to the ``Menu`` icon.
 * The TBSync_ window will open where you can add a new account.
   At the bottom left of the window you’ll see a drop down menu labelled ``Account actions``.
   Click on this and add a new ``Exchange ActiveSync account``.
