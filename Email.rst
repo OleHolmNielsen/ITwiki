@@ -13,7 +13,10 @@ Users must configure their Office365_ DTU account, and using Azure_MFA_ is requi
 DTU webmail service
 ==========================
 
-For web browser access to your DTU mail please use the DTU OWA_ webmail service at https://outlook.office.com.
+For web browser access to your DTU mail please use the Office365_ OWA_ webmail service:
+
+  https://outlook.office.com
+
 The previous OWA_ site https://mail.dtu.dk **does not work** reliably for login to the Office365_ mailboxes.
 
 **Note:** It seems that OWA_ logins currently fail for the Safari_ browser om Macs, 
