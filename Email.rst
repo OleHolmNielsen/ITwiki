@@ -38,11 +38,15 @@ Non-Microsoft Email clients
 
 In general AIT only supports Microsoft's Outlook E-mail clients.
 We have found some guides for non-Microsoft clients as shown below.
+Please note the following points:
 
-**Note:** The Office365_ mailboxes require the so-called *Modern Authentication* (OAuth2_) using Azure_MFA_ and the Microsoft_Authenticator_ app on your smartphone.
-Everyone will have to connect to this Azure mail server for IMAP_ (incoming mail) as well as SMTP_ (outgoing mail)::
+* If you already had configured DTU E-mail in an Outlook app on Apple or Android devices,
+  you probably have to **delete the old DTU account** in the app before adding your DTU account.
 
-  outlook.office365.com
+* The Office365_ mailboxes require the so-called *Modern Authentication* (OAuth2_) using Azure_MFA_ and the Microsoft_Authenticator_ app on your smartphone.
+  Everyone will have to connect to this Azure mail server for IMAP_ (incoming mail) as well as SMTP_ (outgoing mail)::
+
+    outlook.office365.com
 
 .. _OAuth2: https://en.wikipedia.org/wiki/OAuth
 .. _Microsoft_Authenticator: https://www.microsoft.com/en-us/security/mobile-authenticator-app
@@ -61,6 +65,8 @@ If you use an Apple device the following pages may be helpful:
 
 Linux E-mail clients
 -----------------------------
+
+We have found some help pages for Linux E-mail clients:
 
 * `Thunderbird <https://kb.wisc.edu/helpdesk/page.php?id=102005>`_.
 * `GNOME Evolution <https://oit.duke.edu/help/articles/kb0032012>`_.
