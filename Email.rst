@@ -25,14 +25,7 @@ This is documented in this `Inside page <https://www.inside.dtu.dk/en/medarbejde
 
 The previous OWA_ site https://mail.dtu.dk **does not work** reliably for login to the Office365_ mailboxes.
 
-**Note:** It seems that OWA_ logins currently fail for the Safari_ browser om Macs, 
-and the Firefox_ browser on Linux.
-The Chrome_ browser works on Mac and Linux.
-
 .. _OWA: https://www.microsoft.com/en-us/microsoft-365/outlook/web-email-login-for-outlook
-.. _Safari: https://www.apple.com/safari/
-.. _Firefox: https://www.mozilla.org/en-US/firefox/new/
-.. _Chrome: https://www.google.com/chrome/
 
 AIT guides on setting up an E-mail client
 ==============================================
