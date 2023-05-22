@@ -17,7 +17,7 @@ For web browser access to your DTU mail please use the Office365_ OWA_ webmail s
 
   https://outlook.office365.com
 
-  or:
+or:
 
   https://outlook.office.com
 
