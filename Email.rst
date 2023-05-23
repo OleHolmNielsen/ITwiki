@@ -6,13 +6,14 @@ E-mail at DTU
 
 **Note:** Since May 2023 DTU users' mailboxes have been migrated to the Azure cloud service.
 Users must configure their Office365_ DTU account, and using Azure_MFA_ is required for access.
+See the DTU Inside page `Outlook mailboxes will be moved to the Cloud (Exchange Online) <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-service-generelt/mailmigrering-foraar-2023>`_
+including links to guides.
 
-In general AIT only supports Microsoft's Outlook E-mail clients.
-Please see AIT's Mail_FAQ_ on *Inside*.
+In general AIT only supports Microsoft's Outlook E-mail clients, see AIT's Guides_for_Outlook_.
 
 .. _Office365: https://en.wikipedia.org/wiki/Microsoft_365
 .. _Azure_MFA: https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks
-.. _Mail_FAQ: https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/it-systemer-og-vaerktoejer/it-systemer-ait/email/faq
+.. _Guides_for_Outlook: https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/guides/outlook
 
 Outlook app on DTU Windows PCs
 ==================================
@@ -65,8 +66,6 @@ In addition the following pages may be helpful:
 * If you previously had a ``DTU Exchange`` account defined in iOS, you should delete it now because it will not work with Office365_.
   See the guide `Deleting Office 365 Exchange Account from IOS Mail App <https://support.ucsd.edu/services?id=kb_article_view&sysparm_article=KB0033472>`_.
   This page also gives the advice: ``When having trouble with your email account, deleting your account and re-adding it can solve the issue.``
-
-.. _Guides_for_Outlook: https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/guides/outlook
 
 Mac E-mail clients
 -----------------------------
