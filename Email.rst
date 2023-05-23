@@ -84,9 +84,10 @@ AIT offers a number of Guides_for_Outlook_ including ``Setting up Outlook on an 
 Linux E-mail clients
 -----------------------------
 
-We have found some help pages for Linux E-mail clients:
+We have found some good help pages for Linux E-mail clients:
 
-* `Thunderbird <https://kb.wisc.edu/helpdesk/page.php?id=102005>`_.
+* `Microsoft 365 (Thunderbird) - Configure Modern Authentication <https://kb.wisc.edu/helpdesk/page.php?id=102005>`_.
+* `How to Configure Thunderbird for Office 365 Using IMAP (Oauth2) <https://uit.stanford.edu/service/office365/configure/thunderbird-oauth2>`_.
 * `GNOME Evolution <https://oit.duke.edu/help/articles/kb0032012>`_.
 
 In all IMAP/SMTP mail clients the following server settings must be used:
