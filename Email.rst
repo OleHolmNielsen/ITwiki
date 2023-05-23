@@ -58,8 +58,6 @@ Apple E-mail clients
 
 If you use an Apple device the following pages may be helpful:
 
-* `Set up an Outlook account on the iOS Mail app <https://support.microsoft.com/en-us/office/set-up-an-outlook-account-on-the-ios-mail-app-7e5b180f-bc8f-45cc-8da1-5cefc1e633d1>`_.
-
 * `How to Configure Office 365 in Mail on macOS <https://wikis.utexas.edu/display/cnsoitpublic/How+to+Configure+Office+365+in+Mail+on+macOS>`_.
 
 
