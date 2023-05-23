@@ -131,7 +131,8 @@ Now configure the TBSync_ plugin:
 * You may notice though that synchronisation is disabled.
   Turn this on by choosing the ``Enable and synchronize this account``.
   At that moment a list of available resources is displayed.
-* Select the options you’d like to have synchronised, and change the periodic synchronisation time to something suitable.
+* Select the options you’d like to have synchronised. 
+* **Remember** to change the ``Periodic synchronisation (in minutes)`` time field to something suitable, for example 5 minutes.
 * Select ``Synchronize now`` to start synchronisation for the first time.
 
 .. _Using-Thunderbird-with-O365: https://www.canterbury.ac.nz/media/documents/its/Using-Thunderbird-with-O365.pdf
