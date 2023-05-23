@@ -53,13 +53,34 @@ Please note the following points:
 .. _IMAP: https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol
 .. _SMTP: https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol
 
-Apple E-mail clients
+iPhone/iPad E-mail clients
 -----------------------------
 
-If you use an Apple device the following pages may be helpful:
+AIT offers a number of Guides_for_Outlook_ including ``Setting up Outlook on an Iphone``.
+
+In addition the following pages may be helpful:
+
+* See the Microsoft guide `Set up the Outlook app for iOS <https://support.microsoft.com/en-us/office/set-up-the-outlook-app-for-ios-b2de2161-cc1d-49ef-9ef9-81acd1c8e234>`_.
+
+* If you previously had a ``DTU Exchange`` account defined in iOS, you should delete it now because it will not work with Office365_.
+  See the guide `Deleting Office 365 Exchange Account from IOS Mail App <https://support.ucsd.edu/services?id=kb_article_view&sysparm_article=KB0033472>`_.
+  This page also gives the advice: ``When having trouble with your email account, deleting your account and re-adding it can solve the issue.``
+
+.. _Guides_for_Outlook: https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/guides/outlook
+
+Mac E-mail clients
+-----------------------------
+
+AIT offers a number of Guides_for_Outlook_ including ``Setting up DTU email in Outlook on MAC``.
+
+In addition the following pages may be helpful:
 
 * `How to Configure Office 365 in Mail on macOS <https://wikis.utexas.edu/display/cnsoitpublic/How+to+Configure+Office+365+in+Mail+on+macOS>`_.
 
+Android E-mail clients
+-----------------------------
+
+AIT offers a number of Guides_for_Outlook_ including ``Setting up Outlook on an android phone``.
 
 Linux E-mail clients
 -----------------------------
