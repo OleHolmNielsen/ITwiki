@@ -63,6 +63,8 @@ iPhone/iPad E-mail clients
 AIT offers a number of Guides_for_Outlook_ including ``Setting up Outlook on an Iphone``.
 According to the Outlook_FAQ_ you need to install the Microsoft_Authenticator_ app on iPhones.
 
+Note: ``Keyboard apps`` on the iPhone seem to be blocked by the Outlook app, possibly due to a DTU security policy(?).
+
 In addition the following pages may be helpful:
 
 * See the Microsoft guide `Set up the Outlook app for iOS <https://support.microsoft.com/en-us/office/set-up-the-outlook-app-for-ios-b2de2161-cc1d-49ef-9ef9-81acd1c8e234>`_.
