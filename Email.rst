@@ -61,6 +61,7 @@ iPhone/iPad E-mail clients
 -----------------------------
 
 AIT offers a number of Guides_for_Outlook_ including ``Setting up Outlook on an Iphone``.
+According to the Outlook_FAQ_ you need to install the Microsoft_Authenticator_ app on iPhones.
 
 In addition the following pages may be helpful:
 
@@ -69,6 +70,8 @@ In addition the following pages may be helpful:
 * If you previously had a ``DTU Exchange`` account defined in iOS, you should delete it now because it will not work with Office365_.
   See the guide `Deleting Office 365 Exchange Account from IOS Mail App <https://support.ucsd.edu/services?id=kb_article_view&sysparm_article=KB0033472>`_.
   This page also gives the advice: ``When having trouble with your email account, deleting your account and re-adding it can solve the issue.``
+
+.. _Microsoft_Authenticator: https://www.microsoft.com/en-us/security/mobile-authenticator-app
 
 Mac E-mail clients
 -----------------------------
