@@ -11,9 +11,12 @@ including links to guides.
 
 In general Office365_ only supports Microsoft's Outlook E-mail clients, see AIT's Guides_for_Outlook_.
 
+AIT's Outlook_FAQ_ covers a number of questions about Office365_.
+
 .. _Office365: https://en.wikipedia.org/wiki/Microsoft_365
 .. _Azure_MFA: https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks
 .. _Guides_for_Outlook: https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/guides/outlook
+.. _Outlook_FAQ: https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-service-generelt/mailmigrering-foraar-2023/outlookfaq
 
 Outlook app on DTU Windows PCs
 ==================================
@@ -86,6 +89,9 @@ Android E-mail clients
 -----------------------------
 
 AIT offers a number of Guides_for_Outlook_ including ``Setting up Outlook on an android phone``.
+According to the Outlook_FAQ_ you need to install the Microsoft_InTune_ app on Android phones.
+
+.. _Microsoft_InTune: https://learn.microsoft.com/en-us/mem/intune/fundamentals/what-is-intune
 
 Linux E-mail clients
 -----------------------------
