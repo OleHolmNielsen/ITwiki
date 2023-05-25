@@ -81,7 +81,7 @@ In addition the following pages may be helpful:
 Mac E-mail clients
 -----------------------------
 
-On Macs the Apple_Mail_ app works correctly with Office365_ mail and calendar.
+On Mac computers the Apple_Mail_ app works correctly with Office365_ mail and calendar.
 First you have to delete any pre-existing Exchange account,
 then you create a new ``Exchange account`` with your username ``<DTU-initials>@dtu.dk``.
 
@@ -108,7 +108,7 @@ We have found some good help pages for Linux E-mail clients:
 
 * `Microsoft 365 (Thunderbird) - Configure Modern Authentication <https://kb.wisc.edu/helpdesk/page.php?id=102005>`_.
 * `How to Configure Thunderbird for Office 365 Using IMAP (Oauth2) <https://uit.stanford.edu/service/office365/configure/thunderbird-oauth2>`_.
-* `GNOME Evolution <https://oit.duke.edu/help/articles/kb0032012>`_.
+* GNOME Evolution: `Office 365: Configuring Gnome Evolution with Modern Authentication <https://oit.duke.edu/help/articles/kb0032012>`_.
 
 In all IMAP/SMTP mail clients the following server settings must be used:
 
