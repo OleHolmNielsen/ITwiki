@@ -125,4 +125,4 @@ Finally resize the PV (first make a verbose test) and verify the new Physical Vo
   # pvresize --verbose /dev/sdb1
   # pvdisplay /dev/sdb1
 
-Now you can use ``vgdisplay`` for the Volume Group containing ``/dev/sdb1`` to verify the new Volume group size.
+Now you can use ``vgdisplay`` for the Volume Group containing ``/dev/sdb1`` to verify the new Volume Group size.
