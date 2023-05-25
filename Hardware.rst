@@ -12,6 +12,7 @@ This page contains documentation on some hardware at our site.
    Dell_R640
    Dell_R650
    DellOS6
+   HPE_Proliant_SmartArray
    HP_Proliant_firmware_upgrade
    Huawei_server
    C8220_server
