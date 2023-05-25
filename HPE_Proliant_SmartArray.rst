@@ -83,7 +83,7 @@ For example, add a new drive to controller in slot=0 array B::
 
   => controller slot=0 array B add drives=1I:1:11
 
-After having added disk drives, the logical drive will be transformed, and this can take a number of hours.
+Having added disk drives, the logical drive will be transformed, and this can take a number of hours.
 After this you can extend the logical drive no. 2 size::
 
   => controller slot=0 logicaldrive 2 modify size=max 
