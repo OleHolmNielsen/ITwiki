@@ -29,11 +29,29 @@ Install packages and OS prerequisites::
   yum install ssa ssacli ssaducli hponcfg
 
 A *Smart Storage Adminstrator CLI* command ``/usr/sbin/ssacli`` is installed.
-An example usage is::
+Example usages are::
 
   # /usr/sbin/ssacli
   => help 
+  => controller all show
+
+Status of controller slot=0::
+
+  => controller slot=0 show status
+  => controller slot=0 show detail
+  => controller slot=0 enclosure all show detail
+
+Show physical drives::
+
   => controller slot=0 physicaldrive all show 
+
+Show arrays::
+
+  => controller slot=0 array all show detail
+
+Show logical drives::
+
+  => controller slot=0 logicaldrive all show detail
 
 A useful script is smartshow_ from GitHub.
 
@@ -43,7 +61,7 @@ Moving SmartArray disk to another server
 ===========================================
 
 It may be necessary to move SmartArray disk to another HPE Proliant server
-and import the logical drive.
+and import the logical drives contained on the set of disks.
 The following command will import all new logical drives::
 
   vgimportdevices -a
