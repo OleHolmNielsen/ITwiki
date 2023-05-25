@@ -73,7 +73,8 @@ In addition the following pages may be helpful:
   See the guide `Deleting Office 365 Exchange Account from IOS Mail App <https://support.ucsd.edu/services?id=kb_article_view&sysparm_article=KB0033472>`_.
   This page also gives this good advice::
 
-    When having trouble with your email account, deleting your account and re-adding it can solve the issue.
+    When having trouble with your email account,
+    deleting your account and re-adding it can solve the issue.
 
 .. _Microsoft_Authenticator: https://www.microsoft.com/en-us/security/mobile-authenticator-app
 
