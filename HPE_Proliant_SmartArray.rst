@@ -42,12 +42,12 @@ A useful script is smartshow_ from GitHub.
 Extend a logical drive
 =========================
 
-New disks can be added to an existing logical drive (RAID-6, for example), see these help items::
+New disks can be added to an existing logical drive (RAID-6, for example), see these ``ssacli`` help items::
 
   => help extend
   => help expand
 
-Add a new drive to array B::
+For example, a new drive to controller in slot=0 array B::
 
   => controller slot=0 array B add drives=1I:1:11
 
