@@ -39,6 +39,20 @@ A useful script is smartshow_ from GitHub.
 
 .. _smartshow: https://github.com/OleHolmNielsen/HPE_Proliant
 
+Moving SmartArray disk to another server
+===========================================
+
+It may be necessary to move SmartArray disk to another HPE Proliant server
+and import the logical drive.
+The following command will import all new logical drives::
+
+  vgimportdevices -a
+
+Verify the new Physical Volumes and Logical Volumes::
+
+  pvdisplay
+  lvdisplay
+
 Extend a logical drive
 =========================
 
