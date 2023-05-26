@@ -61,6 +61,7 @@ iPhone/iPad E-mail clients
 -----------------------------
 
 AIT offers a number of Guides_for_Outlook_ including ``Setting up Outlook on an Iphone``.
+You need to install the `Microsoft Outlook app for iPhone <https://apps.apple.com/us/app/microsoft-outlook/id951937596>`_.
 According to the Outlook_FAQ_ you need to install the Microsoft_Authenticator_ app on iPhones.
 
 Note: ``Keyboard apps`` on the iPhone seem to be blocked by the Outlook app, possibly due to a DTU security policy(?).
@@ -97,7 +98,11 @@ Android E-mail clients
 -----------------------------
 
 AIT offers a number of Guides_for_Outlook_ including ``Setting up Outlook on an android phone``.
+You need to install the `Microsoft Outlook app for Android <https://play.google.com/store/apps/details?id=com.microsoft.office.outlook&hl=en&gl=US>`_.
 According to the Outlook_FAQ_ you need to install the Microsoft_InTune_ app on Android phones.
+
+**WARNING:** Do NOT install the `Microsoft Outlook Lite app <https://play.google.com/store/apps/details?id=com.microsoft.outlooklite&hl=en&gl=US>`_,
+since this app does not have the functionality of the proper Outlook app!
 
 .. _Microsoft_InTune: https://learn.microsoft.com/en-us/mem/intune/fundamentals/what-is-intune
 
