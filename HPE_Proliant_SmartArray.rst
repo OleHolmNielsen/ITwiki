@@ -111,7 +111,7 @@ the Linux LVM volume must be extended as well by updating the disk partition tab
   Number  Start   End     Size    File system  Name     Flags
    1      17.4kB  3601GB  3601GB               primary  lvm
 
-The disk partition is still the old size, and it must be resized as well to the available size::
+The disk partition is still the old size, and it must be resized as well to the available size (which is 4201GB in the above example)::
 
   (parted) resizepart 1 4201GB
   (parted) p
