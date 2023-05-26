@@ -87,6 +87,10 @@ Having added disk drives, the logical drive will be transformed, and this can ta
 After this you can extend the logical drive no. 2 size::
 
   => controller slot=0 logicaldrive 2 modify size=max 
+
+At this point you may need to **reboot the server** so that it recognizes the updated disk label!
+Also watch out for disk being renamed in the process (sda may become sdb and vice versa),
+a new reboot may solve this issue.
   
 When the SmartArray logical drive has been extended,
 the Linux LVM volume must be extended as well by updating the disk partition table, for example::
@@ -119,6 +123,8 @@ The disk partition is still the old size, and it must be resized as well to the 
   
   Number  Start   End     Size    File system  Name     Flags
    1      17.4kB  4201GB  4201GB               primary  lvm
+
+After updating the disk partition size, a **reboot of the server** may be required for LVM to recognize the changed disk size!
 
 Finally resize the PV (first make a verbose test) and verify the new Physical Volume size::
 
