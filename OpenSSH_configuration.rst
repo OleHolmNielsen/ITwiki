@@ -71,6 +71,10 @@ List the supported algorithms of the server using the commands::
 
 On EL8 systems uncomment the line with the ``CRYPTO_POLICY=`` variable in ``/etc/sysconfig/sshd`` and restart the sshd service.
 
+To verify, run ssh with the -vvv flag from a client to the relevant server::
+
+  # ssh -vvv user@server
+
 .. _Cipher: https://en.wikipedia.org/wiki/Cipher
 .. _HMAC: https://en.wikipedia.org/wiki/Hash-based_message_authentication_code
 .. _KEX: https://en.wikipedia.org/wiki/Key_exchange
