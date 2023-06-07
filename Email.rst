@@ -9,7 +9,7 @@ Users must configure their Office365_ DTU account, and using Azure_MFA_ is requi
 See the DTU Inside page `Outlook mailboxes will be moved to the Cloud (Exchange Online) <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-service-generelt/mailmigrering-foraar-2023>`_
 including links to guides.
 
-In general Office365_ only supports Microsoft's Outlook E-mail clients, see AIT's Guides_for_Outlook_.
+In general Office365_ only supports Microsoft's Outlook_ E-mail clients, see AIT's Guides_for_Outlook_.
 
 AIT's Outlook_FAQ_ covers a number of questions about Office365_.
 
@@ -21,7 +21,7 @@ AIT's Outlook_FAQ_ covers a number of questions about Office365_.
 Outlook app on DTU Windows PCs
 ==================================
 
-If you use a DTU Windows PC and the Outlook app from Microsoft Office,
+If you use a DTU Windows PC and the Outlook_ app from Microsoft Office,
 E-mail should work as before without any issues.
 A restart of the PC is recommended if anything is not working quite right.
 
@@ -40,11 +40,11 @@ The previous OWA_ site https://mail.dtu.dk **does not work** correctly for login
 Non-Microsoft Email clients
 ================================
 
-In general AIT only supports Microsoft's Outlook E-mail clients.
+In general AIT only supports Microsoft's Outlook_ E-mail clients.
 We have found some guides for non-Microsoft clients as shown below.
 Please note the following points:
 
-* If you already had configured DTU E-mail in an Outlook app on Apple or Android devices,
+* If you already had configured DTU E-mail in an Outlook_ app on Apple or Android devices,
   you probably have to **delete the old DTU account** in the app before adding your DTU account.
 
 * The Office365_ mailboxes require the so-called *Modern Authentication* (OAuth2_) using Azure_MFA_ and the Microsoft_Authenticator_ app on your smartphone.
@@ -64,7 +64,7 @@ AIT offers a number of Guides_for_Outlook_ including ``Setting up Outlook on an 
 You need to install the `Microsoft Outlook app for iPhone <https://apps.apple.com/us/app/microsoft-outlook/id951937596>`_.
 According to the Outlook_FAQ_ you need to install the Microsoft_Authenticator_ app on iPhones.
 
-Note: ``Keyboard apps`` on the iPhone seem to be blocked by the Outlook app, possibly due to a DTU security policy(?).
+Note: ``Keyboard apps`` on the iPhone seem to be blocked by the Outlook_ app, possibly due to a DTU security policy(?).
 
 In addition the following pages may be helpful:
 
@@ -102,7 +102,7 @@ You need to install the `Microsoft Outlook app for Android <https://play.google.
 According to the Outlook_FAQ_ you need to install the Microsoft_InTune_ app on Android phones.
 
 **WARNING:** Do NOT install the `Microsoft Outlook Lite app <https://play.google.com/store/apps/details?id=com.microsoft.outlooklite&hl=en&gl=US>`_,
-since this app does not have the functionality of the proper Outlook app!
+since this app does not have the functionality of the proper Outlook_ app!
 
 .. _Microsoft_InTune: https://learn.microsoft.com/en-us/mem/intune/fundamentals/what-is-intune
 
@@ -140,18 +140,19 @@ Calendar client setup at DTU
 
 For **configuring calendar client software on your PC** we offer the following advice:
 
-* Microsoft `Outlook <http://en.wikipedia.org/wiki/Microsoft_Outlook>`_ users have built-in calendar functions.
+* Microsoft Outlook_ users have built-in calendar functions.
 * Microsoft Outlook_Web_Access_ (OWA).
   Login to Office365_ using a browser:
 
     https://outlook.office365.com or the alias https://outlook.office.com
 
+.. _Outlook: https://en.wikipedia.org/wiki/Microsoft_Outlook
 .. _Outlook_Web_Access: https://en.wikipedia.org/wiki/Outlook_Web_App
 
 Adding holidays to the calendar
 -----------------------------------
 
-In the Outlook_Web_Access_ or Outlook for Windows you can add national holidays to your calendar.
+In the Outlook_Web_Access_ or Outlook_ for Windows you can add national holidays to your calendar.
 In Outlook_Web_Access_ click on the calendar pane on the left and select ``+ Add calendar`` to open a pop-up window.
 Here you can select ``Holidays`` to add the official holidays of many different countries to your calendar.
 
