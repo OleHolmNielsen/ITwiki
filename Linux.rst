@@ -10,6 +10,7 @@ Linux documentation
    RHEL_services
    RHEL_applications
    Ansible_configuration
+   OpenSSH_configuration
    Libreswan_IPsec_VPN
    Multi_factor_authentication_on_Linux
    Linux_firewall_configuration
