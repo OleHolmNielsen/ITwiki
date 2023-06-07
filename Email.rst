@@ -141,10 +141,19 @@ Calendar client setup at DTU
 For **configuring calendar client software on your PC** we offer the following advice:
 
 * Microsoft `Outlook <http://en.wikipedia.org/wiki/Microsoft_Outlook>`_ users have built-in calendar functions.
-* Microsoft `Outlook Web Access <http://en.wikipedia.org/wiki/Outlook_Web_App>`_ (OWA): 
+* Microsoft Outlook_Web_Access_ (OWA).
   Login to Office365_ using a browser:
 
     https://outlook.office365.com or the alias https://outlook.office.com
+
+.. _Outlook_Web_Access: https://en.wikipedia.org/wiki/Outlook_Web_App
+
+Adding holidays to the calendar
+-----------------------------------
+
+In the Outlook_Web_Access_ or Outlook for Windows you can add national holidays to your calendar.
+In Outlook_Web_Access_ click on the calendar pane on the left and select ``+ Add calendar`` to open a pop-up window.
+Here you can select ``Holidays`` to add the official holidays of many different countries to your calendar.
 
 Thunderbird calendar and address book client
 ------------------------------------------------
