@@ -63,7 +63,8 @@ SSH settings to be configured include:
 * HMAC_: Hash-based message authentication codes.
 * KEX_: Key exchange.
 
-See also `Steps to disable the diffie-hellman-group1-sha1 algorithm in SSH  <https://access.redhat.com/solutions/4278651>`_.
+See also the Red Hat solution
+`Steps to disable the diffie-hellman-group1-sha1 algorithm in SSH  <https://access.redhat.com/solutions/4278651>`_.
 List the supported algorithms of the server using the commands::
 
   # sshd -T | grep kex
