@@ -8,6 +8,7 @@ E-mail at DTU
 Users must configure their Office365_ DTU account, and using Azure_MFA_ is required for access.
 See the DTU Inside page `Outlook mailboxes will be moved to the Cloud (Exchange Online) <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-service-generelt/mailmigrering-foraar-2023>`_
 including links to guides.
+There is an internal `DTU Multifactor Authentication (MFA) guide <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/guides/mfa>`_.
 
 In general Office365_ only supports Microsoft's Outlook_ E-mail clients, see AIT's Guides_for_Outlook_.
 
