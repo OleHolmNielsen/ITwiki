@@ -34,7 +34,7 @@ For web browser access to your DTU mailbox please use the Office365_ OWA_ webmai
 * https://outlook.office365.com or the alias https://outlook.office.com
 
 The changed web-site is documented in this `Inside page <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-support-og-kontakt/guides/adgang-til-webmail>`_.
-The previous OWA_ site https://mail.dtu.dk **does not work** correctly for login to the Office365_ mailboxes with certain web browsers.
+The previous OWA_ site ``mail.dtu.dk`` or ``mail.win.dtu.dk`` **does not work** correctly for login to the Office365_ mailboxes with certain web browsers.
 
 .. _OWA: https://www.microsoft.com/en-us/microsoft-365/outlook/web-email-login-for-outlook
 
