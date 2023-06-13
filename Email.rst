@@ -83,9 +83,10 @@ In addition the following pages may be helpful:
 Mac E-mail clients
 -----------------------------
 
-On Mac computers the Apple_Mail_ app works correctly with Office365_ mail and calendar.
-First you have to delete any pre-existing Exchange account,
-then you create a new ``Exchange account`` with your username ``<DTU-initials>@dtu.dk``.
+On Mac computers the Apple_Mail_ app works correctly with Office365_ mail and calendar:
+
+* First you have to delete any pre-existing Exchange account.
+* Secondly, you create a new ``Exchange account`` with your username ``<DTU-initials>@dtu.dk``.
 
 AIT offers a number of Guides_for_Outlook_ including ``Setting up DTU email in Outlook on MAC``.
 
