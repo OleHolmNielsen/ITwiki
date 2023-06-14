@@ -1,25 +1,47 @@
 .. _NeDi_installation_on_CentOS:
 
-NeDi installation and upgrading on CentOS and RHEL
-==================================================
+NeDi installation and upgrading on EL and CentOS Linux
+=============================================================
 
 .. Contents::
 
 NeDi_ (*Network Discovery*) is an open source network monitoring tool.
 Please see first the general information in the NeDi_.
 
-This page describes how to install NeDi_ CentOS and RHEL Linux servers.
+This page describes how to install NeDi_ on RHEL (and clones such as AlmaLinux, RockyLinux, and CentOS) Linux servers.
 
-On the dedicated server for NeDi_ the NeDi_ file ``nedi-XXX.tgz`` from the `NeDi download <http://www.nedi.ch/download/>`_ page.
+On the dedicated server for NeDi_ the NeDi_ file ``nedi-XXX.tgz`` from the `NeDi download <https://www.nedi.ch/download/>`_ page.
 Paying customers may download the latest version (currently 1.8) from the NeDi_customer_ page.
 
 See also the general NeDi_installation_ page.
 
-.. _NeDi: http://www.nedi.ch/
-.. _NeDi_customer: https://www.nedi.ch/customer-area/
+.. _NeDi: https://www.nedi.ch/
+.. _NeDi_customer: https://www.nedi.ch/services/customer-area/index.html
 
-Installation on CentOS/RHEL
--------------------------------
+Installation on EL8 and EL9
+===============================
+
+Enable the EPEL_ repository, see the EPEL_ instructions.
+Install these packages::
+
+  dnf install gcc httpd mod_ssl php php-mysqlnd mariadb-server mariadb-devel php-snmp php-gd php-process patch net-snmp net-snmp-utils rrdtool rrdtool-perl tcpdump
+  dnf install perl-Algorithm-Diff perl-Net-Telnet perl-Net-DNS perl-Socket6 perl-Test-Exception perl-DBD-Pg.x86_64 perl-Module-Build perl-Net-SNMP
+  dnf install perl-CPAN perl-App-cpanminus
+
+If you are using an Ansible server, install this ansible-galaxy collection on the server::
+
+  ansible-galaxy collection install community.general
+
+Now you can install the required CPAN_ modules::
+
+  cpanm Module::RRD-Simple
+  cpanm Time::HiRes::Value
+
+.. _EPEL: https://docs.fedoraproject.org/en-US/epel/
+.. _CPAN: https://www.cpan.org/
+
+Installation on CentOS/RHEL 7
+===============================
 
 The present information has been tested on CentOS 7 and RHEL Linux 7 servers,
 and it probably also works on RHEL 8 (and EL8 clones) - testing needed.
@@ -31,12 +53,7 @@ As a preliminary add the EPEL_ package repository, where you install the newest 
 
 * RHEL7: See https://fedoraproject.org/wiki/EPEL
 
-.. _EPEL: https://fedoraproject.org/wiki/EPEL
-
-CentOS7 and RHEL7
------------------
-
-Install prerequisites::
+Install prerequisite packages::
 
   yum install httpd mod_ssl php php-mysql mariadb-server mariadb-devel php-snmp php-gd php-process patch 
   yum install net-snmpnet-snmp-utils rrdtool rrdtool-perl tcpdump postgresql.x86_64 php-pgsql.x86_64
@@ -51,7 +68,7 @@ Then install additional packages from EPEL_::
 Some packages are not in EL7 nor EPEL_ and must be installed manually.
 First the RRD-Simple_ package::
 
-  wget http://search.cpan.org/CPAN/authors/id/N/NI/NICOLAW/RRD-Simple-1.44.tar.gz
+  wget https://search.cpan.org/CPAN/authors/id/N/NI/NICOLAW/RRD-Simple-1.44.tar.gz
   tar xzvf RRD-Simple-1.44.tar.gz
   cd RRD-Simple-1.44   # See the INSTALL file
   perl Makefile.PL 
@@ -62,7 +79,7 @@ First the RRD-Simple_ package::
 
 Then install the Time-HiRes-Value_ package::
 
-  wget http://search.cpan.org/CPAN/authors/id/P/PE/PEVANS/Time-HiRes-Value-0.08.tar.gz
+  wget https://search.cpan.org/CPAN/authors/id/P/PE/PEVANS/Time-HiRes-Value-0.08.tar.gz
   tar xzvf Time-HiRes-Value-0.08.tar.gz
   cd Time-HiRes-Value-0.08
   perl Makefile.PL
@@ -71,9 +88,9 @@ Then install the Time-HiRes-Value_ package::
   perl Build install
   cd ..
 
-If you employ the Postgresql database, install the Class-DBI-Pg_ package::
+Only in case you employ the ``Postgresql database`` install the Class-DBI-Pg_ package::
 
-  wget http://search.cpan.org/CPAN/authors/id/D/DM/DMAKI/Class-DBI-Pg-0.09.tar.gz
+  wget https://search.cpan.org/CPAN/authors/id/D/DM/DMAKI/Class-DBI-Pg-0.09.tar.gz
   tar xzvf Class-DBI-Pg-0.09.tar.gz
   cd Class-DBI-Pg-0.09/
   perl Makefile.PL
@@ -83,9 +100,9 @@ If you employ the Postgresql database, install the Class-DBI-Pg_ package::
   perl Build install
   cd ..
 
-.. _RRD-Simple: http://search.cpan.org/~nicolaw/RRD-Simple-1.44/lib/RRD/Simple.pm
-.. _Time-HiRes-Value: http://search.cpan.org/CPAN/authors/id/P/PE/PEVANS/Time-HiRes-Value-0.08.tar.gz
-.. _Class-DBI-Pg: http://search.cpan.org/~dmaki/Class-DBI-Pg-0.09/lib/Class/DBI/Pg.pm
+.. _RRD-Simple: https://search.cpan.org/~nicolaw/RRD-Simple-1.44/lib/RRD/Simple.pm
+.. _Time-HiRes-Value: https://metacpan.org/pod/Time::HiRes::Value
+.. _Class-DBI-Pg: https://search.cpan.org/~dmaki/Class-DBI-Pg-0.09/lib/Class/DBI/Pg.pm
 
 Patching the Perl NET::SNMP module Message.pm
 ---------------------------------------------
@@ -105,8 +122,8 @@ Patch the ``/usr/share/perl5/vendor_perl/Net/SNMP/Message.pm`` file (as root)::
 You may also download the attached file :download:`Message.pm.diff.el7 <attachments/Message.pm.diff.el7>` (CentOS/RHEL7).
 This patch was provided by the author of NeDi_.
 
-.. _perl-Net-SNMP: http://search.cpan.org/dist/Net-SNMP/
-.. _Net-SNMP: http://net-snmp.sourceforge.net/
+.. _perl-Net-SNMP: https://search.cpan.org/dist/Net-SNMP/
+.. _Net-SNMP: https://net-snmp.sourceforge.net/
 
 Install NeDi
 -------------------------------
@@ -142,7 +159,7 @@ The PHP configuration file ``/etc/php.ini`` **must** be edited so that PHP will 
 
   short_open_tag = On
 
-For reasons of `security <http://phpsec.org/projects/phpsecinfo/tests/expose_php.html>`_ turn off this option in ``/etc/php.ini``::
+For reasons of `security <https://phpsec.org/projects/phpsecinfo/tests/expose_php.html>`_ turn off this option in ``/etc/php.ini``::
 
   expose_php = Off
 
@@ -160,11 +177,11 @@ Either reboot the server, or set *Permissive* mode immediately using this comman
 
   setenforce Permissive
 
-.. _SELinux: http://wiki.centos.org/HowTos/SELinux
+.. _SELinux: https://wiki.centos.org/HowTos/SELinux
 
 See the man-page httpd_selinux_ for information about Apache and SELinux.
 
-.. _httpd_selinux: http://fedoraproject.org/wiki/SELinux/apache
+.. _httpd_selinux: https://fedoraproject.org/wiki/SELinux/apache
 
 Warning messages from SELinux_ will appear in the system syslog ``/var/log/messages``.
 
@@ -271,10 +288,10 @@ Apache web service
 
 We will use the Apache_ web server provided by the *httpd* RPM package.
 
-.. _Apache: http://httpd.apache.org/
+.. _Apache: https://httpd.apache.org/
 
 An SSL-encrypted NeDi_ web-page must be configured because critical information such as login passwords are used.
-For an introduction see `Setting up an SSL secured Webserver with CentOS <http://wiki.centos.org/HowTos/Https>`_.
+For an introduction see `Setting up an SSL secured Webserver with CentOS <https://wiki.centos.org/HowTos/Https>`_.
 The unencrypted HTTP service on port 80 should be redirected to the SSL-encrypted port 443 (see https://wiki.apache.org/httpd/RedirectSSL) as shown in the example below.
 
 You may either use a self-signed SSL certificate, or use a commercial SSL certificate valid for your web server according to your site's security policies.
@@ -299,7 +316,7 @@ In the Apache_ configuration directory ``/etc/httpd/conf.d/`` create the file ``
     ServerAdmin webmaster@example.com
     ServerName nedi.example.com
     DocumentRoot /var/www/html/
-    # Security: Cross-Site Tracing issues: http://www.apacheweek.com/issues/03-01-24
+    # Security: Cross-Site Tracing issues: https://www.apacheweek.com/issues/03-01-24
     RewriteEngine On
     RewriteCond %{REQUEST_METHOD} ^TRACE
     RewriteRule .* - [F]
@@ -336,13 +353,13 @@ Strong recommendations are in:
 * tls-ssl-cipher-hardening_
 
 .. _Server_Side_TLS: https://wiki.mozilla.org/Security/Server_Side_TLS
-.. _tls-ssl-cipher-hardening: http://www.acunetix.com/blog/articles/tls-ssl-cipher-hardening/
+.. _tls-ssl-cipher-hardening: https://www.acunetix.com/blog/articles/tls-ssl-cipher-hardening/
 
 In fact, one may generate an appropriate Apache_ SSL configuration including SSLCipherSuite_ in the page:
 
 * https://mozilla.github.io/server-side-tls/ssl-config-generator/
 
-.. _SSLCipherSuite: http://httpd.apache.org/docs/2.2/mod/mod_ssl.html#sslciphersuite
+.. _SSLCipherSuite: https://httpd.apache.org/docs/2.2/mod/mod_ssl.html#sslciphersuite
 
 Apache on CentOS/RHEL 7
 -----------------------
@@ -459,7 +476,7 @@ See the *MySQL service* section above before doing::
 
   ./nedi.pl -i updatedb
 
-.. _NeDi_installation: http://www.nedi.ch/installation/
+.. _NeDi_installation: https://www.nedi.ch/installation/
 
 When the upgrading has completed successfully, restart all NeDi_ services (as *root* user)::
 
@@ -497,7 +514,7 @@ Make regular database dumps, for example by a *crontab* job::
   # MySQL database backup
   30 7 * * * /root/mysqlbackup
 
-.. _mysqldump: http://dev.mysql.com/doc/refman/5.1/en/mysqldump.html
+.. _mysqldump: https://dev.mysql.com/doc/refman/5.1/en/mysqldump.html
 
 Note: Using the GUI page *System-Snapshot* one may perform a *Database Snapshot* - this is just a special database inside the MySQL_ server, **not a backup**.
 The page *System-Export* also allows export of database contents.
@@ -511,7 +528,7 @@ Step 1: The directory tree ``/var/nedi`` must be restored in stead of the vanill
 
 Step 2: NeDi_s MySQL_ database contents must be loaded from the backup.
 To restore a MySQL_ database see for example
-`How do I restore a MySQL .dump file? <http://stackoverflow.com/questions/105776/how-do-i-restore-a-mysql-dump-file>`_.
+`How do I restore a MySQL .dump file? <https://stackoverflow.com/questions/105776/how-do-i-restore-a-mysql-dump-file>`_.
 As user *root* input the above created backup file::
 
   mysql -u root -p < /root/mysql_backup
