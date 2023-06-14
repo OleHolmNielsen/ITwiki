@@ -416,13 +416,13 @@ It is a good idea to rotate this logfile on a weekly basis, so create the file `
 	weekly
   }
 
-Starting the sshblack service
+Configuring the sshblack service
 ---------------------------------
 
 On RHEL (and clones) as well as Fedora Linux you should set up a Systemd_ startup script (and not run the ``sshblack.pl`` command manually).
 
 EL8/EL9/Fedora and sshblack
-------------------------------
+..................................
 
 A Systemd_ service file :download:`sshblack.service <attachments/sshblack.service>` must be installed::
 
@@ -431,7 +431,7 @@ A Systemd_ service file :download:`sshblack.service <attachments/sshblack.servic
   systemctl enable sshblack.service
 
 CentOS7/RHEL7 and sshblack
----------------------------------
+................................
 
 An EL7-specific startup script :download:`init-sshblack-el7 <attachments/init-sshblack-el7>`
 must be used for RHEL7/CentOS7/Fedora with Systemd_ and firewalld_.
@@ -446,7 +446,7 @@ Now add the service and create the private sshblack_ directory::
   systemctl enable sshblack.service
 
 Configure a firewalld chain
---------------------------------
+................................
 
 Create a *SSHBLACK* iptables_ chain::
 
@@ -462,8 +462,8 @@ It is possible to drop packets from specific IP-addresses and subnets using *ric
 
 but we don't use this yet.
 
-Using sshblack
---------------
+Starting the sshblack service
+----------------------------------
 
 The sshblack_ daemon must be started::
 
