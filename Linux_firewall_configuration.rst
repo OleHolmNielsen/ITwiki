@@ -428,7 +428,7 @@ On RHEL (and clones) as well as Fedora Linux you should set up a Systemd_ startu
 EL8/EL9/Fedora and sshblack
 ------------------------------
 
-A Systemd_ service file sshblack.service__ must be installed::
+A Systemd_ service file :download:`sshblack.service <attachments/sshblack.service>` must be installed::
 
   cp sshblack.service /etc/systemd/system/
   chmod 755 /etc/systemd/system/sshblack.service
@@ -439,17 +439,9 @@ __ attachment: sshblack.service
 CentOS7/RHEL7 and sshblack
 ---------------------------------
 
-An EL7-specific startup script must be used for RHEL7/CentOS7/Fedora with Systemd_ and firewalld_:
-
-* init-sshblack-el7__ 
-
-__ attachment: init-sshblack-el7
-
-Download also this service file:
-
-* sshblack.service-el7__
-
-__ attachment: sshblack.service-el7
+An EL7-specific startup script :download:`init-sshblack.service-el7 <attachments/init-sshblack.service-el7>`
+must be used for RHEL7/CentOS7/Fedora with Systemd_ and firewalld_.
+Install a Systemd_ service file :download:`sshblack.service-el7 <attachments/sshblack.service-el7>`.
 
 Now add the service and create the private sshblack_ directory::
 
