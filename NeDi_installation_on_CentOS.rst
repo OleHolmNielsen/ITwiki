@@ -113,14 +113,13 @@ There is a problem with the *Message.pm* module which may lead to many fake even
   latency xxx exceeds threshold yyy
 
 If you want to fix this problem, the only way is to manually patch the *Message.pm* module (no updates seem to be coming) to use the *Time::HiRes* module.
+You may download the attached file :download:`Message.pm.diff.el7 <attachments/Message.pm.diff.el7>` (CentOS/RHEL7).
+This patch was provided by the author of NeDi_.
+
 Patch the ``/usr/share/perl5/vendor_perl/Net/SNMP/Message.pm`` file (as root)::
 
   cd /usr/share/perl5/vendor_perl/Net/SNMP
-  wget ftp://ftp.fysik.dtu.dk/pub/NeDi/Message.pm.diff.elX   # X = 6 or 7
-  patch < Message.pm.diff.elX   # X = 6 or 7
-
-You may also download the attached file :download:`Message.pm.diff.el7 <attachments/Message.pm.diff.el7>` (CentOS/RHEL7).
-This patch was provided by the author of NeDi_.
+  patch < Message.pm.diff.el7
 
 .. _perl-Net-SNMP: https://search.cpan.org/dist/Net-SNMP/
 .. _Net-SNMP: https://net-snmp.sourceforge.net/
