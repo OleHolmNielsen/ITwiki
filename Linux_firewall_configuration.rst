@@ -350,9 +350,10 @@ See also this page `Further Securing OpenSuSE 11.1 Against SSH Script Attacks <h
 Installing and configuring sshblack
 -----------------------------------
 
-Unpack the sshblack_ tar-ball.
-A local copy is here: :download:`sshblackv281.tar.gz <attachments/sshblackv281.tar.gz>`.
-Consult the sshblack_install_ instructions. 
+Unpack the sshblack_ tar-ball,
+a local copy is here: :download:`sshblackv281.tar.gz <attachments/sshblackv281.tar.gz>`.
+Consult the sshblack_install_ instructions,
+a local copy is here: :download:`sshblack-install.txt <attachments/sshblack-install.txt>`.
 
 .. _sshblack_install: http://www.pettingers.org/media/sshblack-install.txt
 
