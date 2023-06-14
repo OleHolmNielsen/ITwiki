@@ -11,7 +11,7 @@ Please see first the general information in the NeDi_.
 This page describes how to install NeDi_ on RHEL (and clones such as AlmaLinux, RockyLinux, and CentOS) Linux servers.
 
 On the dedicated server for NeDi_ the NeDi_ file ``nedi-XXX.tgz`` from the `NeDi download <https://www.nedi.ch/download/>`_ page.
-Paying customers may download the latest version (currently 1.8) from the NeDi_customer_ page.
+Paying customers may download the latest version (currently 2.3) from the NeDi_customer_ page.
 
 See also the general NeDi_installation_ page.
 
@@ -119,14 +119,14 @@ There is a problem with the *Message.pm* module which may lead to many fake even
 
   latency xxx exceeds threshold yyy
 
-If you want to fix this problem, the only way is to manually patch the *Message.pm* module (no updates seem to be coming) to use the *Time::HiRes* module.
-You may download the attached file :download:`Message.pm.diff.el7 <attachments/Message.pm.diff.el7>` (CentOS/RHEL7).
+If you want to fix this problem, the only way is to manually patch the *Message.pm* module (no updates seem to be coming) to use the Time-HiRes-Value_ module.
+You may download the attached file :download:`Message.pm.diff <attachments/Message.pm.diff>`.
 This patch was provided by the author of NeDi_.
 
 Patch the ``/usr/share/perl5/vendor_perl/Net/SNMP/Message.pm`` file (as root)::
 
   cd /usr/share/perl5/vendor_perl/Net/SNMP
-  patch < Message.pm.diff.el7
+  patch < Message.pm.diff
 
 .. _perl-Net-SNMP: https://search.cpan.org/dist/Net-SNMP/
 .. _Net-SNMP: https://net-snmp.sourceforge.net/
