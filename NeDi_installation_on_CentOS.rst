@@ -134,18 +134,18 @@ Patch the ``/usr/share/perl5/vendor_perl/Net/SNMP/Message.pm`` file (as root)::
 Install NeDi
 -------------------------------
 
-Create a *nedi* user in group *apache* with home directory ``/var/nedi``::
+Create a ``nedi`` user in group ``apache`` with home directory ``/var/nedi``::
 
-  useradd -g apache -s /bin/bash -m -d /var/nedi/ -c "NeDi user" nedi
+  useradd --gid apache --shell /bin/bash --create-home --home-dir /var/nedi/ --comment "NeDi user" nedi
 
-Create some dynamic subdirectories needed, then unpack the files to the *nedi* user's home directory::
+Create some dynamic subdirectories needed, then unpack the files to the ``nedi`` user's home directory::
 
   mkdir -p /var/nedi/log 
   cd /var/nedi
   tar xzvf .../nedi-XXX.tgz
   chown -R nedi.apache /var/nedi/*
 
-**Security: Check if this is really needed** Make the /var/nedi/ directory tree group-writable (group *apache* meaning the Apache web server)::
+**Security: Check if this is really needed** Make the /var/nedi/ directory tree group-writable (group ``apache`` meaning the Apache web server)::
 
   chmod -R g+w /var/nedi/*
 
@@ -263,31 +263,24 @@ NeDi_ requires two running daemon processes:
 * *syslog.pl* syslog daemon which stores events directly in DB.
 * *moni.pl* monitoring daemon for polling uptime and checking connectivity of services.
 
-Daemons on CentOS 7
-...................
+First download the service scripts from here:
 
-On RHEL/CentOS 7 systems download the startup scripts and add the services::
+* :download:`nedi-monitor <attachments/nedi-monitor>`
+* :download:`nedi-syslog <attachments/nedi-syslog>`
+* :download:`nedi-monitor.service <attachments/nedi-monitor.service>`
+* :download:`nedi-syslog.service <attachments/nedi-syslog.service>`
 
-  wget ftp://ftp.fysik.dtu.dk/pub/NeDi/nedi-monitor
-  wget ftp://ftp.fysik.dtu.dk/pub/NeDi/nedi-monitor.service
-  wget ftp://ftp.fysik.dtu.dk/pub/NeDi/nedi-syslog
-  wget ftp://ftp.fysik.dtu.dk/pub/NeDi/nedi-syslog.service
+Add the Systemd_ services::
+
   chmod 755 nedi-monitor nedi-syslog 
   cp nedi-monitor nedi-syslog /usr/libexec/
-  cp nedi-monitor.service nedi-syslog.service /usr/lib/systemd/system/
+  cp nedi-monitor.service nedi-syslog.service /etc/systemd/system/
   systemctl enable nedi-monitor.service
   systemctl enable nedi-syslog.service
   systemctl start nedi-monitor.service
   systemctl start nedi-syslog.service
   systemctl status nedi-monitor.service
   systemctl status nedi-syslog.service
-
-You may also download the files here:
-
-* :download:`nedi-monitor <attachments/nedi-monitor>`
-* :download:`nedi-syslog <attachments/nedi-syslog>`
-* :download:`nedi-monitor.service <attachments/nedi-monitor.service>`
-* :download:`nedi-syslog.service <attachments/nedi-syslog.service>`
 
 Apache web service
 -------------------------------
