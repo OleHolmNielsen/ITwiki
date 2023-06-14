@@ -344,9 +344,13 @@ created using various firewalling tools -- such as iptables_ -- available in mos
 The blacklist is simply a list of source IP addresses that are prohibited from making ssh connections to the protected host. 
 Once a predetermined amount of time has passed, the offending IP address is removed from the blacklist.
 
-.. _sshblack: http://www.pettingers.org/code/sshblack.html
+**NOTICE:** Since modern RHEL (and clones) as well as Fedora
+use firewalld_ in stead of iptables_, the sshblack_ version 2.8.1 from the web-site **does not work**.
+All ``iptables`` commands in the sshblack_ scripts need to be replaced by similar ``firewall-cmd`` commands.
 
 See also this page `Further Securing OpenSuSE 11.1 Against SSH Script Attacks <https://www.suse.com/communities/conversations/further-securing-opensuse-111-against-ssh-script-attacks/>`_.
+
+.. _sshblack: http://www.pettingers.org/code/sshblack.html
 
 Installing and configuring sshblack
 -----------------------------------
@@ -403,9 +407,9 @@ See also the sshblack_config_ page for additional advice.
 sshblack logfiles
 -----------------
 
-The sshblack_ logs to this file::
+The sshblack_ logs to this file, so make sure it exists::
 
-  /var/log/sshblacklisting
+  touch /var/log/sshblacklisting
 
 It is a good idea to rotate this logfile on a weekly basis, so create the file ``/etc/logrotate.d/sshblacklisting`` with the contents::
 
@@ -416,14 +420,24 @@ It is a good idea to rotate this logfile on a weekly basis, so create the file `
 	weekly
   }
 
-CentOS7/RHEL7/Fedora and sshblack
+Starting the sshblack service
 ---------------------------------
 
-**WARNING:** Since CentOS7/RHEL7/Fedora use firewalld_ in stead of iptables_, the sshblack_ version 2.8.1 from the web-site **does not work**.
-All ``iptables`` commands in the sshblack_ scripts need to be replaced by similar ``firewall-cmd`` commands.
-Some preliminary work on this is under way.
+On RHEL (and clones) as well as Fedora Linux you should set up a Systemd_ startup script (and not run the ``sshblack.pl`` command manually).
 
-On CentOS7/RHEL7/Fedora Linux you should set up a Systemd_ startup script (and not run the ``sshblack.pl`` command manually).
+EL8/EL9/Fedora and sshblack
+------------------------------
+
+A Systemd_ service file sshblack.service__ must be installed::
+
+  cp sshblack.service /etc/systemd/system/
+  chmod 755 /etc/systemd/system/sshblack.service
+  systemctl enable sshblack.service
+
+__ attachment: sshblack.service
+
+CentOS7/RHEL7 and sshblack
+---------------------------------
 
 An EL7-specific startup script must be used for RHEL7/CentOS7/Fedora with Systemd_ and firewalld_:
 
@@ -433,17 +447,20 @@ __ attachment: init-sshblack-el7
 
 Download also this service file:
 
-* sshblack.service__
+* sshblack.service-el7__
 
-__ attachment: sshblack.service
+__ attachment: sshblack.service-el7
 
 Now add the service and create the private sshblack_ directory::
 
   mkdir /usr/libexec/sshblack
   cp init-sshblack-el7 /usr/libexec/sshblack/init-sshblack
-  cp sshblack.service /usr/lib/systemd/system/
-  chmod 755 /usr/libexec/sshblack/init-sshblack /usr/lib/systemd/system/sshblack.service
+  cp sshblack.service-el7 /etc/systemd/system/sshblack.service
+  chmod 755 /usr/libexec/sshblack/init-sshblack /etc/systemd/system/sshblack.service
   systemctl enable sshblack.service
+
+Configure a firewalld chain
+--------------------------------
 
 Create a *SSHBLACK* iptables_ chain::
 
@@ -462,15 +479,9 @@ but we don't use this yet.
 Using sshblack
 --------------
 
-The sshblack_ daemon must be started:
+The sshblack_ daemon must be started::
 
-* RHEL7/CentOS7/Fedora::
-
-    systemctl start sshblack.service
-
-* Manual method: Start the sshblack daemon as the *root* user::
-
-    /usr/local/sbin/sshblack.pl
+  systemctl start sshblack.service
 
 There are some useful sshblack_notes_ explaining some additional useful commands:
 
