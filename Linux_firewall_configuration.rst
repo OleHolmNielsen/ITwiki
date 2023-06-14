@@ -128,11 +128,7 @@ Create a country geoblock ipset
 
 We use the IPdeny_ *all countries* zone files and create an IP set which we name *geoblock*.
 We offer a simple script which automatically creates an ipset_ *geoblock* data file.
-Download this *Makefile* to a new directory:
-
-* Makefile__
-
-__ attachment: Makefile
+Download this :download:`Makefile <attachments/Makefile>` to a new directory.
 
 Edit the *COUNTRYLIST* list variable according to your needs, then run::
 
@@ -240,7 +236,7 @@ To circumvent the CentOS 8 Firewalld_ failures in case of overlapping IP ranges,
      ~/.local/bin/aggregate6 --help
 
 2. Perl script aggregate-cidr-addresses_ which takes a list of CIDR address blocks and combine them without overlaps.
-   We have a copy of the aggregate-cidr-addresses.pl__ file, download it to ``/usr/local/bin/``.
+   We have a copy of the :download:`aggregate-cidr-addresses.pl <attachments/aggregate-cidr-addresses.pl>` file, download it to ``/usr/local/bin/``.
 
    Install prerequisite Perl modules::
 
@@ -252,7 +248,6 @@ To circumvent the CentOS 8 Firewalld_ failures in case of overlapping IP ranges,
 
 .. _aggregate6: https://github.com/job/aggregate6
 .. _aggregate-cidr-addresses: https://gist.github.com/denji/17e30bddb9ce9e50294a
-__ attachment:aggregate-cidr-addresses.pl
 
 Testing the ipset service
 -------------------------
@@ -434,12 +429,10 @@ A Systemd_ service file :download:`sshblack.service <attachments/sshblack.servic
   chmod 755 /etc/systemd/system/sshblack.service
   systemctl enable sshblack.service
 
-__ attachment: sshblack.service
-
 CentOS7/RHEL7 and sshblack
 ---------------------------------
 
-An EL7-specific startup script :download:`init-sshblack.service-el7 <attachments/init-sshblack.service-el7>`
+An EL7-specific startup script :download:`init-sshblack-el7 <attachments/init-sshblack-el7>`
 must be used for RHEL7/CentOS7/Fedora with Systemd_ and firewalld_.
 Install a Systemd_ service file :download:`sshblack.service-el7 <attachments/sshblack.service-el7>`.
 
@@ -495,12 +488,7 @@ Checkpoint and restart of sshblack
 The ``sshblack.pl`` script doesn't have any checkpoint/restart feature, so preservation of *BLACKLIST* state across restarts must be done manually.
 See the `Checkpoint and Restart discussion <https://www.suse.com/communities/conversations/further-securing-opensuse-111-against-ssh-script-attacks/#5>`_.
 
-The following script should be downloaded to ``/usr/local/sbin/``:
-
-  * sshblack-save-state__ 
-
-__ attachment: sshblack-save-state
-
+The script :download:`sshblack-save-state <attachments/sshblack-save-state>` should be downloaded to ``/usr/local/sbin/``
 and a new crontab rule should be added to run it every 5 minutes::
 
   # Save the iptables chain BLACKLIST DROP lines for restarting sshblack
