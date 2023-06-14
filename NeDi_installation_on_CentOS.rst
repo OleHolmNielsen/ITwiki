@@ -28,17 +28,24 @@ Install these packages::
   dnf install perl-Algorithm-Diff perl-Net-Telnet perl-Net-DNS perl-Socket6 perl-Test-Exception perl-DBD-Pg.x86_64 perl-Module-Build perl-Net-SNMP
   dnf install perl-CPAN perl-App-cpanminus
 
-If you are using an Ansible server, install this ansible-galaxy collection on the server::
+Now you can install the required CPAN_ modules::
+
+  cpanm RRD::Simple
+  cpanm Time::HiRes::Value
+
+If you are using an Ansible_ server, install this ansible-galaxy collection on the server::
 
   ansible-galaxy collection install community.general
 
-Now you can install the required CPAN_ modules::
+so that you can install Perl modules like this playbook example::
 
-  cpanm Module::RRD-Simple
-  cpanm Time::HiRes::Value
+  - name: Install perl-RRD-Simple package
+    community.general.cpanm:
+      name: RRD::Simple
 
 .. _EPEL: https://docs.fedoraproject.org/en-US/epel/
 .. _CPAN: https://www.cpan.org/
+.. _Ansible: https://www.ansible.com/
 
 Installation on CentOS/RHEL 7
 ===============================
