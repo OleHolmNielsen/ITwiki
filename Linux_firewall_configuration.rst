@@ -351,6 +351,7 @@ Installing and configuring sshblack
 -----------------------------------
 
 Unpack the sshblack_ tar-ball.
+A local copy is here: :download:`sshblackv281.tar.gz <attachments/sshblackv281.tar.gz>`.
 Consult the sshblack_install_ instructions. 
 
 .. _sshblack_install: http://www.pettingers.org/media/sshblack-install.txt
