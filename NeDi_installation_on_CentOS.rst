@@ -109,7 +109,7 @@ Create some dynamic subdirectories needed, then unpack the files to the ``nedi``
 
   chmod -R g+w /var/nedi/*
 
-**Note:** It is important **not** to make the directories /var/nedi and /var/nedi/.ssh group-writable, since this will cause security problems with SSH logins.
+**Note:** It is important **not** to make the directories ``/var/nedi`` and ``/var/nedi/.ssh`` group-writable, since this will cause security problems with SSH logins.
 
 Protect configuration files which might reveal important information about your network::
 
@@ -154,7 +154,7 @@ Warning messages from SELinux_ will appear in the system syslog ``/var/log/messa
 Configuring NeDi for secure SELinux operation
 .............................................
 
-Optional:
+**Optional:**
 Configuring the correct SELinux_ settings for the whole of NeDi_ (*/var/nedi*) is probably going to be really complicated.
 Here are some initial settings to get started.
 
@@ -501,20 +501,28 @@ If you for some reason need to drop the existing MySQL_ database, the NeDi_ comm
   cd /var/nedi/
   ./nedi.pl -i
 
-Upgrading the MySQL database version
-------------------------------------
+Upgrade of MySQL/MariaDB
+------------------------
 
-If you migrate NeDi_ to a new system with a new version of the MySQL_ database,
-for example upgrading MySQL 5.1 on CentOS 6 to MariaDB 5.5 on CentOS 7,
-there are some extra steps.
+If you restore a database dump onto a different server running a **newer MySQL or MariaDB version**
+there are some extra steps:
 
-See `Upgrading from MySQL to MariaDB <https://mariadb.com/kb/en/library/upgrading-from-mysql-to-mariadb/>`_ 
-about running the mysql_upgrade_ command::
+* Consult the Upgrading_MariaDB_ page with detailed instructions for upgrading between MariaDB_ versions or from MySQL_.
 
-  mysql_upgrade
+You should run the mysql_upgrade_ command whenever **major (or even minor) version upgrades** are made , or when migrating from MySQL_ to MariaDB_::
 
-whenever major (or even minor) version upgrades are made, or when migrating from MySQL_ to MariaDB_.
+  mysql_upgrade -p
 
-It may be necessary to restart the *mysqld* service or reboot the server after the upgrade (??).
+It may be necessary to force an upgrade if you have restored a database dump made on an earlier version of MariaDB_,
+say, when migrating from CentOS7/RHEL7 to CentOS8/RHEL8::
+
+  mysql_upgrade -p --force
+
+It may be necessary to restart the *mysqld* service or reboot the server after this upgrade (??).
+
+When migrating a database from CentOS/RHEL 7 (EL7) to RHEL 8 (and EL8 clones) you should read
+`Upgrading from MariaDB 5.5 to MariaDB 10.0 <https://mariadb.com/kb/en/upgrading-from-mariadb-55-to-mariadb-100/>`_
+since there are some incompatible changes between 5.5 and 10.
 
 .. _mysql_upgrade: https://mariadb.com/kb/en/library/mysql_upgrade/
+.. _Upgrading_MariaDB: https://mariadb.com/kb/en/upgrading/
