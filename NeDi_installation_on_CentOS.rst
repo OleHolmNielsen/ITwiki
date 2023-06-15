@@ -65,47 +65,16 @@ Install prerequisite packages::
   yum install httpd mod_ssl php php-mysql mariadb-server mariadb-devel php-snmp php-gd php-process patch 
   yum install net-snmpnet-snmp-utils rrdtool rrdtool-perl tcpdump postgresql.x86_64 php-pgsql.x86_64
   yum install perl-Algorithm-Diff perl-Net-Telnet perl-Net-DNS perl-Socket6 perl-Test-Exception perl-DBD-Pg.x86_64 perl-Module-Build
-
-(the *mysql-server* has been replaced by *mariadb-server*).
+  yum install perl-CPAN perl-App-cpanminus
 
 Then install additional packages from EPEL_::
 
   yum install perl-Net-SNMP perl-IO-Pty-Easy.noarch
 
-Some packages are not in EL7 nor EPEL_ and must be installed manually.
-First the RRD-Simple_ package::
+Some packages must be installed manually as CPAN_ modules::
 
-  wget https://search.cpan.org/CPAN/authors/id/N/NI/NICOLAW/RRD-Simple-1.44.tar.gz
-  tar xzvf RRD-Simple-1.44.tar.gz
-  cd RRD-Simple-1.44   # See the INSTALL file
-  perl Makefile.PL 
-  perl Build
-  perl Build test
-  perl Build install
-  cd ..
-
-Then install the Time-HiRes-Value_ package::
-
-  wget https://search.cpan.org/CPAN/authors/id/P/PE/PEVANS/Time-HiRes-Value-0.08.tar.gz
-  tar xzvf Time-HiRes-Value-0.08.tar.gz
-  cd Time-HiRes-Value-0.08
-  perl Makefile.PL
-  perl Build.PL
-  perl Build test
-  perl Build install
-  cd ..
-
-Only in case you employ the ``Postgresql database`` install the Class-DBI-Pg_ package::
-
-  wget https://search.cpan.org/CPAN/authors/id/D/DM/DMAKI/Class-DBI-Pg-0.09.tar.gz
-  tar xzvf Class-DBI-Pg-0.09.tar.gz
-  cd Class-DBI-Pg-0.09/
-  perl Makefile.PL
-  perl Build.PL
-  perl Build installdeps  # Installs many dependencies
-  perl Build test
-  perl Build install
-  cd ..
+  cpanm RRD::Simple
+  cpanm Time::HiRes::Value
 
 .. _RRD-Simple: https://search.cpan.org/~nicolaw/RRD-Simple-1.44/lib/RRD/Simple.pm
 .. _Time-HiRes-Value: https://metacpan.org/pod/Time::HiRes::Value
