@@ -50,16 +50,7 @@ so that you can install Perl modules like this playbook example::
 Installation on CentOS/RHEL 7
 ===============================
 
-The present information has been tested on CentOS 7 and RHEL Linux 7 servers,
-and it probably also works on RHEL 8 (and EL8 clones) - testing needed.
-As a preliminary add the EPEL_ package repository, where you install the newest version of *epel-release*:
-
-* CentOS::
-
-    yum install epel-release
-
-* RHEL7: See https://fedoraproject.org/wiki/EPEL
-
+Enable the EPEL_ repository, see the EPEL_ instructions.
 Install prerequisite packages::
 
   yum install httpd mod_ssl php php-mysql mariadb-server mariadb-devel php-snmp php-gd php-process patch 
