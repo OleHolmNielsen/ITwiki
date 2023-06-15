@@ -25,7 +25,7 @@ Enable the EPEL_ repository, see the EPEL_ instructions.
 Install these packages::
 
   dnf install gcc httpd mod_ssl php php-mysqlnd mariadb-server mariadb-devel php-snmp php-gd php-process patch net-snmp net-snmp-utils rrdtool rrdtool-perl tcpdump
-  dnf install perl-Algorithm-Diff perl-Net-Telnet perl-Net-DNS perl-Socket6 perl-Test-Exception perl-DBD-Pg.x86_64 perl-Module-Build perl-Net-SNMP
+  dnf install perl-Algorithm-Diff perl-Net-Telnet perl-Net-DNS perl-Socket6 perl-Test-Exception perl-DBD-MySQL perl-Module-Build perl-Net-SNMP
   dnf install perl-CPAN perl-App-cpanminus
 
 Now you can install the required CPAN_ modules::
@@ -198,10 +198,10 @@ Optional:
 Configuring the correct SELinux_ settings for the whole of NeDi_ (*/var/nedi*) is probably going to be really complicated.
 Here are some initial settings to get started.
 
-Set SELinux_ security context for the *nedi* user's home directory::
+Set SELinux_ security context for normal files in the *nedi* user's home directory (do not set on the ``.ssh/`` folder)::
 
   setsebool -P httpd_enable_homedirs 1
-  chcon -R -t httpd_sys_content_t /var/nedi
+  chcon -R -t httpd_sys_content_t /var/nedi/*
 
 For NeDi_ operation you must allow Apache to write to some directories.
 Make sure these directories have correct ownership and permissions::
