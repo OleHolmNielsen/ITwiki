@@ -282,6 +282,8 @@ Add the Systemd_ services::
   systemctl status nedi-monitor.service
   systemctl status nedi-syslog.service
 
+.. _Systemd: https://en.wikipedia.org/wiki/Systemd
+
 Apache web service
 -------------------------------
 
