@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>sshblack Notes and Details -- Things you need to know about sshblack</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="keywords" content="Perl, blacklist, SSH, spam, example, email, utility, utilities, sniper, IPSC, USPSA, USPA, handgun, hacker, genealogy, family, reloading, tarpit, labrea" />
+<meta name="description" content="sshblack implements autonomous and real-time ssh blacklisting to protect ssh servers.  Creates a dynamic database of attackers and is fully configurable by the system administrator." />
+<meta name="last-modified" content="Sun, 25 Mar 2012 01:00:00 GMT"/>
+<meta name="robots" content="index,follow"/>
+<link rel="stylesheet" type="text/css" href="/print.css" media="print"/>
+<link rel="stylesheet" type="text/css" href="/styleone.css" media="screen, projection"/>
+
+
+</head>
+
+<body>
+
+<!-- header div -->
+<div id="hdr">
+  <div align="center"><img src="/images/sshblack.gif" alt="Automatically blacklist SSH hackers" width="700" height="59" />
+  </div>
+</div>
+
+<div id="c-block">
+<div id="c-col-wide">
+<h3> </h3>
+<h3> </h3>
+<h3 align="center">sshblack -- Notes and Details </h3>
+
+<br />
+<br />
+<p>17 Nov 2007:  In response to a <a href="http://www.ossec.net/en/attacking-loganalysis.html">vulnerability</a> pointed out by one of our users, Tim Green, we've made a very minor change, releasing Version 2.8.1.  Please let me know about any issues with this release.  See the README file for details.  In short, sshblack now looks for the <em>last</em> IP address in the log line.  This may cause problems with some *nix and ssh variants although we haven't seen any issues yet.  There are no capability changes/enhancements with this release.</p>
+<p>NOTE: IF YOU ARE USING SSHBLACK FOR MONITORING APACHE OR NGINX LOG FILES, please use Version 2.8 (not Version 2.8.1) available on the downloads page.</p>
+<br />
+<div class="lunch">
+<p>11 May 2005:  The folks at MIT have released a <a href="http://nms.csail.mit.edu/projects/ssh/sshworm.pdf">paper regarding an SSH Worm study</a> which was sponsored by the U.S. Air Force.  It is very enlightening and worth a read.  They also offer some countermeasures.  The <a href="http://nms.csail.mit.edu/projects/ssh/">project page</a> gives more information.  </p>
+</div>
+
+<hr />
+
+
+<p>I have included some utility scripts in the tarball because people were asking me about these.  I suggest you figure out what these do (and tweak them to meet your needs) before blindly executing them.</p>
+<ul>
+<li>list -- manually adds an IP address to the blacklist and modifies the $CACHE file accordingly</li>
+<li>unlist -- manually remove an IP address from the blacklist and the $CACHE file</li>
+<li>bl -- a manual blacklisting tool (one liner that modifies the iptables configuration only)</li>
+<li>unbl -- a manual UNblacklisting tool (one liner that modifies the iptables configuration only)</li>
+<li>iptables-setup -- a few shell commands to set up the iptables chains if you don't want to do it manually.</li>
+</ul>
+
+<hr /><br />
+
+<h3><a name="upgrade" id="upgrade"></a>Some Notes on Upgrading</h3>
+<p>If you are upgrading to a new version of sshblack there is very little you actually need to do except kill the old version and start up the new script.  Version 1 didn't use a cache file but I doubt there is anyone out there still using version 1!  Even if you are, that won't cause a problem, the latest version will simply create a cache file and start working.  If you are still interested in tinkering during an upgrade, read on.</p>
+<p>Problems tend to crop up when people mess with the iptables configuration while they are upgrading.  For the most part, there is no reason to do this.  One situation where you might want to do this is if you are changing the <font face="Courier New, Courier, mono">$ADDRULE</font> or <font face="Courier New, Courier, mono">$DELRULE</font>, you may want to flush the iptables entries from the old rules.  For example, if you are upgrading from 2.7 to 2.8 and decide to use <font face="Courier New, Courier, mono">-j
+    REJECT</font> instead of the <font face="Courier New, Courier, mono">-j DROP</font> you were using in 2.7, you may want to flush any existing -j DROP rules.  You can do this with the <font face="Courier New, Courier, mono">iptables
+    -F BLACKLIST</font> command, assuming your chain is called <font face="Courier New, Courier, mono">BLACKLIST</font>.  Other than that, don't worry about existing rules in the BLACKLIST chain.  The new version of sshblack will work with them just like the old version did.</p>
+<p>Nothing has changed in the format of the cache file since it was first introduced in Version 2.0.  Version 2.8 will read a version 2.7 cache file just fine.</p>
+<p>A general rule of thumb is: If you manually modify iptables, you should likewise modify the cache file and vice versa.  Or delete/clear both.</p>
+<p>Usually any errors that do show up in your sshblack log are harmless to the operation of sshblack.  Tinkering with the iptables configuration or the cache file will commonly result in sshblack trying to delete iptables rules that don't exist.  sshblack will continue to run even if these errors do occur.  However, if you delete the entire iptables chain that sshblack is trying to use, obviously sshblack will not be able to add rules to a chain that doesn't exist.</p>  
+
+<hr />
+<h3><a name="cron" id="cron"></a>Maintaining things with cron, crontab and iptables-save</h3>
+<p>Some have suggested that sshblack should fully maintain the iptables configuration it works with, including saving, checking and restoring chains and rules.  I have chosen not to do this for several reasons which are beyond the scope of this section.  However, here are some pointers that allow you do do these kind of operations yourself.</p>
+<p>If you'd like to manage sshblack like any other background process, see <a href="/code/sshblack-config.html">The Configuration Page</a> for some user-supplied information on managing sshblack with things like chkconfig.  There is even an init script.</p>
+<p>Actually, starting sshblack after a reboot can be as simple as placing the full path and file name in your <font face="Courier New, Courier, mono">/etc/rc.d/rc.local</font> file (or whatever directory/file your OS uses for custom start-up scripts).  This will start sshblack very quickly after your machine boots.</p>
+<p>Saving the iptables configuration can be important because if the custom chain sshblack uses is not restored after a reboot, obviously sshblack won't be able to add/delete rules for a non-existent chain.  If your machine supports it, saving and restoring iptables configs can be done easily using <font face="Courier New, Courier, mono">iptables-save</font> and <font face="Courier New, Courier, mono">iptables-restore</font>.</p> 
+<p>Execution of the <font face="Courier New, Courier, mono">iptables-save</font> command can be done in the root crontab or it can be placed in the <font face="Courier New, Courier, mono">/etc/cron.daily</font> directory.  You can of course do this save every hour if you like by placing the shell file in the <font face="Courier New, Courier, mono">/etc/cron.hourly</font> directory.  Here is an example of an iptables-save script:</p>
+	<div class="code"><pre>
+#!/bin/sh
+
+# Save iptables configuration to /etc/sysconfig/iptables.1
+/sbin/iptables-save -c > /etc/sysconfig/iptables.1
+</pre></div>
+<p>If you'd like to use crontab to do this same thing you can execute the following command:</p>
+<div class="code"><pre>
+[root@stinky root]# crontab -e
+</pre></div>
+
+<p>You will then see your crontab configuration (likely opened in vi).  Simply place the following command into your crontab file and save it:</p>
+<div class="code"><pre>
+mailto = "root"
+
+25 * * * * /sbin/iptables-save -c > /etc/sysconfig/iptables.1
+</pre></div>
+
+<p>Now, how do we pull this information back into iptables in the event of a reboot?  Simple, just go back to your <font face="Courier New, Courier, mono">/etc/rc.d/rc.local</font> and add in the <font face="Courier New, Courier, mono">iptables-restore</font> command <em>[Be
+    sure to place this line BEFORE the line that starts sshblack in your rc.local file]</em>.  This will pull that saved information back in to iptables.</p>
+<div class="code"><pre>
+/sbin/iptables-restore -c &lt; /etc/sysconfig/iptables.1
+</pre></div>
+<p>Note that <font face="Courier New, Courier, mono">iptables-restore</font> will not only restore the rules that sshblack has added, it will restore any custom chains also.</p>
+
+<hr />
+<h3><a name="prereq" id="prereq"></a>Prerequisites</h3>
+<ul>
+	<li><strong>Command-line Firewalling.</strong>  Ideally this should be <font face="Courier New, Courier, mono">iptables</font>.  However, for those of you with older kernels, you can easily modify it to work with <font face="Courier New, Courier, mono">ipchains</font> or even <font face="Courier New, Courier, mono">route</font>.</li>
+	<li><strong>Existing chain</strong> in <font face="Courier New, Courier, mono">iptables</font> for the blacklist (if you choose to use iptables).  This is currently configured as <font face="Courier New, Courier, mono">BLACKLIST</font> but you can name it whatever you want.  You are welcome to configure the script to add blocks to the default <font face="Courier New, Courier, mono">INPUT</font> chain in which case you will not need a custom chain.
+	Also make sure you actually run packets through the chain in your <a href="/code/firewall.html">firewall config</a> or it won't do much good!</li>
+	<li><strong>Root (superuser) access.</strong>  Required for the <font face="Courier New, Courier, mono">iptables</font> calls and access to the logs.</li>
+	<li>[Daemon version only] <strong>Perl Module Proc::Daemon</strong> which is available from CPAN.</li>
+	
+	</ul>
+<br /><hr />
+
+<br />
+<h3><a name="notes1" id="notes1"></a>A Few Notes (aka Rants)</h3>
+<p><font color="#000066">Let me make a couple points in response to some comments I've seen regarding this script and active blacklisting in general.</font></p>
+<p><font color="#000066"><strong>1. My passwords are secure.  Who cares if someone is
+    hacking at them?</strong></font></p>
+<p>In your case and, perchance, my case, this may be true.  If you are certain your passwords will not fall to a dictionary, brute force or intelligent attack and you see no other need to thwart hacking attempts, I say, "Good on ya!"  Move on now and don't worry about sshblack (and don't bother to check your logs because you won't be able to find anything buried in those 2000 lines of failed ssh logins).  However, if you are administering a system where you might have 100 or 1000 users and have no idea how strong all those passwords are, you might want to protect yourself.  Ask anyone who administers a large system and they will tell you that, despite best efforts to enforce strong passwords, there will always be someone who uses "password" or "temp".  Fortuntately many system have integrated password screening that will not allow users to set weak passwords.  Many do not.  Also, even smart people make stupid mistakes.  Perhaps you are setting up a test account or installing a new piece of code that requires a user account.  You forgot to remove that account when you were done testing or forgot to disable logins for that user.  Many machines run by smart people have been compromised when these kind of mistakes are exploited.  Don't worry, sshblack has your back.</p>
+<p><font color="#000066"><strong>2. It would take nine years to hack even a five character password!  That's safe enough.</strong></font></p>
+<p>Your math is flawed.  First, this assumes a brute force attack which may or may not be a good assumption.  Secondly, you are assuming that you are only going to attack on one socket at a time and wait for the ssh daemon to time out or fail each time.  That's (usually) not the way it works.  Most operating systems running ssh have the ability to open more than one socket/port/thread.  That means your ssh daemon can be serving 10, 20 or 1000 log in attempts all at the same time.  It's extremely simple to fork a password hacker to open multiple login attempts at the same time.  Do the math on that.  Fortunately most of the Linux ssh code allows you to adjust the number of threads (either logged-in or initializing) in a config file.  Some systems do not have this limiting feature.  Yet even if you limit this to five simultaneous login prompts, you are still not safe.  See the next paragraph.  I would also point out that MANY people use sshblack to monitor/control things other than ssh daemons so it's utility goes well beyond failed password attempts.</p>
+
+<p><font color="#000066"><strong>3. I've limited the number of threads in my ssh daemon and use strong passwords.  It would take someone over 12,000 years to hack me!</strong></font></p>
+<p>They don't have to be successful at cracking a password to hurt you.  They can use a multi-thread attack to tie up all of your ssh sockets or at least run up your process count and suck up bandwidth.  Obviously the biggest threat here is denial of service.  If they have all your ssh threads tied up with their hacking attempts, how are you going to log in?  This is why it is so important to stop these attacks at the most primary layer.  In the case of sshblack this is done at the IP layer.  By the time you are checking passwords or access databases, its too late.</p>
+<p><font color="#000066"><strong>4. Someone could spoof my address and get me blacklisted from my own machine!</strong></font></p>
+<p>There are several SIGNIFICANT issues with this argument.  First, to even attempt this denial of service, someone would have to assume that you are actually running a script such as this. That's knowledge that your average attacker isn't going to have and knowledge the script kiddie is never going to slow down to acquire.  I would also hope that most people have an upstream router that should be ignoring local-net spoofed packets and not forwarding them on to your SSH host.  As for spoofing your remote address, such as your home DSL, yes, I suppose if someone was so determined and had a HUGE amount of a priori knowledge they could launch such an attack.  Secondly, let's assume that someone has all this knowledge, maybe a disgrunteled ex-employee.  Lauching a blind TCP spoof attack is not impossible but also not that likely.  Remember, we are not talking about a smurf attack or anything like that.  They have to get the ssh daemon to believe that it is talking to a routed host when it really isn't.  What are the chances someone is going to go to all that trouble just for DoS?  There are much more efficient DoS attacks they could use.  Welcome to the Internet.  Lastly, and most importantly, a <a href="/code/sshblack-whitelist.html">whitelist function</a> is included with sshblack so you should be able to whitelist any host or network you like and the rest of this discussion becomes nonsequitur.  If you use the WHITELIST this problem should be significantly minimized.</p>
+
+<p><font color="#000066"><strong>5. The attacker could use a botnet or spoof addresses until my iptables fills up with thousands of entries!</strong></font></p>
+<p>Well, they could except for the fact that sshblack shuts itself down for 24 hours if it detects such an attack.  You can limit the total number of blacklist entries to 50 or 200 or 10,000.  Whatever you're comfortable with.  And when it shuts down, the hacking attempts go on unabated.  But you are the same folks that said nobody should be using a script like this in the first place so that's fine with you.  You don't check logs or worry about the machine anyway so what's one more DoS attack, right?  They've probably tied up all your ssh sockets so you can't log in anyway.  This whole argument falls to some of the same fallacies that the self-blacklisting-blind-spoofing DoS threat does.</p>
+
+<p><font color="#000066"><strong>6. Why would you care?</strong></font></p>
+<p>I don't know how I can make this any more clear:  If you never look at your logs and/or don't care about hundreds or even (yes) thousands of lines of hacking attempts in your logs, do not bother with this script.  I tend to do everything I can to limit my exposure to viruses, trojans, script kiddies, spammers and the like.  This is <em>one
+    small tool</em> I use to limit <em>one aspect</em> of that exposure.  I use blacklists on mail servers too.  If that offends your sense of society, please don't use them.  My passwords are strong, my software is up to date.  It is <em>not</em> that I think these attempts are going to be successful at cracking my SSH daemon.  I just get tired of seeing all the garbage.  I trust the deadbolt on my front door too.  That doesn't mean I want guys lining up in the street trying random house keys.</p>
+
+<p><font color="#000066"><strong>7. Locking out users after X many failed attempts
+    is a bad idea</strong>.</font></p>
+<p>Really?  I'm the first one who's ever thought of this?  Wow!  I think if you look, you'll find dozens of operating systems, applications and servers that do exactly this.  SSH is not for your grandma.  If a user can't manage to enter a password correctly after four (or more) attempts, maybe they should take up a new profession or avocation.</p>
+<br />
+
+<hr />
+
+<h3><a name="otheroptions" id="otheroptions"></a>Other Options</h3>
+<p>The script works very well as it is however, many of the discussion boards have also presented some other options.  I use a few 
+of these myself.  Only a couple of these will put a complete stop to the problem, but they have their associated drawbacks.  Quite a few of these are simply good general security measures that should be done even if you don't have an SSH attack problem.
+</p>
+<ul>
+	<li>Change your listening port number so that the SSH daemon listens on a port other than 22.  This can be done in
+	your sshd config file, usually <font face="Courier New, Courier, mono">/etc/ssh/sshd_config</font>.  This will certainly keep many of the script kiddies out of your machine.  Smoothwall Firewall does this.  Most hacker tools can see right through this though and will find your daemon no matter what port you put it on.  Note this may not be an option for people behind corporate firewalls or
+	with other limitations on their traffic or SSH client.  A perfect option if only one or two knowledgeable people need access to
+	the server.  Use the <font face="Courier New, Courier, mono">ListenAddress <em>ip address:port</em></font> option in 
+	<font face="Courier New, Courier, mono">/etc/ssh/sshd_config</font></li></ul>
+	<div class="code"><pre>
+	ListenAddress 192.168.209.10:222
+	</pre></div>
+	<ul>
+	<li>Set the <font face="Courier New, Courier, mono">PermitRootLogin</font> option to no.  This does absolutely nothing to keep people from attempting to hack your system.  
+	It does add a 
+	tiny bit of security because there is no way for someone to log in as root.  That is, you could have &quot;temp&quot; as your root
+	password (please don't) and it wouldn't matter <strong>in terms of SSH attack </strong>because an SSH user could not log in as root.  
+	There are other ways to do this (see next item).<br />
+	To do this, again, look in the <font face="Courier New, Courier, mono">/etc/ssh/sshd_config</font> file and set the 
+	<font face="Courier New, Courier, mono">PermitRootLogin <em>no&brvbar;yes</em></font> option.</li></ul>
+	
+	<div class="code"><pre>
+	PermitRootLogin no
+	</pre></div>	
+	<ul>
+	<li>Configure your <font face="Courier New, Courier, mono">/etc/passwd</font> file to deny logins to anyone who doesn't need access.  This would include mail-only or FTP-only
+	 users.  Simply, people who don't need shell access.  Most <font face="Courier New, Courier, mono">adduser</font> (or <font face="Courier New, Courier, mono">useradd</font>) applications enable shell access by default.<br />
+	Look in the <font face="Courier New, Courier, mono">/etc/passwd</font> file and change the last item to 
+	<font face="Courier New, Courier, mono">/sbin/nologin</font></li></ul>
+	<div class="code"><pre>
+	uucp:x:56:15:uucp:/var/spool/uucp:/sbin/nologin
+	games:x:58:100:games:/usr/games:/sbin/nologin
+	gopher:x:99:2:gopher:/var/gopher:/sbin/nologin
+	bubba:x:600:611:Bubba Gump:/home/bubba:/sbin/nologin
+	</pre></div>
+<ul>
+	<li>Set the <font face="Courier New, Courier, mono">LoginGraceTime</font> and <font face="Courier New, Courier, mono">MaxStartups</font> variables in <font face="Courier New, Courier, mono">/etc/ssh/sshd_config</font> to be something a bit more aggressive than the default.  This again, will only slow down an attacker, it will do nothing to prevent it.  
+	LoginGraceTime adjusts the amount of time that the ssh daemon will wait for a valid login to be completed.  It normally defaults to
+	120 seconds.  I set it much lower.  <em>[There is a potential problem with doing
+	this but that will be left as an exercise for the student.]</em>  MaxStartups determines how many simultaneous, unauthenticated (not logged in) connections the ssh
+	 daemon will allow.  This defaults to 10.  See the manual page for sshd_config for some more fine-tuning options on MaxStartups.<br />
+	Note that neither of these options has any effect on the maximum number of simultaneous ssh users that can be successfully logged in.<br />
+	In <font face="Courier New, Courier, mono">/etc/ssh/sshd_config</font>:</li></ul>
+	<div class="code"><pre>
+	LoginGraceTime 20
+	MaxStartups 1
+	</pre></div>
+	<ul>
+	
+	<li>Use SSH Keys instead of passwords.  This works well for smaller numbers of users and is generally considered more secure.  I'm also not sure if this would actually stop anyone from attempting to log in and continuing to clutter up your logs.  It can also get interesting if you regularly log in from several different machines.  A USB stick can be used to hold the key.</li>
+
+    <li>Implement door-knocking.  If your version of iptables has all the extensions, you could try something like <a href="http://www.soloport.com/iptables.html">this</a>.  Truly an elegant solution but requires a small amount of monitoring/maintaining.  Some have argued about the viability of door-knocking schemes and dismissed them as weak security through obscurity.  I use several forms of door-knocking for various things.</li>
+	<li>Use pam_tally.  See <a href="http://fedoranews.org/contributors/sonny_nguyen/pam/">pam_tally instructions</a>.  It basically locks accounts with too many failed passwords.  I have no idea if this will work with your ssh, it is designed for pam databases.  Also consider the huge risk of denial-of-service with something like this.  It will also do nothing to keep 1000 lines of "guest" attempts out of your logs.</li>
+</ul>
+
+
+<a href="http://www.pettingers.org/cgi-bin/varied.cgi" style="display: none;">mail</a>
+<br />
+
+
+
+</div>
+</div>
+
+<div id="ftr" align="center">Copyright 2006 Pettingers.org 
+</div>
+
+<!-- left column -->
+<div id="lh-col"><br />
+<h4 align="center">Vectors at</h4>
+<p align="center"><font size="-1" face="Courier New, Courier, mono"><strong>pettingers.org</strong></font></p>
+<br />
+
+<div class="menulf">
+<ul>
+  <li><a href="/index.html" title="pettingers.org Home Page">Home</a></li>
+  <li><a href="/code/code.html" title="Geeky stuff at www.pettingers.org">Geek Stuff <font size="-2">(CODE)</font></a></li>
+  <li><a href="/contact.html" title="Contact information for www.pettingers.org">Contact</a></li>
+</ul>
+  <br />
+<ul>
+  <li><a href="/code/sshblack.html" title="sshblack homepage">SSHBLACK <font size="-2">page</font></a></li>
+  <li><a href="/code/sshblack.html#download" title="download sshblack">SSHBLACK <font size="-2">Download</font></a></li>
+  <li><a href="/code/sshblack-config.html" title="sshblack configuration">SSHBLACK <font size="-2">Configuration</font></a></li>
+  <li><a href="/code/sshblack-notes.html" title="sshblack notes and other options">SSHBLACK <font size="-2">Notes</font></a></li>  
+  <li><a href="/code/sshblack-whitelist.html" title="Using the Whitelist in sshblack">SSHBLACK <font size="-2">Whitelist</font></a></li>
+</ul>
+</div> <!-- end of menulf -->
+
+
+</div>
+<!-- end of left column -->
+
+
+
+
+</body>
+</html>
+
