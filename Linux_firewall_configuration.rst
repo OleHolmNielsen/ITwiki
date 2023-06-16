@@ -7,7 +7,7 @@ Linux firewall and SSH protection configuration
 .. Contents:: Contents of this page:
    :depth: 2
 
-The Linux kernel's built-in firewall function (netfilter_ packet filtering framework) is administered by the iptables_ Linux command.
+The Linux kernel's built-in firewall function (netfilter_ packet filtering framework) is administered by the Linux firewalld_.
 
 .. _iptables: http://en.wikipedia.org/wiki/Iptables
 .. _netfilter: https://en.wikipedia.org/wiki/Netfilter
@@ -19,26 +19,24 @@ General information about the concept of a firewall_.
 The documentation on this page includes:
 
 * IP_sets_ for handling large numbers of subnets.
-  This is useful for special treatment of entire countries or large ISPs, for example, by iptables_.
-* SSH brute force attacks handled by iptables_.
-* SSH failed logins causing blacklisting using sshblack_ and iptables_.
+  This is useful for special treatment of entire countries or large ISPs, for example, by firewalld_.
+* SSH brute force attacks handled by firewalld_.
+* SSH failed logins causing blacklisting using sshblack_ and firewalld_.
 
 RHEL7/CentOS7 and Fedora firewalld
 ==================================
 
 A nice introduction is `RHEL7: How to get started with Firewalld <https://www.certdepot.net/rhel7-get-started-firewalld/>`_.
 
-The default firewall service is now firewalld_, which is a front-end service on top of the iptables_ service.
+The default firewall service is now firewalld_.
 The dynamic firewall daemon firewalld_ provides a dynamically managed firewall with support for network “zones” to assign a level of trust to a network and its associated connections and interfaces. 
 See `Introduction to firewalld <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html>`_.
 
 .. _firewalld: https://fedoraproject.org/wiki/FirewallD
 
-A graphical configuration tool::
+A graphical configuration tool is used to configure firewalld_::
 
   firewall-config
-
-is used to configure firewalld_, which in turn uses iptables_ tool to communicate with netfilter_ in the kernel which implements packet filtering. 
 
 A command line (CLI) configuration tool::
 
@@ -449,11 +447,11 @@ Now add the service and create the private sshblack_ directory::
 Configure a firewalld chain
 ................................
 
-Create a *SSHBLACK* iptables_ chain::
+Create a ``BLACKLIST`` chain rule::
 
   firewall-cmd --permanent --direct --add-chain ipv4 filter BLACKLIST
 
-Then make all new connections to port 22 (SSH) jump to the *BLACKLIST* chain::
+Then make all new connections to port 22 (SSH) jump to the ``BLACKLIST`` chain::
 
   firewall-cmd --direct --add-rule ipv4 filter INPUT_direct 7 -p tcp --dport 22 -m state --state NEW  -j BLACKLIST
 
@@ -470,7 +468,8 @@ The sshblack_ daemon must be started::
 
   systemctl start sshblack.service
 
-There are some useful sshblack_notes_ explaining some additional useful commands:
+There are some useful sshblack_notes_ explaining some additional useful commands
+(a local copy is here :download:`sshblack-notes.txt <attachments/sshblack-notes.txt>`):
 
 * list -- manually adds an IP address to the blacklist and modifies the $CACHE file accordingly
 * unlist -- manually remove an IP address from the blacklist and the $CACHE file
@@ -480,27 +479,29 @@ There are some useful sshblack_notes_ explaining some additional useful commands
 
 .. _sshblack_notes: http://www.pettingers.org/code/sshblack-notes.html
 
-If you want a list of blacklisted IP-addresses, display the BLACKLIST chain::
+If you want a list of blacklisted IP-addresses, display the ``BLACKLIST`` chain::
 
-  iptables -S BLACKLIST
+  /usr/bin/firewall-cmd --direct --get-all-rules | grep BLACKLIST
 
 Checkpoint and restart of sshblack
 ----------------------------------
 
-The ``sshblack.pl`` script doesn't have any checkpoint/restart feature, so preservation of *BLACKLIST* state across restarts must be done manually.
+The ``sshblack.pl`` script doesn't have any checkpoint/restart feature, so preservation of ``BLACKLIST`` state across restarts must be done manually.
 See the `Checkpoint and Restart discussion <https://www.suse.com/communities/conversations/further-securing-opensuse-111-against-ssh-script-attacks/#5>`_.
 
 The script :download:`sshblack-save-state <attachments/sshblack-save-state>` should be downloaded to ``/usr/local/sbin/``
 and a new crontab rule should be added to run it every 5 minutes::
 
-  # Save the iptables chain BLACKLIST DROP lines for restarting sshblack
+  # Save the firewalld chain BLACKLIST DROP lines for restarting sshblack
   */5 * * * * /usr/local/sbin/sshblack-save-state
 
-This will create a restart script ``/var/lib/sshblack/restart.sh`` which will be executed by the above init-script ``init-sshblack`` at system boot time.
+This script will create a restart script ``/var/lib/sshblack/restart.sh`` which should also be executed at system boot time using a crontab rule::
 
-This command prints iptables_ commands to recreate the BLACKLIST from the *sshblack* CACHE in case it is lost by a restart of iptables_::
+  @reboot /var/lib/sshblack/restart.sh
 
-  awk -F, '{if ($3 > 4) printf("/sbin/iptables -I BLACKLIST -s %s -j DROP\n", $1)}' < /var/lib/sshblack/ssh-blacklist-pending
+This command prints commands to recreate the ``BLACKLIST`` from the ``BLACKLIST`` CACHE in case it is lost::
+
+  awk -F, '{if ($3 > 4) printf("firewall-cmd --direct --add-rule ipv4 filter BLACKLIST 0 -s %s -j DROP\n", $1)}' < /var/lib/sshblack/ssh-blacklist-pending
 
 Firewall and NFS
 ================
@@ -508,14 +509,7 @@ Firewall and NFS
 Open up the NFS client's firewall to *all* traffic from the specific NFS-server(s).
 In general this is accomplished by this command::
 
-  iptables -A <rule-name> -s <NFS-server-hostname> -j ACCEPT
-
-This may be accomplished permanently by adding this line by manually appending this rule to ``/etc/sysconfig/iptables``::
-
-  ...
-  -A RH-Firewall-1-INPUT -s <NFS-server-IP> -j ACCEPT    # RHEL 5
-  -A INPUT -s <NFS-server-IP> -j ACCEPT                  # RHEL 6
-
+  firewall-cmd --direct --add-rule ipv4 filter INPUT_direct 0 -s <NFS-server-hostname> -j ACCEPT
 
 Summary of RHEL7/CentOS7 and Fedora firewalld settings
 ======================================================
