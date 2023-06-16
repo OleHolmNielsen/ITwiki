@@ -469,7 +469,7 @@ The sshblack_ daemon must be started::
   systemctl start sshblack.service
 
 There are some useful sshblack_notes_ explaining some additional useful commands
-(a local copy is here :download:`sshblack-notes.html <attachments/sshblack-notes.html`):
+(a local copy is here :download:`sshblack-notes.html <attachments/sshblack-notes.html>`):
 
 * list -- manually adds an IP address to the blacklist and modifies the $CACHE file accordingly
 * unlist -- manually remove an IP address from the blacklist and the $CACHE file
