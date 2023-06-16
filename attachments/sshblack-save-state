@@ -6,6 +6,8 @@
 
 CHAIN=BLACKLIST
 SSHBLACK_HOME=/var/lib/sshblack
+RESTART=$SSHBLACK_HOME/restart.sh
+
 if test ! -d $SSHBLACK_HOME
 then
 	echo Creating SSHBLACK_HOME directory $SSHBLACK_HOME
@@ -14,5 +16,20 @@ fi
 
 # Get the BLACKLIST DROP lines and create iptables commands.
 # Use sort and uniq to avoid duplicates.
-/sbin/iptables -S $CHAIN | grep DROP | sort -k 4 -n | uniq | sed 's/^/iptables /' > $SSHBLACK_HOME/restart.sh
-chmod 755 $SSHBLACK_HOME/restart.sh
+# /sbin/iptables -S $CHAIN | grep DROP | sort -k 4 -n | uniq | sed 's/^/iptables -w /' > $SSHBLACK_HOME/restart.sh.NEW
+# Using firewall-cmd: /usr/bin/firewall-cmd --direct --add-rule ipv4 filter BLACKLIST 0 -s <ip> -j DROP
+echo "#!/bin/bash" > $SSHBLACK_HOME/restart.sh.NEW
+chmod 755 $SSHBLACK_HOME/restart.sh.NEW
+/usr/bin/firewall-cmd --direct --get-all-rules | grep DROP | sort -k 4 -n | uniq | sed 's/^/firewall-cmd --direct --add-rule /' >> $SSHBLACK_HOME/restart.sh.NEW
+
+# Replace restart.sh only if the new file is non-empty
+if test -s $SSHBLACK_HOME/restart.sh.NEW
+then
+	if test -s $SSHBLACK_HOME/restart.sh
+	then
+		# Make a backup of the old $RESTART file
+		rm -f $RESTART.BAK
+		mv $RESTART $RESTART.BAK
+	fi
+	mv $RESTART.NEW $RESTART
+fi
