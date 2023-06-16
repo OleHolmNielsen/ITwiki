@@ -47,6 +47,21 @@ so that you can install Perl modules like this playbook example::
 .. _CPAN: https://www.cpan.org/
 .. _Ansible: https://www.ansible.com/
 
+MariaDB 10.5 on EL9
+-----------------------
+
+The EL9 MariaDB_ database is version 10.5.
+See the 10.5 release notes at https://mariadb.com/kb/en/changes-and-improvements-in-mariadb-10-5/
+Note this new driver::
+
+  Switch Perl DBI scripts from DBD::mysql to DBD::MariaDB driver (MDEV-19755) 
+
+Install the new driver by::
+
+  cpanm DBD::MariaDB
+
+.. _MariaDB: https://mariadb.org/
+
 Installation on CentOS/RHEL 7
 ===============================
 
@@ -188,8 +203,6 @@ Start the MariaDB_ service::
   systemctl start mariadb
   systemctl enable mariadb
   systemctl status mariadb
-
-.. _MariaDB: https://mariadb.org/
 
 Secure the database (root password etc.) by running::
 
