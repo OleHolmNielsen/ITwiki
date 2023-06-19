@@ -43,6 +43,10 @@ so that you can install Perl modules like this playbook example::
     community.general.cpanm:
       name: RRD::Simple
 
+The attached Ansible_ task file :download:`main.yml <attachments/nedi-ansible-role.yml>` 
+may be used to set up your own playbook for installing NeDi_ with Ansible_.
+
+
 .. _EPEL: https://docs.fedoraproject.org/en-US/epel/
 .. _CPAN: https://www.cpan.org/
 .. _Ansible: https://www.ansible.com/
