@@ -1,0 +1,299 @@
+# This task installs the NeDi software.
+# Prerequisites:
+# * The EPEL package repo.
+# * ansible-galaxy collection on the server:
+#   $ ansible-galaxy collection install community.general
+
+- name: Install NeDi prerequisite packages
+  package:
+    name:
+    - gcc
+    - httpd
+    - mod_ssl
+    - php
+    - php-mysqlnd
+    - mariadb-server
+    - mariadb-devel
+    - php-snmp
+    - php-gd
+    - php-process
+    - patch
+    - net-snmp
+    - net-snmp-utils
+    - rrdtool
+    - rrdtool-perl
+    - tcpdump
+    - perl-Algorithm-Diff
+    - perl-Net-Telnet
+    - perl-Net-DNS
+    - perl-Socket6
+    - perl-Test-Exception
+    - perl-DBD-MySQL
+    - perl-Module-Build
+    - perl-Net-SNMP
+    - perl-CPAN
+    - perl-App-cpanminus
+
+# See https://docs.ansible.com/ansible/latest/collections/community/general/cpanm_module.html
+
+- name: Install RRD::Simple module
+  community.general.cpanm:
+    name: RRD::Simple
+
+- name: Install Time::HiRes::Value module
+  community.general.cpanm:
+    name: Time::HiRes::Value
+
+- name: Install perl-IO-Pty-Easy package
+  community.general.cpanm:
+    name: IO::Pty::Easy
+
+# See https://docs.ansible.com/ansible/latest/collections/ansible/posix/patch_module.html
+- name: Apply patch to /usr/share/perl5/vendor_perl/Net/SNMP/Message.pm file
+  ansible.posix.patch:
+    src: Message.pm.diff
+    dest: /usr/share/perl5/vendor_perl/Net/SNMP/Message.pm
+    backup: true
+
+- name: "Add the nedi user"
+  user:
+    name: nedi
+    comment: "NeDi user"
+    uid: 1000
+    group: apache
+    umask: 0002
+    home: "{{ nedi_dir }}"
+    shell: /bin/bash
+    generate_ssh_key: false
+
+# NOTE: Use only RSA SSH keys because switches do not like newer key types
+- name: "Copy NeDi public SSH key files"
+  copy:
+    dest: "{{ nedi_dir }}/.ssh/"
+    src: "{{ item }}"
+    owner: nedi
+    group: apache
+    # Selinux context: user:role:type:level
+    seuser: unconfined_u
+    serole: object_r
+    setype: ssh_home_t
+    selevel: s0
+  with_items:
+    - id_rsa.pub
+
+- name: "Copy NeDi user's private SSH key files"
+  copy:
+    dest: "{{ nedi_dir }}/.ssh/"
+    src: "{{ item }}"
+    owner: nedi
+    group: apache
+    mode: 0600
+    seuser: unconfined_u
+    serole: object_r
+    setype: ssh_home_t
+    selevel: s0
+  with_items:
+    - known_hosts
+    - id_rsa
+
+# Extract NeDi /var/nedi backup tar-ball 
+# Make sure the .ssh/  and other .??* folders are EXCLUDED by this command:
+# cd /var/nedi; tar czf /root/nedi-backup.tar.gz *
+
+- name: "Extract NeDi /var/nedi backup tar-ball nedi-backup.tar.gz into {{ nedi_dir }}"
+  unarchive:
+    src: nedi-backup.tar.gz
+    dest: "{{ nedi_dir }}"
+    creates: "{{ nedi_dir }}/html/Devices-List.php"
+    owner: nedi
+    group: apache
+    # Selinux context: user:role:type:level
+    seuser: unconfined_u
+    serole: object_r
+    setype: httpd_sys_content_t
+    selevel: s0
+
+#
+# Possibility to install the NeDi distribution tar-ball + patches:
+#
+# Extract patch tar-ball if html/Devices-List.php doesn't exist yet
+# Do not overwrite existing files
+#- name: "Extract patch nedi-2.3p1.tgz into {{ nedi_dir }}"
+#  unarchive:
+#    src: nedi-2.3p1.tgz
+#    dest: "{{ nedi_dir }}"
+#    keep_newer: yes
+#    creates: "{{ nedi_dir }}/html/Devices-List.php"
+#    owner: nedi
+#    group: apache
+
+# Extract tar-ball if nedi.pl doesn't exist yet
+# Do not overwrite existing files
+#- name: "Extract nedi-2.3.003.tgz into {{ nedi_dir }}"
+#  unarchive:
+#    src: nedi-2.3.003.tgz
+#    dest: "{{ nedi_dir }}"
+#    keep_newer: yes
+#    creates: "{{ nedi_dir }}/nedi.pl"
+#    owner: nedi
+#    group: apache
+
+- name: "Create directory {{ nedi_dir }}/log"
+  file:
+    dest: "{{ nedi_dir }}/log"
+    state: directory
+    owner: nedi
+    group: apache
+
+- name: "Copy NeDi configuration files"
+  copy:
+    dest: "{{ nedi_dir }}"
+    src: "{{ item }}"
+    owner: nedi
+    group: apache
+  with_items:
+    - nedi.conf
+    - seedlist
+
+# Do NOT touch the top-level directory nor the .ssh directory for security reasons
+- name: "Change permissions of {{ nedi_dir }}/* files"
+  shell: "chmod -R g+w {{ nedi_dir }}/*"
+  changed_when: False
+
+- name: "Remove group permissions to top-level {{ nedi_dir }} directory for security reasons"
+  command: "chmod g=rx {{ nedi_dir }}"
+  changed_when: False
+
+- name: "Configure SELinux to permit read-write access for Apache in {{ nedi_dir }}"
+  command: "chcon -R -t httpd_sys_rw_content_t {{ nedi_dir }}/html/map {{ nedi_dir }}/sysobj/"
+  changed_when: False
+
+- name: "Set SELinux security context for the nedi user’s home directory"
+  seboolean:
+    name: httpd_enable_homedirs
+    state: yes
+    persistent: yes
+
+- name: "Create link /etc/nedi.conf"
+  file:
+    path: /etc/nedi.conf
+    src: "{{ nedi_dir }}/nedi.conf"
+    state: link
+
+- name: "Rename the original directory /var/www/html one time only"
+  command: mv /var/www/html /var/www/html.orig
+  args:
+    removes: /var/www/html
+    creates: /var/www/html.orig
+
+- name: "Create link to /var/nedi/html/ from /var/www/html"
+  file:
+    path: /var/www/html
+    src: /var/nedi/html
+    state: link
+
+- name: "Configure /etc/php.ini short_open_tag=On"
+  lineinfile:
+    path: /etc/php.ini
+    regexp: '^short_open_tag ='
+    line: 'short_open_tag = On'
+    backup: yes
+
+- name: "Configure /etc/php.ini expose_php=Off"
+  lineinfile:
+    path: /etc/php.ini
+    regexp: '^expose_php ='
+    line: 'expose_php = Off'
+    backup: yes
+
+- name: "Set SELinux mode to permissive"
+  selinux:
+    policy: targeted
+    state: permissive
+
+- name: "Install MariaDB EL8/EL9 database RPMs"
+  package:
+    name: 
+    - mariadb-server
+    - mariadb-devel
+    state: present
+
+- name: "Install MySQL-python on CentOS7/RHEL7"
+  yum:
+    name: 
+    - MySQL-python
+    state: present
+  when: ansible_facts['distribution_major_version'] == "7"
+
+# In RHEL8 the MySQL-python was renamed as python3-mysql
+- name: Install python3-mysql on CentOS8/RHEL8
+  dnf:
+    name:
+    - python3-mysql
+    state: present
+  when: ansible_facts['distribution_major_version'] == "8"
+
+# In RHEL9 the MySQL-python was renamed as python3-mysql
+- name: "Install python3-PyMySQL on EL9"
+  dnf:
+    name:
+    - python3-PyMySQL
+    state: present
+  when: ansible_facts['distribution_major_version'] == "9"
+
+- name: "Start MariaDB database service"
+  systemd:
+    state: started
+    enabled: yes
+    name: mariadb
+
+# NOTE: Initial action to secure the database (root password etc.) by running:
+# /usr/bin/mysql_secure_installation
+
+- name: "Create database backup script mysqlbackup wirh logrotate"
+  copy:
+    src: logrotate.mysqlbackup
+    dest: /etc/logrotate.d/mysqlbackup
+    owner: root
+    group: root
+    mode: 0600
+
+# Note: you must define "mysql_root_password" in /etc/ansible/hosts
+- name: "Replace DATABASEPASSWORD in /etc/logrotate.d/mysqlbackup"
+  replace:
+    path: /etc/logrotate.d/mysqlbackup
+    regexp: 'DATABASEPASSWORD'
+    replace: '{{ mysql_root_password }}'
+
+- name: "Copy Apache config file 03nedi.conf"
+  copy:
+    src: "03nedi.conf"
+    dest: /etc/httpd/conf.d/
+    owner: root
+    group: root
+    mode: 0644
+    # Selinux context: user:role:type:level
+    seuser: unconfined_u
+    serole: object_r
+    setype: httpd_config_t
+    selevel: s0
+
+- name: "Copy Systemd service files"
+  copy:
+    src: "{{ item }}"
+    dest: /etc/systemd/system
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  with_items:
+    - nedi-monitor.service
+    - nedi-syslog.service
+
+- name: "Start Systemd services"
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - nedi-monitor.service
+    - nedi-syslog.service
