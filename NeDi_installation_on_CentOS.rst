@@ -18,7 +18,7 @@ See also the general NeDi_installation_ page.
 .. _NeDi: https://www.nedi.ch/
 .. _NeDi_customer: https://www.nedi.ch/services/customer-area/index.html
 
-Installation on EL8 and EL9
+NeDi installation on EL8 
 ===============================
 
 Enable the EPEL_ repository, see the EPEL_ instructions.
@@ -46,13 +46,20 @@ so that you can install Perl modules like this playbook example::
 The attached Ansible_ task file :download:`main.yml <attachments/nedi-ansible-role.yml>` 
 may be used to set up your own playbook for installing NeDi_ with Ansible_.
 
-
+.. _MariaDB: https://mariadb.org/
 .. _EPEL: https://docs.fedoraproject.org/en-US/epel/
 .. _CPAN: https://www.cpan.org/
 .. _Ansible: https://www.ansible.com/
 
-MariaDB 10.5 on EL9
------------------------
+If you restore a database dump onto a different server running a **newer MySQL or MariaDB version** you **must** read the
+section ``Upgrade of MySQL/MariaDB`` below!
+
+NeDi installation on EL9 
+===============================
+
+**WARNING:** At the time of writing (June 2023) NeDi version 2.3 does not yet support the MariaDB version 10.5,
+which is part of EL9 (RHEL 9 and clones).
+You have to use EL8 with MariaDB 10.3 in stead.
 
 The EL9 MariaDB_ database is version 10.5.
 See the 10.5 release notes at https://mariadb.com/kb/en/changes-and-improvements-in-mariadb-10-5/
@@ -64,10 +71,8 @@ Install the new driver by::
 
   cpanm DBD::MariaDB
 
-.. _MariaDB: https://mariadb.org/
-
-Installation on CentOS/RHEL 7
-===============================
+NeDi Installation on CentOS/RHEL 7
+======================================
 
 Enable the EPEL_ repository, see the EPEL_ instructions.
 Install prerequisite packages::
@@ -91,7 +96,7 @@ Some packages must be installed manually as CPAN_ modules::
 .. _Class-DBI-Pg: https://search.cpan.org/~dmaki/Class-DBI-Pg-0.09/lib/Class/DBI/Pg.pm
 
 Patching the Perl NET::SNMP module Message.pm
----------------------------------------------
+====================================================
 
 NeDi_ the perl-Net-SNMP_ library (*Net::SNMP*, not to be confused with the Net-SNMP_ package), which hasn't been updated since 2010.
 There is a problem with the *Message.pm* module which may lead to many fake events in NeDi_
@@ -111,7 +116,7 @@ Patch the ``/usr/share/perl5/vendor_perl/Net/SNMP/Message.pm`` file (as root)::
 .. _Net-SNMP: https://net-snmp.sourceforge.net/
 
 Install NeDi
--------------------------------
+====================
 
 Create a ``nedi`` user in group ``apache`` with home directory ``/var/nedi``::
 
@@ -197,9 +202,9 @@ and then configure SELinux_ to permit read-write access for Apache::
   chcon -R -t httpd_sys_rw_content_t /var/nedi/sysobj/
 
 NeDi database services
--------------------------------
+==============================
 
-Mariadb database service (CentOS 7)
+Mariadb database service
 -----------------------------------
 
 Start the MariaDB_ service::
@@ -216,7 +221,8 @@ Initialize NeDi database
 ------------------------
 
 See the NeDi_installation_ page about database initialization.
-To get a **completely blank** Nedi_ database do::
+If this is an **initial installation** of NeDi_,
+initialize a **completely blank** Nedi_ database by::
 
   cd /var/nedi/
   ./nedi.pl -i
@@ -259,10 +265,13 @@ Add the Systemd_ services::
   systemctl status nedi-monitor.service
   systemctl status nedi-syslog.service
 
+Documentation is in the systemd.service_ manual page.
+
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
+.. _systemd.service: https://www.man7.org/linux/man-pages/man5/systemd.service.5.html
 
 Apache web service
--------------------------------
+=======================
 
 We will use the Apache_ web server provided by the *httpd* RPM package.
 
@@ -339,23 +348,20 @@ In fact, one may generate an appropriate Apache_ SSL configuration including SSL
 
 .. _SSLCipherSuite: https://httpd.apache.org/docs/2.2/mod/mod_ssl.html#sslciphersuite
 
-Apache on CentOS/RHEL 7
------------------------
-
-There seems to be a bug in the *httpd* package file ``/etc/httpd/conf.modules.d/00-lua.conf`` giving a syslog error message::
+There seems to be a bug in the CentOS/RHEL 7 *httpd* package file ``/etc/httpd/conf.modules.d/00-lua.conf`` giving a syslog error message::
 
   httpd: Syntax error on line 56 of /etc/httpd/conf/httpd.conf: Syntax error on line 1 of /etc/httpd/conf.modules.d/00-lua.conf: Cannot load modules/mod_lua.so into server: /etc/httpd/modules/mod_lua.so: undefined symbol: apr_bcrypt_encode
 
-Comment out (insert #) the line 1 in ``/etc/httpd/conf.modules.d/00-lua.conf``.
+On EL7 comment out (insert #) the line 1 in ``/etc/httpd/conf.modules.d/00-lua.conf``.
 
-When the configuration test is OK, start the *httpd* service::
+Start the web service
+-----------------------
+
+When the Apache configuration test is OK, start the *httpd* service::
 
   systemctl enable httpd
   systemctl start httpd
   systemctl status httpd
-
-Firewall rules for web services (CentOS7)
------------------------------------------
 
 A nice introduction is `RHEL7: How to get started with Firewalld <https://www.certdepot.net/rhel7-get-started-firewalld/>`_.
 
@@ -367,8 +373,8 @@ Configure firewalld_ rules for HTTP/HTTPS (ports 80,443) by adding::
 
 .. _firewalld: https://fedoraproject.org/wiki/FirewallD
 
-Crontab jobs
--------------------------------
+NeDi Crontab jobs
+=========================
 
 For automatic device discovery use *cron* jobs.
 Add some *crontab* commands for user *nedi* using the command::
@@ -381,7 +387,7 @@ to add these hourly jobs::
   0 1-23 * * * /var/nedi/nedi.pl -p > /var/nedi/log/nedi.lastrun 2>&1
 
 Upgrading NeDi software
--------------------------------
+============================
 
 From time to time a new version of NeDi_ may become available (see *Installation* above for downloads),
 and you may want to install the update.
@@ -520,6 +526,10 @@ If you for some reason need to drop the existing MySQL_ database, the NeDi_ comm
 
 Upgrade of MySQL/MariaDB
 ------------------------
+
+NOTE: At the time of writing (June 2023) NeDi version 2.3 does not yet support the MariaDB version 10.5,
+which is part of EL9 (RHEL 9 and clones).
+You have to use EL8 with MariaDB 10.3.
 
 If you restore a database dump onto a different server running a **newer MySQL or MariaDB version**
 there are some extra steps:
