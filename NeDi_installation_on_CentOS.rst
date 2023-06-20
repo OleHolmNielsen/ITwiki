@@ -54,23 +54,6 @@ may be used to set up your own playbook for installing NeDi_ with Ansible_.
 If you restore a database dump onto a different server running a **newer MySQL or MariaDB version** you **must** read the
 section ``Upgrade of MySQL/MariaDB`` below!
 
-NeDi installation on EL9 
-===============================
-
-**WARNING:** At the time of writing (June 2023) NeDi version 2.3 does not yet support the MariaDB version 10.5,
-which is part of EL9 (RHEL 9 and clones).
-You have to use EL8 with MariaDB 10.3 in stead.
-
-The EL9 MariaDB_ database is version 10.5.
-See the 10.5 release notes at https://mariadb.com/kb/en/changes-and-improvements-in-mariadb-10-5/
-Note this new driver::
-
-  Switch Perl DBI scripts from DBD::mysql to DBD::MariaDB driver (MDEV-19755) 
-
-Install the new driver by::
-
-  cpanm DBD::MariaDB
-
 NeDi Installation on CentOS/RHEL 7
 ======================================
 
@@ -94,6 +77,23 @@ Some packages must be installed manually as CPAN_ modules::
 .. _RRD-Simple: https://search.cpan.org/~nicolaw/RRD-Simple-1.44/lib/RRD/Simple.pm
 .. _Time-HiRes-Value: https://metacpan.org/pod/Time::HiRes::Value
 .. _Class-DBI-Pg: https://search.cpan.org/~dmaki/Class-DBI-Pg-0.09/lib/Class/DBI/Pg.pm
+
+NeDi installation on EL9 
+===============================
+
+**WARNING:** At the time of writing (June 2023) NeDi version 2.3 does not yet support the MariaDB version 10.5,
+which is part of EL9 (RHEL 9 and clones).
+You have to use EL8 with MariaDB 10.3 in stead.
+
+The EL9 MariaDB_ database is version 10.5.
+See the 10.5 release notes at https://mariadb.com/kb/en/changes-and-improvements-in-mariadb-10-5/
+Note this new driver::
+
+  Switch Perl DBI scripts from DBD::mysql to DBD::MariaDB driver (MDEV-19755) 
+
+Install the new driver by::
+
+  cpanm DBD::MariaDB
 
 Patching the Perl NET::SNMP module Message.pm
 ====================================================
@@ -243,21 +243,16 @@ NeDi syslog and moni daemons
 
 NeDi_ requires two running daemon processes:
 
-* *syslog.pl* syslog daemon which stores events directly in DB.
-* *moni.pl* monitoring daemon for polling uptime and checking connectivity of services.
+* ``syslog.pl`` syslog daemon which stores events directly in the database.
+* ``moni.pl`` monitoring daemon for polling uptime and checking connectivity of services.
 
 First download the service scripts from here:
 
-* :download:`nedi-monitor <attachments/nedi-monitor>`
-* :download:`nedi-syslog <attachments/nedi-syslog>`
 * :download:`nedi-monitor.service <attachments/nedi-monitor.service>`
 * :download:`nedi-syslog.service <attachments/nedi-syslog.service>`
 
 Add the Systemd_ services::
 
-  chmod 755 nedi-monitor nedi-syslog 
-  cp nedi-monitor nedi-syslog /usr/libexec/
-  cp nedi-monitor.service nedi-syslog.service /etc/systemd/system/
   systemctl enable nedi-monitor.service
   systemctl enable nedi-syslog.service
   systemctl start nedi-monitor.service
@@ -265,6 +260,15 @@ Add the Systemd_ services::
   systemctl status nedi-monitor.service
   systemctl status nedi-syslog.service
 
+On **EL7 systems** you must first install these scripts:
+
+* :download:`nedi-monitor <attachments/nedi-monitor>`
+* :download:`nedi-syslog <attachments/nedi-syslog>`
+* Copy files::
+    chmod 755 nedi-monitor nedi-syslog 
+    cp nedi-monitor nedi-syslog /usr/libexec/
+    cp nedi-monitor.service nedi-syslog.service /etc/systemd/system/
+  
 Documentation is in the systemd.service_ manual page.
 
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
