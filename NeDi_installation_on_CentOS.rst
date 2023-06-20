@@ -265,6 +265,7 @@ On **EL7 systems** you must first install these scripts:
 * :download:`nedi-monitor <attachments/nedi-monitor>`
 * :download:`nedi-syslog <attachments/nedi-syslog>`
 * Copy files::
+
     chmod 755 nedi-monitor nedi-syslog 
     cp nedi-monitor nedi-syslog /usr/libexec/
     cp nedi-monitor.service nedi-syslog.service /etc/systemd/system/
