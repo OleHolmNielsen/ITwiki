@@ -5,11 +5,9 @@ Requires=mariadb.service NetworkManager.service
 After=mariadb.service NetworkManager.service 
 
 [Service]
-Type=oneshot
+Type=simple
 RemainAfterExit=yes
-ExecStart=/usr/libexec/nedi-monitor start
-ExecStop=/usr/libexec/nedi-monitor stop
-ExecReload=/usr/libexec/nedi-monitor reload
+ExecStart=/var/nedi/moni.pl
 
 [Install]
 WantedBy=basic.target
