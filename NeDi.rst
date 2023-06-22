@@ -52,10 +52,10 @@ Paying customers may download the latest version (currently 2.0) from the NeDi_c
 
 See also the general NeDi_installation_ page.
 
-NeDi installation and upgrading on CentOS and RHEL Linux
+NeDi installation and upgrading on RHEL Linux
 --------------------------------------------------------
 
-To keep this page more general, the installation as well as upgrading of NeDi_ on CentOS 6/7 and RHEL 6/7 Linux is documented in a separate page:
+To keep this page more general, the installation as well as upgrading of NeDi_ on RHEL EL8 and EL7 Linux is documented in a separate page:
 
 * :ref:`NeDi_installation_on_CentOS`.
 
@@ -597,18 +597,14 @@ Note: If your NeDi_ version is too old (<= 1.5.038) then you must add the argume
           if($opt{'N'} =~ /^arpwatch/){
                 &misc::ArpWatch(0);
 
-Status of arpwatch
+The arpwatch tool
 ------------------
 
-The arpwatch tool, while included in CentOS 7, CentOS 8 and Fedora, is no longer being maintained. 
-Check https://en.wikipedia.org/wiki/Arpwatch
+The arpwatch_ tool, while included in RHEL EL7, EL8 and Fedora, is no longer being maintained. 
 
-There is no *Systemd* script which will start arpwatch_ on multiple network interfaces.
+There is no Systemd_ script which will start arpwatch_ on **multiple** network interfaces.
 
-Using arpwatch on CentOS 6
---------------------------
-
-For a CentOS 6 Linux server to work with ARP_ caches, install the arpwatch_ package and its ``arpfetch`` script, as well as some tools in the arp-scan_ package::
+To work with ARP_ caches, install the arpwatch_ package and its ``arpfetch`` script, as well as some tools in the arp-scan_ package::
 
   yum install arpwatch arp-scan
   cp -p /usr/share/doc/arpwatch-*/arpfetch /usr/local/bin/
@@ -620,7 +616,15 @@ Now you can inquire any SNMP device (in particular your Router_) about its ARP_ 
 
   arpfetch <IP-address> public
 
-where *public* is just a default SNMP community name (you may be using a different community name).
+where ``public`` is just a default SNMP community name (you may be using a different community name).
+
+Now start the arpwatch_ service.
+
+Configure NeDi_ in ``nedi.conf`` to read the ARP_ cache data::
+
+ arpwatch        /var/lib/arpwatch/arp.dat*
+
+.. _Systemd: https://en.wikipedia.org/wiki/Systemd
 
 Updating ethercodes.dat Ethernet vendor codes
 .............................................
@@ -662,42 +666,6 @@ Each block represents a total of 2^12 (4,096) Ethernet MAC addresses.
 This file may be downloaded using the arp-scan_ tool ``get-iab`` (see ``man get-iab``).
 
 .. _IEEE_IAB: http://standards.ieee.org/regauth/oui/iab.txt
-
-The arpwatch daemon
-...................
-
-Note: This section is only valid on CentOS 6 / RHEL 6 systems.
-
-Configure the file ``/etc/sysconfig/arpwatch``, changing the default recipient *root* to *-* in order to suppress E-mails::
-
-  OPTIONS="-u arpwatch -e - -s 'root (Arpwatch)'"
-
-Start the arpwatch_ daemon (also at boot time)::
-
-  chkconfig arpwatch on
-  service arpwatch start
-
-ARP_ cache data will be collected in the files ``/var/lib/arpwatch/arp.dat*``,
-and those files will be refreshed every 15 minutes by the arpwatch_ daemon (previous files are renamed with a "-" extension).
-
-However, this only works if your server has a single default network interface, such as *eth0*.
-If you have multiple network interfaces, you must modify the arpwatch_ init-script as described in
-`arpwatch on multiple interfaces <http://sgros.blogspot.dk/2012/01/arpwatch-on-multiple-interfaces.html>`_.
-Every network interface to be monitored requires a separate instance of the arpwatch_ daemon.
-Download an improved `arpwatch init-script <http://www.zemris.fer.hr/~sgros/files/scripts/arpwatch>`_ to replace ``/etc/rc.d/init.d/arpwatch``.
-For convenience we have attached a copy of the arpwatch-init__ file.
-
-__ attachment: arpwatch-init
-
-Add a new *INTERFACES* variable to ``/etc/sysconfig/arpwatch``, for example::
-
-  INTERFACES="eth0 eth1" 
-
-Now start the arpwatch_ service as above.
-
-Configure NeDi_ in ``nedi.conf`` to read the ARP_ cache data::
-
- arpwatch        /var/lib/arpwatch/arp.dat*
 
 arpwatch bugs
 .............
