@@ -1,7 +1,8 @@
 .. _NeDi_installation_on_CentOS:
 
+======================================================
 NeDi installation and upgrading on EL and CentOS Linux
-=============================================================
+======================================================
 
 .. Contents::
 
@@ -19,7 +20,7 @@ See also the general NeDi_installation_ page.
 .. _NeDi_customer: https://www.nedi.ch/services/customer-area/index.html
 
 NeDi installation on EL8 
-===============================
+------------------------------
 
 Enable the EPEL_ repository, see the EPEL_ instructions.
 Install these packages::
@@ -55,7 +56,7 @@ If you restore a database dump onto a different server running a **newer MySQL o
 section ``Upgrade of MySQL/MariaDB`` below!
 
 NeDi Installation on CentOS/RHEL 7
-======================================
+--------------------------------------
 
 Enable the EPEL_ repository, see the EPEL_ instructions.
 Install prerequisite packages::
@@ -79,7 +80,7 @@ Some packages must be installed manually as CPAN_ modules::
 .. _Class-DBI-Pg: https://search.cpan.org/~dmaki/Class-DBI-Pg-0.09/lib/Class/DBI/Pg.pm
 
 NeDi installation on EL9 
-===============================
+------------------------------
 
 **WARNING:** At the time of writing (June 2023) NeDi version 2.3 does not yet support the MariaDB version 10.5,
 which is part of EL9 (RHEL 9 and clones).
@@ -96,7 +97,7 @@ Install the new driver by::
   cpanm DBD::MariaDB
 
 Patching the Perl NET::SNMP module Message.pm
-====================================================
+----------------------------------------------------
 
 NeDi_ the perl-Net-SNMP_ library (*Net::SNMP*, not to be confused with the Net-SNMP_ package), which hasn't been updated since 2010.
 There is a problem with the *Message.pm* module which may lead to many fake events in NeDi_
@@ -116,7 +117,7 @@ Patch the ``/usr/share/perl5/vendor_perl/Net/SNMP/Message.pm`` file (as root)::
 .. _Net-SNMP: https://net-snmp.sourceforge.net/
 
 Install NeDi
-====================
+--------------------
 
 Create a ``nedi`` user in group ``apache`` with home directory ``/var/nedi``::
 
@@ -202,7 +203,7 @@ and then configure SELinux_ to permit read-write access for Apache::
   chcon -R -t httpd_sys_rw_content_t /var/nedi/sysobj/
 
 NeDi database services
-==============================
+------------------------------
 
 Mariadb database service
 -----------------------------------
@@ -276,7 +277,7 @@ Documentation is in the systemd.service_ manual page.
 .. _systemd.service: https://www.man7.org/linux/man-pages/man5/systemd.service.5.html
 
 Apache web service
-=======================
+----------------------
 
 We will use the Apache_ web server provided by the *httpd* RPM package.
 
@@ -379,7 +380,7 @@ Configure firewalld_ rules for HTTP/HTTPS (ports 80,443) by adding::
 .. _firewalld: https://fedoraproject.org/wiki/FirewallD
 
 NeDi Crontab jobs
-=========================
+------------------------
 
 For automatic device discovery use *cron* jobs.
 Add some *crontab* commands for user *nedi* using the command::
@@ -392,7 +393,7 @@ to add these hourly jobs::
   0 1-23 * * * /var/nedi/nedi.pl -p > /var/nedi/log/nedi.lastrun 2>&1
 
 Upgrading NeDi software
-============================
+----------------------------
 
 From time to time a new version of NeDi_ may become available (see *Installation* above for downloads),
 and you may want to install the update.
