@@ -1,10 +1,4 @@
-# This task installs the NeDi software.
-# Prerequisites:
-# * The EPEL package repo.
-# * ansible-galaxy collection on the server:
-#   $ ansible-galaxy collection install community.general
-
-- name: Install NeDi prerequisite packages
+- name: "Install NeDi prerequisite packages"
   package:
     name:
     - gcc
@@ -12,6 +6,7 @@
     - mod_ssl
     - php
     - php-mysqlnd
+    - mariadb
     - mariadb-server
     - mariadb-devel
     - php-snmp
@@ -36,20 +31,20 @@
 
 # See https://docs.ansible.com/ansible/latest/collections/community/general/cpanm_module.html
 
-- name: Install RRD::Simple module
+- name: "Install RRD::Simple module"
   community.general.cpanm:
     name: RRD::Simple
 
-- name: Install Time::HiRes::Value module
+- name: "Install Time::HiRes::Value module"
   community.general.cpanm:
     name: Time::HiRes::Value
 
-- name: Install perl-IO-Pty-Easy package
+- name: "Install perl-IO-Pty-Easy package"
   community.general.cpanm:
     name: IO::Pty::Easy
 
 # See https://docs.ansible.com/ansible/latest/collections/ansible/posix/patch_module.html
-- name: Apply patch to /usr/share/perl5/vendor_perl/Net/SNMP/Message.pm file
+- name: "Apply patch to /usr/share/perl5/vendor_perl/Net/SNMP/Message.pm file"
   ansible.posix.patch:
     src: Message.pm.diff
     dest: /usr/share/perl5/vendor_perl/Net/SNMP/Message.pm
@@ -81,7 +76,7 @@
   with_items:
     - id_rsa.pub
 
-- name: "Copy NeDi user's private SSH key files"
+- name: "Copy NeDi private SSH key files"
   copy:
     dest: "{{ nedi_dir }}/.ssh/"
     src: "{{ item }}"
@@ -113,9 +108,6 @@
     setype: httpd_sys_content_t
     selevel: s0
 
-#
-# Possibility to install the NeDi distribution tar-ball + patches:
-#
 # Extract patch tar-ball if html/Devices-List.php doesn't exist yet
 # Do not overwrite existing files
 #- name: "Extract patch nedi-2.3p1.tgz into {{ nedi_dir }}"
@@ -211,7 +203,7 @@
     policy: targeted
     state: permissive
 
-- name: "Install MariaDB EL8/EL9 database RPMs"
+- name: "Install MariaDB database RPMs"
   package:
     name: 
     - mariadb-server
@@ -226,7 +218,7 @@
   when: ansible_facts['distribution_major_version'] == "7"
 
 # In RHEL8 the MySQL-python was renamed as python3-mysql
-- name: Install python3-mysql on CentOS8/RHEL8
+- name: "Install python3-mysql on CentOS8/RHEL8"
   dnf:
     name:
     - python3-mysql
@@ -250,6 +242,12 @@
 # NOTE: Initial action to secure the database (root password etc.) by running:
 # /usr/bin/mysql_secure_installation
 
+- name: "Install database backup prerequisite packages"
+  package:
+    name:
+    - bzip2
+    - lbzip2
+
 - name: "Create database backup script mysqlbackup wirh logrotate"
   copy:
     src: logrotate.mysqlbackup
@@ -258,7 +256,6 @@
     group: root
     mode: 0600
 
-# Note: you must define "mysql_root_password" in /etc/ansible/hosts
 - name: "Replace DATABASEPASSWORD in /etc/logrotate.d/mysqlbackup"
   replace:
     path: /etc/logrotate.d/mysqlbackup
@@ -297,3 +294,23 @@
   with_items:
     - nedi-monitor.service
     - nedi-syslog.service
+
+# Crontab changes suggested by Remo Rickli 26-Sep-2016:
+- name: "Run NeDi discovery (hourly)"
+  cron:
+    user: nedi
+    name: "NeDi discovery (hourly)"
+    hour: "1-23"
+    minute: "0"
+    job: "{{ nedi_dir }}/nedi.pl -v -pB2P1 > /var/nedi/log/nedi.lastrun 2>&1"
+  notify: Restart crond
+
+# Crontab should contain: /var/nedi/nedi.pl -v -pB2 -A 'login !=""' -SAFaom > /var/nedi/log/nedi-backup.lastrun 2>&1
+- name: "Run NeDi discovery (daily)"
+  cron:
+    user: nedi
+    name: "NeDi discovery (daily)"
+    hour: "0"
+    minute: "0"
+    job: "{{ nedi_dir }}/nedi.pl -v -pB2 -SAFaom > /var/nedi/log/nedi-backup.lastrun 2>&1"
+  notify: Restart crond
