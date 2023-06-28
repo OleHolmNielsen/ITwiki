@@ -1,8 +1,8 @@
 .. _NeDi_installation_on_CentOS:
 
-======================================================
-NeDi installation and upgrading on EL and CentOS Linux
-======================================================
+==========================================================
+NeDi installation and upgrading on RHEL EL8 and EL7 Linux
+==========================================================
 
 .. Contents::
 
@@ -11,7 +11,9 @@ Please see first the general information in the NeDi_.
 
 This page describes how to install NeDi_ on RHEL (and clones such as AlmaLinux, RockyLinux, and CentOS) Linux servers.
 
-On the dedicated server for NeDi_ the NeDi_ file ``nedi-XXX.tgz`` from the `NeDi download <https://www.nedi.ch/download/>`_ page.
+On the dedicated server for NeDi_ download the file ``nedi-XXX.tgz`` 
+(select the current version in stead of ``XXX``)
+from the `NeDi download <https://www.nedi.ch/download/>`_ page.
 Paying customers may download the latest version (currently 2.3) from the NeDi_customer_ page.
 
 See also the general NeDi_installation_ page.
