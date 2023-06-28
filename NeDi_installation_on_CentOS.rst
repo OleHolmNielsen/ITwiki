@@ -9,20 +9,23 @@ NeDi installation and upgrading on RHEL EL8 and EL7 Linux
 NeDi_ (*Network Discovery*) is an open source network monitoring tool.
 Please see first the general information in the NeDi_.
 
-This page describes how to install NeDi_ on RHEL (and clones such as AlmaLinux, RockyLinux, and CentOS) Linux servers.
+This page describes how to install NeDi_ on RHEL
+(and clones such as AlmaLinux, RockyLinux, and CentOS) Linux servers.
+See also the general NeDi_installation_ page.
 
 On the dedicated server for NeDi_ download the file ``nedi-XXX.tgz`` 
 (select the current version in stead of ``XXX``)
 from the `NeDi download <https://www.nedi.ch/download/>`_ page.
 Paying customers may download the latest version (currently 2.3) from the NeDi_customer_ page.
 
-See also the general NeDi_installation_ page.
-
 .. _NeDi: https://www.nedi.ch/
 .. _NeDi_customer: https://www.nedi.ch/services/customer-area/index.html
 
 NeDi installation on EL8 
 ------------------------------
+
+If you restore a database dump onto a different server running a **newer MySQL or MariaDB version** you **must** read the
+section ``Upgrade of MySQL/MariaDB`` below!
 
 Enable the EPEL_ repository, see the EPEL_ instructions.
 Install these packages::
@@ -36,7 +39,10 @@ Now you can install the required CPAN_ modules::
   cpanm RRD::Simple
   cpanm Time::HiRes::Value
 
-If you are using an Ansible_ server, install this ansible-galaxy collection on the server::
+Ansible installation
+...........................
+
+If you are using an Ansible_ server for installation, install this ansible-galaxy collection on the server::
 
   ansible-galaxy collection install community.general
 
@@ -53,9 +59,6 @@ may be used to set up your own playbook for installing NeDi_ with Ansible_.
 .. _EPEL: https://docs.fedoraproject.org/en-US/epel/
 .. _CPAN: https://www.cpan.org/
 .. _Ansible: https://www.ansible.com/
-
-If you restore a database dump onto a different server running a **newer MySQL or MariaDB version** you **must** read the
-section ``Upgrade of MySQL/MariaDB`` below!
 
 NeDi Installation on CentOS/RHEL 7
 --------------------------------------
