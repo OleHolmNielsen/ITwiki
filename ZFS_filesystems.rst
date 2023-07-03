@@ -306,6 +306,12 @@ You can access the files in a snapshot by mounting it, for example::
 The files will be visible in ``/mnt``.
 Remember to unmount ``/mnt`` afterwards.
 
+To destroy a snapshot::
+
+  zfs destroy [-Rdnprv] filesystem|volume@snap[%snap[,snap[%snap]]]
+
+see ``man zfs-destroy``.
+
 General snapshot advice:
 
 * Snapshot frequently and regularly.
