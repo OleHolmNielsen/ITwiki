@@ -248,7 +248,8 @@ The `docutils <http://docutils.sourceforge.net/>`_ Python package must be instal
 
 1. One way is to install an RPM from you distribution::
 
-     yum install python-docutils
+     yum install python-docutils     # EL7
+     dnf install python2-docutils    # EL8
 
 2. Another way is to install from source:
    Unpack the docutils source tar-ball and install::
