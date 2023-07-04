@@ -483,8 +483,8 @@ This is our Apache configuration file ``/etc/httpd/conf.d/wiki.conf`` for the Wi
      ServerName wiki.example.com
      DocumentRoot /var/www/wiki/
      # For MoinMoin version >= 1.9
-     # Static moin files for v.1.9.3, URL changes with Moin version:
-     Alias /moin_static193 "/usr/lib/python2.4/site-packages/MoinMoin/web/static/htdocs/"
+     # Static moin files for v.1.9.11, URL changes with Moin version:
+     Alias /moin_static1911 "/usr/lib/python2.4/site-packages/MoinMoin/web/static/htdocs/"
      # Required for /wiki/modern/css/*.css files:
      Alias /wiki/ "/usr/lib/python2.4/site-packages/MoinMoin/web/static/htdocs/"
      ScriptAlias /it "/var/www/wiki/cgi-bin/moin.cgi"
@@ -493,7 +493,7 @@ This is our Apache configuration file ``/etc/httpd/conf.d/wiki.conf`` for the Wi
      SSLCertificateKeyFile /etc/pki/tls/private/example.com.key
  </VirtualHost>
 
-Here ``moin_static193`` must be changed according the the Moin version being used !
+Here ``moin_static1911`` must be changed according the the Moin version being used !
 
 The **IP address** in the configuration file must be changed according to which server is used.
 Also, *SSL certificates* must be installed (beyond the scope of this page).
