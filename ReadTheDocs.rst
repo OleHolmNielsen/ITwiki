@@ -3,18 +3,19 @@ Migration of a Restructured Text and Sphinx based Wiki to ReadTheDocs
 =============================================================================
 
 If you have a ``Restructured Text`` (RST_) and Sphinx_ based Wiki you can migrate it to ReadTheDocs_ 
-For MoinMoin based Wikis see also the :ref:`Moin2Sphinx` page.
+For MoinMoin based Wikis see also the Moin2Sphinx_ page.
 
 .. _Sphinx: https://www.sphinx-doc.org/en/master/
 .. _RST: https://docutils.sourceforge.io/rst.html
 .. _ReadTheDocs: https://readthedocs.org/
+.. _Moin2Sphinx: https://github.com/OleHolmNielsen/Moin2Sphinx
 
 Prerequisites
 ---------------
 
 We assume that you already have your Wiki documentation files in a Git_ repository,
 and that these files are RST_ files set up to be formatted with Sphinx_.
-For an example see the :ref:`Moin2Sphinx` page.
+For an example see the Moin2Sphinx_ page.
 
 You should have or create a Sphinx_ Configuration_ file ``conf.py`` in the same folder as the RST_ files.
 
