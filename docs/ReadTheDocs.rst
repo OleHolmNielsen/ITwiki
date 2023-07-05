@@ -8,6 +8,9 @@ For ``MoinMoin`` based Wikis see also the Moin2Sphinx_ page.
 Please read the Example_projects_ page which describes **requirements** for your documentation project.
 You may choose the example-sphinx-basic_ setup.
 
+ReadTheDocs_ is a *Continuous Documentation Deployment* platform for your software project.
+Every time you change something in your documentation, ReadTheDocs_ will detect your change and build your documentation.
+
 .. _Sphinx: https://www.sphinx-doc.org/en/master/
 .. _RST: https://docutils.sourceforge.io/rst.html
 .. _ReadTheDocs: https://readthedocs.org/
@@ -33,7 +36,7 @@ You can move your Sphinx_ files (including ``conf.py``) into a ``docs`` folder w
   git commit
   git push
 
-For our desired **manual** import of a Git_ repository to ReadTheDocs_, a ``.readthedocs.yaml`` file 
+For our desired **Manual** import of a Git_ repository to ReadTheDocs_, a ``.readthedocs.yaml`` file 
 must be added to your Git_ ``docs`` folder.
 Download the .readthedocs.yaml_ file from the example-sphinx-basic_ page, for example::
 
@@ -104,3 +107,27 @@ click on the ``View docs`` link to go the documentation.
 
 Add Git integration
 ---------------------
+
+You should integrate ReadTheDocs_ with your Git_ project by defining as Webhook_
+where your Git_ project pushes a message to ReadTheDocs_ telling that updates exist.
+This causes ReadTheDocs_ to rebuild your documentation from the latest Git_ files.
+
+First create an Integration_ on ReadTheDocs_ in your project page by clicking ``Admin->Integrations``.
+Now click on ``Add Integration``.
+Select the appropriate ``Integration type``, for example, *GitHub incoming webhook*
+and click ``Add Integration``.
+Since we have chosen to ``Import Manually``,
+use the address given to manually configure this webhook, for example::
+
+  readthedocs.org/api/v2/webhook/xxxxxxx
+
+Copy the Webhook_ address.
+
+Next create a Webhook_ in your Git_ page.
+In GitHub_ this is in the project's ``Settings->Webhooks`` page.
+Click on ``Add Webhook`` (this may require your MFA authentication).
+In the ``Payload URL`` box paste the above Webhook_ address and click
+the green button ``Add webhook``.
+
+.. _Webhook: https://en.wikipedia.org/wiki/Webhook
+.. _Integration: https://docs.readthedocs.io/en/stable/integrations.html
