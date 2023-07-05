@@ -66,6 +66,41 @@ In stead, create your own personal login account.
 Import a repository
 --------------------------
 
-When you have logged in, you can ``Import a Project`` (your Git_ project documentation) from the Dashboard_.
+When you have logged in, you can click on ``Import a Project`` (your Git_ project documentation)
+from the Dashboard_ page.
+
+Now click the ``Import Manually`` button!
+
+In the *Project Details* page **select carefully a suitable name** for your project.
+**Note:** This name will become the DNS domain name of your documentation pages,
+for example, ``https://my-nice-documentation.readthedocs.io``.
+
+In the ``Repository URL`` field enter the URL of your Git_ project.
+It will be the same URL as you use to make a ``git clone`` command of your code,
+for example::
+
+  https://github.com/OleHolmNielsen/Niflheim_system.git
+
+If you wish to use a Git_ branch other than the default ``main``,
+enter the branch name in the ``Default branch`` box.
+
+Click ``Next`` which will take yo to the *Add a project configuration file* page.
+Note the instruction::
+
+  Make sure your project has a .readthedocs.yaml configuration file at the root directory of your repository. 
+
+Since we have already created a .readthedocs.yaml_ file, we can click the ``Finish`` button.
 
 .. _Dashboard: https://readthedocs.org/dashboard/
+
+Project overview
+-------------------
+
+On your project's overview page you can click the ``Build version`` button to generate the web pages.
+They will be published, for example, on the page ``https://my-nice-documentation.readthedocs.io``.
+
+When you get (hopefully) the ``Build completed`` message,
+click on the ``View docs`` link to go the documentation.
+
+Add Git integration
+---------------------
