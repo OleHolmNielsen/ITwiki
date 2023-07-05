@@ -25,10 +25,11 @@ For an example see the Moin2Sphinx_ page.
 You should have or create a Sphinx_ Configuration_ file ``conf.py`` in the same folder as the RST_ files.
 
 ReadTheDocs_ assumes that your documentation files all reside in your Git_ project sub-folder named ``docs``.
-You can move your files into a ``docs`` folder with this command::
+You can move your Sphinx_ files (including ``conf.py``) into a ``docs`` folder with these commands::
 
   mkdir docs
-  git mv files*.rst docs
+  git mv conf.py docs/
+  git mv <your-files>.rst docs/
   git commit
   git push
 
@@ -38,8 +39,11 @@ Download the .readthedocs.yaml_ file from the example-sphinx-basic_ page, for ex
 
   cd docs/
   wget https://raw.githubusercontent.com/readthedocs-examples/example-sphinx-basic/main/.readthedocs.yaml
+  git add .readthedocs.yaml
+  git commit .readthedocs.yaml
+  git push
 
-This file may be good as-is without any changes.
+This file may be good as-is without any modifications.
 
 .. _Git: https://en.wikipedia.org/wiki/Git
 .. _Configuration: https://www.sphinx-doc.org/en/master/usage/configuration.html
@@ -58,3 +62,10 @@ In stead, create your own personal login account.
 .. _GitHub: https://github.com/
 .. _GitLab: https://about.gitlab.com/
 .. _Bitbucket: https://bitbucket.org/product/guides/getting-started/overview#bitbucket-software-hosting-options
+
+Import a repository
+--------------------------
+
+When you have logged in, you can ``Import a Project`` (your Git_ project documentation) from the Dashboard_.
+
+.. _Dashboard: https://readthedocs.org/dashboard/
