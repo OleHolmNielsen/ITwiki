@@ -25,7 +25,7 @@ We assume that you already have your Wiki documentation files in a Git_ reposito
 and that these files are RST_ files set up to be formatted with Sphinx_.
 For an example see the Moin2Sphinx_ page.
 
-You should have or create a Sphinx_ Configuration_ file ``conf.py`` in the same folder as the RST_ files.
+You should have (or create) a Sphinx_ Configuration_ file ``conf.py`` in the same folder as the RST_ files.
 
 ReadTheDocs_ assumes that your documentation files all reside in your Git_ project sub-folder named ``docs``.
 You can move your Sphinx_ files (including ``conf.py``) into a ``docs`` folder with these commands::
@@ -38,7 +38,7 @@ You can move your Sphinx_ files (including ``conf.py``) into a ``docs`` folder w
 
 For our desired **Manual** import of a Git_ repository to ReadTheDocs_, a ``.readthedocs.yaml`` file 
 must be added to your Git_ ``docs`` folder.
-Download the .readthedocs.yaml_ file from the example-sphinx-basic_ page, for example::
+Download the readthedocs.yaml_ file from the example-sphinx-basic_ page, for example::
 
   cd docs/
   wget https://raw.githubusercontent.com/readthedocs-examples/example-sphinx-basic/main/.readthedocs.yaml
@@ -50,15 +50,15 @@ This file may be good as-is without any modifications.
 
 .. _Git: https://en.wikipedia.org/wiki/Git
 .. _Configuration: https://www.sphinx-doc.org/en/master/usage/configuration.html
-.. _.readthedocs.yaml: https://github.com/readthedocs-examples/example-sphinx-basic/blob/main/.readthedocs.yaml
+.. _readthedocs.yaml: https://github.com/readthedocs-examples/example-sphinx-basic/blob/main/.readthedocs.yaml
 
 Login to ReadTheDocs
 --------------------------
 
-Go to the ReadTheDocs_ page and login or sign up.
+Go to the ReadTheDocs_ page and login, or sign up if you are a new user.
 
 **WARNING:** Do **not** login with your GitHub_, GitLab_ or Bitbucket_ login!
-If you do so, ReadTheDocs_ will take full access to your Git_ repository!
+If you do so, ReadTheDocs_ will be granted **full access** to your entire Git_ repository!
 For security reasons you probably do not want to allow this access!
 In stead, create your own personal login account.
 
@@ -72,19 +72,19 @@ Import a repository
 When you have logged in, you can click on ``Import a Project`` (your Git_ project documentation)
 from the Dashboard_ page.
 
-Now click the ``Import Manually`` button!
+Now click the ``Import Manually`` button so that you do not divulge your Git_ login information!
 
 In the *Project Details* page **select carefully a suitable name** for your project.
 **Note:** This name will become the DNS domain name of your documentation pages,
-for example, ``https://my-nice-documentation.readthedocs.io``.
+for example, thje name ``My nice documentation`` will become ``https://my-nice-documentation.readthedocs.io``.
 
 In the ``Repository URL`` field enter the URL of your Git_ project.
-It will be the same URL as you use to make a ``git clone`` command of your code,
+It is the same URL which you use to make a ``git clone`` command of your code,
 for example::
 
   https://github.com/OleHolmNielsen/Niflheim_system.git
 
-If you wish to use a Git_ branch other than the default ``main``,
+If you wish to use a Git_ branch other than the default ``main`` branch,
 enter the branch name in the ``Default branch`` box.
 
 Click ``Next`` which will take yo to the *Add a project configuration file* page.
@@ -92,7 +92,7 @@ Note the instruction::
 
   Make sure your project has a .readthedocs.yaml configuration file at the root directory of your repository. 
 
-Since we have already created a .readthedocs.yaml_ file, we can click the ``Finish`` button.
+Since we have already created a readthedocs.yaml_ file, we can click the ``Finish`` button.
 
 .. _Dashboard: https://readthedocs.org/dashboard/
 
