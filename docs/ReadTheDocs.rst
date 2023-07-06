@@ -76,7 +76,7 @@ Now click the ``Import Manually`` button so that you do not divulge your Git_ lo
 
 In the *Project Details* page **select carefully a suitable name** for your project.
 **Note:** This name will become the DNS domain name of your documentation pages,
-for example, thje name ``My nice documentation`` will become ``https://my-nice-documentation.readthedocs.io``.
+for example, the name ``My nice documentation`` will become ``https://my-nice-documentation.readthedocs.io``.
 
 In the ``Repository URL`` field enter the URL of your Git_ project.
 It is the same URL which you use to make a ``git clone`` command of your code,
@@ -131,3 +131,8 @@ the green button ``Add webhook``.
 
 .. _Webhook: https://en.wikipedia.org/wiki/Webhook
 .. _Integration: https://docs.readthedocs.io/en/stable/integrations.html
+
+E-mail notifications
+---------------------------
+
+Configure E-mail notifications to be sent on build failures in the page ``Admin->Email notifications``.
