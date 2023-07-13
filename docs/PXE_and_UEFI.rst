@@ -1,15 +1,15 @@
 .. _PXE_and_UEFI:
 
-===============================
-Install CentOS via PXE and UEFI
-===============================
+==================================
+Install EL Linux via PXE and UEFI
+==================================
 
 .. Contents::
 
 Overview
 ========
 
-This *HowTo* guide documents how to install CentOS_ 7 and 8 using PXE_ on a client host booting by UEFI_.
+This *HowTo* guide documents how to install EL Linux using PXE_ on a client host booting by UEFI_.
 
 This page assumes that you already have a working DHCP_ and PXE_ boot server for installing client hosts using the Legacy_BIOS_boot_ method. 
 We will show how to support also UEFI_ booting with PXE_.
@@ -86,7 +86,7 @@ Here we have created a special directory for UEFI_ boot files on the TFTP server
 
   mkdir /var/lib/tftpboot/uefi
 
-We need to copy UEFI_ boot files from CentOS_ 7 or 8, and we need these RPMs::
+We need to copy UEFI_ boot files from EL Linux and we need these RPMs::
 
   yum install grub2-efi-x64 shim-x64
 
@@ -114,20 +114,24 @@ Then build your own boot file ``bootx64.efi`` by::
 
 The GRUB2_ modules are documented in https://www.linux.org/threads/understanding-the-various-grub-modules.11142/
 
-Copy CentOS Linux boot images
+Copy Linux boot images
 -----------------------------
 
-For each CentOS_ (and other OS) version you should copy Linux boot images to a separate directory on the TFTP server, for example::
+For each EL Linux (and other OS) version you should copy Linux boot images to a separate directory on the TFTP server,
+for example, for AlmaLinux 8.8::
 
-  mkdir /var/lib/tftpboot/CentOS-7.9.2009-x86_64/
+  mkdir /var/lib/tftpboot/AlmaLinux-8.8-x86_64/
 
-and download the PXE_ boot images::
+In this directory create the following ``Makefile``::
 
-  cd /var/lib/tftpboot/CentOS-7.9.2009-x86_64/
-  wget http://mirror.centos.org/centos-7/7.9.2009/os/x86_64/images/pxeboot/initrd.img
-  wget http://mirror.centos.org/centos-7/7.9.2009/os/x86_64/images/pxeboot/vmlinuz
+  ELVERSION=8.8
+  default:
+        @echo "NOTE: Images are from AlmaLinux/${ELVERSION}"
+        @wget --timestamping https://mirror.fysik.dtu.dk/linux/almalinux/${ELVERSION}/BaseOS/x86_64/os/images/pxeboot/initrd.img
+        @wget --timestamping https://mirror.fysik.dtu.dk/linux/almalinux/${ELVERSION}/BaseOS/x86_64/os/images/pxeboot/vmlinuz
 
-Other mirror sites may be used in stead of mirror.centos.org.
+and run a ``make`` command to download the boot image files.
+Other mirror sites may be used in stead of *mirror.fysik.dtu.dk*.
 
 Create grub.cfg file
 --------------------
