@@ -77,7 +77,7 @@ NOTES:
 * It seems that having the boot file in a subdirectory such as ``uefi/bootx64.efi``
   will cause the client host PXE to download all further files also from that same ``uefi/`` subdirectory, so you need to place other files there.
 
-* The ``shimx64.efi`` bootloader may be required in stead of ``bootx64.efi`` in the above ``/etc/dhcpd.conf``.
+* The ``shimx64.efi`` bootloader_ may be required in stead of ``bootx64.efi`` in the above ``/etc/dhcpd.conf``.
 
 Copy UEFI boot files
 --------------------
@@ -231,6 +231,9 @@ There is documentation of the Kickstart_file_ syntax.
 
 A Kickstart_ installation can be made using PXE-booting_ or PXE_and_UEFI_ network booting.
 
+An example Kickstart_file_ is
+:download:`ks-almalinux-8.8-minimal-x86_64.cfg <attachments/ks-almalinux-8.8-minimal-x86_64.cfg>`.
+
 .. _Kickstart: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-1-introduction
 .. _Kickstart_file: https://anaconda-installer.readthedocs.io/en/latest/kickstart.html
 .. _RHEL: https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux
@@ -286,14 +289,13 @@ You should always use a password to protect your boot loader. An unprotected boo
     grub2-mkpasswd-pbkdf2
 
   command, enter the password you want to use, and copy the command’s output (the hash starting with ``grub.pbkdf2``) into the Kickstart file.
-  An example bootloader Kickstart entry with an encrypted password will look similar to the following::
+  An example bootloader_ Kickstart entry with an encrypted password will look similar to the following::
 
     bootloader --iscrypted --password=grub.pbkdf2.sha512.10000.5520C6C9832F3AC3D149AC0B24BE69E2D4FB0DBEEDBD29CA1D30A044DE2645C4C7A291E585D4DC43F8A4D82479F8B95CA4BA4381F8550510B75E8E0BB2938990.C688B6F0EF935701FF9BD1A8EC7FE5BD2333799C98F28420C5CC8F1A2A233DE22C83705BB614EA17F3FDFDF4AC2161CEA3384E56EB38A2E39102F5334C47405E
 
 Some systems require a special partition for installing the boot loader. The type and size of this partition depends on whether the disk you are installing the boot loader to uses the Master Boot Record (MBR) or a GUID Partition Table (GPT) schema. For more information, see Boot Loader Installation.
 
-
-.. _bootloader: * https://docs.fedoraproject.org/en-US/fedora/rawhide/install-guide/appendixes/Kickstart_Syntax_Reference/#sect-kickstart-commands-bootloader
+.. _bootloader: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#bootloader
 
 Installation screen resolution
 ------------------------------
