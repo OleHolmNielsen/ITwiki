@@ -213,6 +213,36 @@ The following method has been suggested, however, it does not seem to work and o
 Configuring Kickstart automated install
 =======================================
 
+EL Linux installation with Kickstart
+----------------------------------------
+
+RHEL_ Linux and EL clones such as AlmaLinux_ or RockyLinux_, as well as Fedora_, can be installed using Kickstart_.
+See a general description from the Fedora page:
+
+* Many system administrators would prefer to use an automated installation method to install Fedora_ or Red Hat Enterprise Linux on their machines.
+  To answer this need, Red Hat created the Kickstart_ installation method.
+  Using Kickstart_, a system administrator can create a single file containing the answers to all the questions that would normally be asked during a typical installation.
+
+* Kickstart_ files can be kept on a server system and read by individual computers during the installation.
+  This installation method can support the use of a single Kickstart_file_ to install Fedora_ or Red Hat Enterprise Linux on multiple machines,
+  making it ideal for network and system administrators.
+
+There is documentation of the Kickstart_file_ syntax.
+
+A Kickstart_ installation can be made using PXE-booting_ or PXE_and_UEFI_ network booting.
+
+.. _Kickstart: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-1-introduction
+.. _Kickstart_file: https://anaconda-installer.readthedocs.io/en/latest/kickstart.html
+.. _RHEL: https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux
+.. _AlmaLinux: https://almalinux.org/
+.. _RockyLinux: https://www.rockylinux.org
+.. _Fedora: https://fedoraproject.org/
+.. _PXE-booting: https://wiki.fysik.dtu.dk/ITwiki/PXE-booting
+.. _PXE_and_UEFI: https://wiki.fysik.dtu.dk/ITwiki/PXE_and_UEFI
+
+Configuring Kickstart
+------------------------------
+
 Automated installation using Anaconda_ is possible with UEFI as well as PXE legacy booting.
 In the above ``grub.cfg`` file use:
 
@@ -234,7 +264,6 @@ The *Kickstart Boot Options* are defined in the pages:
 Setting up an NFS server is not discussed here.
 
 .. _Anaconda: https://fedoraproject.org/wiki/Anaconda
-.. _Kickstart: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/html/installation_guide/ch-kickstart2
 
 Bootloader command
 ------------------
