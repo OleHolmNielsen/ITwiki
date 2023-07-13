@@ -114,7 +114,7 @@ Then build your own boot file ``bootx64.efi`` by::
 
 The GRUB2_ modules are documented in https://www.linux.org/threads/understanding-the-various-grub-modules.11142/
 
-Copy Linux boot images
+Download Linux boot images
 -----------------------------
 
 For each EL Linux (and other OS) version you should copy Linux boot images to a separate directory on the TFTP server,
@@ -238,28 +238,27 @@ A Kickstart_ installation can be made using PXE-booting_ or PXE_and_UEFI_ networ
 .. _RockyLinux: https://www.rockylinux.org
 .. _Fedora: https://fedoraproject.org/
 
-Configuring Kickstart
-------------------------------
-
 Automated installation using Anaconda_ is possible with UEFI as well as PXE legacy booting.
 In the above ``grub.cfg`` file use:
 
 * ``inst.ks=`` Gives the location of a Kickstart_ file to be used to automate the installation.
 
-For example, the following menu item may be added to ``grub.cfg`` to download a Kickstart_ file ``ks-centos-7.9.2009-uefi-x86_64.cfg`` 
+For example, the following menu item may be added to ``grub.cfg`` to download a Kickstart_ file ``ks-almalinux-8.8-minimal-x86_64.cfg``
 from the NFS server at IP address ``<server-IP>``::
 
-  menuentry 'Install CentOS Linux 7.9 using Kickstart' --class fedora --class gnu-linux --class gnu --class os {
-    linuxefi (tftp)/CentOS-7.9.2009-x86_64/vmlinuz ip=dhcp inst.ks=nfs:<server-IP>:/opt/kickstart/ks-centos-7.9.2009-uefi-x86_64.cfg
-    initrdefi (tftp)/CentOS-7.9.2009-x86_64/initrd.img
+  menuentry 'AlmaLinux 8.8 minimal Kickstart' --class centos --class gnu-linux --class gnu --class os --unrestricted {
+    linuxefi (tftp)/AlmaLinux-8.8-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:<server-IP>:/u/kickstart/ks-almalinux-8.8-minimal-x86_64.cfg
+    initrdefi (tftp)/AlmaLinux-8.8-x86_64/initrd.img
   }
 
-The *Kickstart Boot Options* are defined in the pages:
+A Legacy PXE BIOS boot file ``/tftpboot/pxelinux.cfg/default`` example using the same Kickstart_ file is::
 
-* https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/chap-anaconda-boot-options#sect-boot-options-installer
-* https://docs.fedoraproject.org/en-US/fedora/rawhide/install-guide/appendixes/Kickstart_Syntax_Reference/
+  label AlmaLinux8.8 minimal-x86_64
+        menu label Clean AlmaLinux-8.8-x86_64, minimal install
+        kernel AlmaLinux-8.8-x86_64/vmlinuz
+        append load_ramdisk=1 initrd=AlmaLinux-8.8-x86_64/initrd.img network inst.ks=nfs:nfsvers=3:<server-IP>:/u/kickstart/ks-almalinux-8.8-minimal-x86_64.cfg vga=792
 
-Setting up an NFS server is not discussed here.
+(Setting up an NFS server at ``<server-IP>`` is not discussed here.)
 
 .. _Anaconda: https://fedoraproject.org/wiki/Anaconda
 
