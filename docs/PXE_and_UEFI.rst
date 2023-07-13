@@ -237,8 +237,6 @@ A Kickstart_ installation can be made using PXE-booting_ or PXE_and_UEFI_ networ
 .. _AlmaLinux: https://almalinux.org/
 .. _RockyLinux: https://www.rockylinux.org
 .. _Fedora: https://fedoraproject.org/
-.. _PXE-booting: https://wiki.fysik.dtu.dk/ITwiki/PXE-booting
-.. _PXE_and_UEFI: https://wiki.fysik.dtu.dk/ITwiki/PXE_and_UEFI
 
 Configuring Kickstart
 ------------------------------
