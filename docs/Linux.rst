@@ -18,7 +18,7 @@ Linux documentation
    XFS_filesystems
    ZFS_filesystems
    Kickstart
-   PXE_booting
+   PXE-booting
    DNS-servers
    Samba
    Docker_containers
