@@ -263,6 +263,10 @@ Download the repo file and install the CUDA_ tools::
   yum clean all
   yum install cuda
 
+Installation instructions for a static CUDA_ version::
+
+  wget https://developer.download.nvidia.com/compute/cuda/12.2.0/local_installers/cuda_12.2.0_535.54.03_linux.run
+  sudo sh cuda_12.2.0_535.54.03_linux.run
 
 .. _CUDA: https://developer.nvidia.com/cuda-zone
 
