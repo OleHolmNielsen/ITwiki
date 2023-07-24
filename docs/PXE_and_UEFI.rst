@@ -90,9 +90,11 @@ We create a special directory for UEFI_ boot files on the TFTP server::
 
 which is also soft-linked as ``/tftpboot/uefi/``.
 
-The OS installation .efi files **must** be copied from the OS installation image,
+The OS installation ``*.efi`` files **must** be copied from the OS installation image,
 since the versions contained in EL8 RPM packages seem to be buggy,
-see for example https://forums.rockylinux.org/t/pxe-boot-uefi-mode/4852
+see for example https://forums.rockylinux.org/t/pxe-boot-uefi-mode/4852.
+Symptoms may be that TFTP download of large ``vmlinuz`` or ``initrd.img`` files 
+during Kickstart fail with an error *error: timeout reading ...*.
 
 Download **all .efi files** from a mirror site, 
 for example, https://mirror.fysik.dtu.dk/linux/almalinux/8.8/BaseOS/x86_64/kickstart/EFI/BOOT/
