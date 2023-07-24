@@ -62,11 +62,11 @@ In the DHCP subnet section(s) define UEFI RFC4578_ or PXE (legacy) boot image ty
 
   # UEFI x86-64 boot (RFC4578 architecture types 7, 8 and 9)
   if option arch = 00:07 {          
-        filename "uefi/bootx64.efi";
+        filename "uefi/BOOTX64.EFI";
   } else if option arch = 00:08 {
-        filename "uefi/bootx64.efi";
+        filename "uefi/BOOTX64.EFI";
   } else if option arch = 00:09 {
-        filename "uefi/bootx64.efi";
+        filename "uefi/BOOTX64.EFI";
   } else {                              
         # PXE boot
         filename "pxelinux.0";
@@ -74,17 +74,36 @@ In the DHCP subnet section(s) define UEFI RFC4578_ or PXE (legacy) boot image ty
 
 NOTES: 
 
-* It seems that having the boot file in a subdirectory such as ``uefi/bootx64.efi``
+* the ``BOOTX64.EFI`` file name seems to be upper case in the EL8 installation images.
+
+* It seems that having the boot file in a subdirectory such as ``uefi/BOOTX64.EFI``
   will cause the client host PXE to download all further files also from that same ``uefi/`` subdirectory, so you need to place other files there.
 
-* The ``shimx64.efi`` bootloader_ may be required in stead of ``bootx64.efi`` in the above ``/etc/dhcpd.conf``.
+* **Probably obsolete:** The ``shimx64.efi`` bootloader_ may be required in stead of ``BOOTX64.EFI`` in the above ``/etc/dhcpd.conf``.
 
 Copy UEFI boot files
 --------------------
 
-Here we have created a special directory for UEFI_ boot files on the TFTP server::
+We create a special directory for UEFI_ boot files on the TFTP server::
 
   mkdir /var/lib/tftpboot/uefi
+
+which is also soft-linked as ``/tftpboot/uefi/``.
+
+The OS installation .efi files **must** be copied from the OS installation image,
+since the versions contained in EL8 RPM packages seem to be buggy,
+see for example https://forums.rockylinux.org/t/pxe-boot-uefi-mode/4852
+
+Download **all .efi files** from a mirror site, 
+for example, https://mirror.fysik.dtu.dk/linux/almalinux/8.8/BaseOS/x86_64/kickstart/EFI/BOOT/
+to the TFTP server's folder ``/tftpboot/uefi/``.
+
+OBSOLETE: Copy .efi files from the OS RPMs
+..............................................
+
+**WARNING:** The .efi files from the OS RPMs seem to be buggy:
+Large image files (vmlinuz, initrd.img) cannot be downloaded reliably by TFTP,
+see for example https://forums.rockylinux.org/t/pxe-boot-uefi-mode/4852
 
 We need to copy UEFI_ boot files from EL Linux and we need these RPMs::
 
@@ -108,9 +127,9 @@ Copy the boot files, for example::
 
   yum install grub2-efi-x64-modules
 
-Then build your own boot file ``bootx64.efi`` by::
+Then build your own boot file ``BOOTX64.EFI`` by::
 
-  grub2-mkstandalone -d /usr/lib/grub/x86_64-efi/ -O x86_64-efi --modules="tftp net efinet linux part_gpt efifwsetup" -o /var/lib/tftpboot/uefi/bootx64.efi
+  grub2-mkstandalone -d /usr/lib/grub/x86_64-efi/ -O x86_64-efi --modules="tftp net efinet linux part_gpt efifwsetup" -o /var/lib/tftpboot/uefi/BOOTX64.EFI
 
 The GRUB2_ modules are documented in https://www.linux.org/threads/understanding-the-various-grub-modules.11142/
 
@@ -139,7 +158,7 @@ and other versions of ``OS`` and ``VERSION``.
 Create grub.cfg file
 --------------------
 
-The ``uefi/bootx64.efi`` boot file will be looking for a Grub_ configuration file ``uefi/grub.cfg`` in the same subdirectory.
+The ``uefi/BOOTX64.EFI`` boot file will be looking for a Grub_ configuration file ``uefi/grub.cfg`` in the same subdirectory.
 Create ``/var/lib/tftpboot/uefi/grub.cfg`` with the contents::
 
   set default="0"
