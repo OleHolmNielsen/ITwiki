@@ -495,6 +495,11 @@ Define a user's disk quota ``userquota`` and number-of-files quota ``userobjquot
 
 Using a quota value of ``none`` will remove the quota.
 
+We have written some Tools_for_managing_ZFS_disk_quotas_ providing,
+for example, commands similar to the standard Linux commands ``repquota`` and ``quota``.
+
+.. _Tools_for_managing_ZFS_disk_quotas: https://github.com/OleHolmNielsen/ZFS_tools
+
 The superuser can view the user disk usage and quotas, see the zfs-userspace_ manual page::
 
   zfs userspace filesystem|snapshot|path|mountpoint
@@ -523,14 +528,6 @@ this is only available in the Oracle_Solaris_ZFS_ implementation, see the defaul
 So with Linux OpenZFS_ you must set disk quotas individually for each user as shown above.
 
 .. _defaultuserquota: https://docs.oracle.com/cd/E53394_01/html/E54801/gazvb.html#SVZFSgpwey
-
-Tools for managing ZFS disk quotas
-------------------------------------
-
-We have written some Tools_for_managing_ZFS_disk_quotas_ providing,
-for example, commands similar to the standard Linux commands ``repquota`` and ``quota``.
-
-.. _Tools_for_managing_ZFS_disk_quotas: https://github.com/OleHolmNielsen/ZFS_tools
 
 NFS sharing ZFS file systems
 ================================
