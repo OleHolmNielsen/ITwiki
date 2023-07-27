@@ -24,6 +24,7 @@ See also some useful pages:
 * https://help.ubuntu.com/community/Grub2/Passwords
 * https://wiki.fogproject.org/wiki/index.php/BIOS_and_UEFI_Co-Existence
 * https://github.com/quattor/aii/issues/216
+* UEFI security: `UEFI DEFENSIVE PRACTICES GUIDANCE <https://www.nsa.gov/portals/75/documents/what-we-do/cybersecurity/professional-resources/ctr-uefi-defensive-practices-guidance.pdf>`_.
 
 .. _CentOS: https://www.centos.org/
 .. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
