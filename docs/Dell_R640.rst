@@ -111,6 +111,14 @@ Get Health LED status::
 
   racadm getled
 
+Make the LED blink::
+
+  racadm setled -l 1
+
+Stop the LED from blinking::
+
+  racadm setled -l 0
+
 Get system and version information::
 
   Service Tag: racadm getsvctag
