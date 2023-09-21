@@ -22,7 +22,16 @@ Lenovo provides SR645_V3_ information:
 Booting and BIOS configuration
 ==============================
 
-Press **F2** during start-up to enter the BIOS and firmware setup menus.
+Press **F1** during start-up to enter the BIOS and firmware setup menus.
+Press **F10** for network boot and **F12** for a one-time boot menu.
+
+XClarity Provisioning Manager
+--------------------------------
+
+Initial BMC credentials::
+
+  Username: USERID
+  Password: PASSW0RD   (Note the zero)
 
 
 Minimal configuration of a new server or motherboard
