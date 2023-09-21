@@ -7,6 +7,7 @@ Lenovo SR645 V3 server
 .. Contents::
 
 This page contains information about Lenovo SR645_V3_ servers deployed in our cluster.
+The Lenovo ThinkSystem SR645_V3_ is a 2-socket 1U server that features the AMD EPYC 9004 "Genoa" family of processors. 
 
 .. _SR645_V3: https://lenovopress.lenovo.com/lp1607-thinksystem-sr645-v3-server
 
@@ -15,8 +16,8 @@ Documentation and software
 
 Lenovo provides SR645_V3_ information:
 
-* manuals
-* downloads.
+* `ThinkSystem SR645 Setup Guide <https://pubs.lenovo.com/sr645/sr645_setup_guide.pdf>`_.
+* software downloads.
 
 Booting and BIOS configuration
 ==============================
