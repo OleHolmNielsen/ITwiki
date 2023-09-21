@@ -7,6 +7,7 @@ This page contains documentation on some hardware at our site.
 .. toctree::
    :maxdepth: 1
 
+   Lenovo_SR645_V3
    Dell_C6420
    Dell_ME484
    Dell_R640
