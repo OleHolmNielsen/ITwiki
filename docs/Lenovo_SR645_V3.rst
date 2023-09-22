@@ -14,10 +14,13 @@ The Lenovo ThinkSystem SR645_V3_ is a 2-socket 1U server that features the AMD E
 Documentation and software
 ==========================
 
-Lenovo provides SR645_V3_ information:
+Lenovo provides SR645_V3_ information and downloads:
 
 * `ThinkSystem SR645 Setup Guide <https://pubs.lenovo.com/sr645/sr645_setup_guide.pdf>`_.
-* software downloads.
+* `Lenovo XClarity Essentials OneCLI <https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli>`_.
+* `Firmware updates <https://pubs.lenovo.com/sr645/maintenance_manual_firmware_updates>`_
+  and `Best practices <https://lenovopress.lenovo.com/lp0656-lenovo-thinksystem-firmware-and-driver-update-best-practices>`_.
+  The `SR645 V3 download page <https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sr645/7d2x/downloads/driver-list/>`_.
 
 Booting and BIOS configuration
 ==============================
@@ -33,30 +36,49 @@ Initial BMC credentials::
   Username: USERID
   Password: PASSW0RD   (Note the zero)
 
+Note: If you have several SSH authentication key files (``$HOME/.ssh/id_*``) they will be tried in turn, 
+and since the BMC accepts a maximum of 5 login attempts, SSH logins may fail with the error::
+
+  Received disconnect from 10.x.x.x port 22:2: Too many authentication failures
+
+Workaround: Specify only 1 of the keys to the SSH command, for example::
+
+  ssh -i $HOME/.ssh/id_rsa <BMC_hostname>
 
 Minimal configuration of a new server or motherboard
 ----------------------------------------------------
 
 At our site the following minimal settings are required for a new server or a new motherboard.  
 
-The (BMC) setup is accessed via the ...
+The (BMC) setup is accessed via the console or BMC web GUI.
+Login with the above credentials.
 
-* In the *Network* page set:
+Changing BMC password: The rules are documented where????  See also password settings below.
 
-  * **NIC Selection**: **Dedicated**
-  * **Enable IPMI over LAN** to **Enabled**.
+**Important**: Set the BMC network address selection to **Obtain IP from DHCP** in stead of the default **First DHCP,
+then static IP** so that the BMC does not fall back to a private IP-address!
 
-* In the *System Summary* page read the NIC **iDRAC MAC Address** from this page for configuring the DHCP server.
+Now we assume the use of the BMC web GUI.
 
-Go to the *System Setup* menu item *Device Settings* and select the *Integrated NIC* items:
+There is a *Remote Console* menu to open a console in a new browser tab.
 
-* In the NIC *Main Configuration Page* select *NIC Configuration*.  We use **NIC port 3** (1 Gbit) as the system's NIC.
+In the *Home* menu enter the hostname in *System Information and Settings*.
 
-* Read the NIC **Ethernet MAC Address** from this page for configuring the DHCP server.
+Change the BMC **Hostname** to the DNS name, or select *Obtain Hostname from DHCP*.
+Set IPv6 to Disabled.
 
-* Select the **Legacy Boot Protocol** item **PXE**.
+In *DNS and DDNS* set Preferred address type: IPv4 and DDNS to Disabled.
 
-*Boot Sequence* menu:
+Disable *Use DNS to discover Lenovo XClarity Administrator*.
+
+In *Service Enablement and Port Assignment* enable the *IPMI over LAN*.
+
+In the *User/LDAP* menu change the local *User name* from *USERID* to *root*.
+
+Click on *Global Settings* and deselect *Complex password required* and set *Minimum password length* to 8.
+
+In the *Security* menu item set *IPMI SEL Log Wrapping* to Enabled.
+
+In the *Boot Sequence* menu:
 
   * Click the **Boot Sequence** item to move PXE boot up above the hard disk boot.
-
