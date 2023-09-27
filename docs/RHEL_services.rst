@@ -43,7 +43,7 @@ See `CentOS / RHEL 7 : Change default kernel (boot with old kernel) <https://www
 Managing system services with Systemd
 -------------------------------------
 
-RHEL7 system services are managed with Systemd_.
+RHEL system services are managed with Systemd_.
 See `Chapter 6. Managing Services with systemd <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html>`_.
 
 .. _Systemd: http://en.wikipedia.org/wiki/Systemd
@@ -51,6 +51,25 @@ See `Chapter 6. Managing Services with systemd <https://access.redhat.com/docume
 To list system services::
 
   systemctl list-unit-files
+
+Sometimes a service may crash repeatedly and needs to be restarted.
+A good workaround is described in
+`How to automatically restart Linux services with Systemd <https://freshman.tech/snippets/linux/auto-restart-systemd-service/>`_.
+See also `Set up self-healing services with systemd <https://www.redhat.com/sysadmin/systemd-automate-recovery>`_.
+For example, copy the service file::
+
+  cp /usr/lib/systemd/system/snmpd.service /etc/systemd/system/
+
+and add to the copied file's ``Service`` section::
+
+  [Service]
+  ...
+  Restart=on-failure
+  RestartSec=1s
+
+Then reload services::
+
+  systemctl daemon-reload
 
 Limit on number of open files
 -----------------------------
