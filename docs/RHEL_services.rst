@@ -544,7 +544,7 @@ Then start the service::
 TFTP file server
 ===================================
 
-The TFTP_ file server may be used for :ref:`PXE_booting` client devices.
+The TFTP_ file server may be used for :ref:`PXE-booting` client devices.
 See some advice about installing a TFTP server:
 
 * http://www.bo-yang.net/2015/08/31/centos7-install-tftp-server
