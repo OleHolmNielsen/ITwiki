@@ -21,7 +21,7 @@ Lenovo provides SR645_V3_ information and downloads:
 * `Firmware updates <https://pubs.lenovo.com/sr645/maintenance_manual_firmware_updates>`_
   and `Best practices <https://lenovopress.lenovo.com/lp0656-lenovo-thinksystem-firmware-and-driver-update-best-practices>`_.
   The `SR645 V3 download page <https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sr645/7d2x/downloads/driver-list/>`_.
-* `Lenovo EveryScale (formerly Lenovo Scalable Infrastructure or LeSI) <https://lenovopress.lenovo.com/lp0900-lenovo-everyscale-lesi>`_.
+* `Lenovo EveryScale (formerly Lenovo Scalable Infrastructure or LeSI) <https://lenovopress.lenovo.com/lp0900-lenovo-everyscale-lesi>`_ for HPC.
 
 Booting and BIOS configuration
 ==============================
@@ -83,3 +83,5 @@ In the *Security* menu item set *IPMI SEL Log Wrapping* to Enabled.
 In the *Boot Sequence* menu:
 
   * Click the **Boot Sequence** item to move PXE boot up above the hard disk boot.
+
+Disable ``SMT mode`` (Symmetric Multithreading) in the BIOS setup menu under *UEFI Settings->System setup*.
