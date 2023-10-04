@@ -23,8 +23,8 @@ Using Kickstart
 ===============
 
 ``Kickstart`` is not "used" as such, it is more of a method for installation preparation.
-It uses a script (``ks.cfg``) to describes the steps necessary for installing Linux.
-The script and installation files are then provided through standard services like a CD/DVD, DHCP_+TFTP_ or a floppy disk.
+It uses a script ``ks.cfg`` to describe the steps necessary for installing Linux.
+The script and installation files are then provided through standard services like a CD/DVD, with DHCP_ and TFTP_, or a floppy disk.
 
 RedHat provides a tool `system-config-kickstart` for setting up a kickstart installation, which creates the ``ks.cfg`` file.
 
@@ -34,20 +34,13 @@ PXE configuration
 Network booting by PXE_ (*Preboot Execution Environment*)
 uses the ``/tftpboot`` directory for downloading files by TFTP_.
 In order to boot a machine into a Linux environment, the PXELINUX_ software is used.
+See also our :ref:`PXE-booting` page.
 
 The PXE_/TFTP_ directory ``/tftpboot`` is organized into the following subdirectories:
 
  * ``pxelinux.cfg/``: Contains PXE_ ``default.XXX`` boot files, as well as soft links corresponding to IP-addresses to be installed by PXE_.
 
  * An OS-specific folder (for example, ``CentOS-7.9/``) containing just two files ``vmlinuz`` (kernel) and ``initrd.img`` (RAM-disk).
-
-The ``default.XXX`` files contains references to the actual kickstart files located in ``/u/rpm/kickstart/``, for example:: 
-
-   ks-centos-7-clean.cfg  
-   ks-centos-7-preserve-scratch.cfg
-
-PXE boot parameters
--------------------
 
 The PXE_ booting is controlled by a number of parameters in the PXE_ configuration file, for example::
 
