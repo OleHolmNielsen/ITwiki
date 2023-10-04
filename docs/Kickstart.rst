@@ -17,6 +17,7 @@ For documentation see the Pykickstart_ page.
 .. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
 .. _TFTP: https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol
 .. _PXELINUX: https://wiki.syslinux.org/wiki/index.php?title=PXELINUX
+.. _DHCP: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
 
 Using kickstart
 ===============
