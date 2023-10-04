@@ -41,15 +41,15 @@ as well as a `SYSLINUX Wiki <http://syslinux.zytor.com/wiki/index.php/Main_Page>
 Boot process summary
 --------------------
 
-When a client computer performs a PXE_ network boot, the Linux DHCP server assigns the client an IP-address 
-and further information including a TFTP-server address (DHCP ``next-server`` option)
-and a boot image file name ``pxelinux.0`` (DHCP ``filename`` option).
-The client retrieves the file ``pxelinux.0`` from the TFTP server and executes it.
+When a client computer performs a PXE_ network boot, the Linux DHCP_ server assigns the client an IP-address 
+and further information including a TFTP-server address (DHCP_ ``next-server`` option)
+and a boot image file name ``pxelinux.0`` (DHCP_ ``filename`` option).
+The client retrieves the file ``pxelinux.0`` from the TFTP_ server and executes it.
 
 
-The ``pxelinux.0`` PXELINUX boot image then attempts to download configurations files from the TFTP server
+The ``pxelinux.0`` PXELINUX boot image then attempts to download configurations files from the TFTP_ server
 in the boot process `explained here <pxelinux.doc#how-to-configure-pxelinux>`_.
-To summarize: The PXE/network client will use TFTP to download a PXELINUX configuration file
+To summarize: The PXE/network client will use TFTP_ to download a PXELINUX configuration file
 from the server's ``/tftpboot/pxelinux.cfg/`` directory
 whose name is usually either:
 
@@ -62,13 +62,16 @@ it is also possible to PXE-boot into the
 This is a very flexible way to boot, for example, diskette images with BIOS_ upgrades, hardware testers, or
 SystemImager installation, etc.
 
+.. _TFTP: http://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol
+.. _DHCP: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
+
 Installing the SYSLINUX tools
 -----------------------------
 
 Although your Linux machine may already have some of the SYSLINUX tools installed, 
 it is recommended that you get the latest `version of SYSLINUX <http://www.kernel.org/pub/linux/utils/boot/syslinux/>`_.
 
-Unpack the tar-ball and copy the following SYSLINUX files to the ``/tftpboot`` directory on the DHCP/TFTP server::
+Unpack the tar-ball and copy the following SYSLINUX files to the ``/tftpboot`` directory on the DHCP_/TFTP_ server::
 
   tar xzvf syslinux-4.02.tar.gz
   cd syslinux-4.02
@@ -134,7 +137,7 @@ A Microsoft *Windows Deployment Service* WDS_ takes over PXE_ booting of any PXE
 For a solution, see `Linux and Windows deployment <http://www.syslinux.org/wiki/index.php/Linux_and_Windows_deployment>`_:
 
 * This covers the setup and deployment of a PXE_ boot solution consisting of 2 pxe servers and one dhcp server. 
-  The 2 PXE_ servers are linux and windows - the former running pxelinux and tftp and the latter one running WDS (Windows Deployment Services), with a linux server providing DHCP services.
+  The 2 PXE_ servers are linux and windows - the former running pxelinux and tftp and the latter one running WDS (Windows Deployment Services), with a linux server providing DHCP_ services.
 
 See also `Peaceful Coexistence: WDS and Linux PXE Servers <http://www.vcritical.com/2011/06/peaceful-coexistence-wds-and-linux-pxe-servers/>`_:
 
@@ -152,7 +155,7 @@ SystemImager installation, etc.
 
 Please consult the :ref:`README.menu` from the  SYSLINUX source.
 
-One must first install SYSLINUX files to ``/tftpboot`` on the DHCP/TFTP server as shown in `Installing the SYSLINUX tools`_.
+One must first install SYSLINUX files to ``/tftpboot`` on the DHCP_/TFTP_ server as shown in `Installing the SYSLINUX tools`_.
 
 Secondly, for each client machine that should use the SYSLINUX menu systems a hexadecimally encoded IP-address file
 must be created in ``/tftpboot/pxelinux.cfg/``, pointing to the menu configuration file.
@@ -228,7 +231,7 @@ You can copy the Ultimate Boot CD tools from the CD, or from the ISO image if yo
 
   root# mount -o loop /some-path/ubcd503.iso /mnt
 
-You can very simply enable the complete Ultimate Boot CD tools in a PXE environment by copying the entire CD structure to ``/tftpboot/`` on your TFTP server::
+You can very simply enable the complete Ultimate Boot CD tools in a PXE environment by copying the entire CD structure to ``/tftpboot/`` on your TFTP_ server::
 
   root# cp -rp /mnt/ubcd /tftpboot/
 
@@ -239,7 +242,7 @@ and add this configuration to the SYSLINUX menu file::
         kernel menu.c32
         append ubcd/menus/syslinux/main.cfg
 
-Alternatively, with SYSLINUX version 4 and above you can PXE-boot the 300MB UBC ISO-image directly (loading the TFTP server much more).
+Alternatively, with SYSLINUX version 4 and above you can PXE-boot the 300MB UBC ISO-image directly (loading the TFTP_ server much more).
 The loading of ISO CD images with SYSLINUX is described in http://syslinux.zytor.com/wiki/index.php/MEMDISK#ISO_images.
 The SYSLINUX menu file could have a section like::
 
