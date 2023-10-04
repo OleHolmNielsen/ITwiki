@@ -13,6 +13,8 @@ Introduction
 The ``Kickstart`` installation method provides a way to do automated installations of RedHat Linux and derivatives.
 For documentation see the Pykickstart_ page.
 
+See also our :ref:`PXE-booting` and :ref:`PXE_and_UEFI` pages.
+
 .. _Pykickstart: https://pykickstart.readthedocs.io/en/latest/
 .. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
 .. _TFTP: https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol
@@ -32,20 +34,19 @@ PXE configuration
 Network booting by PXE_ (*Preboot Execution Environment*)
 uses the ``/tftpboot`` directory for downloading files by TFTP_.
 In order to boot a machine into a Linux environment, the PXELINUX_ software is used.
-See also our :ref:`PXE-booting` page.
 
 The PXE_/TFTP_ directory ``/tftpboot`` is organized into the following subdirectories:
 
  * ``/tftpboot/pxelinux.cfg/``: Contains PXE_ ``default.XXX`` boot files, as well as soft links corresponding to IP-addresses to be installed by PXE_.
 
- * An OS-specific folder (for example, ``/tftpboot/CentOS-7.9/``) containing just two files ``vmlinuz`` (kernel) and ``initrd.img`` (RAM-disk).
+ * An OS-specific folder (for example, ``/tftpboot/CentOS-7.9/``) containing just two files ``vmlinuz`` (kernel) and ``initrd.img`` (Initial RAM-disk).
 
 The PXE_ booting is controlled by a number of parameters in the PXE_ configuration file, for example::
 
-  label CentOS7 clean-x86_64
-        menu label Clean CentOS-7-x86_64, kickstart
-        kernel CentOS-7-x86_64/vmlinuz
-        append load_ramdisk=1 initrd=CentOS-7-x86_64/initrd.img network ks=nfs:130.225.86.4:/u/rpm/kickstart/ks-centos-7-clean-x86_64.cfg
+  label CentOS7.9.2009 minimal-x86_64
+        menu label Clean CentOS-7.9.2009-x86_64, minimal install
+        kernel CentOS-7.9.2009-x86_64/vmlinuz
+        append load_ramdisk=1 initrd=CentOS-7.9.2009-x86_64/initrd.img network ks=nfs:130.225.86.11:/u/kickstart/ks-centos-7.9.2009-minimal-x86_64.cfg
 
 Here the ``append`` parameters are documented in Anaconda_Boot_Options_.
 The ``Kickstart`` file is configured by the ``ks=...`` parameter,
@@ -53,7 +54,7 @@ which can use several types of network resources such as ``nfs, http or ftp``.
 For NFS_ installs please note that RHEL/CentOS defaults to the ``NFSv4`` version,
 however, the ``ks=`` parameter also permits specifying other NFS_ mount options such as::
 
-  ks=nfs:nfsvers=3:130.225.86.4:xxx
+  ks=nfs:nfsvers=3:130.225.86.11:xxx
 
 .. _NFS: https://en.wikipedia.org/wiki/Network_File_System
 .. _Anaconda_Boot_Options: https://anaconda-installer.readthedocs.io/en/latest/boot-options.html
@@ -61,9 +62,10 @@ however, the ``ks=`` parameter also permits specifying other NFS_ mount options 
 vmlinuz and initrd.img
 ----------------------
 
-The boot kernel and initial file system used by PXE_ are the ``vmlinuz`` mini-kernel and the ``initrd`` initial RAM-disk,  respectively.
-These should be downloaded from a RHEL/CentOS mirror site.
-On the ``intra5`` DHCP_/PXE_ server these files are placed in ``/tftpboot/CentOS-X.Y`` directory for Centos version X.Y, for example.
+The boot kernel and initial file system used by PXE_ are the ``vmlinuz`` mini-kernel and the ``initrd`` Initial RAM-disk,  respectively.
+These should be downloaded from a mirror site, for example https://mirror.fysik.dtu.dk/linux/.
+
+On the ``intra5`` DHCP_/PXE_ server these files are placed in ``/tftpboot/CentOS-X.Y`` directory for CentOS version X.Y, for example.
   
 The PXE_ boot files in the ``/tftpboot/pxelinux.cfg`` directory must contain 
 ``default.XXX`` files such as ``default.install-centos-4.4-clean`` which contain a reference to the new versions 
