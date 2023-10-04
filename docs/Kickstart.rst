@@ -24,9 +24,7 @@ Using Kickstart
 
 ``Kickstart`` is not "used" as such, it is more of a method for installation preparation.
 It uses a script ``ks.cfg`` to describe the steps necessary for installing Linux.
-The script and installation files are then provided through standard services like a CD/DVD, with DHCP_ and TFTP_, or a floppy disk.
-
-RedHat provides a tool `system-config-kickstart` for setting up a kickstart installation, which creates the ``ks.cfg`` file.
+The script and installation files are then provided through standard services like DHCP_ and PXE_ and TFTP_, or using a DVD disk.
 
 PXE configuration
 =================
@@ -38,9 +36,9 @@ See also our :ref:`PXE-booting` page.
 
 The PXE_/TFTP_ directory ``/tftpboot`` is organized into the following subdirectories:
 
- * ``pxelinux.cfg/``: Contains PXE_ ``default.XXX`` boot files, as well as soft links corresponding to IP-addresses to be installed by PXE_.
+ * ``/tftpboot/pxelinux.cfg/``: Contains PXE_ ``default.XXX`` boot files, as well as soft links corresponding to IP-addresses to be installed by PXE_.
 
- * An OS-specific folder (for example, ``CentOS-7.9/``) containing just two files ``vmlinuz`` (kernel) and ``initrd.img`` (RAM-disk).
+ * An OS-specific folder (for example, ``/tftpboot/CentOS-7.9/``) containing just two files ``vmlinuz`` (kernel) and ``initrd.img`` (RAM-disk).
 
 The PXE_ booting is controlled by a number of parameters in the PXE_ configuration file, for example::
 
@@ -52,7 +50,8 @@ The PXE_ booting is controlled by a number of parameters in the PXE_ configurati
 Here the ``append`` parameters are documented in Anaconda_Boot_Options_.
 The ``Kickstart`` file is configured by the ``ks=...`` parameter,
 which can use several types of network resources such as ``nfs, http or ftp``.
-For NFS_ installs please note that RHEL/CentOS defaults to ``NFS version 4``, however, the ``ks=`` parameter also permits NFS_ mount options such as::
+For NFS_ installs please note that RHEL/CentOS defaults to the ``NFSv4`` version,
+however, the ``ks=`` parameter also permits specifying other NFS_ mount options such as::
 
   ks=nfs:nfsvers=3:130.225.86.4:xxx
 
