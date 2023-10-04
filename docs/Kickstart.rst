@@ -10,7 +10,7 @@ Kickstart installation
 Introduction
 =============
 
-The Kickstart installation method provides a way to do automated installations of RedHat Linux and derivatives, while allowing the Anaconda installer to make decision about hardware support and packages dependencies.
+The ``Kickstart`` installation method provides a way to do automated installations of RedHat Linux and derivatives.
 For documentation see the Pykickstart_ page.
 
 .. _Pykickstart: https://pykickstart.readthedocs.io/en/latest/
@@ -19,10 +19,10 @@ For documentation see the Pykickstart_ page.
 .. _PXELINUX: https://wiki.syslinux.org/wiki/index.php?title=PXELINUX
 .. _DHCP: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
 
-Using kickstart
+Using Kickstart
 ===============
 
-Kickstart is not "used" as such, it is more of a method for installation preparation.
+``Kickstart`` is not "used" as such, it is more of a method for installation preparation.
 It uses a script (``ks.cfg``) to describes the steps necessary for installing Linux.
 The script and installation files are then provided through standard services like a CD/DVD, DHCP_+TFTP_ or a floppy disk.
 
@@ -35,7 +35,7 @@ Network booting by PXE_ (*Preboot Execution Environment*)
 uses the ``/tftpboot`` directory for downloading files by TFTP_.
 In order to boot a machine into a Linux environment, the PXELINUX_ software is used.
 
-The PXE_ / TFTP_ directory ``/tftpboot`` is organized into the following subdirectories:
+The PXE_/TFTP_ directory ``/tftpboot`` is organized into the following subdirectories:
 
  * ``pxelinux.cfg/``: Contains PXE_ ``default.XXX`` boot files, as well as soft links corresponding to IP-addresses to be installed by PXE_.
 
@@ -56,13 +56,14 @@ The PXE_ booting is controlled by a number of parameters in the PXE_ configurati
         kernel CentOS-5-i386/vmlinuz
         append load_ramdisk=1 initrd=CentOS-5-i386/initrd.img network ks=nfs:130.225.86.4:/u/rpm/kickstart/ks-centos-5-clean-i386.cfg
 
-Here the ``append`` parameters are documented in http://fedoraproject.org/wiki/Anaconda_Boot_Options.
+Here the ``append`` parameters are documented in Anaconda_Boot_Options_.
 The ``Kickstart file`` is controlled by the ``ks=...`` parameter which can use several types of resources such as ``nfs, http or ftp``.
 Please note that for RHEL/CentOS that NFS_ defaults to ``NFS version 4``, however, the ``ks=`` parameter also permits NFS_ mount options such as::
 
   ks=nfs:nfsvers=3:130.225.86.4:xxx
 
 .. _NFS: https://en.wikipedia.org/wiki/Network_File_System
+.. _Anaconda_Boot_Options: https://anaconda-installer.readthedocs.io/en/latest/boot-options.html
 
 vmlinuz and initrd.img
 ----------------------
