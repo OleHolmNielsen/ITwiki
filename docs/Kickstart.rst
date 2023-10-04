@@ -62,10 +62,12 @@ however, the ``ks=`` parameter also permits specifying other NFS_ mount options 
 vmlinuz and initrd.img
 ----------------------
 
-The boot kernel and initial file system used by PXE_ are the ``vmlinuz`` mini-kernel and the ``initrd`` Initial RAM-disk,  respectively.
+The PXE_ boot kernel and initial file system are the ``vmlinuz`` mini-kernel and the ``initrd`` Initial RAM-disk,  respectively.
 These should be downloaded from a mirror site, for example https://mirror.fysik.dtu.dk/linux/.
+It is **required** to download the specially configured **Kickstart images** and not the regular boot images, for example from
+https://mirror.fysik.dtu.dk/linux/almalinux/8/BaseOS/x86_64/kickstart/images/
 
-On the ``intra5`` DHCP_/PXE_ server these files are placed in ``/tftpboot/CentOS-X.Y`` directory for CentOS version X.Y, for example.
+On the ``intra5`` DHCP_/PXE_ server these PXE_ files are placed in ``/tftpboot/CentOS-X.Y`` directory for CentOS version X.Y, for example.
   
 The PXE_ boot files in the ``/tftpboot/pxelinux.cfg`` directory must contain 
 ``default.XXX`` files such as ``default.install-centos-4.4-clean`` which contain a reference to the new versions 
