@@ -44,14 +44,15 @@ The PXE_/TFTP_ directory ``/tftpboot`` is organized into the following subdirect
 
 The PXE_ booting is controlled by a number of parameters in the PXE_ configuration file, for example::
 
-  label CentOS5 clean-i386
-        menu label Clean CentOS-5-i386, kickstart
-        kernel CentOS-5-i386/vmlinuz
-        append load_ramdisk=1 initrd=CentOS-5-i386/initrd.img network ks=nfs:130.225.86.4:/u/rpm/kickstart/ks-centos-5-clean-i386.cfg
+  label CentOS7 clean-x86_64
+        menu label Clean CentOS-7-x86_64, kickstart
+        kernel CentOS-7-x86_64/vmlinuz
+        append load_ramdisk=1 initrd=CentOS-7-x86_64/initrd.img network ks=nfs:130.225.86.4:/u/rpm/kickstart/ks-centos-7-clean-x86_64.cfg
 
 Here the ``append`` parameters are documented in Anaconda_Boot_Options_.
-The ``Kickstart file`` is controlled by the ``ks=...`` parameter which can use several types of resources such as ``nfs, http or ftp``.
-Please note that for RHEL/CentOS that NFS_ defaults to ``NFS version 4``, however, the ``ks=`` parameter also permits NFS_ mount options such as::
+The ``Kickstart`` file is configured by the ``ks=...`` parameter,
+which can use several types of network resources such as ``nfs, http or ftp``.
+For NFS_ installs please note that RHEL/CentOS defaults to ``NFS version 4``, however, the ``ks=`` parameter also permits NFS_ mount options such as::
 
   ks=nfs:nfsvers=3:130.225.86.4:xxx
 
