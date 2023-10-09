@@ -86,8 +86,8 @@ of `vmlinuz` and  `initrd` in ``/tftpboot/CentOS-X.Y``.
 
 .. _AlmaLinux: https://almalinux.org/
 
-DHCP configuration dhcpd.conf
------------------------------------
+DHCP configuration file dhcpd.conf
+==================================
 
 The following entry in ``/etc/dhcpd.conf`` enables PXE_ boot by means of the PXELINUX_ software::
 
