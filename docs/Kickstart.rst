@@ -12,7 +12,6 @@ Introduction
 
 The ``Kickstart`` installation method provides a way to do automated installations of RedHat Linux and derivatives.
 For documentation see the Pykickstart_ page.
-
 See also our :ref:`PXE-booting` and :ref:`PXE_and_UEFI` pages.
 
 .. _Pykickstart: https://pykickstart.readthedocs.io/en/latest/
@@ -24,24 +23,30 @@ See also our :ref:`PXE-booting` and :ref:`PXE_and_UEFI` pages.
 Using Kickstart
 ===============
 
-``Kickstart`` is not "used" as such, it is more of a method for installation preparation.
-It uses a script ``ks.cfg`` to describe the steps necessary for installing Linux.
-The script and installation files are then provided through standard services like DHCP_ and PXE_ and TFTP_, or using a DVD disk.
+``Kickstart`` is a method for Linux installation preparation,
+and it uses a ``Kickstart`` script ``ks.cfg`` to describe the steps necessary for installing Linux.
+The script as well as installation files are then provided through standard services like DHCP_ and PXE_ and TFTP_
+(or possibly using a DVD disk, even this may be outdated).
 
 PXE configuration
 =================
 
 Network booting by PXE_ (*Preboot Execution Environment*)
-uses the ``/tftpboot`` directory for downloading files by TFTP_.
-In order to boot a machine into a Linux environment, the PXELINUX_ software is used.
+provides the ``/tftpboot`` directory on a boot server for downloading files by the TFTP_ protocol.
+The PXE_ network booting protocol is implemented in hardware/firmware by every Ethernet_ chip.
 
-The PXE_/TFTP_ directory ``/tftpboot`` is organized into the following subdirectories:
+In order to boot a machine into a Linux installation environment,
+the client computer boots the PXELINUX_ software from the boot server.
 
- * ``/tftpboot/pxelinux.cfg/``: Contains PXE_ ``default.XXX`` boot files, as well as soft links corresponding to IP-addresses to be installed by PXE_.
+The boot server's PXE_/TFTP_ directory ``/tftpboot`` is organized into the following subdirectories:
+
+ * ``/tftpboot/pxelinux.cfg/``: Contains PXE_ boot files named as ``default.XXX``,
+   as well as soft links corresponding to IP-addresses (see the PXELINUX_ page *Configuration* section)
+   to be downloaded and installed using PXE_.
 
  * An OS-specific folder (for example, ``/tftpboot/CentOS-7.9/``) containing just two files ``vmlinuz`` (kernel) and ``initrd.img`` (Initial RAM-disk).
 
-The PXE_ booting is controlled by a number of parameters in the PXE_ configuration file, for example::
+The PXE_ network booting is controlled by a number of parameters in the PXE_ configuration file, for example::
 
   label CentOS7.9.2009 minimal-x86_64
         menu label Clean CentOS-7.9.2009-x86_64, minimal install
@@ -56,6 +61,7 @@ however, the ``ks=`` parameter also permits specifying other NFS_ mount options 
 
   ks=nfs:nfsvers=3:130.225.86.11:xxx
 
+.. _Ethernet: https://en.wikipedia.org/wiki/Ethernet
 .. _NFS: https://en.wikipedia.org/wiki/Network_File_System
 .. _Anaconda_Boot_Options: https://anaconda-installer.readthedocs.io/en/latest/boot-options.html
 
