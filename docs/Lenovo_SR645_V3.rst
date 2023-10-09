@@ -85,3 +85,13 @@ In the *Boot Sequence* menu:
   * Click the **Boot Sequence** item to move PXE boot up above the hard disk boot.
 
 Disable ``SMT mode`` (Symmetric Multithreading) in the BIOS setup menu under *UEFI Settings->System setup*.
+
+Firmware upgrades
+----------------------
+
+In the BMC GUI's ``Firmware Update`` window you may install update files.
+
+You may want to enable these non-default settings:
+
+* **Auto Promote Primary BMC to Backup**
+
