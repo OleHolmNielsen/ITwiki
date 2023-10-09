@@ -60,7 +60,7 @@ which can in addition use several types of network resources such as NFS_, HTTP_
 
 Possibly obsolete:
 For NFS_ installs please note that RHEL/CentOS defaults to the NFS_ version``NFSv4``.
-However, the ``ks=`` parameter also permits specifying an NFS_ mount option ``nfsvers=3``::
+However, the ``ks=`` parameter also permits specifying an NFS_ mount option ``nfsvers=3`` like this::
 
   ks=nfs:nfsvers=3:130.225.86.11:ks.cfg
 
