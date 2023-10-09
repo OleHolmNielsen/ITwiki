@@ -55,8 +55,8 @@ For example, a file ``default.centos7`` for installing CentOS 7 might contain::
         append load_ramdisk=1 initrd=CentOS-7.9.2009-x86_64/initrd.img network ks=nfs:130.225.86.11:/u/kickstart/ks-centos-7.9.2009-minimal-x86_64.cfg
 
 Here the ``append`` parameters are documented in Anaconda_Boot_Options_.
-The ``Kickstart`` file is configured by the ``ks=...`` parameter,
-which can use several types of network resources such as ``nfs, http or ftp``.
+The name of the ``Kickstart`` file is configured by the ``ks=...`` parameter,
+which can in addition use several types of network resources such as NFS_, HTTP_, or FTP_.
 For NFS_ installs please note that RHEL/CentOS defaults to the ``NFSv4`` version,
 however, the ``ks=`` parameter also permits specifying other NFS_ mount options such as::
 
@@ -65,6 +65,8 @@ however, the ``ks=`` parameter also permits specifying other NFS_ mount options 
 .. _Ethernet: https://en.wikipedia.org/wiki/Ethernet
 .. _RAM-disk: https://en.wikipedia.org/wiki/RAM_drive
 .. _NFS: https://en.wikipedia.org/wiki/Network_File_System
+.. _HTTP: https://en.wikipedia.org/wiki/HTTP
+.. _FTP: https://en.wikipedia.org/wiki/File_Transfer_Protocol
 .. _Anaconda_Boot_Options: https://anaconda-installer.readthedocs.io/en/latest/boot-options.html
 
 vmlinuz and initrd.img
