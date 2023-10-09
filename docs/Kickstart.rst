@@ -57,10 +57,12 @@ For example, a file ``default.centos7`` for installing CentOS 7 might contain::
 Here the ``append`` parameters are documented in Anaconda_Boot_Options_.
 The name of the ``Kickstart`` file is configured by the ``ks=...`` parameter,
 which can in addition use several types of network resources such as NFS_, HTTP_, or FTP_.
-For NFS_ installs please note that RHEL/CentOS defaults to the ``NFSv4`` version,
-however, the ``ks=`` parameter also permits specifying other NFS_ mount options such as::
 
-  ks=nfs:nfsvers=3:130.225.86.11:xxx
+Possibly obsolete:
+For NFS_ installs please note that RHEL/CentOS defaults to the NFS_ version``NFSv4``.
+However, the ``ks=`` parameter also permits specifying an NFS_ mount option ``nfsvers=3``::
+
+  ks=nfs:nfsvers=3:130.225.86.11:ks.cfg
 
 .. _Ethernet: https://en.wikipedia.org/wiki/Ethernet
 .. _RAM-disk: https://en.wikipedia.org/wiki/RAM_drive
