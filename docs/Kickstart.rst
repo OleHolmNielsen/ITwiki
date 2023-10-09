@@ -44,9 +44,10 @@ The boot server's PXE_/TFTP_ directory ``/tftpboot`` is organized into the follo
    to be downloaded and installed using PXE_.
 
  * An OS-specific folder (for example, ``/tftpboot/CentOS-7.9/``) containing two files ``vmlinuz`` (a mini-kernel for PXE_ booting)
-   and ``initrd.img`` (an Initial RAM-disk file system).
+   and ``initrd.img`` (an Initial RAM-disk_ file system).
 
-The PXE_ network booting is controlled by a number of parameters in a PXE_ configuration file, for example a file ``default.centos7``::
+The PXE_ network booting is controlled by a number of parameters in a PXE_ configuration file.
+For example, a file ``default.centos7`` for installing CentOS 7 might contain::
 
   label CentOS7.9.2009 minimal-x86_64
         menu label Clean CentOS-7.9.2009-x86_64, minimal install
@@ -62,25 +63,29 @@ however, the ``ks=`` parameter also permits specifying other NFS_ mount options 
   ks=nfs:nfsvers=3:130.225.86.11:xxx
 
 .. _Ethernet: https://en.wikipedia.org/wiki/Ethernet
+.. _RAM-disk: https://en.wikipedia.org/wiki/RAM_drive
 .. _NFS: https://en.wikipedia.org/wiki/Network_File_System
 .. _Anaconda_Boot_Options: https://anaconda-installer.readthedocs.io/en/latest/boot-options.html
 
 vmlinuz and initrd.img
 ----------------------
 
-The PXE_ boot kernel and initial file system are the ``vmlinuz`` mini-kernel and the ``initrd`` Initial RAM-disk,  respectively.
-These should be downloaded from a mirror site, for example https://mirror.fysik.dtu.dk/linux/.
-It is **required** to download the specially configured **Kickstart images** and not the regular boot images, for example from
-https://mirror.fysik.dtu.dk/linux/almalinux/8/BaseOS/x86_64/kickstart/images/
+The PXE_ boot kernel and initial file system are the ``vmlinuz`` mini-kernel and the ``initrd`` Initial RAM-disk_,  respectively.
+These should be downloaded to the installation server from a mirror site, for example https://mirror.fysik.dtu.dk/linux/.
+It is **required** to download the specially configured **Kickstart images** and not the regular OS boot images, for example from
+https://mirror.fysik.dtu.dk/linux/almalinux/8/BaseOS/x86_64/kickstart/images/ for AlmaLinux_.
 
-On the ``intra5`` DHCP_/PXE_ server these PXE_ files are placed in ``/tftpboot/CentOS-X.Y`` directory for CentOS version X.Y, for example.
+On our internal DHCP_/PXE_ server these PXE_ files are placed in, for example,
+the ``/tftpboot/AlmaLinux-8.8-x86_64/`` directory for installation of AlmaLinux_ version 8.8.
   
 The PXE_ boot files in the ``/tftpboot/pxelinux.cfg`` directory must contain 
 ``default.XXX`` files such as ``default.install-centos-4.4-clean`` which contain a reference to the new versions 
 of `vmlinuz` and  `initrd` in ``/tftpboot/CentOS-X.Y``.
 
-dhcpd.conf
-----------
+.. _AlmaLinux: https://almalinux.org/
+
+DHCP configuration dhcpd.conf
+-----------------------------------
 
 The following entry in ``/etc/dhcpd.conf`` enables PXE_ boot by means of the PXELINUX_ software::
 
