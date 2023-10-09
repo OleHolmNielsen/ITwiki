@@ -18,10 +18,13 @@ Lenovo provides SR645_V3_ information and downloads:
 
 * `ThinkSystem SR645 Setup Guide <https://pubs.lenovo.com/sr645/sr645_setup_guide.pdf>`_.
 * `Lenovo XClarity Essentials OneCLI <https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli>`_.
-* `Firmware updates <https://pubs.lenovo.com/sr645/maintenance_manual_firmware_updates>`_
+* Firmware_updates_
   and `Best practices <https://lenovopress.lenovo.com/lp0656-lenovo-thinksystem-firmware-and-driver-update-best-practices>`_.
-  The `SR645 V3 download page <https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sr645/7d2x/downloads/driver-list/>`_.
+  The Firmware_download_ page.
 * `Lenovo EveryScale (formerly Lenovo Scalable Infrastructure or LeSI) <https://lenovopress.lenovo.com/lp0900-lenovo-everyscale-lesi>`_ for HPC.
+
+.. _Firmware_updates: https://pubs.lenovo.com/sr645/maintenance_manual_firmware_updates
+.. _Firmware_download: https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sr645/7d2x/downloads/driver-list/
 
 Booting and BIOS configuration
 ==============================
@@ -87,9 +90,13 @@ In the *Boot Sequence* menu:
 Disable ``SMT mode`` (Symmetric Multithreading) in the BIOS setup menu under *UEFI Settings->System setup*.
 
 Firmware upgrades
-----------------------
+=================
 
 In the BMC GUI's ``Firmware Update`` window you may install update files.
+Go to the Firmware_download_ page and type in the system serial number to search for updates.
+Print the serial number by::
+
+  dmidecode -s system-serial-number
 
 You may want to enable these non-default settings:
 
