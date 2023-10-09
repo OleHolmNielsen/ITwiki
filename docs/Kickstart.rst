@@ -26,7 +26,7 @@ Using Kickstart
 ``Kickstart`` is a method for Linux installation preparation,
 and it uses a ``Kickstart`` script ``ks.cfg`` to describe the steps necessary for installing Linux.
 The script as well as installation files are then provided through standard services like DHCP_ and PXE_ and TFTP_
-(or possibly using a DVD disk, even this may be outdated).
+(or possibly using a DVD disk, even though this may be outdated).
 
 PXE configuration
 =================
@@ -34,7 +34,6 @@ PXE configuration
 Network booting by PXE_ (*Preboot Execution Environment*)
 provides the ``/tftpboot`` directory on a boot server for downloading files by the TFTP_ protocol.
 The PXE_ network booting protocol is implemented in hardware/firmware by every Ethernet_ chip.
-
 In order to boot a machine into a Linux installation environment,
 the client computer boots the PXELINUX_ software from the boot server.
 
@@ -44,9 +43,10 @@ The boot server's PXE_/TFTP_ directory ``/tftpboot`` is organized into the follo
    as well as soft links corresponding to IP-addresses (see the PXELINUX_ page *Configuration* section)
    to be downloaded and installed using PXE_.
 
- * An OS-specific folder (for example, ``/tftpboot/CentOS-7.9/``) containing just two files ``vmlinuz`` (kernel) and ``initrd.img`` (Initial RAM-disk).
+ * An OS-specific folder (for example, ``/tftpboot/CentOS-7.9/``) containing two files ``vmlinuz`` (a mini-kernel for PXE_ booting)
+   and ``initrd.img`` (an Initial RAM-disk file system).
 
-The PXE_ network booting is controlled by a number of parameters in the PXE_ configuration file, for example::
+The PXE_ network booting is controlled by a number of parameters in a PXE_ configuration file, for example a file ``default.centos7``::
 
   label CentOS7.9.2009 minimal-x86_64
         menu label Clean CentOS-7.9.2009-x86_64, minimal install
