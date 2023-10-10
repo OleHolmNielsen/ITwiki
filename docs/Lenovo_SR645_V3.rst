@@ -83,9 +83,9 @@ Click on *Global Settings* and deselect *Complex password required* and set *Min
 
 In the *Security* menu item set *IPMI SEL Log Wrapping* to Enabled.
 
-In the *Boot Sequence* menu:
+In the *UEFI Setup -> Boot Manager -> Change boot order* menu:
 
-  * Click the **Boot Sequence** item to move PXE boot up above the hard disk boot.
+  * Click the **Change the order** item to move PXE boot up above the hard disk boot.
 
 Disable ``SMT mode`` (Symmetric Multithreading) in the BIOS setup menu under *UEFI Settings->System setup*.
 
