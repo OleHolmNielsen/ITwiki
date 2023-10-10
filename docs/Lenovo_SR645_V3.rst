@@ -24,7 +24,7 @@ Lenovo provides SR645_V3_ information and downloads:
 * `Lenovo EveryScale (formerly Lenovo Scalable Infrastructure or LeSI) <https://lenovopress.lenovo.com/lp0900-lenovo-everyscale-lesi>`_ for HPC.
 
 .. _Firmware_updates: https://pubs.lenovo.com/sr645/maintenance_manual_firmware_updates
-.. _Firmware_download: https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sr645/7d2x/downloads/driver-list/
+.. _Firmware_download: https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sr645v3/7d9c/downloads/driver-list/
 
 Booting and BIOS configuration
 ==============================
