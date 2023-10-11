@@ -17,7 +17,9 @@ Documentation and software
 Lenovo provides SR645_V3_ information and downloads:
 
 * `ThinkSystem SR645 Setup Guide <https://pubs.lenovo.com/sr645/sr645_setup_guide.pdf>`_.
+* `Lenovo XClarity Administrator Product Guide <https://lenovopress.lenovo.com/tips1200-lenovo-xclarity-administrator>`_.
 * `Lenovo XClarity Essentials OneCLI <https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli>`_.
+* `Lenovo XClarity Provisioning Manager <https://sysmgt.lenovofiles.com/help/index.jsp?topic=%2Flxpm_frontend%2Flxpm_product_page.html&cp=7>`_.
 * Firmware_updates_
   and `Best practices <https://lenovopress.lenovo.com/lp0656-lenovo-thinksystem-firmware-and-driver-update-best-practices>`_.
   The Firmware_download_ page.
@@ -59,12 +61,38 @@ Login with the above credentials.
 
 Changing BMC password: The rules are documented where????  See also password settings below.
 
-**Important**: Set the BMC network address selection to **Obtain IP from DHCP** in stead of the default **First DHCP,
-then static IP** so that the BMC does not fall back to a private IP-address!
+Configuration using the console
+.........................................
 
-Now we assume the use of the BMC web GUI.
+The BMC GUI has a *Remote Console* menu to open a console in a new browser tab.
+Press **F1** during start-up to enter the BIOS and firmware setup menus.
+Use the console to configure the **UEFI setup**.
 
-There is a *Remote Console* menu to open a console in a new browser tab.
+Go to the menu **BMC settings** submenu **Network settings**:
+
+* Configure **DHCP control** to **DHCP enabled**.
+  **Important**: Set the BMC network address selection to **Obtain IP from DHCP**
+  in stead of the default **First DHCP, then static IP** so that the BMC does not fall back to a private IP-address!
+
+* Set **IPv6** to **Disabled**.
+
+* When done press **Save Network Settings**.
+
+Go to the menu **UEFI Settings**:
+
+* In **System Settings -> Processors** select Disable ``SMT Mode`` (Symmetric Multithreading).
+
+* In **Boot Manager -> Change Boot Order** use + and - to change the boot order items to 1) Network, 2) Hard disk.
+  Press **Commit Changes and Exit**.
+
+* In **Boot Manager -> Set Boot Priority -> Network Priority** use + and - to move down the priority of IPv6.
+
+* When done press **Save Settings**.
+
+* When all configuration is finished press **Exit UEFI Setup**.
+
+Configuration using the BMC web GUI
+.........................................
 
 In the *Home* menu enter the hostname in *System Information and Settings*.
 
@@ -86,8 +114,6 @@ In the *Security* menu item set *IPMI SEL Log Wrapping* to Enabled.
 In the *UEFI Setup -> Boot Manager -> Change boot order* menu:
 
   * Click the **Change the order** item to move PXE boot up above the hard disk boot.
-
-Disable ``SMT mode`` (Symmetric Multithreading) in the BIOS setup menu under *UEFI Settings->System setup*.
 
 Firmware upgrades
 =================
