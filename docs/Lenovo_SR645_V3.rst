@@ -19,6 +19,7 @@ Lenovo provides SR645_V3_ information and downloads:
 * `ThinkSystem SR645 Setup Guide <https://pubs.lenovo.com/sr645/sr645_setup_guide.pdf>`_.
 * `Lenovo XClarity Administrator Product Guide <https://lenovopress.lenovo.com/tips1200-lenovo-xclarity-administrator>`_.
 * `Lenovo XClarity Essentials OneCLI <https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli>`_.
+  and `Lenovo XClarity Essentials OneCLI User Guide <https://pubs.lenovo.com/lxce-onecli/onecli_bk.pdf>`_.
 * `Lenovo XClarity Provisioning Manager <https://sysmgt.lenovofiles.com/help/index.jsp?topic=%2Flxpm_frontend%2Flxpm_product_page.html&cp=7>`_.
 * Firmware_updates_
   and `Best practices <https://lenovopress.lenovo.com/lp0656-lenovo-thinksystem-firmware-and-driver-update-best-practices>`_.
@@ -81,6 +82,14 @@ Go to the menu **BMC settings** submenu **Network settings**:
 Go to the menu **UEFI Settings**:
 
 * In **System Settings -> Processors** select Disable ``SMT Mode`` (Symmetric Multithreading).
+
+* In **System Settings -> Network -> Network Stack Settings** you probably want to set **IPv6 PXE Support** to Disabled.
+
+* In **System Settings -> Network -> Network Boot Settings** you have to **unconfigure PXE**
+  for each individual NIC that will never be used for network PXE booting:
+
+  - Set **UEFI PXE Mode** to Disabled.
+  - Set **Legacy PXE Mode** to Disabled.
 
 * In **Boot Manager -> Change Boot Order** use + and - to change the boot order items to 1) Network, 2) Hard disk.
   Press **Commit Changes and Exit**.
