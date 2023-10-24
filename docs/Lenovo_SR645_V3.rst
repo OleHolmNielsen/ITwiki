@@ -135,9 +135,12 @@ firmware and device driver updates.
 Download the ``lnvgy_utl_lxcer_onecli01z-4.2.0_linux_x86-64`` RPM file from the download page and install it.
 This will create a soft-link ``/usr/bin/onecli`` to the OneCLI_ command.
 
-Some useful commands are::
+Some useful OneCLI_ commands are::
 
   onecli config show
+  onecli config save --file <savetofilename> [--group <groupname>] [--excbackupctl] [<options>] # Save the current settings
+  onecli config replicate --file <filename> [<options>] # Replicate the settings to the other system
+  onecli config restore --file <filename> [<options>]   # Restore a saved setting value to the current system
 
 Firmware upgrades
 =================
