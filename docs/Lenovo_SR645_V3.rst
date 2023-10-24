@@ -138,9 +138,21 @@ This will create a soft-link ``/usr/bin/onecli`` to the OneCLI_ command.
 Some useful OneCLI_ commands are::
 
   onecli config show
+  onecli config show system_prod_data
+
+Saving and restoring system configuration::
+
   onecli config save --file <savetofilename> [--group <groupname>] [--excbackupctl] [<options>] # Save the current settings
   onecli config replicate --file <filename> [<options>] # Replicate the settings to the other system
   onecli config restore --file <filename> [<options>]   # Restore a saved setting value to the current system
+
+System health commands::
+
+  onecli misc syshealth
+  onecli misc syshealth --device system
+  onecli misc syshealth --device processor
+  onecli misc syshealth --device dimm
+  onecli misc syshealth --device power
 
 Firmware upgrades
 =================
