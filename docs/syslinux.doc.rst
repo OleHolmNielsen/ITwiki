@@ -4,7 +4,7 @@
 syslinux.doc
 ============
 
-Version: syslinux-3.35
+Version: syslinux-3.35 (update?)
 
 .. Contents::
 
