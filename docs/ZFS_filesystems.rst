@@ -479,9 +479,18 @@ Some useful commands are::
   zpool events -v
   zpool history
 
+If a normal user, and also the daily ``logwatch`` scripts, tries to execute ``zpool status`` an error message may appear::
+
+  Permission denied the ZFS utilities must be run as root
+
+This seems to be a Systemd_ issue, see 
+`permissions issues with openzfs #28653 <https://github.com/systemd/systemd/issues/28653>`_.
+There seems to be a fix in
+`Udev vs tmpfiles take 2 #28732 <https://github.com/systemd/systemd/pull/28732>`_,
+however, this has not been tested on EL8 yet.
+
 .. _Troubleshooting: https://openzfs.github.io/openzfs-docs/Basic%20Concepts/Troubleshooting.html
 .. _ZFS_events: https://openzfs.github.io/openzfs-docs/Basic%20Concepts/Troubleshooting.html#zfs-events
-
 
 Disk quotas for ZFS
 ======================
