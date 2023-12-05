@@ -451,6 +451,9 @@ See the zpool-status_ if any disks have failed::
   zpool status
   zpool status -x
 
+Scan the system for disk changes using ``/usr/bin/rescan-scsi-bus.sh`` from the `sg3_utils` package.
+Unfortunately, it may sometimes be necessary to reboot the server so that the OS will discover the replaced ``/dev/sd???`` disk device.
+
 Use the zpool-replace_ command to replace a failed disk, for example disk *sde*::
 
   zpool replace <pool-name> sde sde
