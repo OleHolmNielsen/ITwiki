@@ -73,9 +73,18 @@ It may be a good idea to install
 `Multi-version <https://rocm.docs.amd.com/en/latest/deploy/linux/install_overview.html#installation-types>`_
 of the ROCm stack on a system, for example::
 
-  dnf install rocm-hip-sdk5.7.1 rocm-hip-sdk5.6.1
+  dnf install rocm-hip-sdk5.7.2 rocm-hip-sdk5.6.1
 
 Read also the Linux_installation_ section *Post-install Actions and Verification Process*.
+
+The software is installed under the ``/opt`` directory.
+Some useful commands are:
+
+* AMD ROCm System Management Interface (SMI) command::
+
+    /opt/rocm-5.7.2/bin/rocm-smi 
+
+The directory name depends on the installed versions of ROCm_.
 
 .. _Linux_installation: https://rocm.docs.amd.com/en/latest/deploy/linux/os-native/install.html
 .. _EPEL: https://docs.fedoraproject.org/en-US/epel/
