@@ -6,6 +6,7 @@ AMD ROCm
 
 This page documents how to deploy an EL Linux server with AMD_ Instinct_ GPUs
 using the ROCm_ HPC and AI software stack.
+See also this `Wikipedia article <https://en.wikipedia.org/wiki/ROCm>`_.
 
 .. _AMD: https://www.amd.com
 .. _Instinct: https://www.amd.com/en/graphics/instinct-server-accelerators
@@ -48,12 +49,25 @@ Install kernel packages::
 
   dnf install kernel-headers kernel-devel
 
-Two new UNIX groups ``video,render`` should be created, 
-and users must be added to those groups.
+Two new UNIX groups ``video,render`` should be created::
+
+  sudo usermod -a -G render,video $LOGNAME
+
+and ROCm_ users must be added to those groups.
+
+The section `Setting Permissions for Groups <https://rocm.docs.amd.com/en/latest/deploy/linux/prerequisites.html#setting-permissions-for-groups>`_
+states that a file ``/etc/adduser.conf`` should be created.
+However, such a file is **not** used by EL Linux installations.
 
 Install ROCm_ RPMs as documented in
 `Installation via Package manager <https://rocm.docs.amd.com/en/latest/deploy/linux/os-native/index.html>`_.
-Some Yum repositories ``amdgpu.repo, rocm.repo`` will beanabled for installation.
+The Yum repositories ``amdgpu.repo, rocm.repo`` will be enabled for installation.
+
+Now install::
+
+  dnf install amdgpu-dkms
+
+and reboot the server.
 
 It may be a good idea to install 
 `Multi-version <https://rocm.docs.amd.com/en/latest/deploy/linux/install_overview.html#installation-types>`_
