@@ -97,3 +97,9 @@ Install ROCm runtimes
 The Quick_Start_ guide shows how to install the ``rocm-hip-libraries`` meta-package on EL8::
 
   dnf install rocm-hip-libraries 
+
+Install the ROC_tracer_ library::
+
+  dnf install roctracer
+
+.. _ROC_tracer: https://rocm.docs.amd.com/projects/roctracer/en/latest/
