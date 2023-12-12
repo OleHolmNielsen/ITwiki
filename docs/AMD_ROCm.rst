@@ -44,7 +44,8 @@ Software installation
 
 The `Deploy ROCm on Linux <https://rocm.docs.amd.com/en/latest/deploy/linux/>`_
 guide documents installation on RHEL.
-You must enable the EPEL_ repository.
+See also the Quick_Start_ guide.
+You must first enable the EPEL_ repository.
 Install kernel packages::
 
   dnf install kernel-headers kernel-devel
@@ -87,4 +88,12 @@ Some useful commands are:
 The directory name depends on the installed versions of ROCm_.
 
 .. _Linux_installation: https://rocm.docs.amd.com/en/latest/deploy/linux/os-native/install.html
+.. _Quick_Start: https://rocm.docs.amd.com/en/latest/deploy/linux/quick_start.html
 .. _EPEL: https://docs.fedoraproject.org/en-US/epel/
+
+Install ROCm runtimes
+---------------------------
+
+The Quick_Start_ guide shows how to install the ``rocm-hip-libraries`` meta-package on EL8::
+
+  dnf install rocm-hip-libraries 
