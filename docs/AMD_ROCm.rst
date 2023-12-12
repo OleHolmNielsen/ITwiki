@@ -100,6 +100,6 @@ The Quick_Start_ guide shows how to install the ``rocm-hip-libraries`` meta-pack
 
 Install the ROC_tracer_ library::
 
-  dnf install roctracer
+  dnf install roctracer roctracer-devel
 
 .. _ROC_tracer: https://rocm.docs.amd.com/projects/roctracer/en/latest/
