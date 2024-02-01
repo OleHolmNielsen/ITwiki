@@ -133,6 +133,8 @@ In the *UEFI Setup -> Boot Manager -> Change boot order* menu:
 
   * Click the **Change the order** item to move PXE boot up above the hard disk boot.
 
+.. _FreeIPMI: https://www.gnu.org/software/freeipmi/
+
 XClarity Essentials OneCLI
 ==============================
 
