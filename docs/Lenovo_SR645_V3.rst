@@ -80,7 +80,7 @@ Go to the menu **BMC settings** submenu **Network settings**:
 
 * When done press **Save Network Settings**.
 
-Go to the menu **UEFI Settings**:
+Go to the menu **UEFI Setup**:
 
 * In **System Settings -> Processors** select Disable ``SMT Mode`` (Symmetric Multithreading).
 
@@ -114,6 +114,14 @@ In *DNS and DDNS* set Preferred address type: IPv4 and DDNS to Disabled.
 Disable *Use DNS to discover Lenovo XClarity Administrator*.
 
 In *Service Enablement and Port Assignment* enable the *IPMI over LAN*.
+The web GUI says::
+
+  The current security settings require incoming IPMI over LAN connection to use cipher suite ID 17.
+  If you are using the IPMItool utility (prior to version 1.8.19), you must specify the option “-C 17” to connect to this management controller.
+
+With FreeIPMI_ use the -I option, for example::
+
+  ipmipower -I 17 -D LAN_2_0 ....
 
 In the *User/LDAP* menu change the local *User name* from *USERID* to *root*.
 
