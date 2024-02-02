@@ -119,9 +119,11 @@ The web GUI says::
   The current security settings require incoming IPMI over LAN connection to use cipher suite ID 17.
   If you are using the IPMItool utility (prior to version 1.8.19), you must specify the option “-C 17” to connect to this management controller.
 
-With FreeIPMI_ use the -I option, for example::
+With FreeIPMI_ use the `-I CIPHER-SUITE-ID` option, for example::
 
   ipmipower -I 17 -D LAN_2_0 ....
+
+**NOTE:** Some BMC brands (HPE, SuperMicro) unfortunately only support the default cipher suite ``-I 3`` and will reject connections with ``-I 17``.
 
 In the *User/LDAP* menu change the local *User name* from *USERID* to *root*.
 
