@@ -2,19 +2,20 @@
 Lenovo servers and racks
 #########################
 
-.. Contents::
-
 This page contains information about Lenovo servers and racks deployed in our cluster:
 
-* Lenovo_SD665-N_V3_ Neptune DWC Server.
-* Lenovo_SR645_V3_ server.
-* Lenovo_SR850_V3_ server.
-* Lenovo_BIOS_settings_ common to servers.
-* Lenovo_XClarity_BMC_ (XCC) controller.
-* Lenovo_rack_ cabinets.
-* Lenovo_PDU_ power distribution units.
-* Lenovo_CDU_ direct water cooling distribution units.
-* Lenovo_EveryScale_ framework for data center solutions.
+.. toctree::
+      :maxdepth: 1
+
+   Lenovo_SD665-N_V3
+   Lenovo_SR645_V3
+   Lenovo_SR850_V3
+   Lenovo_BIOS_settings
+   Lenovo_XClarity_BMC
+   Lenovo_rack cabinets.
+   Lenovo_PDU_ power distribution units.
+   Lenovo_CDU
+   Lenovo_EveryScale_ framework for data center solutions.
 
 .. _Lenovo_PDU: https://lenovopress.lenovo.com/lp1556-lenovo-1u-switched-monitored-3-phase-pdu
 .. _Lenovo_EveryScale: https://lenovopress.lenovo.com/lp0900-lenovo-everyscale-lesi
