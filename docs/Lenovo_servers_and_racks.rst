@@ -5,7 +5,7 @@ Lenovo servers and racks
 This page contains information about Lenovo servers and racks deployed in our cluster:
 
 .. toctree::
-      :maxdepth: 1
+   :maxdepth: 1
 
    Lenovo_SD665-N_V3
    Lenovo_SR645_V3
