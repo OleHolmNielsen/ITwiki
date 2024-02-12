@@ -15,7 +15,7 @@ This page contains information about Lenovo servers and racks deployed in our cl
 
 External pages:
 
-* Lenovo_rack_
+* Lenovo_rack_ cabinet solutions.
 * Lenovo_PDU_ power distribution units.
 * Lenovo_Neptune_ liquid cooling technology.
 * Lenovo_EveryScale_ framework for data center solutions (formerly Lenovo Scalable Infrastructure or LeSI).
