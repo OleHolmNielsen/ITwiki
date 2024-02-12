@@ -21,6 +21,6 @@ Lenovo provides SR645_V3_ information and downloads:
 Booting and BIOS configuration
 ==============================
 
-See the Lenovo_BIOS_settings_ page.
+See the :ref:`Lenovo_BIOS_settings` page.
 
-See the Lenovo_XClarity_BMC_ page.
+See the :ref:`Lenovo_XClarity_BMC` page.
