@@ -10,7 +10,6 @@ This page contains documentation on some hardware at our site.
    Lenovo_servers_and_racks
    Lenovo_XClarity_BMC
    Lenovo_BIOS_settings
-   Lenovo_rack
    Lenovo_SD665-N_V3
    Lenovo_SR850_V3
    Lenovo_SR645_V3
