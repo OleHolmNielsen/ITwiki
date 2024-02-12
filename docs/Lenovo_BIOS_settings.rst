@@ -1,12 +1,12 @@
 .. _Lenovo_BIOS_settings:
 
-========================================
+======================================
 Lenovo BIOS settings common to servers
-========================================
+======================================
 
 .. Contents::
 
-This page contains information about Lenovo BIOS settings common to servers.
+This page contains information about BIOS settings common to Lenovo servers.
 
 Booting and BIOS configuration
 ==============================
