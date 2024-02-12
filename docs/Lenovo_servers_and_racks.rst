@@ -13,7 +13,7 @@ This page contains information about Lenovo servers and racks deployed in our cl
    Lenovo_BIOS_settings
    Lenovo_XClarity_BMC
 
-External pages:
+Lenovo product pages:
 
 * Lenovo_rack_ cabinet solutions.
 * Lenovo_PDU_ power distribution units.
