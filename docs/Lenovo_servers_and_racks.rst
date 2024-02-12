@@ -25,8 +25,8 @@ Lenovo product pages:
 .. _Lenovo_EveryScale: https://lenovopress.lenovo.com/lp0900-lenovo-everyscale-lesi
 .. _Lenovo_Neptune: https://www.lenovo.com/us/en/servers-storage/neptune/
 
-Firmware upgrades
-=================
+Server firmware upgrades
+==========================
 
 In the BMC (XCC) GUI's ``Firmware Update`` window you may install update files.
 Go to the Firmware_download_ page and type in the system serial number to search for updates.
