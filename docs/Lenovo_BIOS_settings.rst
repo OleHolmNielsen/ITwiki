@@ -1,3 +1,6 @@
+.. _Lenovo_BIOS_settings:
+
+========================================
 Lenovo BIOS settings common to servers
 ========================================
 

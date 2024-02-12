@@ -1,3 +1,6 @@
+.. _Lenovo_XClarity_BMC:
+
+==========================
 Lenovo XClarity (XCC) BMC
 ==========================
 

@@ -1,4 +1,6 @@
+.. _Lenovo_servers_and_racks:
 
+========================
 Lenovo servers and racks
 ========================
 
