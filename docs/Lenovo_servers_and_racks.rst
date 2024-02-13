@@ -35,7 +35,7 @@ Print the serial number by the command::
 
   dmidecode -s system-serial-number
 
-* The Firmware_download_ page.
+* The Data_Center_Support_ page including download pages.
 * Firmware `Best practices <https://lenovopress.lenovo.com/lp0656-lenovo-thinksystem-firmware-and-driver-update-best-practices>`_.
 
-.. _Firmware_download: https://datacentersupport.lenovo.com/us/en
+.. _Data_Center_Support: https://datacentersupport.lenovo.com/us/en
