@@ -35,9 +35,7 @@ Print the serial number by the command::
 
   dmidecode -s system-serial-number
 
-* Firmware_updates_
-  and `Best practices <https://lenovopress.lenovo.com/lp0656-lenovo-thinksystem-firmware-and-driver-update-best-practices>`_.
-  The Firmware_download_ page.
+* The Firmware_download_ page.
+* Firmware `Best practices <https://lenovopress.lenovo.com/lp0656-lenovo-thinksystem-firmware-and-driver-update-best-practices>`_.
 
-.. _Firmware_updates: https://pubs.lenovo.com/sr645/maintenance_manual_firmware_updates
-.. _Firmware_download: https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sr645v3/7d9c/downloads/driver-list/
+.. _Firmware_download: https://datacentersupport.lenovo.com/us/en
