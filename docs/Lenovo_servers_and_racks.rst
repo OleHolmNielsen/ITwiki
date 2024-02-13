@@ -31,7 +31,8 @@ Server firmware upgrades
 
 In the BMC (XCC) GUI's ``Firmware Update`` window you may install update files.
 
-Print the system information by these commands::
+The system product and SKU name can be read from the BMC (XCC) GUI's Home page.
+You can also print the system information by these Linux commands::
 
   dmidecode -s system-product-name
   dmidecode -s system-sku-number
