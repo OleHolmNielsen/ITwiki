@@ -30,10 +30,18 @@ Server firmware upgrades
 ==========================
 
 In the BMC (XCC) GUI's ``Firmware Update`` window you may install update files.
-Go to the Firmware_download_ page and type in the system serial number to search for updates.
-Print the serial number by the command::
 
+Print the system information by these commands::
+
+  dmidecode -s system-product-name
+  dmidecode -s system-sku-number
   dmidecode -s system-serial-number
+
+Go to the Data_Center_Support_ page and click on the ``Servers`` tile and select your server model:
+
+* Select series: ``ThinkSystem``.
+* Select subseries and search for the ``system product name``.
+* Select machine type as the 4 first letters of the ``SKU number``.
 
 * The Data_Center_Support_ page including download pages.
 * Firmware `Best practices <https://lenovopress.lenovo.com/lp0656-lenovo-thinksystem-firmware-and-driver-update-best-practices>`_.
