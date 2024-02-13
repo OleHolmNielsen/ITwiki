@@ -37,6 +37,7 @@ You can also print the system information by these Linux commands::
   dmidecode -s system-product-name
   dmidecode -s system-sku-number
   dmidecode -s system-serial-number
+  dmidecode -s bios-version
 
 Go to the Data_Center_Support_ page and click on the ``Servers`` tile and select your server model:
 
