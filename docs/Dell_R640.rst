@@ -133,6 +133,10 @@ Get system logs::
   SEL Event Log: racadm getsel
   Lifecycle Log: racadm lclog view
 
+Get hardware inventory information::
+
+  racadm hwinventory
+
 Clone system configuration with racadm
 ......................................
 
