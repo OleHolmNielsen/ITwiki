@@ -21,6 +21,8 @@ Lenovo provides SD665_V3_ information and downloads:
 
 * https://pubs.lenovo.com/sd665-v3/
 
+There is a `Product Home <https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sd665-v3/7d9p>`_ page for downloads.
+
 Booting and BIOS configuration
 ==============================
 
