@@ -13,6 +13,8 @@ The nodes are housed in the upgraded ThinkSystem DW612S_ enclosure.
 
 The SD665_V3_ has a water-cooled NVIDIA 2-Port PCIe Gen5 x16 InfiniBand Adapter (SharedIO) 
 `ThinkSystem NVIDIA ConnectX-7 NDR200 InfiniBand QSFP112 Adapters <https://lenovopress.lenovo.com/lp1693-thinksystem-nvidia-connectx-7-ndr200-infiniband-qsfp112-adapters>`_.
+The adapter is located in the right-hand SD665_V3_ node and connects both servers in the tray.
+Note that the right-hand SD665_V3_ node must be up and running in order for the left-hand node to have InfiniBand connectivity!
 
 .. _SD665_V3: https://lenovopress.lenovo.com/lp1612-lenovo-thinksystem-sd665-v3-server
 .. _DW612S: https://pubs.lenovo.com/dw612s_neptune_enclosure/
