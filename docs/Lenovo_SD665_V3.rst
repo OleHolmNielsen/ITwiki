@@ -28,10 +28,10 @@ There is important information in the article
 Power up
 --------
 
-When powering up nodes with Shared I/O adapters, from an A/C down state or after a virtual reseat, the Primary node must be powered on before the Auxiliary node.
-It is recommended to wait until the Primary node completes POST before attempting to power up the Auxiliary node, or ideally, wait until the Primary node has completed boot to the operating system.
-Failure to wait will result in the Auxiliary node not being granted power permission, and therefore, the Auxiliary node will not boot.
-The System Event Log (SEL) for the Auxiliary node will also report the either one of following events:
+When powering up nodes with Shared I/O adapters, from an A/C down state or after a virtual reseat, the ``Primary node`` must be powered on before the ``Auxiliary node``.
+It is recommended to wait until the ``Primary node`` completes POST before attempting to power up the ``Auxiliary node``, or ideally, wait until the ``Primary node`` has completed boot to the operating system.
+Failure to wait will result in the ``Auxiliary node`` not being granted power permission, and therefore, the ``Auxiliary node`` will not boot.
+The System Event Log (SEL) for the ``Auxiliary node`` will also report the either one of following events:
 
 * Module/Board - SharedIO fail Asserted
 * Sensor Aux/Pri SharedIO has transitioned to critical from a less severe state.
@@ -39,10 +39,10 @@ The System Event Log (SEL) for the Auxiliary node will also report the either on
 Power down or Rebooting
 -------------------------
 
-When powering down, or rebooting, nodes with Shared I/O adapters, the Auxiliary node should always be powered down before the Primary Node.
-The Aux adapter cannot operate without the Primary node adapter having power.
-There is no mechanism in place to prevent the Primary node from powering down while the Auxiliary node is still powered up, so it is important to pay close attention to the order that the nodes are being powered off.
-Failure to power down the Auxiliary node first will result in a fault reported in the System Event Log (SEL) on the Auxiliary node, or in some cases, a software NMI once the Aux adapter loses power and is no longer visible:
+When powering down, or rebooting, nodes with Shared I/O adapters, the ``Auxiliary node`` should always be powered down before the ``Primary node``.
+The Aux adapter cannot operate without the ``Primary node`` adapter having power.
+There is no mechanism in place to prevent the ``Primary node`` from powering down while the ``Auxiliary node`` is still powered up, so it is important to pay close attention to the order that the nodes are being powered off.
+Failure to power down the ``Auxiliary node`` first will result in a fault reported in the System Event Log (SEL) on the ``Auxiliary node``, or in some cases, a software NMI once the Aux adapter loses power and is no longer visible:
 
 * Slot/Connector - PCIe 1 - Fault - PCIe 1
 * Critical interrupt - NMI State - Software NMI
@@ -50,11 +50,11 @@ Failure to power down the Auxiliary node first will result in a fault reported i
 Other considerations
 -------------------------
 
-When installing the Shared I/O adapters, the primary adapter should be installed on the right side of the chassis, with the auxiliary adapter on the left side.
+When installing the Shared I/O adapters, the ``Primary adapter`` should be installed on the right side of the chassis, with the auxiliary adapter on the left side.
 
-To update firmware on the Shared I/O adapter, first power down the Auxiliary node.
-Once the code has been applied to the primary card, power down the Primary node and power it back up.
-Once the operating system has booted, power up the Auxiliary node.
+To update firmware on the Shared I/O adapter, first power down the ``Auxiliary node``.
+Once the code has been applied to the primary card, power down the ``Primary node`` and power it back up.
+Once the operating system has booted, power up the ``Auxiliary node``.
 
 If at any point a PCI bus fault or Software NMI has been generated in the System Event Log because of an incorrect power off sequence, a virtual reseat can be done to clear the event.
 
