@@ -31,15 +31,30 @@ Workaround: Specify only 1 of the keys to the SSH command, for example::
 
   ssh -i $HOME/.ssh/id_rsa <BMC_hostname>
 
-Minimal configuration of a new server or motherboard
-----------------------------------------------------
+Minimal configuration of a new server or a new motherboard
+-----------------------------------------------------------
 
 At our site the following minimal settings are required for a new server or a new motherboard.  
 
 The (BMC) setup is accessed via the console or BMC web GUI.
 Login with the above credentials.
+Go to the ``BMC Configuration`` menus and the login credentials:
 
-Changing BMC password: The rules are documented where????  See also password settings below.
+* Click on ``Global Settings`` and deselect ``Complex password required`` and set ``Minimum password length`` to 8 (or according to your policies).
+  Also change ``Minimum password change interval`` to ``0`` so that you can change the password as needed.
+
+* In the ``User/LDAP`` menu edit the BMC local ``User name`` from ``USERID`` to ``root``.
+  Here you may also change the password.
+
+You may change the ``BMC Configuration->Network`` settings:
+
+* Configure ``DHCP control`` to ``DHCP enabled``.
+  **Important**: Set the BMC network address selection to ``Obtain IP from DHCP``
+  in stead of the default ``First DHCP, then static IP`` so that the BMC does not fall back to a private IP-address!
+
+* Set ``IPv6`` to ``Disabled``.
+
+* When done press ``Save Network Settings``.
 
 Configuration using the console
 .........................................
@@ -48,34 +63,34 @@ The BMC GUI has a *Remote Console* menu to open a console in a new browser tab.
 Press **F1** during start-up to enter the BIOS and firmware setup menus.
 Use the console to configure the **UEFI setup**.
 
-Go to the menu **BMC settings** submenu **Network settings**:
+Go to the menu ``BMC settings`` submenu ``Network settings``:
 
-* Configure **DHCP control** to **DHCP enabled**.
-  **Important**: Set the BMC network address selection to **Obtain IP from DHCP**
-  in stead of the default **First DHCP, then static IP** so that the BMC does not fall back to a private IP-address!
+* Configure ``DHCP control`` to ``DHCP enabled``.
+  **Important**: Set the BMC network address selection to ``Obtain IP from DHCP``
+  in stead of the default ``First DHCP, then static IP`` so that the BMC does not fall back to a private IP-address!
 
-* Set **IPv6** to **Disabled**.
+* Set ``IPv6`` to ``Disabled``.
 
-* When done press **Save Network Settings**.
+* When done press ``Save Network Settings``.
 
-Go to the menu **UEFI Setup**:
+Go to the menu ``UEFI Setup``:
 
-* In **System Settings -> Processors** select Disable ``SMT Mode`` (Symmetric Multithreading).
+* In ``System Settings -> Processors`` select Disable ``SMT Mode`` (Symmetric Multithreading).
 
-* In **System Settings -> Network -> Network Stack Settings** you probably want to set **IPv6 PXE Support** to Disabled.
+* In ``System Settings -> Network -> Network Stack Settings`` you probably want to set ``IPv6 PXE Support`` to Disabled.
 
-* In **System Settings -> Network -> Network Boot Settings** you have to **unconfigure PXE**
+* In ``System Settings -> Network -> Network Boot Settings`` you have to ``unconfigure PXE``
   for each individual NIC that will never be used for network PXE booting:
 
-  - Set **UEFI PXE Mode** to Disabled.
-  - Set **Legacy PXE Mode** to Disabled.
+  - Set ``UEFI PXE Mode`` to Disabled.
+  - Set ``Legacy PXE Mode`` to Disabled.
 
-* In **Boot Manager -> Change Boot Order** use + and - to change the boot order items to 1) Network, 2) Hard disk.
-  Press **Commit Changes and Exit**.
+* In ``Boot Manager -> Change Boot Order`` use + and - to change the boot order items to 1) Network, 2) Hard disk.
+  Press ``Commit Changes and Exit``.
 
-* In **Boot Manager -> Set Boot Priority -> Network Priority** use + and - to move down the priority of IPv6.
+* In ``Boot Manager -> Set Boot Priority -> Network Priority`` use + and - to move down the priority of IPv6.
 
-* When done press **Save Settings**.
+* When done press ``Save Settings``.
 
 * When all configuration is finished press **Exit UEFI Setup**.
 
@@ -102,10 +117,6 @@ With FreeIPMI_ use the `-I CIPHER-SUITE-ID` option, for example::
   ipmipower -I 17 -D LAN_2_0 ....
 
 **NOTE:** Some BMC brands (HPE, SuperMicro) unfortunately only support the default cipher suite ``-I 3`` and will reject connections with ``-I 17``.
-
-In the *User/LDAP* menu change the local *User name* from *USERID* to *root*.
-
-Click on *Global Settings* and deselect *Complex password required* and set *Minimum password length* to 8.
 
 In the *Security* menu item set *IPMI SEL Log Wrapping* to Enabled.
 
