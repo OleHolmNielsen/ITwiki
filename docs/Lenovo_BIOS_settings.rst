@@ -46,7 +46,10 @@ Go to the ``BMC Configuration`` menus and the login credentials:
 * In the ``User/LDAP`` menu edit the BMC local ``User name`` from ``USERID`` to ``root``.
   Here you may also change the password.
 
-You may change the ``BMC Configuration->Network`` settings:
+BMC network settings
+----------------------
+
+You may change the ``BMC Configuration`` ``Network`` settings:
 
 * Configure ``DHCP control`` to ``DHCP enabled``.
   **Important**: Set the BMC network address selection to ``Obtain IP from DHCP``
@@ -54,7 +57,24 @@ You may change the ``BMC Configuration->Network`` settings:
 
 * Set ``IPv6`` to ``Disabled``.
 
-* When done press ``Save Network Settings``.
+* When done press ``Apply``.
+
+Modify the ``DNS and DDNS`` settings:
+
+* Change DNS ``Preferred address type`` to ``IPv4``.
+
+* Change DDNS_ to ``Disabled``.
+
+* When done press ``Apply``.
+
+.. _DDNS: https://en.wikipedia.org/wiki/Dynamic_DNS
+
+BMC Security
+--------------
+
+You may change the ``BMC Configuration`` ``Security`` settings:
+
+* If desired set the ``IPMI SEL Log Wrapping`` to ``Enabled``.
 
 Configuration using the console
 .........................................
