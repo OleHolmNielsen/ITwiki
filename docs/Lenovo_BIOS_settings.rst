@@ -65,9 +65,15 @@ Modify the ``DNS and DDNS`` settings:
 
 * Change DDNS_ to ``Disabled``.
 
+* If your network has a DNS server configured to advertise the address of a *Lenovo XClarity Administrator* (LXCA_) instance.
+  Lenovo offers a 90 days trial license for LXCA_.
+  The BMC will periodically search each DNS server for SRV records defined as: ``_lxca._tcp``.
+  If an LXCA_ instance is found, the BMC will attempt to announce its presence to the selected address of LXCA_ instance.
+
 * When done press ``Apply``.
 
 .. _DDNS: https://en.wikipedia.org/wiki/Dynamic_DNS
+.. _LXCA: https://sysmgt.lenovofiles.com/help/index.jsp?topic=%2Fcom.lenovo.lxca.doc%2Flxca_overview.html
 
 BMC Security
 --------------
