@@ -106,7 +106,7 @@ Go to the menu ``UEFI Setup``:
 * In ``System Settings -> Network -> Network Stack Settings`` you probably want to set ``IPv6 PXE Support`` to Disabled.
 
 * In ``System Settings -> Network -> Network Boot Settings`` you have to ``unconfigure PXE``
-  for each individual NIC that will never be used for network PXE booting:
+  for each individual NIC in the ``MAC address`` submenu that will never be used for network PXE booting:
 
   - Set ``UEFI PXE Mode`` to Disabled.
   - Set ``Legacy PXE Mode`` to Disabled.
