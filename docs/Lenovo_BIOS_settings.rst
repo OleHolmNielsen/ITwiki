@@ -49,10 +49,9 @@ Go to the ``BMC Configuration`` menus and the login credentials:
 BMC network settings
 ----------------------
 
-In the ``Home`` menu enter the desired hostname in ``System Information and Settings``.
-Change the BMC ``Hostname`` to the server's DNS name, or select ``Obtain Hostname from DHCP``.
-
 You may change the ``BMC Configuration`` ``Network`` settings:
+
+* Change the BMC ``Hostname`` to the server's DNS name, or select ``Obtain Hostname from DHCP``.
 
 * Configure ``DHCP control`` to ``DHCP enabled``.
   **Important**: Set the BMC network address selection to ``Obtain IP from DHCP``
@@ -68,23 +67,16 @@ Modify the ``DNS and DDNS`` settings:
 
 * Change DDNS_ to ``Disabled``.
 
-* If your network has a DNS server configured to advertise the address of a *Lenovo XClarity Administrator* (LXCA_) instance.
+* Disable ``Use DNS to discover Lenovo XClarity Administrator``.
+  Note: If your network has a DNS server configured to advertise the address of a *Lenovo XClarity Administrator* (LXCA_) instance.
   Lenovo offers a 90 days trial license for LXCA_.
   The BMC will periodically search each DNS server for SRV records defined as: ``_lxca._tcp``.
   If an LXCA_ instance is found, the BMC will attempt to announce its presence to the selected address of LXCA_ instance.
 
 * When done press ``Apply``.
 
-In the ``UEFI Setup -> Boot Manager -> Change boot order`` menu:
-
-  * Click the ``Change the order`` item to move PXE boot up above the hard disk boot.
-
 .. _DDNS: https://en.wikipedia.org/wiki/Dynamic_DNS
 .. _LXCA: https://sysmgt.lenovofiles.com/help/index.jsp?topic=%2Fcom.lenovo.lxca.doc%2Flxca_overview.html
-
-In ``DNS and DDNS`` set Preferred address type: IPv4 and DDNS to Disabled.
-
-Disable ``Use DNS to discover Lenovo XClarity Administrator``.
 
 In ``Service Enablement and Port Assignment`` enable the ``IPMI over LAN``.
 The web GUI says::
