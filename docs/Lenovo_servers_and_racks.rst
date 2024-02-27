@@ -8,7 +8,7 @@ This page contains information about Lenovo servers and racks deployed in our cl
    :maxdepth: 1
 
    Lenovo_SD665_V3
-   Lenovo_SD665-N_V3
+   Lenovo_SD650-N_V2
    Lenovo_SR645_V3
    Lenovo_SR850_V3
    Lenovo_BIOS_settings
