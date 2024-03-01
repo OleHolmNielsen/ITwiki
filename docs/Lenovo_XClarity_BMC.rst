@@ -56,6 +56,11 @@ Show system configuration parameters, for example::
 
   onecli config show BootOrder.BootOrder
 
+Show/set BMC hostname::
+
+  onecli config show IMM.HostName1
+  onecli config set IMM.HostName1 <BMC-hostname>
+
 Updating a single firmware file on a single server (omit last file extension)::
 
   onecli update flash --dir <firmware-directory> --scope individual --includeid <firmware-file-name> 
