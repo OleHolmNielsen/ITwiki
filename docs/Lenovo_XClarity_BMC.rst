@@ -41,8 +41,8 @@ Some useful OneCLI_ commands are::
 Saving and restoring system configuration::
 
   onecli config save --file <savetofilename> [--group <groupname>] [--excbackupctl] [<options>] # Save the current settings
-  onecli config replicate --file <filename> [<options>] # Replicate the settings to the other system
-  onecli config restore --file <filename> [<options>]   # Restore a saved setting value to the current system
+  onecli config replicate --file <filename> [<options>] # Replicate the settings to ANOTHER system
+  onecli config restore --file <filename> [<options>]   # Restore a saved setting value to the CURRENT system
 
 System health commands::
 
@@ -51,3 +51,7 @@ System health commands::
   onecli misc syshealth --device processor
   onecli misc syshealth --device dimm
   onecli misc syshealth --device power
+
+Show system configuration parameters, for example::
+
+  onecli config show BootOrder.BootOrder
