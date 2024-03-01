@@ -61,6 +61,11 @@ Show/set BMC hostname::
   onecli config show IMM.HostName1
   onecli config set IMM.HostName1 <BMC-hostname>
 
+Show/set the system's friendly name (unrelated to DNS names)::
+
+  onecli config show IMM.IMMInfo_Name 
+  onecli config set IMM.IMMInfo_Name <system-name>
+
 Updating a single firmware file on a single server (omit last file extension)::
 
   onecli update flash --dir <firmware-directory> --scope individual --includeid <firmware-file-name> 
