@@ -55,3 +55,7 @@ System health commands::
 Show system configuration parameters, for example::
 
   onecli config show BootOrder.BootOrder
+
+Updating a single firmware file on a single server (omit last file extension)::
+
+  onecli update flash --dir <firmware-directory> --scope individual --includeid <firmware-file-name> 
