@@ -40,3 +40,9 @@ Booting and BIOS configuration
 See the :ref:`Lenovo_BIOS_settings` page.
 
 See the :ref:`Lenovo_XClarity_BMC` page.
+
+There is a document
+`Lenovo ThinkSystem SR645 Recommended UEFI and OS settings for Lenovo Scalable Infrastructure (LeSI) <https://download.lenovo.com/servers/sr645_and_sr665_uefi_and_os_settings_v1.4.txt>`_
+which recommends:
+
+* For best performance set to **Maximum Performance** first, then set to **Custom Mode**
