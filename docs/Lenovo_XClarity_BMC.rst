@@ -70,6 +70,22 @@ Show/set the system's friendly name (unrelated to DNS names)::
 If you made a ``onecli config save`` file, make sure to delete the line with ``IMM.IMMInfo_Name`` from that file because it 
 will be overwritten by the *replicate* command..
 
+Upload system logs to Lenovo
+------------------------------
+
+The OneCLI_ can upload system logs to Lenovo using the getinfor_ command::
+
+  onecli inventory getinfor --ffdc --upload lenovo
+
+The ``--upload`` command is described as:
+
+* If specified with lenovo, the format is: --upload lenovo. The inventory data is uploaded to Lenovo Upload Facility. Users should specify the case number, or specify both machine type and serial number.
+
+.. _getinfor: https://pubs.lenovo.com/lxce-onecli/onecli_r_getinfor_command
+
+Firmware updates
+-----------------
+
 Updating a single firmware file on a single server (omit last file extension)::
 
   onecli update flash --dir <firmware-directory> --scope individual --includeid <firmware-file-name> 
