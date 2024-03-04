@@ -38,11 +38,12 @@ Some useful OneCLI_ commands are::
   onecli config show
   onecli config show system_prod_data
 
-Saving and restoring system configuration::
+Saving and replicating the system configuration::
 
   onecli config save --file <savetofilename> [--group <groupname>] [--excbackupctl] [<options>] # Save the current settings
   onecli config replicate --file <filename> [<options>] # Replicate the settings to ANOTHER system
-  onecli config restore --file <filename> [<options>]   # Restore a saved setting value to the CURRENT system
+
+Use the ``onecli config restore`` command to restore previous settings on the **same** server.
 
 System health commands::
 
@@ -65,6 +66,9 @@ Show/set the system's friendly name (unrelated to DNS names)::
 
   onecli config show IMM.IMMInfo_Name 
   onecli config set IMM.IMMInfo_Name <system-name>
+
+If you made a ``onecli config save`` file, make sure to delete the line with ``IMM.IMMInfo_Name`` from that file because it 
+will be overwritten by the *replicate* command..
 
 Updating a single firmware file on a single server (omit last file extension)::
 
