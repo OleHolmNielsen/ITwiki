@@ -22,6 +22,15 @@ Documentation and software
 .. _OneCLI: https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli
 .. _OneCLI_User_Guide: https://pubs.lenovo.com/lxce-onecli/onecli_bk.pdf
 
+Service log for Lenovo hardware support
+===========================================
+
+Gather ``Service Log`` files for Lenovo hardware support under the XCC GUI page under *Quick Actions* menu.
+Press the *Export* button and the file will be stored in your ``$HOME/Downloads`` directory.
+
+Then upload the file to the `Lenovo Upload page <https://logupload.lenovo.com/>`_.
+You must enter the case number (3000xxxx).
+
 XClarity Essentials OneCLI
 ==============================
 
