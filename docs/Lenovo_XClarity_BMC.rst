@@ -35,6 +35,8 @@ You must enter the case number (3000xxxx).
 `Secure Connection Failed error page <https://support.mozilla.org/en-US/kb/secure-connection-failed-firefox-did-not-connect>`_.
 We currently do not have a workaround for this issue.
 
+Lenovo has a `Repair status <https://support.lenovo.com/us/en/repairstatus>`_ page.
+
 XClarity Essentials OneCLI
 ==============================
 
