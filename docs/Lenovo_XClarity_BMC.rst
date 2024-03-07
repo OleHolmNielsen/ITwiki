@@ -58,9 +58,14 @@ Saving and replicating the system configuration::
   onecli config save --file <savetofilename> [--group <groupname>] [--excbackupctl] [<options>] # Save the current settings
   onecli config replicate --file <filename> [<options>] # Replicate the settings to ANOTHER system
 
-Use the ``onecli config restore`` command to restore previous settings on the **same** server.
+Use the ``onecli config restore`` command **only** to restore previous settings on the **same** server.
+If you made a ``onecli config save`` file, make sure to delete the line with ``IMM.IMMInfo_Name`` from that file because it 
+will be overwritten by the *replicate* command.
+The ``noreplicate`` parameters are printed by the command::
 
-System health commands::
+  onecli config show noreplicate
+
+Some system health commands::
 
   onecli misc syshealth
   onecli misc syshealth --device system
@@ -81,9 +86,6 @@ Show/set the system's friendly name (unrelated to DNS names)::
 
   onecli config show IMM.IMMInfo_Name 
   onecli config set IMM.IMMInfo_Name <system-name>
-
-If you made a ``onecli config save`` file, make sure to delete the line with ``IMM.IMMInfo_Name`` from that file because it 
-will be overwritten by the *replicate* command..
 
 Upload system logs to Lenovo
 ------------------------------
