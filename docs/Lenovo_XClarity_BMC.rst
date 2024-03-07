@@ -26,10 +26,14 @@ Service log for Lenovo hardware support
 ===========================================
 
 Gather ``Service Log`` files for Lenovo hardware support under the XCC GUI page under *Quick Actions* menu.
-Press the *Export* button and the file will be stored in your ``$HOME/Downloads`` directory.
+Press the *Export* button and the file will be stored in your ``$HOME/Downloads/`` directory.
 
 Then upload the file to the `Lenovo Upload page <https://logupload.lenovo.com/>`_.
 You must enter the case number (3000xxxx).
+
+**Note:** Browsers on Linux (Firefox, Chrome) may refuse this web page with a
+`Secure Connection Failed error page <https://support.mozilla.org/en-US/kb/secure-connection-failed-firefox-did-not-connect>`_.
+We currently do not have a workaround for this issue.
 
 XClarity Essentials OneCLI
 ==============================
