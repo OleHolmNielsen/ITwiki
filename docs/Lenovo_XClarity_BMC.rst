@@ -106,3 +106,6 @@ Firmware updates
 Updating a single firmware file on a single server (omit last file extension)::
 
   onecli update flash --dir <firmware-directory> --scope individual --includeid <firmware-file-name> 
+
+See the *Lenovo XClarity Administrator Quick Start Guide*
+`Updating firmware and software <https://sysmgt.lenovofiles.com/help/topic/com.lenovo.lxca.doc/lxca_qsg_update_sw_fw.pdf>`_.
