@@ -12,6 +12,7 @@ Booting and BIOS configuration
 ==============================
 
 * Press ``F1`` during start-up to enter the BIOS and firmware setup menus.
+  In the BMC GUI you may also press ``Quick Actions`` and select the *Power Action* ``Boot Server to System Setup``.
 * Press ``F10`` for network boot and ``F12`` for a one-time boot menu.
 
 XClarity Provisioning Manager
@@ -104,6 +105,8 @@ Configuration using the console
 
 The BMC GUI has a ``Remote Console`` menu to open a console in a new browser tab.
 Press ``F1`` during start-up to enter the BIOS and firmware setup menus.
+In the BMC GUI you may also press ``Quick Actions`` and select the *Power Action* ``Boot Server to System Setup``.
+
 Use the console to configure the ``UEFI setup``.
 
 Go to the menu ``BMC settings`` submenu ``Network settings``:
