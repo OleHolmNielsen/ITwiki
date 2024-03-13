@@ -61,7 +61,13 @@ Saving and replicating the system configuration::
 Use the ``onecli config restore`` command **only** to restore previous settings on the **same** server.
 If you made a ``onecli config save`` file, make sure to delete the line with ``IMM.IMMInfo_Name`` from that file because it 
 will be overwritten by the *replicate* command.
-The ``noreplicate`` parameters are printed by the command::
+In the ``onecli config replicate`` log file you should identify all **VPD setting** parameters and delete those from the file, for example::
+
+  Some settings are failed to set with some reason. The settings and reasons are as following:
+  SYSTEM_PROD_DATA.SysInfoSerialNum
+        Reason:SYSTEM_PROD_DATA.SysInfoSerialNum is skipped since this is VPD setting
+
+The ``noreplicate`` parameters may be printed by the command::
 
   onecli config show noreplicate
 
