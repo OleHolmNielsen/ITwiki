@@ -25,6 +25,9 @@ There is important information regarding SharedIO for older SD650 servers in the
 `Considerations when using ThinkSystem SD650, SD650 V2, SD650 V3 and ConnectX-6 HDR, ConnectX-7 NDR SharedIO <https://support.lenovo.com/us/en/solutions/ht510888-thinksystem-sd650-and-connectx-6-hdr-sharedio-lenovo-servers-and-storage>`_.
 The issues have apparently been resolved in the SD665_V3_ system.
 
+Please note that several Infiniband tools such as ``ibnetdiscover`` fail with an error message when executed on the SD665_V3_ "auxiliary" (left-hand) node, 
+and you **must** execute such tools on the "primary" (right-hand) node (private communication with a Lenovo support person).
+
 Documentation and software
 ==========================
 
