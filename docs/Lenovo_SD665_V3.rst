@@ -82,7 +82,11 @@ so it may be a good idea to add this flag and omit firmware updates::
 
   ./mlnxofedinstall --without-fw-update
 
-**Notice:** OFED_ software includes kernel modules for the running kernel, and these must be rebuilt if the kernel is upgraded!
+**Notices**:
+
+* On Redhat and SLES distributions with errata kernel installed there is no need to use the ``mlnx_add_kernel_support.sh`` script.
+  The regular installation can be performed and weak-updates mechanism will create symbolic links to the MLNX_OFED kernel modules.
+* OFED_ software includes kernel modules for the running kernel, and these must be rebuilt if the kernel is upgraded!
 
 Installation instructions are in the *User Manual* from the `Mellanox documentation <https://docs.nvidia.com/networking/software/adapter-software/index.html#linux>`_.
 
