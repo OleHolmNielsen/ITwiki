@@ -54,6 +54,10 @@ OFED software and drivers
 -------------------------
 
 The OpenFabrics Enterprise Distribution (OFED_) is open-source software for RDMA and kernel bypass applications, as provided by the `OpenFabrics Alliance <http://en.wikipedia.org/wiki/OFED>`_.
+Mellanox provides some information about Inbox_drivers_ from various OS vendors,
+but it is not stated whether they can be used in place of the drivers from Mellanox described below.
+
+.. _Inbox_drivers: https://network.nvidia.com/products/adapter-software/ethernet/inbox-drivers/
 
 Install these prerequisite packages::
 
