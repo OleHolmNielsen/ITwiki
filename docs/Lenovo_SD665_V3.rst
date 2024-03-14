@@ -82,15 +82,20 @@ so it may be a good idea to add this flag and omit firmware updates::
 
   ./mlnxofedinstall --without-fw-update
 
+Installation instructions are in the *User Manual* from the `Mellanox documentation <https://docs.nvidia.com/networking/software/adapter-software/index.html#linux>`_.
+
+Verify that the Mellanox driver RPMs have been installed and the ``openibd`` service started::
+
+  rpm -qa | grep mlnx
+  systemctl status openibd
+
+If your kernel version does not match with any of the offered pre-built RPMs,
+you can add your kernel version by using the ``mlnx_add_kernel_support.sh`` script located inside the MLNX_OFED package.
+
 **Notices**:
 
 * On Redhat and SLES distributions with errata kernel installed there is no need to use the ``mlnx_add_kernel_support.sh`` script.
   The regular installation can be performed and weak-updates mechanism will create symbolic links to the MLNX_OFED kernel modules.
 * OFED_ software includes kernel modules for the running kernel, and these must be rebuilt if the kernel is upgraded!
-
-Installation instructions are in the *User Manual* from the `Mellanox documentation <https://docs.nvidia.com/networking/software/adapter-software/index.html#linux>`_.
-
-If your kernel version does not match with any of the offered pre-built RPMs,
-you can add your kernel version by using the ``mlnx_add_kernel_support.sh`` script located inside the MLNX_OFED package.
 
 .. _OFED: https://www.openfabrics.org/index.php/resources/ofed-for-linux-ofed-for-windows/ofed-overview.html
