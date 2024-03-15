@@ -57,6 +57,14 @@ The OpenFabrics Enterprise Distribution (OFED_) is open-source software for RDMA
 Mellanox provides some information about Inbox_drivers_ from various OS vendors,
 but it is not stated whether they can be used in place of the drivers from Mellanox described below.
 
+Nvidia's `Red Hat Enterprise Linux (RHEL) Inbox Driver documentation <https://docs.nvidia.com/networking/display/rhel89/general+support>`_
+has the statement::
+
+  Warning
+  ConnectX-7 is only supported as technical preview (i.e., the feature is not fully supported for production).
+
+Since the SD665_V3_ nodes have ``ConnectX-7`` adapters, these are **NOT SUPPORTED** at present! 
+
 .. _Inbox_drivers: https://network.nvidia.com/products/adapter-software/ethernet/inbox-drivers/
 
 Install these prerequisite packages::
