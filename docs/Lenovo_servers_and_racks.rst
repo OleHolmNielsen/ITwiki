@@ -46,6 +46,8 @@ Go to the Data_Center_Support_ page and click on the ``Servers`` tile and select
 * Select subseries and search for the ``system product name``.
 * Select machine type as the 4 first letters of the ``SKU number``.
 
+Alternatively, just type in the ``System serial number`` in the search bar.
+
 * The Data_Center_Support_ page including download pages.
 * Firmware `Best practices <https://lenovopress.lenovo.com/lp0656-lenovo-thinksystem-firmware-and-driver-update-best-practices>`_.
 
