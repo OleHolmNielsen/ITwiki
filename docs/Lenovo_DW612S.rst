@@ -59,6 +59,7 @@ The required firmware file is the .rom file (for example, ``lnvgy_fw_smm2_umsm12
 
 After logging in to the SMM Web Gui click on the *Configuration* tab and select *Firmware update*.
 Here you browse for the .rom file and upload it for the firmware update to start.
+**Important**: Make sure that ``Preserve Settings`` is selected.
 
 .. _Data_Center_Support: https://datacentersupport.lenovo.com/us/en
 
