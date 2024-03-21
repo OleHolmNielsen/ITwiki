@@ -13,6 +13,7 @@ This page contains information about Lenovo servers and racks deployed in our cl
    Lenovo_SR850_V3
    Lenovo_BIOS_settings
    Lenovo_XClarity_BMC
+   Lenovo_DW612S
 
 Lenovo product pages:
 
