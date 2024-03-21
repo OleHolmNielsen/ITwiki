@@ -19,7 +19,7 @@ Lenovo product pages:
 * Lenovo_rack_ cabinet solutions.
 * Lenovo_PDU_ power distribution units.
   Vertiv `User Documentation for Lenovo <https://www.vertiv.com/en-us/support/avocent-support-lenovo/>`_.
-* Lenovo_Neptune_ liquid cooling technology and the DW612S_ 6U enclosure.
+* Lenovo_Neptune_ liquid cooling technology, the DW612S_ 6U enclosure and DW612S_documents_.
 * Lenovo_EveryScale_ framework for data center solutions (formerly *Lenovo Scalable Infrastructure* or LeSI).
 
 .. _Lenovo_rack: https://lenovopress.lenovo.com/lp1287-lenovo-rack-cabinet-reference#availability=Available
@@ -27,6 +27,7 @@ Lenovo product pages:
 .. _Lenovo_EveryScale: https://lenovopress.lenovo.com/lp0900-lenovo-everyscale-lesi
 .. _Lenovo_Neptune: https://www.lenovo.com/us/en/servers-storage/neptune/
 .. _DW612S: https://pubs.lenovo.com/dw612s_neptune_enclosure/
+.. _DW612S_documents: https://pubs.lenovo.com/dw612s_neptune_enclosure/pdf_files
 
 Server firmware upgrades
 ==========================
