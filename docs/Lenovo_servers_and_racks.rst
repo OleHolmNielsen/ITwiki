@@ -20,6 +20,7 @@ Lenovo product pages:
 * Lenovo_rack_ cabinet solutions.
 * Lenovo_PDU_ power distribution units.
   Vertiv `User Documentation for Lenovo <https://www.vertiv.com/en-us/support/avocent-support-lenovo/>`_.
+  PDUs delivered by Lenovo may have the default USERID/PASSW0RD login.
 * Lenovo_Neptune_ liquid cooling technology.
 * Lenovo_EveryScale_ framework for data center solutions (formerly *Lenovo Scalable Infrastructure* or LeSI).
 
