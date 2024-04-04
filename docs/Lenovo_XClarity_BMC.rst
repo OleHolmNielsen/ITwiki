@@ -112,21 +112,39 @@ Firmware updates
 Updating a single firmware file on a single server can be performed with OneCLI_, but the no working examples have been found in the OneCLI_User_Guide_.
 We have tested this procedure:
 
-1. Unpack the firmware payload zip file in a dedicated directory (example XCC firmware `lnvgy_fw_xcc_qgx330d-5.10_anyos_comp.zip`)::
+1. Unpack the firmware payload zip file in a dedicated directory (example `XCC` firmware file `lnvgy_fw_xcc_qgx330d-5.10_anyos_comp.zip`)::
 
      mkdir XCC
      cd XCC
      unzip <somewhere>/lnvgy_fw_xcc_qgx330d-5.10_anyos_comp.zip
 
    A subdirectory ``payload`` will contain the firmware file.
+   Change the `XCC` directory name for other firmwares such as `UEFI`.
 
 2. Execute this command::
 
      onecli update flash --scope individual --dir <somewhere>/XCC --nocompare --includeid lnvgy_fw_xcc_qgx330d-5.10_anyos_comp --output /tmp
 
-Note that the firmware file extension must be omitted, and that output logs will be written to `/tmp`.
-When the XCC/BMC is updated it will be rebooted as part of the firmware update.
-When the UEFI is updated, the server must be rebooted manually.
+Note that the firmware file extension must be omitted,
+and that output logs will be written to `/tmp` (useful if the `XCC` directory is on a remote file server)..
 
-See also the *Lenovo XClarity Administrator Quick Start Guide*
-`Updating firmware and software <https://sysmgt.lenovofiles.com/help/topic/com.lenovo.lxca.doc/lxca_qsg_update_sw_fw.pdf>`_.
+Special notes:
+
+* When the XCC (BMC) is updated it will be rebooted as part of the firmware update.
+
+* When the UEFI is updated, the server must be rebooted manually.
+
+* When updating the `NVIDIA/Mellanox` network adapters, the firmware update bundle contains separate firmware files for different adapter families.
+  These must be used with the above procedure:
+
+  - NVIDIA ConnectX-6 Lx 10/25GbE LOM Ethernet ``fam010``.
+  - Nvidia ConnectX-7 NDR200/HDR QSFP112 2-port PCIe Gen5 x16 InfiniBand Adapter (SharedIO) DWC: ``fam016``.
+    Notice that the server power must be hard cycled for the firmware update to be effective!
+    In the DW612S chassis the nodes can be power cycled by a ``Reseat`` operation in the SMM2 web GUI,
+    and it may take 5 minutes before the node can be powered on again.
+
+See also:
+
+* `How to use Lenovo XClarity Essentials OneCLI to locally update your system <https://support.lenovo.com/us/en/solutions/ht511326-how-to-use-lenovo-xclarity-essentials-onecli-to-locally-update-your-system>`_.
+* *Lenovo XClarity Administrator Quick Start Guide* `Updating firmware and software <https://sysmgt.lenovofiles.com/help/topic/com.lenovo.lxca.doc/lxca_qsg_update_sw_fw.pdf>`_.
+
