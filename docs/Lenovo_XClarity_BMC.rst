@@ -109,9 +109,24 @@ The ``--upload`` command is described as:
 Firmware updates
 -----------------
 
-Updating a single firmware file on a single server (omit last file extension)::
+Updating a single firmware file on a single server can be performed with OneCLI_, but the no working examples have been found in the OneCLI_User_Guide_.
+We have tested this procedure:
 
-  onecli update flash --dir <firmware-directory> --scope individual --includeid <firmware-file-name> 
+1. Unpack the firmware payload zip file in a dedicated directory (example XCC firmware `lnvgy_fw_xcc_qgx330d-5.10_anyos_comp.zip`)::
 
-See the *Lenovo XClarity Administrator Quick Start Guide*
+     mkdir XCC
+     cd XCC
+     unzip <somewhere>/lnvgy_fw_xcc_qgx330d-5.10_anyos_comp.zip
+
+   A subdirectory ``payload`` will contain the firmware file.
+
+2. Execute this command::
+
+     onecli update flash --scope individual --dir <somewhere>/XCC --nocompare --includeid lnvgy_fw_xcc_qgx330d-5.10_anyos_comp --output /tmp
+
+Note that the firmware file extension must be omitted, and that output logs will be written to `/tmp`.
+When the XCC/BMC is updated it will be rebooted as part of the firmware update.
+When the UEFI is updated, the server must be rebooted manually.
+
+See also the *Lenovo XClarity Administrator Quick Start Guide*
 `Updating firmware and software <https://sysmgt.lenovofiles.com/help/topic/com.lenovo.lxca.doc/lxca_qsg_update_sw_fw.pdf>`_.
