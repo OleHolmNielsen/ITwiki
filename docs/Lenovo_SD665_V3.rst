@@ -37,6 +37,12 @@ Lenovo provides SD665_V3_ information and downloads:
 
 There is a `Product Home <https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sd665-v3/7d9p>`_ page for downloads.
 
+The `EasyBuild` software module `OpenMPI` seems to have issues with the Mellanox libraries.
+Setting these variables may be a workaround::
+
+  export OMPI_MCA_btl='^openib,ofi'
+  export OMPI_MCA_mtl='^ofi' 
+
 Booting and BIOS configuration
 ==============================
 
