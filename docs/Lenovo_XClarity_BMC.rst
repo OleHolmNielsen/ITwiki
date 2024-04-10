@@ -93,6 +93,10 @@ Show/set the system's friendly name (unrelated to DNS names)::
   onecli config show IMM.IMMInfo_Name 
   onecli config set IMM.IMMInfo_Name <system-name>
 
+Enable promoting the primary BMC firmware to the backup firmware::
+
+  onecli config set IMM.BackupAutoPromote Enabled
+
 Upload system logs to Lenovo
 ------------------------------
 
