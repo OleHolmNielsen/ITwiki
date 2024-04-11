@@ -7,7 +7,7 @@ Lenovo SD650-N_V2 server
 .. Contents::
 
 This page contains information about Lenovo SD650-N_V2_ servers deployed in our cluster.
-The Lenovo ThinkSystem SD650-N_V2_ is a 2-socket 1U server that features the AMD EPYC 9004 "Genoa" family of processors and 4 GPUs. 
+The Lenovo ThinkSystem SD650-N_V2_ is a 2-socket 1U server that features the Intel Xeon family of processors and 4 GPUs. 
 
 The nodes are housed in the upgraded ThinkSystem DW612S_ enclosure.
 
