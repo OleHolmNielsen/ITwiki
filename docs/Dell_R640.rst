@@ -162,6 +162,10 @@ You can also reconfigure just a single setting component with the ``-c`` flag, f
 
   racadm set -t xml -f config.xml -c NIC.Integrated.1-1-1 -b NoReboot
 
+To configure only the UEFI boot order you may configure this setting in the `config.xml` file::
+
+  <Attribute Name="UefiBootSeq">NIC.PxeDevice.1-1, Disk.SATAEmbedded.A-1</Attribute>
+
 The server will need to be rebooted, see the ``racadm set -b NoReboot|Graceful|Forced`` options in::
 
   racadm help set
