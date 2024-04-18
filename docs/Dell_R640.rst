@@ -162,7 +162,11 @@ You can also reconfigure just a single setting component with the ``-c`` flag, f
 
   racadm set -t xml -f config.xml -c NIC.Integrated.1-1-1 -b NoReboot
 
-To configure the UEFI boot order you may configure this setting in the `config.xml` file::
+To configure the UEFI boot order::
+
+  racadm set bios.biosbootsettings.UefiBootSeq NIC.PxeDevice.1-1,Disk.SATAEmbedded.A-1
+
+or configure this setting in the `config.xml` file::
 
   <Attribute Name="UefiBootSeq">NIC.PxeDevice.1-1, Disk.SATAEmbedded.A-1</Attribute>
 
@@ -498,7 +502,7 @@ Press *Finish* to save all settings.
 
 It is possible to request a one-time PXE boot from the BMC using this IPMItool_ raw command::
 
-  ipmitool -I lanplus -H <BMC-adress> -U <username> -P <password> raw 0x00 0x08 0x05 0xa0 0x04 0x00 0x00 0x00
+  ipmitool -I lanplus -H <BMC-address> -U <username> -P <password> raw 0x00 0x08 0x05 0xa0 0x04 0x00 0x00 0x00
 
 The FreeIPMI_ command ipmi-raw_ may also be used.
 
