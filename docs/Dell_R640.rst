@@ -148,6 +148,10 @@ For example::
 
   racadm get --clone -t xml -f config.xml
 
+In the ``config.xml`` you may possibly want to delete the line setting the iDRAC password so that your current password is preserved::
+
+  <Attribute Name="Users.2#Password">Calvin#SCP#CloneReplace1</Attribute>
+
 To use the config.xml on another server and **reboot automatically by default**::
 
   racadm set -t xml -f config.xml
