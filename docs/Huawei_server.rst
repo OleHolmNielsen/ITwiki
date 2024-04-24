@@ -852,6 +852,8 @@ uMate tool
 
 The *uMate* is a Java-based tool used for log collection, firmware upgrade, configuration of BIOS, iBMC, HMM, and System.
 
+**WARNING:** It seems that *uMate* does not work on EL8 Linux, and that CentOS/RHEL 7 is required!
+
 The following prerequisites must be installed (this is for CentOS/RHEL)::
 
   yum install java-1.8.0-openjdk ipmitool net-snmp-utils python glibc.i686 libXext.i686
