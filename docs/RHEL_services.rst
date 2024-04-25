@@ -468,6 +468,10 @@ Install also this package::
 NFS server configuration is now in ``/etc/nfs.conf``, an INI-like configuration file.
 Ports are defined in this file.
 
+If IPv6 is disabled, you may get an error **rpc.rquotad: Failed to create udp6 service**,
+see https://unix.stackexchange.com/questions/454231/rpc-bind-errors-when-disabling-ipv6
+The fix is to comment out lines with *udp6* and *tcp6* in ``/etc/netconfig`` and reboot the system.
+
 NFS server firewall rules
 -----------------------------------
 
