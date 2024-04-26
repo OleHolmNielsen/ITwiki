@@ -186,6 +186,16 @@ See the job status by::
 Setting system parameters
 -------------------------
 
+View the BIOS boot mode::
+
+  racadm get BIOS.BiosBootSettings
+
+To set the boot mode to UEFI::
+
+  racadm set BIOS.BiosBootSettings.BootMode Uefi
+
+The new setting will only take effect at the next reboot.
+
 To enable **IPMI over LAN**::
 
   racadm set iDRAC.IPMILan.Enable 1
