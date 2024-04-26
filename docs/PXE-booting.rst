@@ -60,10 +60,11 @@ With `newer versions of SYSLINUX <http://www.kernel.org/pub/linux/utils/boot/sys
 it is also possible to PXE-boot into the
 `SYSLINUX menu systems <http://syslinux.zytor.com/menu.php>`_ where many booting options can be configured.
 This is a very flexible way to boot, for example, diskette images with BIOS_ upgrades, hardware testers, or
-SystemImager installation, etc.
+Kickstart_ installation, etc.
 
 .. _TFTP: http://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol
 .. _DHCP: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
+.. _Kickstart: https://anaconda-installer.readthedocs.io/en/latest/kickstart.html
 
 Installing the SYSLINUX tools
 -----------------------------
@@ -151,7 +152,7 @@ With `newer versions of SYSLINUX <http://www.kernel.org/pub/linux/utils/boot/sys
 it is possible to PXE-boot into the
 `SYSLINUX menu systems <http://syslinux.zytor.com/menu.php>`_ where many booting options can be configured.
 This is a very flexible way to boot, for example, diskette images with BIOS_ upgrades, hardware testers, or
-SystemImager installation, etc.
+Kickstart_ installation, etc.
 
 Please consult the :ref:`README.menu` from the  SYSLINUX source.
 
@@ -357,25 +358,60 @@ A sample output is::
 The pxeconfigd daemon
 ---------------------
 
-The second part of the pxeconfig_toolkit_ is the *pxeconfigd daemon*.
-This tool is presumably only useful when doing network installation using https://www.ansible.com/
-`SystemImager <System_administration#cloning-of-nodes-with-systemimager>`_.
+The second part of the pxeconfig_toolkit_ is the ``pxeconfigd`` daemon which is started by xinetd_ on EL7 and EL8 systems by a file ``/etc/xinetd.d/pxeconfigd``::
 
-The *pxeconfigd daemon* will remove the hexadecimally encoded IP-address soft-link on the server when contacted by the client node. 
-In order for this to happen, you must go to the image server's ``/var/lib/systemimager/scripts/post-install`` directory 
-and create the file ``30all.pxeconfig``::
+  service pxeconfigd
+  {
+  disable               = no
+  socket_type   = stream
+  protocol      = tcp
+  user          = root
+  group         = sys
+  wait          = no
+  server                = /usr/local/sbin/pxeconfigd
+  # server_args = -d /tftpboot/pxelinux.cfg
+  }
+
+On EL9 systems xinetd_ no longer exists, and xinetd_ services must be converted to Systemd_,
+see `How to convert xinetd service to systemd? <https://access.redhat.com/solutions/1609583>`_.
+On EL9 you create the socket file ``/etc/systemd/system/pxeconfigd.socket``::
+
+  [Unit]
+  Description=Pxeconfigd Socket
+
+  [Socket]
+  ListenStream=6611
+  Accept=yes                          
+
+  [Install]
+  WantedBy=sockets.target
+
+and the service file ``/etc/systemd/system/pxeconfigd.service``::
+
+  [Unit]
+  Description=Pxeconfigd Per-Connection Server
+
+  [Service]
+  ExecStart=-/usr/local/sbin/pxeconfigd
+  User=root
+  Group=sys
+  StandardInput=socket
+
+The ``pxeconfigd`` daemon will remove the hexadecimally encoded IP-address soft-link on the server when contacted by the client node. 
+In order for this to happen, you must create the image server's post-install script to make an action such as this example::
 
   #!/bin/sh
   # To be used with the pxeconfig tool.
   # Remove the <hex_ipaddr> file from the pxelinux.cfg directory so the client will boot from disk.
   # Get pxeconfig from ftp://ftp.surfsara.nl/pub/outgoing/pxeconfig.tar.gz
-  # Get the Systemimager variables
-  . /tmp/post-install/variables.txt
   telnet $IMAGESERVER 6611
   sleep 1
   exit 0
 
-When this script is executed on the node by SystemImager in the post-install phase,
-the ``telnet`` command connects to the *pxeconfigd daemon* on the image server,
+When this script is executed on the node in the post-install phase,
+the ``telnet`` command connects to the ``pxeconfigd`` daemon on the image server,
 and this daemon will remove the hexadecimally encoded IP-address soft-link in ``/tftpboot/pxelinux.cfg/``
 corresponding to the client IP-address which did the ``telnet`` connection.
+
+.. _xinetd: https://en.wikipedia.org/wiki/Xinetd
+.. _Systemd: https://en.wikipedia.org/wiki/Systemd
