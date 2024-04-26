@@ -358,7 +358,8 @@ A sample output is::
 The pxeconfigd daemon
 ---------------------
 
-The second part of the pxeconfig_toolkit_ is the ``pxeconfigd`` daemon which is started by xinetd_ on EL7 and EL8 systems by a file ``/etc/xinetd.d/pxeconfigd``::
+The second part of the pxeconfig_toolkit_ is the ``pxeconfigd`` daemon which is started by xinetd_ on **EL7 and EL8 systems**
+by a file ``/etc/xinetd.d/pxeconfigd``::
 
   service pxeconfigd
   {
@@ -372,12 +373,34 @@ The second part of the pxeconfig_toolkit_ is the ``pxeconfigd`` daemon which is 
   # server_args = -d /tftpboot/pxelinux.cfg
   }
 
-On EL9 systems xinetd_ no longer exists, and xinetd_ services must be converted to Systemd_,
+The ``pxeconfigd`` daemon will remove the hexadecimally encoded IP-address soft-link on the server when contacted by the client node. 
+In order for this to happen, you must create the image server's post-install script to make an action such as this example::
+
+  #!/bin/sh
+  # To be used with the pxeconfig tool.
+  # Remove the <hex_ipaddr> file from the pxelinux.cfg directory so the client will boot from disk.
+  # Get pxeconfig from ftp://ftp.surfsara.nl/pub/outgoing/pxeconfig.tar.gz
+  telnet $IMAGESERVER 6611
+  sleep 1
+  exit 0
+
+When this script is executed on the node in the post-install phase,
+the ``telnet`` command connects to the ``pxeconfigd`` daemon on the image server,
+and this daemon will remove the hexadecimally encoded IP-address soft-link in ``/tftpboot/pxelinux.cfg/``
+corresponding to the client IP-address which did the ``telnet`` connection.
+
+.. _xinetd: https://en.wikipedia.org/wiki/Xinetd
+
+The pxeconfigd daemon on EL9
+----------------------------
+
+On **EL9 systems** xinetd_ no longer exists, and xinetd_ services would have to be converted to Systemd_,
 see `How to convert xinetd service to systemd? <https://access.redhat.com/solutions/1609583>`_.
-On EL9 you create the socket file ``/etc/systemd/system/pxeconfigd.socket``::
+A possibility is to create the socket file ``/etc/systemd/system/pxeconfigd.socket``::
 
   [Unit]
   Description=Pxeconfigd Socket
+  PartOf=pxeconfigd.service
 
   [Socket]
   ListenStream=6611
@@ -397,21 +420,7 @@ and the service file ``/etc/systemd/system/pxeconfigd.service``::
   Group=sys
   StandardInput=socket
 
-The ``pxeconfigd`` daemon will remove the hexadecimally encoded IP-address soft-link on the server when contacted by the client node. 
-In order for this to happen, you must create the image server's post-install script to make an action such as this example::
+Howerver, this is not working at present.
 
-  #!/bin/sh
-  # To be used with the pxeconfig tool.
-  # Remove the <hex_ipaddr> file from the pxelinux.cfg directory so the client will boot from disk.
-  # Get pxeconfig from ftp://ftp.surfsara.nl/pub/outgoing/pxeconfig.tar.gz
-  telnet $IMAGESERVER 6611
-  sleep 1
-  exit 0
 
-When this script is executed on the node in the post-install phase,
-the ``telnet`` command connects to the ``pxeconfigd`` daemon on the image server,
-and this daemon will remove the hexadecimally encoded IP-address soft-link in ``/tftpboot/pxelinux.cfg/``
-corresponding to the client IP-address which did the ``telnet`` connection.
-
-.. _xinetd: https://en.wikipedia.org/wiki/Xinetd
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
