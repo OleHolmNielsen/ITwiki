@@ -190,11 +190,15 @@ View the BIOS boot mode::
 
   racadm get BIOS.BiosBootSettings
 
-To set the boot mode to UEFI::
+To set the boot mode to UEFI at the next reboot::
 
   racadm set BIOS.BiosBootSettings.BootMode Uefi
+  racadm jobqueue create BIOS.Setup.1-1
 
-The new setting will only take effect at the next reboot.
+Note: It seems that additional UEFI parameters also need to be set (TBD)::
+
+  UefiBootSeq NIC.PxeDevice.1-1,Disk.SATAEmbedded.A-1
+  HddPlaceholder Enabled
 
 To enable **IPMI over LAN**::
 
