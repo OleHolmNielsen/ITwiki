@@ -39,7 +39,7 @@ At our site the following minimal settings are required for a new server or a ne
 
 The (BMC) setup is accessed via the console or BMC web GUI.
 Login with the above credentials.
-Go to the ``BMC Configuration`` menus and the login credentials:
+Go to the ``BMC Configuration -> User/LDAP`` menus and modify the login credentials:
 
 * Click on ``Global Settings`` and deselect ``Complex password required`` and set ``Minimum password length`` to 8 (or according to your policies).
   Also change ``Minimum password change interval`` to ``0`` so that you can change the password as needed.
