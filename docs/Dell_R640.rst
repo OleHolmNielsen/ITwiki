@@ -186,6 +186,10 @@ See the job status by::
 Setting system parameters
 -------------------------
 
+Set the E-mail alerts destination::
+
+  racadm set iDRAC.EmailAlert.Address.1 <some-email-address>
+
 View the BIOS boot mode::
 
   racadm get BIOS.BiosBootSettings
