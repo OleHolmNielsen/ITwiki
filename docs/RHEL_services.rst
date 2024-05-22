@@ -326,7 +326,50 @@ We document configuration of this in :ref:`Linux_firewall_configuration`.
 DNS servers
 ================
 
-See the documentation on :ref:`DNS-servers`.
+See also the documentation on :ref:`DNS-servers`.
+
+ISC BIND DNS nameserver
+-------------------------
+
+The ISC_ distributes the latest stable and development releases of the BIND_ DNS nameserver
+available from the ISC_Downloads_ page which also has *Release Notes*.
+Some important bug fixes in recent ISC_ releases are:
+
+* `Repeated priming queries when doing forwarding <https://gitlab.isc.org/isc-projects/bind9/-/issues/752>`_.
+  In the syslog there are lots of entries::
+
+    named[5116]: resolver priming query complete
+
+ISC_ distributes BIND_ RPM packages from this `Fedora Copr repository <https://copr.fedorainfracloud.org/coprs/isc/bind/>`_.
+Installation has these steps::
+
+  dnf copr enable isc/bind 
+  dnf install isc-bind
+
+The ``named.conf`` configuration file can be found at ``/etc/opt/isc/scls/isc-bind/named.conf`` (RHEL/CentOS 8, Fedora).
+
+Start the ISC_ BIND_ named service by::
+
+  systemctl start isc-bind-named
+  systemctl enable isc-bind-named
+
+**Important:** Remember to first stop and disable the OS's default named service!
+
+Note that due to the nature of Software Collections,
+no BIND_ 9 daemon or utility installed by these packages is available in $PATH by default.
+To be able to use them, do the following:
+
+    * to enable the Software Collection for the current shell, run ``scl enable isc-bind bash``
+    * to enable the Software Collection inside a shell script, add the following line to it: ``source scl_source enable isc-bind``
+
+
+.. _ISC: https://www.isc.org/
+.. _ISC_Downloads: https://www.isc.org/download/
+.. _BIND: https://en.wikipedia.org/wiki/BIND
+.. _Copr: https://copr.fedorainfracloud.org/
+
+RHEL BIND nameserver installation
+------------------------------------
 
 Note that ``bind-chroot`` is no longer recommended, see ``man named``::
 
@@ -336,7 +379,7 @@ Note that ``bind-chroot`` is no longer recommended, see ``man named``::
   It is not necessary to run named in a chroot environment if the Red Hat SELinux policy for named is enabled. When enabled, this policy is far more secure than a chroot environment.
   Users are recommended to enable SELinux and remove the bind-chroot package.
 
-Install the BIND DNS server packages::
+Install the BIND_ DNS server packages::
 
   yum install bind-utils bind-libs bind
   systemctl enable named 
@@ -353,7 +396,7 @@ Install SELinux packages and documentation::
 Configuring DNS master server
 --------------------------------
 
-The BIND configuration file is ``/etc/named.conf``.
+The BIND_ configuration file is ``/etc/named.conf``.
 
 The authoritative DNS zone files are located in this directory ``/var/named``.
 
