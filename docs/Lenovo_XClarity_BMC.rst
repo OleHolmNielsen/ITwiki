@@ -37,6 +37,21 @@ We currently do not have a workaround for this issue.
 
 Lenovo has a `Repair status <https://support.lenovo.com/us/en/repairstatus>`_ page.
 
+XCC licenses
+================
+
+License keys for the XCC can be accessed in the product page's *Reference Information* pane item
+`Feature On Demand Key <https://fod2.lenovo.com/lkms>`_.
+There is *FoD* documentation in the `Using the FoD web site <https://pubs.lenovo.com/lenovo_fod/usingfod>`_.
+First you must register a login account on the *FoD* homepage.
+
+In the *FoD* dashboard you can click on the *Retrieve history* menu and select search type *Search history via machine type serial number*.
+For the *Search value* you enter the 4-character *Machine type* followed by the server's serial number.
+The license key file can be downloaded or E-mailed.
+
+The license key can be installed in the XCC web-page's ``BMC License`` item or the menu 
+*BMC Configuration->License* page.
+
 XClarity Essentials OneCLI
 ==============================
 
