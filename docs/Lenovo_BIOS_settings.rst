@@ -47,6 +47,15 @@ Go to the ``BMC Configuration -> User/LDAP`` menus and modify the login credenti
 * In the ``User/LDAP`` menu edit the BMC local ``User name`` from ``USERID`` to ``root``.
   Here you may also change the password.
 
+Using OneCLI_ one may configure some desirable XCC parameters::
+
+  onecli config set IMM.IMMInfo_Name `hostname -s`
+  onecli config set IMM.HostName1 `hostname -s`b
+  onecli config set IMM.MinPasswordLen=8
+  onecli config set IMM.DDNS_Enable=Disabled
+
+.. _OneCLI: https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli
+
 BMC network settings
 ----------------------
 
