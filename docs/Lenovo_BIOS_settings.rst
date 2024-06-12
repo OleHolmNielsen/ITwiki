@@ -51,8 +51,8 @@ Using OneCLI_ one may configure some desirable XCC parameters::
 
   onecli config set IMM.IMMInfo_Name `hostname -s`
   onecli config set IMM.HostName1 `hostname -s`b
-  onecli config set IMM.MinPasswordLen=8
-  onecli config set IMM.DDNS_Enable=Disabled
+  onecli config set IMM.MinPasswordLen 8
+  onecli config set IMM.DDNS_Enable Disabled
 
 .. _OneCLI: https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli
 
