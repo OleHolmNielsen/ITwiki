@@ -579,22 +579,25 @@ If DHCP is enabled on iDRAC and you want to use the DNS server IP provided by th
   racadm set iDRAC.NIC.DNSDomainFromDHCP 1
   racadm set iDRAC.NIC.DNSDomainNameFromDHCP 1
 
-
 The iDRAC DNS Name **cannot be obtained from DHCP!**
 Therefore you must always set the DNS name manually::
 
-    racadm set iDRAC.NIC.DNSRacName iDRACNAME
+    racadm set iDRAC.NIC.DNSRacName <iDRACNAME>
 
 Manual DNS settings:
 
 * Set iDRAC domain name::
 
-    racadm set iDRAC.NIC.DNSDomainName DOMAIN.NAME
+    racadm set iDRAC.NIC.DNSDomainName <DOMAIN.NAME>
 
 * Set iDRAC DNS Server::
 
     racadm config -g cfgLanNetworking -o cfgDNSServer1 x.x.x.x
     racadm config -g cfgLanNetworking -o cfgDNSServer2 y.y.y.y
+
+* Set the server's DNS hostname by::
+
+    racadm  set System.ServerOS.HostName <Server-DNS-name>
 
 iDRAC web-server security Host Header enforcement
 -------------------------------------------------
