@@ -104,7 +104,7 @@ We have found that storage data are **preserved** with this procedure:
 
 * Disconnect the ME484_ from a PERC_ controller.
 * Attaching to an HBA_ controller.
-* Perform ME484_ firmware updates using HSM.
+* Perform ME484_ firmware updates using SHM_ tools.
 * Reattach ME484_ to the PERC_ controller.
 
 .. _MegaRAID: https://www.broadcom.com/products/storage/raid-controllers
