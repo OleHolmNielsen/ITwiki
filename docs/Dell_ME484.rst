@@ -76,7 +76,9 @@ Show detailed disk information including *Firmware Revision* (here for slot 75):
 ME484 firmware updates
 ======================
 
-The latest ME484_ firmware as of February 2024 is `52CC, A08 <https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=tmvgc&oscode=wst14&productcode=powervault-me484-expansion>`_.
+The latest ME484_ firmware as of February 2024 is 52CC_, A08.
+
+.. _52CC: https://www.dell.com/support/home/da-dk/drivers/driversdetails?driverid=49d45&oscode=wst14&productcode=powervault-me484-expansion
 
 PERC controller notes
 ---------------------
