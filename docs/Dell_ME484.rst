@@ -139,10 +139,10 @@ The ME484_ *ServiceTag* is listed under the *Enclosure* column.
 
 The sequence of operations are to update **right and left sideplanes** and finally **both** EMMs 0 and 1::
 
-  shmcli update emm -a=0 -enc=500c0ff0f169263c -emm=0 -file=right_sideplane_combined_r2019.20.10.gff
-  shmcli update emm -a=0 -enc=500c0ff0f169263c -emm=0 -file=left_sideplane_combined_r2019.20.10.gff
-  shmcli update emm -a=0 -enc=500c0ff0f169263c -emm=0 -file=emm_canister_local_combined_non_disruptive_r2019.20.10.gff
-  shmcli update emm -a=0 -enc=500c0ff0f169263c -emm=1 -file=emm_canister_local_combined_non_disruptive_r2019.20.10.gff 
+  shmcli update emm -a=0 -enc=500c0ff0f169263c -emm=0 -file=right_sideplane_combined_r2019.20.15.gff
+  shmcli update emm -a=0 -enc=500c0ff0f169263c -emm=0 -file=left_sideplane_combined_r2019.20.15.gff
+  shmcli update emm -a=0 -enc=500c0ff0f169263c -emm=0 -file=emm_canister_local_combined_non_disruptive_r2019.20.15.gff
+  shmcli update emm -a=0 -enc=500c0ff0f169263c -emm=1 -file=emm_canister_local_combined_non_disruptive_r2019.20.15.gff 
 
 The correct enclosure WWN must be used (in the example it is WWN=500c0ff0f169263c).
 The firmware file names depend on the release version.
