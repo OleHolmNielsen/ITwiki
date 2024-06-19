@@ -76,8 +76,7 @@ Show detailed disk information including *Firmware Revision* (here for slot 75):
 ME484 firmware updates
 ======================
 
-The latest ME484_ firmware as of October 2021 is `5280, A05 <https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=tmvgc&oscode=wst14&productcode=powervault-me484-expansion>`_,
-even though the support page currently lists an older *526E, A04* version.
+The latest ME484_ firmware as of February 2024 is `52CC, A08 <https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=tmvgc&oscode=wst14&productcode=powervault-me484-expansion>`_.
 
 PERC controller notes
 ---------------------
@@ -92,7 +91,7 @@ for example as::
 
   Vendor Identification = DellEMC
   Product Identification = Array584EMM
-  Product Revision Level = 5280
+  Product Revision Level = 52CC
 
 Using an HBA for firmware updates
 ---------------------------------
@@ -102,17 +101,23 @@ and the SHM_ tools only works with HBA_ adapters (probably due to ME484 being ba
 
 We have found that storage data are **preserved** with this procedure:
 
-* Disconnect the ME484_ from a PERC_ controller.
-* Attaching to an HBA_ controller.
+* Shut down the server with ME484_ attached to a PERC_ controller.
+* Disconnect the ME484_ SAS cables from the controller.
+* Connect ME484_ SAS cables to a second server with an HBA_ controller.
+* Power up the second server.
 * Perform ME484_ firmware updates using SHM_ tools.
-* Reattach ME484_ to the PERC_ controller.
+* Shut down the second server.
+* Reattach ME484_ to the server with PERC_ controller and power it up again.
+
+**IMPORTANT:** Do not disconnect ME484_ SAS cables from controllers without powering down the server first.
+A PERC_ controller will fail the *Virtual Disks* in the ME484_ if disconnected while power is on!
 
 .. _MegaRAID: https://www.broadcom.com/products/storage/raid-controllers
 
 Using SHM to update firmware
 ----------------------------
 
-When the ME484_ is attached to a supported HBA_ controller, the firmware package (for example, ``5280.zip``) contains detailed installation instructions in the ``README.txt`` file.
+When the ME484_ is attached to a supported HBA_ controller, the firmware package (for example, ``52CC.zip``) contains detailed installation instructions in the ``README.txt`` file.
 
 As stated in the SHM_ manual section *Updating EMM firmware*::
 
@@ -129,7 +134,7 @@ First list adapters, enclosures and the 2 EMM modules per enclosure::
   shmcli list physical enclosures 
   shmcli list emms -a=0 
 
-The EMM firmware is listed under the *Rev* column (for example, 5280).
+The EMM firmware is listed under the *Rev* column (for example, 52CC).
 The ME484_ *ServiceTag* is listed under the *Enclosure* column.
 
 The sequence of operations are to update **right and left sideplanes** and finally **both** EMMs 0 and 1::
