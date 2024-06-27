@@ -34,7 +34,7 @@ Further documentation:
 There is an Ansible_github_ repository.
 
 .. _Ansible: https://www.ansible.com/
-.. _Getting_started: http://docs.ansible.com/ansible/intro_getting_started.html
+.. _Getting_started: https://docs.ansible.com/ansible/latest/getting_started/index.html
 .. _Ansible_github: https://github.com/ansible/
 
 Inventory
