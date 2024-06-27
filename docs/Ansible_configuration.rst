@@ -35,7 +35,7 @@ There is an Ansible_github_ repository.
 
 .. _Ansible: https://www.ansible.com/
 .. _Getting_started: https://docs.ansible.com/ansible/latest/getting_started/index.html
-.. _Installation_Guide: https://docs.ansible.com/ansible/latest/installation_guide/index.html
+.. _Installation_Guide: https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html
 .. _Ansible_github: https://github.com/ansible/
 
 Inventory
