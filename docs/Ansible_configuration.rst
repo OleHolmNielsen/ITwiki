@@ -13,7 +13,7 @@ Getting started with Ansible
 
 Tutorials on Ansible_:
 
-* Getting_started_ tutorial.
+* Getting_started_ tutorial and Installation_Guide_.
 * Server World: https://www.server-world.info/en/note?os=CentOS_7&p=ansible&f=1
 * An Ansible Tutorial: https://serversforhackers.com/c/an-ansible-tutorial
 * Ansible_blog_
@@ -35,6 +35,7 @@ There is an Ansible_github_ repository.
 
 .. _Ansible: https://www.ansible.com/
 .. _Getting_started: https://docs.ansible.com/ansible/latest/getting_started/index.html
+.. _Installation_Guide: https://docs.ansible.com/ansible/latest/installation_guide/index.html
 .. _Ansible_github: https://github.com/ansible/
 
 Inventory
