@@ -7,7 +7,7 @@ Linux documentation
 
    RHEL
    RHEL_installation
-   RHEL_services
+   RHEL_services including DNS, NFS, TFTP, firewall etc.
    RHEL_applications
    Ansible_configuration
    OpenSSH_configuration
