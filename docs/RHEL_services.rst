@@ -38,16 +38,10 @@ The boot items can be listed by::
 
   awk -F\' /^menuentry/{print\$2} /etc/grub2.cfg
 
-See `CentOS / RHEL 7 : Change default kernel (boot with old kernel) <https://www.thegeekdiary.com/centos-rhel-7-change-default-kernel-boot-with-old-kernel/>`_.
-
 Managing system services with Systemd
 -------------------------------------
 
 RHEL system services are managed with Systemd_.
-See `Chapter 6. Managing Services with systemd <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html>`_.
-
-.. _Systemd: http://en.wikipedia.org/wiki/Systemd
-
 To list system services::
 
   systemctl list-unit-files
@@ -71,6 +65,8 @@ Then reload services::
 
   systemctl daemon-reload
 
+.. _Systemd: http://en.wikipedia.org/wiki/Systemd
+
 Limit on number of open files
 -----------------------------
 
@@ -81,30 +77,6 @@ Therefore one may have to configure limits for a username in ``/etc/security/lim
   <username>  soft nofile  32768
 
 The user has to log out and in again before the new limits become active.
-
-
-GNOME tools
-===============
-
-Tools to customize your GNOME_ desktop include:
-
-* GNOME_Shell_ provides basic functions like launching applications, switching between windows and is also a widget engine. 
-  To list all available extensions::
-
-    yum list gnome-shell*
-
-  Search for extensions: https://extensions.gnome.org/
-
-* `Experience with setting up CentOS 7 (GNOME 3 etc.,) <https://www.centos.org/forums/viewtopic.php?t=47796>`_.
-* GNOME_Tweak_Tool_ (now known as *Tweaks*)::
-
-    yum install gnome-tweak-tool
-    gnome-tweak-tool&
-
-.. _GNOME: https://wiki.gnome.org/
-.. _GNOME_Shell: https://en.wikipedia.org/wiki/GNOME_Shell
-.. _GNOME_Tweak_Tool: https://wiki.gnome.org/Apps/Tweaks
-
 
 Storage tools
 ===============
@@ -160,13 +132,7 @@ Networking services
 
 Networking documentation is in the Networking_Guide_.
 
-.. _Networking_Guide: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Networking_Guide/index.html
-
-Ethernet device naming has changed, see CentOS7_FAQ_ question 2.
-Documentation is in `Consistent Network Device Naming <http://fedoraproject.org/wiki/Features/ConsistentNetworkDeviceNaming>`_ and 
-`Consistent Network Device Naming in Linux <http://linux.dell.com/biosdevname/>`_.
-
-.. _CentOS7_FAQ: http://wiki.centos.org/FAQ/CentOS7
+.. _Networking_Guide: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html-single/configuring_and_managing_networking/index
 
 iftop network monitoring
 ------------------------------
@@ -194,29 +160,12 @@ Controlling the ``/etc/resolv.conf`` configuration is discussed in https://wiki.
 
 .. _NetworkManager: https://en.wikipedia.org/wiki/NetworkManager
 
-IPv6 configuration
------------------------
-
-See https://wiki.centos.org/FAQ/CentOS7.
-
-Many services in CentOS 7 **fail** if IPv6 gets disabled, as in ``/etc/sysctl.conf``::
-
-  # DO NOT DO THIS: Disable IPv6
-  # net.ipv6.conf.all.disable_ipv6 = 1
-  # net.ipv6.conf.default.disable_ipv6 = 1
-
-We have had problems in CentOS 7.2 and 7.3 for these services: autofs, Ethernet bonding.
-
 VLAN 802.1Q trunk configuration
 -------------------------------
 
 For certain servers it may be desirable to connect directly to different VLAN_ subnets. 
 This requires connecting to a switch port which has the desired VLANs configured in the switch.
-See the RHEL 7 802_1Q_VLAN_Tagging_ documentation and:
 
-* `Configuring 802.1q VLAN in CentOS 7 <https://sites.google.com/site/ghidit/reviews/centos-7-1-a-not-so-seamless-upgrade/configuring-802-1q-vlan-in-centos-7>`_.
-
-.. _802_1Q_VLAN_Tagging: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Networking_Guide/ch-Configure_802_1Q_VLAN_Tagging.html
 .. _VLAN: http://en.wikipedia.org/wiki/Virtual_LAN
 
 To configure a VLAN_ network interface for, for example, VLAN ID 2 with parent interface enp5s0f1 and IP 10.54.2.xx using ``nmtui`` do:
@@ -346,7 +295,7 @@ Installation has these steps::
   dnf copr enable isc/bind 
   dnf install isc-bind
 
-The ``named.conf`` configuration file can be found at ``/etc/opt/isc/scls/isc-bind/named.conf`` (RHEL/CentOS 8, Fedora).
+The ``named.conf`` configuration file can be found at ``/etc/opt/isc/scls/isc-bind/named.conf`` (RHEL 8, Fedora).
 
 Start the ISC_ BIND_ named service by::
 
@@ -443,73 +392,58 @@ Start the DNS server by::
 NFS server configuration
 =============================
 
-See the RHEL7 documentation `8.7. NFS Server Configuration <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Storage_Administration_Guide/nfs-serverconfig.html>`_.
-This includes a section *8.7.3. Running NFS Behind a Firewall*.
+RHEL 8 documentation: RHEL8_NFS_server_.
+See `Chapter 3. Exporting NFS shares <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/deploying_different_types_of_servers/exporting-nfs-shares_deploying-different-types-of-servers>`_.
 
-See also `Quick NFS Server configuration on Redhat 7 Linux System  <http://linuxconfig.org/quick-nfs-server-configuration-on-redhat-7-linux>`_
-and `Setting Up NFS Server And Client On CentOS 7 <http://www.unixmen.com/setting-nfs-server-client-centos-7/>`_ and
-`About NFS (Shared File System Administration) <https://docs.oracle.com/cd/E52668_01/E54669/html/ol7-about-nfs.html>`_.
+.. _RHEL8_NFS_server: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/deploying_different_types_of_servers/deploying-an-nfs-server_deploying-different-types-of-servers
 
 First install these RPMs::
 
-  yum install nfs-utils quota
+  dnf install nfs-utils quota quota-rpc
 
-Add this to ``/etc/sysconfig/nfs``::
+NFS server configuration is now in ``/etc/nfs.conf``, an INI-like configuration file from the *nfs-utils* package.
+Ports etc. are defined in this file.
+Configure these values in ``/etc/nfs.conf``::
 
-  RPCMOUNTDOPTS="-p 892"
-  LOCKD_TCPPORT=32803
-  LOCKD_UDPPORT=32769
+  [lockd]
+  port = 32803
+  udp-port = 32769
+  [mountd]
+  port = 892
+  [nfsd]
+  threads=8
 
-This scripts is sourced by ``/usr/lib/systemd/scripts/nfs-utils_env.sh``.
+For heavily loaded NFS servers with large memory and many CPU cores you should increase this variable from the default value of 8 to perhaps 16, 32 or 64::
 
-Also, for heavily loaded NFS servers with large memory and many CPU cores you should increase this variable from the default value of 8 to perhaps 16, 32 or::
+  [nfsd]
+  threads = 64
 
-  RPCNFSDCOUNT=64
+and restart the service by ``systemctl restart nfs-server.service``
+as described in https://access.redhat.com/solutions/2216.
 
-Some services (undocumented) must be enabled at reboot and started::
+Some services must be enabled at reboot and started::
 
   systemctl enable rpcbind
   systemctl enable nfs-server
-  systemctl enable nfs-lock
-  systemctl enable nfs-idmap
   systemctl enable rpc-rquotad.service
+  # systemctl enable nfs-lock
+  # systemctl enable nfs-idmap
   systemctl start rpcbind
   systemctl start nfs-server
-  systemctl start nfs-lock
-  systemctl start nfs-idmap
   systemctl start rpc-rquotad.service
-
-The NFS remote quota service **rpc-rquotad.service** (alias: nfs-rquotad.service) was added by Red Hat as late as March 2016, see the bug fix update https://rhn.redhat.com/errata/RHBA-2016-0557.html.
-There is a new configuration file ``/etc/sysconfig/rpc-rquotad`` in which you must define a fixed port 875::
-
-  RPCRQUOTADOPTS="-p 875"
-
-Then restart the *nfs* service::
-
-  systemctl restart nfs-server 
+  # systemctl start nfs-lock
+  # systemctl start nfs-idmap
 
 Check that the required services are running::
 
   # systemctl -l | grep nfs
-  proc-fs-nfsd.mount                       loaded active mounted   NFSD configuration filesystem
-  var-lib-nfs-rpc_pipefs.mount             loaded active mounted   RPC Pipe File System
-  nfs-config.service                       loaded active exited    Preprocess NFS configuration
-  nfs-idmapd.service                       loaded active running   NFSv4 ID-name mapping service
-  nfs-mountd.service                       loaded active running   NFS Mount Daemon
-  nfs-server.service                       loaded active exited    NFS server and services
-  nfs-client.target                        loaded active active    NFS client services
-
-RHEL 8 notes
-------------------
-
-See `Chapter 3. Exporting NFS shares <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/deploying_different_types_of_servers/exporting-nfs-shares_deploying-different-types-of-servers>`_.
-
-Install also this package::
-
-  dnf install quota-rpc
-
-NFS server configuration is now in ``/etc/nfs.conf``, an INI-like configuration file.
-Ports are defined in this file.
+  proc-fs-nfsd.mount               loaded active mounted   NFSD configuration filesystem                                                
+  var-lib-nfs-rpc_pipefs.mount     loaded active mounted   RPC Pipe File System                                                         
+  nfs-idmapd.service               loaded active running   NFSv4 ID-name mapping service                                                
+  nfs-mountd.service               loaded active running   NFS Mount Daemon                                                             
+  nfs-server.service               loaded active exited    NFS server and services                                                      
+  nfsdcld.service                  loaded active running   NFSv4 Client Tracking Daemon                                                 
+  nfs-client.target                loaded active active    NFS client services                       
 
 If IPv6 is disabled, you may get an error **rpc.rquotad: Failed to create udp6 service**,
 see https://unix.stackexchange.com/questions/454231/rpc-bind-errors-when-disabling-ipv6
@@ -560,7 +494,6 @@ It seems that the problem is solved by explicitly whitelisting the IP subnets us
   firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT_direct 0 -s 10.2.0.0/16 -j ACCEPT
   firewall-cmd --reload
 
-
 Chrony NTP time service
 ===================================
 
@@ -607,7 +540,7 @@ Install the TFTP server and client package by::
 
 .. _TFTP: http://en.wikipedia.org/wiki/Tftp
 
-In CentOS/RHEL 7 the TFTP_ service is controlled by Systemd_.
+The TFTP_ service is controlled by Systemd_.
 If you want to modify the TFTP_ service, first copy the file to the directory for customized services::
 
   cp -Z /usr/lib/systemd/system/tftp.service /etc/systemd/system/tftp.service
@@ -684,7 +617,7 @@ Sendmail TLS errors
 
 See the article `Securing Applications with TLS in RHEL <https://access.redhat.com/articles/1462183>`_.
 
-With CentOS 8 Sendmail we have problems sending to *smtp.ait.dtu.dk* and get errors in ``/var/log/maillog``::
+With EL 8 Sendmail we have problems sending to *smtp.ait.dtu.dk* and get errors in ``/var/log/maillog``::
 
   ruleset=tls_server, arg1=SOFTWARE, relay=smtp.ait.dtu.dk, reject=403 4.7.0 TLS handshake failed. 
 
@@ -828,17 +761,10 @@ When the user list is disabled, users need to type their user name and password 
 
       dconf update
 
-CentOS 7.1 has a bug in the user list (can't scroll up/down), see https://bugzilla.redhat.com/show_bug.cgi?id=1184802.
-
 Non-graphical run-level
 ===========================================
 
 Servers don't need a graphical (GUI) login screen.
-In CentOS 6 the graphical/non-graphical run-level was controlled by ``/etc/inittab``.
-In Red Hat Enterprise Linux 7, the concept of runlevels has been replaced with Systemd_ targets. 
-See `8.3. Working with systemd Targets 
-<https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/sect-Managing_Services_with_systemd-Targets.html#sect-Managing_Services_with_systemd-Targets-Change_Default>`_.
-
 With Systemd_ its done like this::
 
   systemctl get-default
@@ -930,7 +856,6 @@ Apple Time Machine support
 
 Samba **version 4.8.1** is requited for Apple Time Machine support, see https://bugzilla.samba.org/show_bug.cgi?id=12380.
 This currently means that the latest Fedora FC28 is required.
-There are no 4.8.1 RPMs for CentOS 7.
 
 To enable this edit ``smb.conf`` to add in the *[global]* section::
 
