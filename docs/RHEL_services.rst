@@ -413,13 +413,8 @@ Configure these values in ``/etc/nfs.conf``::
   [nfsd]
   threads=8
 
-For heavily loaded NFS servers with large memory and many CPU cores you should increase this variable from the default value of 8 to perhaps 16, 32 or 64::
-
-  [nfsd]
-  threads = 64
-
-and restart the service by ``systemctl restart nfs-server.service``
-as described in https://access.redhat.com/solutions/2216.
+For heavily loaded NFS servers with large memory and many CPU cores you should increase the *nfsd threads* from the default value of 8 to perhaps 16, 32 or 64
+and restart the service by ``systemctl restart nfs-server.service`` as described in https://access.redhat.com/solutions/2216.
 
 Some services must be enabled at reboot and started::
 
