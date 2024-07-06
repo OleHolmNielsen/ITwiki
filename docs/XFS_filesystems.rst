@@ -177,7 +177,7 @@ Mount large XFS filesystems with inode64 option
 =======================================================
 
 XFS allocates inodes to reflect their on-disk location by default. 
-However, because some 32-bit userspace applications are not compatible with inode numbers greater than 232, XFS will allocate all inodes in disk locations which result in 32-bit inode numbers. 
+However, because some 32-bit userspace applications are not compatible with inode numbers greater than 2**32, XFS will allocate all inodes in disk locations which result in 32-bit inode numbers. 
 This can lead to decreased performance on very large filesystems (that is, larger than 2 terabytes), because inodes are skewed to the beginning of the block device, while data is skewed towards the end.
 To address this, use the inode64 mount option. This option configures XFS to allocate inodes and data across the entire file system, which can improve performance::
 
