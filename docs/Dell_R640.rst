@@ -446,12 +446,12 @@ NVDIMM Optane persistent memory setup
 Note that Intel has discontinued NVDIMM_ Optane persistent memory with recent processor generations
 as described in the Optane_EOL_ page.
 
-Documentation of NVDIMM_ in Dell PowerEdge servers:
+Documentation of NVDIMM_ Optane persistent memory:
 
 * NVDIMM_Wiki_ at kernel.org.
 * `Using NVDIMM persistent memory storage <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_storage_devices/using-nvdimm-persistent-memory-storage_managing-storage-devices>`_.
 
-Configuration of persistent memory is described in the manual *Dell EMC PMem 200 Series User's Guide* 
+Configuration of persistent memory in Dell PowerEdge servers is described in the manual *Dell EMC PMem 200 Series User's Guide* 
 in the `server documentation <https://www.dell.com/support/home/en-uk/product-support/product/poweredge-r750/docs>`_:
 
 * To configure NVDIMM_ 3D_XPoint_ known as *Intel Optane* persistent memory DIMM modules go to the *System BIOS Settings* boot menus.
