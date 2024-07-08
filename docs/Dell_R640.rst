@@ -445,7 +445,6 @@ NVDIMM Optane persistent memory setup
 
 Note that Intel has discontinued NVDIMM_ Optane persistent memory with recent processor generations
 as described in the Optane_EOL_ page.
-
 Documentation of NVDIMM_ Optane persistent memory:
 
 * NVDIMM_Wiki_ at kernel.org.
@@ -461,10 +460,10 @@ in the `server documentation <https://www.dell.com/support/home/en-uk/product-su
 
 * Memory mode configuration for persistent memory:
 
-  - To create an NDIMMM_ goal in BIOS, go to ``Memory Settings > Persistent Memory > Intel Persistent Memory > Region Configuration > Create Goal Config``.
+  - To create an NVDIMM_ goal in BIOS, go to ``Memory Settings > Persistent Memory > Intel Persistent Memory > Region Configuration > Create Goal Config``.
   - The BIOS options determine how the goal is created and the PMems are configured:
   - Operation Target: Platform - Applies the goal to all the DIMMs in the system (recommended).
-    Persistent [%]: ``100 - Creates a goal of 100% Persistent memory across the selected PMems``.
+  - ``Persistent [%]: 100 - Creates a goal of 100% Persistent memory across the selected PMems``.
 
 Configure persistent memory namespaces
 ---------------------------------------------
