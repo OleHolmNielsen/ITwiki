@@ -443,11 +443,13 @@ Miscellaneous Settings menu
 NVDIMM Optane persistent memory setup
 =========================================
 
+Note that Intel has discontinued NVDIMM_ Optane persistent memory with recent processor generations
+as described in the Optane_EOL_ page.
+
 Documentation of NVDIMM_:
 
 * NVDIMM_Wiki_ at kernel.org.
-* `Using NVDIMM persistent memory storage <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_storage_devices/using-nvdimm-persistent-memory-storage_managing-storage-devices>`_ (RHEL8).
-* `Persistent Memory: NVDIMMs <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/ch-persistent-memory-nvdimms>`_ (RHEL7)
+* `Using NVDIMM persistent memory storage <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_storage_devices/using-nvdimm-persistent-memory-storage_managing-storage-devices>`_.
 
 To configure NVDIMM_ 3D_XPoint_ known as *Intel Optane* persistent memory DIMM modules go to the *System BIOS Settings* boot menus.
 Select the *Memory Settings* and then *Persistent Memory* and *Intel Persistent Memory*.
@@ -479,6 +481,7 @@ To correlate a namespace to a PMem device, use the following command::
 .. _NVDIMM: https://en.wikipedia.org/wiki/NVDIMM
 .. _NVDIMM_Wiki: https://nvdimm.wiki.kernel.org/
 .. _3D_XPoint: https://en.wikipedia.org/wiki/3D_XPoint
+.. _Optane_EOL: https://www.intel.com/content/www/us/en/support/articles/000057951/memory-and-storage/intel-optane-memory.html
 
 Managing NVDIMMs with ipmctl
 ---------------------------------
