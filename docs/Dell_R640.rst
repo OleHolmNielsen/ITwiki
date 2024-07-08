@@ -446,17 +446,29 @@ NVDIMM Optane persistent memory setup
 Note that Intel has discontinued NVDIMM_ Optane persistent memory with recent processor generations
 as described in the Optane_EOL_ page.
 
-Documentation of NVDIMM_:
+Documentation of NVDIMM_ in Dell PowerEdge servers:
 
 * NVDIMM_Wiki_ at kernel.org.
 * `Using NVDIMM persistent memory storage <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_storage_devices/using-nvdimm-persistent-memory-storage_managing-storage-devices>`_.
 
-To configure NVDIMM_ 3D_XPoint_ known as *Intel Optane* persistent memory DIMM modules go to the *System BIOS Settings* boot menus.
-Select the *Memory Settings* and then *Persistent Memory* and *Intel Persistent Memory*.
-Select the *DIMM Configuration* menu and view NVDIMM_ modules.
-
 Configuration of persistent memory is described in the manual *Dell EMC PMem 200 Series User's Guide* 
-in the `server documentation <https://www.dell.com/support/home/en-uk/product-support/product/poweredge-r750/docs>`_.
+in the `server documentation <https://www.dell.com/support/home/en-uk/product-support/product/poweredge-r750/docs>`_:
+
+* To configure NVDIMM_ 3D_XPoint_ known as *Intel Optane* persistent memory DIMM modules go to the *System BIOS Settings* boot menus.
+  Select the menu::
+
+    Memory Settings > Persistent Memory > Intel Persistent Memory > Persistent Memory DIMM Configuration
+
+* Memory mode configuration for persistent memory:
+
+  - To create an NDIMMM_ goal in BIOS, go to ``Memory Settings > Persistent Memory > Intel Persistent Memory > Region Configuration > Create Goal Config``.
+  - The BIOS options determine how the goal is created and the PMems are configured:
+  - Operation Target: Platform - Applies the goal to all the DIMMs in the system (recommended).
+    Persistent [%]: ``100 - Creates a goal of 100% Persistent memory across the selected PMems``.
+
+Configure persistent memory namespaces
+---------------------------------------------
+
 Install this package::
 
   dnf install ndctl
@@ -465,23 +477,23 @@ and list all physical devices::
 
   ndctl list -DHi
 
-To create a namespace on one of the persistent memory modules::
+The configuration of namespaces will decide how much memory capacity to expose to the OS.
+Create a namespace on each of the persistent memory modules::
 
   ndctl create-namespace
 
-See the manual for ``ndctl-create-namespace``.
+See the manual for ndctl-create-namespace_.
 List namespaces::
 
   ndctl list -N
 
-To correlate a namespace to a PMem device, use the following command::
-
-  lsblk
+To correlate a namespace to a PMem device, use the ``lsblk`` command.
 
 .. _NVDIMM: https://en.wikipedia.org/wiki/NVDIMM
 .. _NVDIMM_Wiki: https://nvdimm.wiki.kernel.org/
 .. _3D_XPoint: https://en.wikipedia.org/wiki/3D_XPoint
 .. _Optane_EOL: https://www.intel.com/content/www/us/en/support/articles/000057951/memory-and-storage/intel-optane-memory.html
+.. _ndctl-create-namespace: https://docs.pmem.io/ndctl-user-guide/ndctl-man-pages/ndctl-create-namespace
 
 Managing NVDIMMs with ipmctl
 ---------------------------------
