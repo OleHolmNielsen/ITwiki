@@ -462,8 +462,9 @@ in the `server documentation <https://www.dell.com/support/home/en-uk/product-su
 
   - To create an NVDIMM_ goal in BIOS, go to ``Memory Settings > Persistent Memory > Intel Persistent Memory > Region Configuration > Create Goal Config``.
   - The BIOS options determine how the goal is created and the PMems are configured:
-  - Operation Target: Platform - Applies the goal to all the DIMMs in the system (recommended).
-  - ``Persistent [%]: 100 - Creates a goal of 100% Persistent memory across the selected PMems``.
+
+    - Operation Target: Platform - Applies the goal to all the DIMMs in the system (recommended).
+    - ``Persistent [%]: 100 - Creates a goal of 100% Persistent memory across the selected PMems``.
 
 Configure persistent memory namespaces
 ---------------------------------------------
