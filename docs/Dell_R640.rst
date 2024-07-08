@@ -438,6 +438,8 @@ Miscellaneous Settings menu
 
 * **Keyboard NumLock** = **Off**.
 
+.. _NVDIMM_Setup:
+
 NVDIMM Optane persistent memory setup
 =========================================
 

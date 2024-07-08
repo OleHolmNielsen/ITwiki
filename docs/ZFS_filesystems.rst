@@ -219,6 +219,8 @@ where the disks are listed by the zpool-status_ command.
 Add SLOG and ZIL on Optane NVDIMM persistent memory
 ......................................................
 
+Setting up NVDIMM persistent memory is described in :ref:`NVDIMM_Setup`.
+
 This section show how to configure an L2ARC_cache_
 using NVDIMM_ 3D_XPoint_ known as *Intel Optane* persistent memory DIMM modules.
 
