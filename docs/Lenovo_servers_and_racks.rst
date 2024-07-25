@@ -14,6 +14,7 @@ This page contains information about Lenovo servers and racks deployed in our cl
    Lenovo_BIOS_settings
    Lenovo_XClarity_BMC
    Lenovo_DW612S
+   Vertiv_PDU
 
 Lenovo product pages:
 
