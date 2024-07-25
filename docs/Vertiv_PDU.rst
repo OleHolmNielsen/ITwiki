@@ -19,7 +19,7 @@ PDUs delivered by Lenovo may have the default **USERID/PASSW0RD** login credenti
 Configuration
 ==============
 
-In the `System` menu make the following configurations:
+In the **System** menu make the following configurations:
 
 * **Network:** Set an appropriate *Hostname* for the PDU.
 
@@ -29,7 +29,7 @@ In the `System` menu make the following configurations:
   Configure a suitable *"From" Email Address*.
   Configure a *Target Email address* for recipients of mails.
 
-* **System-Admin:** Set *System Label* to an appropriate system name.
+* **Admin:** Set *System Label* to an appropriate system name.
 
 * **Locale:** Select *Temperature Units: Celsius*.
 
