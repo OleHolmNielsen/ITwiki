@@ -29,6 +29,17 @@ As a workaround login and specify one specific (RSA) SSH key::
 
   ssh -i .ssh/id_rsa.pub USERID@<PDU-address>
 
+Using the CLI interface is not obvious since the (undocumented) HELP command only displays::
+
+  USERID > help
+  Usage: COMMAND PATH [= ARGUMENT]
+  COMMAND
+    [get, set, logout, add, delete, control, ack, sendTest, reset, reboot, help]
+  PATH
+    The API path (excluding "api" and separated by spaces) to which COMMAND will be applied.
+  ARGUMENT
+    The "data" field for the API request formatted as either JSON or YAML.
+
 Configuration
 ==============
 
