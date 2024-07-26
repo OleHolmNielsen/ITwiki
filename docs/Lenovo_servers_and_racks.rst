@@ -22,11 +22,13 @@ Lenovo product pages:
 * Lenovo_PDU_ power distribution units.
 * Lenovo_Neptune_ liquid cooling technology.
 * Lenovo_EveryScale_ framework for data center solutions (formerly *Lenovo Scalable Infrastructure* or LeSI).
+  See also Lenovo EveryScale_Best_Recipes_.
 
 .. _Lenovo_rack: https://lenovopress.lenovo.com/lp1287-lenovo-rack-cabinet-reference#availability=Available
 .. _Lenovo_PDU: https://lenovopress.lenovo.com/lp1556-lenovo-1u-switched-monitored-3-phase-pdu
 .. _Lenovo_EveryScale: https://lenovopress.lenovo.com/lp0900-lenovo-everyscale-lesi
 .. _Lenovo_Neptune: https://www.lenovo.com/us/en/servers-storage/neptune/
+.. _EveryScale_Best_Recipes: https://support.lenovo.com/us/en/solutions/HT510136
 
 Server firmware upgrades
 ==========================
