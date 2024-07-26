@@ -25,7 +25,7 @@ SSH logins are possible but the PDU doesn't accept the most modern SSH keys::
   ssh USERID@<PDU-address>
   Received disconnect from <IP> port 22:2: Too many authentication failures
 
-As a workaround login and specify one specific (RSA) SSH key::
+As a workaround use the ``ssh`` command and specify one specific (RSA) SSH key::
 
   ssh -i .ssh/id_rsa.pub USERID@<PDU-address>
 
