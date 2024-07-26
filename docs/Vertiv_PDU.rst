@@ -16,6 +16,10 @@ Click ``Log In`` in the upper right hand corner of the web page.
 
 PDUs delivered by Lenovo may have the default **USERID/PASSW0RD** login credentials.
 
+In the **System** *Users* menu it is possible to edit or add users.
+Apparently, these PDUs reject adding the ``root`` username with a message ``Error! Not authorized``,
+probably because ``root`` is used internally in the system?
+
 Configuration
 ==============
 
