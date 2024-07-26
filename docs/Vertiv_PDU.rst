@@ -23,6 +23,8 @@ In the **System** menu make the following configurations:
 
 * **Network:** Set an appropriate *Hostname* for the PDU.
 
+* **Web Server:** In the *HTTP Interface* select *Redirected to HTTPS*.
+
 * **Time:** Select the timezone ``Europe/Copenhaven``.
 
 * **Email:** Select our local SMTP server name.
