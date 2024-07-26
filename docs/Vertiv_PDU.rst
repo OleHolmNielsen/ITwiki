@@ -12,13 +12,22 @@ This page contains information about Vertiv PDUs as delivered by Lenovo.
 Login to PDU
 ============
 
-Click ``Log In`` in the upper right hand corner of the web page.
+Click ``Log In`` in the upper right hand corner of the PDU's web page.
 
 PDUs delivered by Lenovo may have the default **USERID/PASSW0RD** login credentials.
 
 In the **System** *Users* menu it is possible to edit or add users.
 Apparently, these PDUs reject adding the ``root`` username with a message ``Error! Not authorized``,
 probably because ``root`` is used internally in the system?
+
+SSH logins are possible but the PDU doesn't accept the most modern SSH keys::
+
+  ssh USERID@<PDU-address>
+  Received disconnect from <IP> port 22:2: Too many authentication failures
+
+As a workaround login and specify one specific (RSA) SSH key::
+
+  ssh -i .ssh/id_rsa.pub USERID@<PDU-address>
 
 Configuration
 ==============
