@@ -28,6 +28,13 @@ The issues have apparently been resolved in the SD665_V3_ system.
 Please note that several Infiniband tools such as ``ibnetdiscover`` fail with an error message when executed on the SD665_V3_ "auxiliary" (left-hand) node, 
 and you **must** execute such tools on the "primary" (right-hand) node (private communication with a Lenovo support person).
 
+Infiniband firmware
+--------------------
+
+This command displays the firmware version::
+
+  ibv_devinfo | grep fw_ver
+
 Documentation and software
 ==========================
 
