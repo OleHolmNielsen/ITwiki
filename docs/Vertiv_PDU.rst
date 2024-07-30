@@ -55,7 +55,7 @@ In the **System** menu make the following configurations:
   Configure a suitable *"From" Email Address*.
   Configure a *Target Email address* for recipients of mails.
 
-* **Admin:** Set *System Label* to an appropriate system name.
+* **Admin:** Set *System Label* to an appropriate system name, for example, the hostname.
 
 * **Locale:** Select *Temperature Units: Celsius*.
 
