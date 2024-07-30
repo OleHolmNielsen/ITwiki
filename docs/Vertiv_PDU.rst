@@ -27,7 +27,7 @@ SSH logins are possible but the PDU doesn't accept the most modern SSH keys::
 
 As a workaround use the ``ssh`` command and specify one specific (RSA) SSH key::
 
-  ssh -i .ssh/id_rsa.pub USERID@<PDU-address>
+  ssh -i ~/.ssh/id_rsa.pub USERID@<PDU-address>
 
 Using the CLI interface is not obvious since the (undocumented) HELP command only displays::
 
