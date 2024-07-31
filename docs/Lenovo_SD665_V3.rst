@@ -28,6 +28,11 @@ The issues have apparently been resolved in the SD665_V3_ system.
 Please note that several Infiniband tools such as ``ibnetdiscover`` fail with an error message when executed on the SD665_V3_ "auxiliary" (left-hand) node, 
 and you **must** execute such tools on the "primary" (right-hand) node (private communication with a Lenovo support person).
 
+For debugging purposes, Mellanox provides a linux-sysinfo-snapshot_ tool which
+is designed to take a snapshot of all the configuration and relevant information on the server and Mellanox's adapters.
+
+.. _linux-sysinfo-snapshot: https://github.com/Mellanox/linux-sysinfo-snapshot
+
 Infiniband firmware
 --------------------
 
