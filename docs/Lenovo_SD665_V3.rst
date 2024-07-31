@@ -40,6 +40,10 @@ This command displays the firmware version::
 
   ibv_devinfo | grep fw_ver
 
+This Mellanox drivers tool also reports firmware versions::
+
+  mlxfwmanager 
+
 Documentation and software
 ==========================
 
