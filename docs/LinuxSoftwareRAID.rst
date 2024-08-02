@@ -63,6 +63,12 @@ To list disks on controller 0::
 Disk drive blinking LED
 -----------------------
 
+**IMPORTANT:**
+The script lsi_device_list.sh__ uses the ``sas2ircu`` command to list devices in a readable format.
+Here you can grep for disk serial numbers for identification and read the ``Encl:Slot`` information,
+which seems to be impossible to read otherwise.
+Use the ``Encl:Slot`` information to make the disk blink.
+
 To turn on the **blinking disk drive LED** use the command::
 
   sas2ircu <controller #> LOCATE <Encl:Bay> <Action>
@@ -82,11 +88,6 @@ for example::
 Notice: ON and OFF must be in Upper Case!
 
 .. _LSI: http://www.lsi.com
-
-**IMPORTANT:**
-The script lsi_device_list.sh__ uses the ``sas2ircu`` command to list devices in a readable format.
-Here you can grep for disk serial numbers for identification.
-
 __ attachment:lsi_device_list.sh
 
 Software RAID documentation
