@@ -83,7 +83,9 @@ Notice: ON and OFF must be in Upper Case!
 
 .. _LSI: http://www.lsi.com
 
-The script lsi_device_list.sh__ uses the sas2ircu command to list devices in a readable format.
+**IMPORTANT:**
+The script lsi_device_list.sh__ uses the ``sas2ircu`` command to list devices in a readable format.
+Here you can grep for disk serial numbers for identification.
 
 __ attachment:lsi_device_list.sh
 
