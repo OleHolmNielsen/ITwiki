@@ -17,9 +17,11 @@ The nodes are housed in the upgraded ThinkSystem DW612S_ enclosure.
 NVIDIA InfiniBand Adapter (SharedIO)
 =======================================
 
+
 The SD665_V3_ has a water-cooled NVIDIA 2-Port PCIe Gen5 x16 InfiniBand Adapter (SharedIO) 
 `ThinkSystem NVIDIA ConnectX-7 NDR200 InfiniBand QSFP112 Adapters <https://lenovopress.lenovo.com/lp1693-thinksystem-nvidia-connectx-7-ndr200-infiniband-qsfp112-adapters>`_.
 The adapter is located in the right-hand SD665_V3_ node and connects both servers in the tray.
+https://datacentersupport.lenovo.com/de/en/solutions/ht510888
 
 There is important information regarding SharedIO for older SD650 servers in the article 
 `Considerations when using ThinkSystem SD650, SD650 V2, SD650 V3 and ConnectX-6 HDR, ConnectX-7 NDR SharedIO <https://support.lenovo.com/us/en/solutions/ht510888-thinksystem-sd650-and-connectx-6-hdr-sharedio-lenovo-servers-and-storage>`_.
@@ -43,6 +45,8 @@ This command displays the firmware version::
 This Mellanox drivers tool also reports firmware versions::
 
   mlxfwmanager 
+
+Undocumented restriction: **Node reseats** (virtually with the SMM2 module) are required whenever SharedIO adapter firmwares are updated!! 
 
 Documentation and software
 ==========================
