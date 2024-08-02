@@ -63,11 +63,18 @@ To list disks on controller 0::
 Disk drive blinking LED
 -----------------------
 
+Determine the *Serial Number* of the disk to blink, for example, */dev/sdt*::
+
+  smartctl -a /dev/sdt | grep Number
+
 **IMPORTANT:**
 The script lsi_device_list.sh__ uses the ``sas2ircu`` command to list devices in a readable format.
 Here you can grep for disk serial numbers for identification and read the ``Encl:Slot`` information,
-which seems to be impossible to read otherwise.
-Use the ``Encl:Slot`` information to make the disk blink.
+which seems to be impossible to read otherwise::
+
+  lsi_device_list.sh | grep <Serial Number>
+
+Now use the printed ``Encl:Slot`` information to make the disk blink.
 
 To turn on the **blinking disk drive LED** use the command::
 
