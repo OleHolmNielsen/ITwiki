@@ -48,6 +48,15 @@ This Mellanox drivers tool also reports firmware versions::
 
 Undocumented restriction: **Node reseats** (virtually with the SMM2 module) are required whenever SharedIO adapter firmwares are updated!! 
 
+Updating firmware from a repository folder (here: ``/home/que/Lenovo/SD665V3/MLNX/``) can be done from the XCC GUI, or by using a OneCLI_ command like::
+
+  onecli update flash --nocompare --includeid mlnx-lnvgy_fw_nic_cx-j9m3u-0302_anyos_comp --dir /home/que/Lenovo/SD665V3/MLNX/ --log=5 -N --output /tmp 
+
+This will loop over all firmwares in the repository and try to apply them one by one.
+To select a specific firmware: **TBD**
+
+.. _OneCLI: https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli
+
 Documentation and software
 ==========================
 
