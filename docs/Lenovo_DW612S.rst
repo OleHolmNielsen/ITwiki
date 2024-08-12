@@ -16,24 +16,26 @@ Documentation
 * The DW612S_ 6U enclosure.
 * DW612S_documents_.
 * DW612S_User_Guide_.
+* SMM2_ functions and IPMI commands.
 
 .. _Lenovo_Neptune: https://www.lenovo.com/us/en/servers-storage/neptune/
 .. _DW612S: https://pubs.lenovo.com/dw612s_neptune_enclosure/
 .. _DW612S_documents: https://pubs.lenovo.com/dw612s_neptune_enclosure/pdf_files
 .. _DW612S_User_Guide: https://pubs.lenovo.com/dw612s_neptune_enclosure/dw612s_user_guide.pdf
+.. _SMM2: https://pubs.lenovo.com/mgt_tools_smm2/
 
-Configuration of the DW612S System Management Module (SMM)
-------------------------------------------------------------
+Configuration of the DW612S System Management Module 2 (SMM2_)
+---------------------------------------------------------------
 
-Add the SMM Ethernet MAC address to the DHCP server, then go to the SMM login page.
+Add the SMM2_ Ethernet MAC address to the DHCP server, then go to the SMM2_ login page.
 The default administrator username may be *admin* or *USERID*,
 and the password may be the default *PASSW0RD* or something else configured by Lenovo.
 
-After logging in to the SMM Web Gui click on the *Configuration* tab:
+After logging in to the SMM2_ Web Gui click on the *Configuration* tab:
 
 * **Account Security**: Change *Minimum password length* and *Minimum password reuse cycle* as needed.
 * **User account**: Change the login name (if desired), and/or add and enable your site's login username/password with **Administrator** priviledges.
-* **Network Configuration**: Define the SMM's DNS hostname and domainname.
+* **Network Configuration**: Define the SMM2_'s DNS hostname and domainname.
   You should leave IPv6 as enabled for future management access.
 * Check the Date and time in **Time settings**.
 * **NTP**: Set your site's NTP server and your Timezone.
@@ -43,11 +45,11 @@ After logging in to the SMM Web Gui click on the *Configuration* tab:
   * Destination Email Addresses for alert recipients.
   * SMTP (email) Server Settings.
 
-SMM firmware updates
+SMM2_ firmware updates
 ------------------------
 
 * Locate the enclosure's *Serial Number* in the *System Information->Enclorure VPD* window.
-* Locate the SMM firmware version in the *Summary->Enclosure Rear View* window.
+* Locate the SMM2_ firmware version in the *Summary->Enclosure Rear View* window.
 
 Using the Serial Number, 
 
@@ -57,7 +59,7 @@ Download the *payload* firmware zip file (for example, `lnvgy_fw_smm2_umsm12o-1.
 and unzip it.
 The required firmware file is the .rom file (for example, ``lnvgy_fw_smm2_umsm12o-1.16_anyos_noarch.rom``).
 
-After logging in to the SMM Web Gui click on the *Configuration* tab and select *Firmware update*.
+After logging in to the SMM2_ Web Gui click on the *Configuration* tab and select *Firmware update*.
 Here you browse for the .rom file and upload it for the firmware update to start.
 **Important**: Make sure that ``Preserve Settings`` is selected.
 
