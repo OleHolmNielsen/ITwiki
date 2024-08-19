@@ -35,7 +35,7 @@ Example usages are::
 
   # /usr/sbin/ssacli
   => help 
-  => controller all show
+  => controller all show status
 
 Status of controller slot=0::
 
@@ -43,7 +43,7 @@ Status of controller slot=0::
   => controller slot=0 show detail
   => controller slot=0 enclosure all show detail
 
-Show physical drives and details::
+Show slot=1 physical drives and details::
 
   => controller slot=1 physicaldrive all show 
   => ctrl slot=1 physicaldrive 2I:1:29 show detail

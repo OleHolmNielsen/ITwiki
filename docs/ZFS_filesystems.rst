@@ -107,9 +107,10 @@ List HPE server's disks
 If using a HPE HBA controller, the disks in the system can be displayed using the ``ssacli`` command from the *ssacli* RPM package.
 See the :ref:`hpe_proliant_smartarray` page.
 
-Example usage is::
+Example usage may be::
 
   $ /usr/sbin/ssacli
+  => controller all show status
   => ctrl slot=1 pd all show status
   => ctrl slot=1 physicaldrive 2I:1:29 show detail
 
