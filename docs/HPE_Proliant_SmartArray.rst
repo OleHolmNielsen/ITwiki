@@ -1,3 +1,5 @@
+.. _hpe_proliant_smartarray:
+
 ===================================
 HPE Proliant SmartArray
 ===================================
