@@ -135,8 +135,8 @@ Example usage is::
          .....
          Disk Name: /dev/sdac
 
-Here you can read the disk name, serial number etc.,
-and compare disk names with lists from ``lsblk`` and ``lsscsi`` as shown above.
+Here you can read the **disk name**, serial number etc.,
+and compare disk names with lists from ``lsblk`` and ``lsscsi`` as shown above as well as ``zpool status``.
 
 Trying out ZFS
 ====================
