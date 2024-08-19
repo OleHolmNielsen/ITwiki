@@ -104,7 +104,7 @@ The following commands are useful for listing disk block devices::
 List HPE server's disks
 -----------------------------
 
-If using a HPE HBA controller, the disks in the system can be displayed using the ssacli_ command from the *ssacli* RPM package.
+If using a HPE HBA controller, the disks in the system can be displayed using the ``ssacli`` command from the *ssacli* RPM package.
 See the :ref:`HPE_Proliant_SmartArray` page.
 
 Example usage is::
