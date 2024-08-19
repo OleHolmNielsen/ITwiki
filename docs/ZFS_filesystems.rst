@@ -101,6 +101,43 @@ The following commands are useful for listing disk block devices::
   lsblk
   lsscsi --wwn --size
 
+List HPE server's disks
+-----------------------------
+
+If using a HPE HBA controller, the disks in the system can be displayed using the ssacli_ command from the *ssacli* RPM package.
+See the :ref:`HPE_Proliant_SmartArray` page.
+
+Example usage is::
+
+  $ /usr/sbin/ssacli
+  => ctrl slot=1 pd all show status
+  => ctrl slot=1 physicaldrive 2I:1:29 show detail
+
+  Smart HBA H240 in Slot 1 (HBA Mode)
+
+   HBA Drives
+
+      physicaldrive 2I:1:29
+         Port: 2I
+         Box: 1
+         Bay: 29
+         Status: OK
+         Drive Type: HBA Mode Drive
+         Interface Type: SAS
+         Size: 6 TB
+         Drive exposed to OS: True
+         Logical/Physical Block Size: 512/512
+         Rotational Speed: 7200
+         Firmware Revision: HPD7
+         Serial Number: 1EK2RLEJ
+         WWID: 5000CCA232AE1049
+         Model: HP      MB6000FEDAU
+         .....
+         Disk Name: /dev/sdac
+
+
+Here you can read the disk name, serial number etc.
+
 Trying out ZFS
 ====================
 
