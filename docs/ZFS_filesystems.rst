@@ -20,6 +20,9 @@ See also the OpenZFS_ developers page.
 ZFS documentation
 ============================
 
+**NOTICE:** Aaron_Toponce_ ’s documentation is apparently not available any longer since early 2024!!
+You may find a ZFS_web_archive_ copy of this documentation.
+
 * Getting_Started_ with ZFS_ including an RHEL-based-distro_ guide.
 
 * First time OpenZFS users are encouraged to check out Aaron_Toponce_ ’s excellent documentation.
@@ -48,6 +51,7 @@ ZFS documentation
 .. _Getting_Started: https://openzfs.github.io/openzfs-docs/Getting%20Started/index.html
 .. _RHEL-based-distro: https://openzfs.github.io/openzfs-docs/Getting%20Started/RHEL-based%20distro/index.html
 .. _Aaron_Toponce: https://pthree.org/2012/12/04/zfs-administration-part-i-vdevs/
+.. _ZFS_web_archive: https://web.archive.org/web/20230904234829/https://pthree.org/2012/04/17/install-zfs-on-debian-gnulinux/
 .. _Best_practices: https://pthree.org/2012/12/13/zfs-administration-part-viii-zpool-best-practices-and-caveats/
 .. _OpenZFS_Newcomers: https://openzfs.org/wiki/Newcomers
 .. _Lustre: https://wiki.lustre.org/Main_Page
