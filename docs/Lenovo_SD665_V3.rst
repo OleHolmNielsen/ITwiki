@@ -9,10 +9,13 @@ Lenovo SD665_V3 server
 This page contains information about Lenovo SD665_V3_ servers deployed in our cluster.
 The Lenovo ThinkSystem SD665_V3_ is a 2-socket ½U server that features the AMD EPYC 9004 "Genoa" family of processors. 
 
-The nodes are housed in the upgraded ThinkSystem DW612S_ enclosure.
+The nodes are housed in the upgraded ThinkSystem DW612S_ enclosure with SMM2_ management module.
+See the SMM2_ page with SMM2_ functions and IPMItool_ commands for managing the SMM2_.
 
+.. _SMM2: https://pubs.lenovo.com/mgt_tools_smm2/
 .. _SD665_V3: https://lenovopress.lenovo.com/lp1612-lenovo-thinksystem-sd665-v3-server
 .. _DW612S: https://pubs.lenovo.com/dw612s_neptune_enclosure/
+.. _IPMItool: https://github.com/ipmitool/ipmitool
 
 NVIDIA InfiniBand Adapter (SharedIO)
 =======================================
@@ -46,7 +49,7 @@ This Mellanox drivers tool also reports firmware versions::
 
   mlxfwmanager 
 
-Undocumented restriction: **Node reseats** (virtually with the SMM2 module) are required whenever SharedIO adapter firmwares are updated!! 
+Undocumented restriction: **Node reseats** (virtually with the SMM2_ module) are required whenever SharedIO adapter firmwares are updated!! 
 
 Updating firmware from a repository folder *XXX/* can be done from the XCC GUI, or by using a OneCLI_ command like this example::
 
