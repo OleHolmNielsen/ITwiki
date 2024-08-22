@@ -49,8 +49,8 @@ Both the left and right nodes of a tray have to be reseated simultaneously!
 The reseats may be performed in several alternative ways:
 
 * Using Lenovo Confluent_ software.
-* Using the SMM2_ web GUI.
-* Using IPMItool_ commands (see the :ref:`Lenovo_DW612S` page.
+* Using the DW612S_ SMM2_ web GUI (see the SMM2_ page).
+* Using IPMItool_ commands (see the :ref:`Lenovo_DW612S` page).
 
 This command displays the NVIDIA/Mellanox firmware version::
 
