@@ -46,7 +46,7 @@ There seems to be an undocumented restriction that **Node reseats** (performed v
 are **required** whenever SharedIO adapter firmwares are updated!! 
 Both the left and right nodes of a tray have to be reseated simultaneously!
 
-The reseats may be performed in seral ways:
+The reseats may be performed in several alternative ways:
 
 * Using Lenovo Confluent_ software.
 * Using the SMM2_ web GUI.
@@ -68,6 +68,7 @@ This will loop over all firmwares in the repository and try to apply them one by
 To select only a specific firmware family: **TBD**
 
 .. _OneCLI: https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli
+.. _Confluent: https://hpc.lenovo.com/users/documentation/whatisconfluent.html
 
 Documentation and software
 ==========================
