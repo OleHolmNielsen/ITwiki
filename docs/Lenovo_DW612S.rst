@@ -16,6 +16,7 @@ Documentation
 * The DW612S_ 6U enclosure.
 * DW612S_documents_.
 * DW612S_User_Guide_.
+* SMM2_ management module SMM2_Users_Guide_.
 * SMM2_ functions and IPMI commands.
 
 .. _Lenovo_Neptune: https://www.lenovo.com/us/en/servers-storage/neptune/
@@ -23,6 +24,7 @@ Documentation
 .. _DW612S_documents: https://pubs.lenovo.com/dw612s_neptune_enclosure/pdf_files
 .. _DW612S_User_Guide: https://pubs.lenovo.com/dw612s_neptune_enclosure/dw612s_user_guide.pdf
 .. _SMM2: https://pubs.lenovo.com/mgt_tools_smm2/
+.. _SMM2_Users_Guide: https://pubs.lenovo.com/mgt_tools_smm2/smm2_users_guide.pdf
 
 Configuration of the DW612S System Management Module 2 (SMM2_)
 ---------------------------------------------------------------
