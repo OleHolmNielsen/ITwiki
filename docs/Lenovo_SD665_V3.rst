@@ -38,18 +38,27 @@ is designed to take a snapshot of all the configuration and relevant information
 
 .. _linux-sysinfo-snapshot: https://github.com/Mellanox/linux-sysinfo-snapshot
 
-Infiniband firmware
---------------------
+Updating Infiniband firmware
+------------------------------
 
-This command displays the firmware version::
+**WARNING:**
+There seems to be an undocumented restriction that **Node reseats** (performed virtually using the SMM2_ module)
+are **required** whenever SharedIO adapter firmwares are updated!! 
+Both the left and right nodes of a tray have to be reseated simultaneously!
+
+The reseats may be performed in seral ways:
+
+* Using Lenovo Confluent_ software.
+* Using the SMM2_ web GUI.
+* Using IPMItool_ commands.
+
+This command displays the NVIDIA/Mellanox firmware version::
 
   ibv_devinfo | grep fw_ver
 
 This Mellanox drivers tool also reports firmware versions::
 
   mlxfwmanager 
-
-Undocumented restriction: **Node reseats** (virtually with the SMM2_ module) are required whenever SharedIO adapter firmwares are updated!! 
 
 Updating firmware from a repository folder *XXX/* can be done from the XCC GUI, or by using a OneCLI_ command like this example::
 
