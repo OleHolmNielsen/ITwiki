@@ -50,7 +50,7 @@ The reseats may be performed in several alternative ways:
 
 * Using Lenovo Confluent_ software.
 * Using the SMM2_ web GUI.
-* Using IPMItool_ commands.
+* Using IPMItool_ commands (see the :ref:`Lenovo_DW612S` page.
 
 This command displays the NVIDIA/Mellanox firmware version::
 
