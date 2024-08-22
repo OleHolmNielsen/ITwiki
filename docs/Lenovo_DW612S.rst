@@ -45,6 +45,19 @@ After logging in to the SMM2_ Web Gui click on the *Configuration* tab:
   * Destination Email Addresses for alert recipients.
   * SMTP (email) Server Settings.
 
+SMM2_ ipmitool commands
+------------------------
+
+The SMM2_ ipmi_command_list_ page lists IPMItool_ IPMI_ commands that can get or set SMM2_ parameters.
+
+Some example commands are::
+
+  ipmitool -I lanplus -H <SMM2-hostname> -U $IPMI_USER -P $IPMI_PASSWORD raw 0x32 <options>
+
+.. _ipmi_command_list: https://pubs.lenovo.com/mgt_tools_smm2/ipmi_command_list
+.. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
+.. _IPMItool: https://github.com/ipmitool/ipmitool
+
 SMM2_ firmware updates
 ------------------------
 
