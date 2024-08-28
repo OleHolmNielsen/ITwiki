@@ -12,6 +12,9 @@ The Lenovo ThinkSystem SD665_V3_ is a 2-socket ½U server that features the AMD 
 The nodes are housed in the upgraded ThinkSystem DW612S_ enclosure with SMM2_ management module.
 See the SMM2_ page with SMM2_ functions and IPMItool_ commands for managing the SMM2_.
 
+Note: Mellanox Infiniband and Ethernet software and firmware **MLNX_OFED / MLNX_EN for Lenovo** must be downloaded from the special *Lenovo EveryScale* site
+https://network.nvidia.com/support/firmware/lenovo-intelligent-cluster/
+
 .. _SMM2: https://pubs.lenovo.com/mgt_tools_smm2/
 .. _SD665_V3: https://lenovopress.lenovo.com/lp1612-lenovo-thinksystem-sd665-v3-server
 .. _DW612S: https://pubs.lenovo.com/dw612s_neptune_enclosure/
@@ -19,7 +22,6 @@ See the SMM2_ page with SMM2_ functions and IPMItool_ commands for managing the 
 
 NVIDIA InfiniBand Adapter (SharedIO)
 =======================================
-
 
 The SD665_V3_ has a water-cooled NVIDIA 2-Port PCIe Gen5 x16 InfiniBand Adapter (SharedIO) 
 `ThinkSystem NVIDIA ConnectX-7 NDR200 InfiniBand QSFP112 Adapters <https://lenovopress.lenovo.com/lp1693-thinksystem-nvidia-connectx-7-ndr200-infiniband-qsfp112-adapters>`_.
