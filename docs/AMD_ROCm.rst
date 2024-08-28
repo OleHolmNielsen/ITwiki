@@ -42,8 +42,7 @@ Compilers and libraries
 Software installation
 =========================
 
-The `Deploy ROCm on Linux <https://rocm.docs.amd.com/en/latest/deploy/linux/>`_
-guide documents installation on RHEL.
+The ROCm_installation_for_Linux_ guide documents installation on RHEL.
 See also the Quick_Start_ guide.
 You must first enable the EPEL_ repository.
 Install kernel packages::
@@ -87,6 +86,7 @@ Some useful commands are:
 
 The directory name depends on the installed versions of ROCm_.
 
+.. _ROCm_installation_for_Linux: https://rocm.docs.amd.com/projects/install-on-linux/en/latest/
 .. _Linux_installation: https://rocm.docs.amd.com/en/latest/deploy/linux/os-native/install.html
 .. _Quick_Start: https://rocm.docs.amd.com/en/latest/deploy/linux/quick_start.html
 .. _EPEL: https://docs.fedoraproject.org/en-US/epel/
