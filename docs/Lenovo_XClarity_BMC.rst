@@ -61,12 +61,28 @@ firmware and device driver updates.
 
 Download the ``lnvgy_utl_lxcer_onecli01z-4.2.0_linux_x86-64`` RPM file from the download page and install it.
 This will create a soft-link ``/usr/bin/onecli`` to the OneCLI_ command.
-There is a OneCLI_User_Guide_.
+There is a OneCLI_User_Guide_ and you may read the online help::
+
+  onecli help
+
+The OneCLI_ can be used Out-of-band_ from a management server with arguments for example::
+
+  onecli <some command> -N --bmc $IPMI_USER:$IPMI_PASSWORD@<XCC-address>
+
+where the IPMI login is defined by the variables $IPMI_USER:$IPMI_PASSWORD.
 
 Some useful OneCLI_ commands are::
 
   onecli config show
   onecli config show system_prod_data
+
+Power management can be done locally or Out-of-band_, see the options::
+
+  onecli ospower help
+
+A node Virtual_Reseat_ power cycling can be done (Out-of-band_ is recommended :-) with::
+
+  onecli ospower acpower
 
 Saving and replicating the system configuration::
 
@@ -111,6 +127,8 @@ Show/set the system's friendly name (unrelated to DNS names)::
 Enable promoting the primary BMC firmware to the backup firmware::
 
   onecli config set IMM.BackupAutoPromote Enabled
+
+.. _Out-of-band: https://en.wikipedia.org/wiki/Out-of-band
 
 Upload system logs to Lenovo
 ------------------------------
@@ -166,4 +184,26 @@ See also:
 
 * `How to use Lenovo XClarity Essentials OneCLI to locally update your system <https://support.lenovo.com/us/en/solutions/ht511326-how-to-use-lenovo-xclarity-essentials-onecli-to-locally-update-your-system>`_.
 * *Lenovo XClarity Administrator Quick Start Guide* `Updating firmware and software <https://sysmgt.lenovofiles.com/help/topic/com.lenovo.lxca.doc/lxca_qsg_update_sw_fw.pdf>`_.
+
+XCC CLI access using SSH
+==========================
+
+One may have XCC CLI access using SSH, however, it's necessary to specify *which* of your multiple SSH keys to use::
+
+  ssh -i $HOME/.ssh/id_rsa.pub <node-xcc-name>
+
+Once logged into the XCC CLI there are many options, use `help` to list options.
+
+To display Vital Product Data::
+
+  system> help vpd
+  usage:
+   vpd sys  - displays Vital Product Data for the system
+   vpd bmc  - displays Vital Product Data for the management controller
+   vpd uefi - displays Vital Product Data for system BIOS
+   vpd lxpm - displays Vital Product Data for system LXPM
+   vpd fw   - displays Vital Product Data for the system firmware
+   vpd comp - displays Vital Product Data for the system components
+   vpd pcie - displays Vital Product Data for PCIe devices
+
 
