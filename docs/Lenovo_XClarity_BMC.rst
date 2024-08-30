@@ -129,6 +129,7 @@ Enable promoting the primary BMC firmware to the backup firmware::
   onecli config set IMM.BackupAutoPromote Enabled
 
 .. _Out-of-band: https://en.wikipedia.org/wiki/Out-of-band
+.. _Virtual_Reseat: https://pubs.lenovo.com/mgt_tools_smm2/c_chassis_front_overview
 
 Upload system logs to Lenovo
 ------------------------------
