@@ -147,6 +147,12 @@ The ``--upload`` command is described as:
 Firmware updates
 -----------------
 
+The server's firmware versions can be displayed by::
+
+  onecli update scan -N --bmc $IPMI_USER:$IPMI_PASSWORD@<XCC-address>
+
+This command must be executed Out-of-band_ because OneCLI_ refuses to work locally on non-supported OSes (bug discovered August 2024).
+
 Updating a single firmware file on a single server can be performed with OneCLI_, but the no working examples have been found in the OneCLI_User_Guide_.
 We have tested this procedure:
 
