@@ -143,6 +143,13 @@ Example usage may be::
 Here you can read the **disk name**, serial number etc.,
 and compare disk names with lists from ``lsblk`` and ``lsscsi`` as shown above as well as ``zpool status``.
 
+If a replacement disk is hidden from the OS, it may be because it was previously attached to a RAID adapter,
+see https://serverfault.com/questions/1142870/hp-smart-array-p812-hba-mode-masked-drives
+This can me modified like in this example::
+
+  $ /usr/sbin/ssacli
+  => ctrl slot=1 physicaldrive 2I:1:29 modify clearconfigdata
+
 Trying out ZFS
 ====================
 
