@@ -35,6 +35,8 @@ You may find a ZFS_web_archive_ copy of this documentation.
 
 * `ZFS man-pages <https://openzfs.github.io/openzfs-docs/man/index.html>`_.
 
+* `ZFS mailing lists <https://github.com/openzfs/openzfs-docs/blob/master/docs/Project%20and%20Community/Mailing%20Lists.rst>`_.
+
 * Lustre_ and ZFS_:
 
   - Lustre_ uses ZFS_, see https://wiki.lustre.org/ZFS.
