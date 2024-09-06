@@ -12,13 +12,19 @@ The Lenovo ThinkSystem SD665_V3_ is a 2-socket ½U server that features the AMD 
 The nodes are housed in the upgraded ThinkSystem DW612S_ enclosure with SMM2_ management module.
 See the SMM2_ page with SMM2_ functions and IPMItool_ commands for managing the SMM2_.
 
-Note: Mellanox Infiniband and Ethernet software and firmware **MLNX_OFED / MLNX_EN for Lenovo** must be downloaded from the special *Lenovo EveryScale* site
-https://network.nvidia.com/support/firmware/lenovo-intelligent-cluster/
+To offer solution-level interoperability support for HPC and AI configurations based on the Lenovo ThinkSystem portfolio and OEM components,
+Lenovo_EveryScale_ extensively tests the components and their combinations.
+The extensive testing results in a Best_Recipe_ release of software and firmware levels.
+Lenovo warrants Best_Recipe_ components to work seamlessly together as a fully integrated data center solution instead of a collection of individual components at the time of implementation.
 
 .. _SMM2: https://pubs.lenovo.com/mgt_tools_smm2/
 .. _SD665_V3: https://lenovopress.lenovo.com/lp1612-lenovo-thinksystem-sd665-v3-server
 .. _DW612S: https://pubs.lenovo.com/dw612s_neptune_enclosure/
 .. _IPMItool: https://github.com/ipmitool/ipmitool
+.. _Lenovo_EveryScale: https://lenovopress.lenovo.com/lp0900-lenovo-everyscale-lesi
+.. _Best_Recipes: https://support.lenovo.com/us/en/solutions/HT510136
+.. _NVIDIA_Lenovo_EveryScale: https://network.nvidia.com/support/firmware/lenovo-intelligent-cluster/
+.. _Lenovo_Archive: https://network.nvidia.com/support/firmware/lenovo-archive/
 
 NVIDIA InfiniBand Adapter (SharedIO)
 =======================================
@@ -40,8 +46,16 @@ is designed to take a snapshot of all the configuration and relevant information
 
 .. _linux-sysinfo-snapshot: https://github.com/Mellanox/linux-sysinfo-snapshot
 
-Updating Infiniband firmware
-------------------------------
+Updating Mellanox Infiniband firmware
+-----------------------------------------------
+
+Note: Mellanox Infiniband and Ethernet software and firmware **MLNX_OFED / MLNX_EN for Lenovo** must be downloaded from the special NVIDIA_Lenovo_EveryScale_ site.
+Click on the *Firmware* tab to download the latest firmware.
+Older firmware can be downloaded from the Lenovo_Archive_.
+
+The Lenovo Mellanox adapters' firmware **must** be updated with the special Lenovo firmware executable, for example::
+
+  mlxfwmanager_LES_24A_ES_OFED-24.04-0_build1
 
 **WARNING:**
 There seems to be an undocumented restriction that **Node reseats** (performed virtually using the SMM2_ module)
@@ -58,11 +72,11 @@ This command displays the NVIDIA/Mellanox firmware version::
 
   ibv_devinfo | grep fw_ver
 
-This Mellanox drivers tool also reports firmware versions::
+This standard Mellanox drivers tool also reports firmware versions::
 
   mlxfwmanager 
 
-Updating firmware from a repository folder *XXX/* can be done from the XCC GUI, or by using a OneCLI_ command like this example::
+Updating networking firmware from a repository folder *XXX/* can be done from the XCC GUI, or by using a OneCLI_ command like this example::
 
   onecli update flash --nocompare --includeid mlnx-lnvgy_fw_nic_cx-j9m3u-0302_anyos_comp --dir XXX/ --log=5 -N --output /tmp/logs
 
