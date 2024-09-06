@@ -49,20 +49,20 @@ is designed to take a snapshot of all the configuration and relevant information
 Updating Mellanox Infiniband firmware
 -----------------------------------------------
 
-Note: Mellanox Infiniband and Ethernet software and firmware **MLNX_OFED / MLNX_EN for Lenovo** must be downloaded from the special NVIDIA_Lenovo_EveryScale_ site.
-Click on the *Firmware* tab to download the latest firmware.
-Older firmware can be downloaded from the Lenovo_Archive_.
+* Mellanox Infiniband and Ethernet software and firmware **MLNX_OFED / MLNX_EN for Lenovo** must be downloaded from the special NVIDIA_Lenovo_EveryScale_ site.
+  Click on the *Firmware* tab to download the latest firmware.
+* Older firmware can be downloaded from the Lenovo_Archive_.
 
 The Lenovo Mellanox adapters' firmware **must** be updated with the special Lenovo firmware executable, for example::
 
   mlxfwmanager_LES_24A_ES_OFED-24.04-0_build1
 
 **WARNING:**
-There seems to be an undocumented restriction that **Node reseats** (performed virtually using the SMM2_ module)
+There seems to be an undocumented restriction that node Virtual_Reseat_ (performed virtually using the SMM2_ module)
 are **required** whenever SharedIO adapter firmwares are updated!! 
-Both the left and right nodes of a tray have to be reseated simultaneously!
+Both the **left and right nodes** of a tray have to be reseated simultaneously!
 
-The reseats may be performed in several alternative ways:
+The node Virtual_Reseat_ may be performed in several alternative ways:
 
 * Using Lenovo Confluent_ software.
 * Using the DW612S_ SMM2_ web GUI (see the SMM2_ page).
@@ -85,6 +85,7 @@ To select only a specific firmware family: **TBD**
 
 .. _OneCLI: https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli
 .. _Confluent: https://hpc.lenovo.com/users/documentation/whatisconfluent.html
+.. _Virtual_Reseat: https://pubs.lenovo.com/mgt_tools_smm2/c_chassis_front_overview
 
 Documentation and software
 ==========================
