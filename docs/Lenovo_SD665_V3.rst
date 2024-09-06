@@ -22,7 +22,7 @@ Lenovo warrants Best_Recipe_ components to work seamlessly together as a fully i
 .. _DW612S: https://pubs.lenovo.com/dw612s_neptune_enclosure/
 .. _IPMItool: https://github.com/ipmitool/ipmitool
 .. _Lenovo_EveryScale: https://lenovopress.lenovo.com/lp0900-lenovo-everyscale-lesi
-.. _Best_Recipes: https://support.lenovo.com/us/en/solutions/HT510136
+.. _Best_Recipe: https://support.lenovo.com/us/en/solutions/HT510136
 .. _NVIDIA_Lenovo_EveryScale: https://network.nvidia.com/support/firmware/lenovo-intelligent-cluster/
 .. _Lenovo_Archive: https://network.nvidia.com/support/firmware/lenovo-archive/
 
