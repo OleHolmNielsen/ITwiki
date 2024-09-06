@@ -50,7 +50,7 @@ Updating Mellanox Infiniband firmware
 -----------------------------------------------
 
 * Mellanox Infiniband and Ethernet software and firmware **MLNX_OFED / MLNX_EN for Lenovo** must be downloaded from the special NVIDIA_Lenovo_EveryScale_ site.
-  Click on the *Firmware* tab to download the latest firmware.
+  Click on the ``Firmware`` tab to download the latest firmware.
 * Older firmware can be downloaded from the Lenovo_Archive_.
 
 The Lenovo Mellanox adapters' firmware **must** be updated with the special Lenovo firmware executable, for example::
