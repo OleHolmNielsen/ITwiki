@@ -57,6 +57,8 @@ The Lenovo Mellanox adapters' firmware **must** be updated with the special Leno
 
   mlxfwmanager_LES_24A_ES_OFED-24.04-0_build1
 
+Adding the ``--query`` flag will display firmware versions.
+
 **WARNING:**
 There seems to be an undocumented restriction that node Virtual_Reseat_ (performed virtually using the SMM2_ module)
 are **required** whenever SharedIO adapter firmwares are updated!! 
@@ -74,7 +76,7 @@ This command displays the NVIDIA/Mellanox firmware version::
 
 This standard Mellanox drivers tool also reports firmware versions::
 
-  mlxfwmanager 
+  mlxfwmanager --query
 
 Updating networking firmware from a repository folder *XXX/* can be done from the XCC GUI, or by using a OneCLI_ command like this example::
 
@@ -86,6 +88,19 @@ To select only a specific firmware family: **TBD**
 .. _OneCLI: https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli
 .. _Confluent: https://hpc.lenovo.com/users/documentation/whatisconfluent.html
 .. _Virtual_Reseat: https://pubs.lenovo.com/mgt_tools_smm2/c_chassis_front_overview
+
+MST (Mellanox Software Tools) service
+----------------------------------------
+
+The ``mst`` tool (from the `mft` Mellanox firmware tools package) has a number of functions:
+
+* ``mst help``: Print usage information
+* ``mst start``: Create special files that represent Mellanox devices.
+* ``mst status -v``: Print current status of Mellanox devices
+
+If it is necessary to reset the firmware on a Mellanox device, this command may have to be used::
+
+  mlxfwreset -d /dev/mst/mt4129_pciconf0 reset 
 
 Documentation and software
 ==========================
