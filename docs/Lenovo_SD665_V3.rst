@@ -169,6 +169,10 @@ Verify that the Mellanox driver RPMs have been installed and the ``openibd`` ser
   rpm -qa | grep mlnx
   systemctl status openibd
 
+Verify the installed OFED package name and version::
+
+  ofed_info -s
+
 If your kernel version does not match with any of the offered pre-built RPMs,
 you can add your kernel version by using the ``mlnx_add_kernel_support.sh`` script located inside the MLNX_OFED package.
 
