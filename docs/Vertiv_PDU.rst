@@ -17,8 +17,10 @@ Click ``Log In`` in the upper right hand corner of the PDU's web page.
 PDUs delivered by Lenovo may have the default **USERID/PASSW0RD** login credentials.
 
 In the **System** *Users* menu it is possible to edit or add users.
-Apparently, these PDUs reject adding the ``root`` username with a message ``Error! Not authorized``,
-probably because ``root`` is used internally in the system?
+These PDUs reject adding the ``root`` username with a message ``Error! Not authorized``,
+because the ``root`` user is used internally by the PDU's Linux OS (confirmed by Vertiv support September 2024):
+
+* You should create a local administrator username, for example ``admin``.
 
 SSH logins are possible but the PDU doesn't accept the most modern SSH keys::
 
