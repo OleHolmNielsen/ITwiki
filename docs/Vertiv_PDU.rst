@@ -51,7 +51,7 @@ In the **System** menu make the following configurations:
 
 * **Web Server:** In the *HTTP Interface* select *Redirected to HTTPS*.
 
-* **Users:** Create a local administrator username, for example ``admin`` with *Admin* rights.
+* **Users:** Create a local administrator username, for example ``admin`` with *Admin* rights (``root`` is not authorized).
 
 * **Time:** Select the timezone ``Europe/Copenhaven``.
 
