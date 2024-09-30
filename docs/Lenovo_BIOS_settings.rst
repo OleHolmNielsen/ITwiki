@@ -15,8 +15,9 @@ Booting and BIOS configuration
   In the BMC GUI you may also press ``Quick Actions`` and select the *Power Action* ``Boot Server to System Setup``.
 * Press ``F10`` for network boot and ``F12`` for a one-time boot menu.
 
-The Lenovo UEFI boot goes through PEI_ and DXE_ phases before booting the OS.
+The Lenovo UEFI_ boot goes through PEI_ and DXE_ phases before booting the OS.
 
+.. _UEFI: https://en.wikipedia.org/wiki/UEFI
 .. _PEI: https://uefi.org/specs/PI/1.8/V1_Services_PEI.html
 .. _DXE: https://uefi.org/specs/PI/1.8/V2_Overview.html
 

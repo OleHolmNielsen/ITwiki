@@ -15,6 +15,7 @@ See also pages on:
 .. _BIOS: https://en.wikipedia.org/wiki/BIOS
 .. _PXE: http://en.wikipedia.org/wiki/Preboot_Execution_Environment
 .. _PXE_and_UEFI: https://wiki.fysik.dtu.dk/ITwiki/PXE_and_UEFI
+.. _UEFI: https://en.wikipedia.org/wiki/UEFI
 
 SYSLINUX and PXELINUX
 ==========================
