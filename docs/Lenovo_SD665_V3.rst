@@ -137,6 +137,20 @@ The OpenFabrics Enterprise Distribution (OFED_) is open-source software for RDMA
 Mellanox provides some information about Inbox_drivers_ from various OS vendors,
 but it is not stated whether they can be used in place of the drivers from Mellanox described below.
 
+NVIDIA offers a `Linux MLNX OFED repository <https://network.nvidia.com/support/mlnx-ofed-public-repository/>`_ which is enabled by:
+
+1. Install key::
+
+     rpm --import https://www.mellanox.com/downloads/ofed/RPM-GPG-KEY-Mellanox 
+
+2. Add the desired repo, for example::
+
+     cd /etc/yum.repos.d/ 
+     wget https://linux.mellanox.com/public/repo/mlnx_ofed/latest/rhel8.10/mellanox_mlnx_ofed.repo
+     dnf clean all
+
+3. Install driver packages: TBD?
+
 Nvidia's `Red Hat Enterprise Linux (RHEL) Inbox Driver documentation <https://docs.nvidia.com/networking/display/rhel89/general+support>`_
 has the statement::
 
