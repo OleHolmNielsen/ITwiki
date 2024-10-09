@@ -186,6 +186,16 @@ Configuring ZFS
 
 The sections below describe how we have configured ZFS_.
 
+List disks in the system
+---------------------------
+
+First identify the disk device WWN_ names and the corresponding `/dev/sd...` device names::
+
+  ls -l /dev/disk/by-id/wwn* | sed /part/d | awk '{print $9 " is disk " $11}' | sort -k 4
+
+It is recommended to use the permanent WWN_ names in stead of the Linux disk device names which are changeable.
+You should make a record of the above WWN_ names to Linux disk device names mapping.
+
 Create RAIDZ disks
 ------------------------
 
