@@ -191,10 +191,12 @@ List disks in the system
 
 First identify the disk device WWN_ names and the corresponding `/dev/sd...` device names::
 
-  ls -l /dev/disk/by-id/wwn* | sed /part/d | awk '{print $9 " is disk " $11}' | sort -k 4
+  $ ls -l /dev/disk/by-id/wwn* | sed /part/d | awk '{print $9 " is disk " $11}' | sort -k 4
+  /dev/disk/by-id/wwn-0x600508b1001cf4b3e98de44628d4583c is disk ../../sda
+  ...
 
-It is recommended to use the permanent WWN_ names in stead of the Linux disk device names which are changeable.
-You should make a record of the above WWN_ names to Linux disk device names mapping.
+For ZFS_ usage it is recommended to use the permanent hardware-based WWN_ names in stead of the Linux disk device names which are changeable.
+You should make a record of the above mapping of WWN_ names to Linux disk device names.
 
 Create RAIDZ disks
 ------------------------
