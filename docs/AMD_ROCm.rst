@@ -60,29 +60,40 @@ states that a file ``/etc/adduser.conf`` should be created.
 However, such a file is **not** used by EL Linux installations.
 
 Install ROCm_ RPMs as documented in
-`Installation via Package manager <https://rocm.docs.amd.com/en/latest/deploy/linux/os-native/index.html>`_.
+`Installation via native package manager <https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/native-install/index.html>`_.
 The Yum repositories ``amdgpu.repo, rocm.repo`` will be enabled for installation.
 
 Now install::
 
   dnf install amdgpu-dkms
 
-and reboot the server.
+and **reboot the server**.
 
-It may be a good idea to install 
-`Multi-version <https://rocm.docs.amd.com/en/latest/deploy/linux/install_overview.html#installation-types>`_
-of the ROCm stack on a system, for example::
+Then install ROCm_::
 
-  dnf install rocm-hip-sdk5.7.2 rocm-hip-sdk5.6.1
+  dnf install rocm
 
-Read also the Linux_installation_ section *Post-install Actions and Verification Process*.
+Finally follow the `Post-installation instructions <https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/post-install.html>`_::
+
+  tee --append /etc/ld.so.conf.d/rocm.conf <<EOF
+  /opt/rocm/lib
+  /opt/rocm/lib64
+  EOF
+  ldconfig
+  export PATH=$PATH:/opt/rocm-6.2.2/bin
+  dkms status
+
+Verify the ROCm_ installation::
+
+  /opt/rocm-6.2.2/bin/rocminfo
+  /opt/rocm-6.2.2/bin/clinfo
 
 The software is installed under the ``/opt`` directory.
 Some useful commands are:
 
-* AMD ROCm System Management Interface (SMI) command::
+* AMD ROCm_ System Management Interface (SMI) command::
 
-    /opt/rocm-5.7.2/bin/rocm-smi 
+    /opt/rocm-X.X.X/bin/rocm-smi 
 
 The directory name depends on the installed versions of ROCm_.
 
