@@ -44,20 +44,25 @@ Software installation
 
 The ROCm_installation_for_Linux_ guide documents installation on RHEL.
 See also the Quick_Start_ guide.
+
+Note: Use this matrix to view the ROCm compatibility across successive major and minor releases:
+https://rocm.docs.amd.com/en/latest/compatibility/compatibility-matrix.html
+which contains a number of version requirements for software packages.
+For example, OpenMPI requires these communication framework versions to work with ROCm_ 6.2:
+
+* UCC_ >=1.3.0
+* UCX_ >=1.15.0
+
+.. _UCC: https://github.com/ROCm/ucc
+.. _UCX: https://github.com/ROCm/ucx
+
+Install packages
+-----------------
+
 You must first enable the EPEL_ repository.
 Install kernel packages::
 
   dnf install kernel-headers kernel-devel
-
-Two new UNIX groups ``video,render`` should be created::
-
-  sudo usermod -a -G render,video $LOGNAME
-
-and ROCm_ users must be added to those groups.
-
-The section `Setting Permissions for Groups <https://rocm.docs.amd.com/en/latest/deploy/linux/prerequisites.html#setting-permissions-for-groups>`_
-states that a file ``/etc/adduser.conf`` should be created.
-However, such a file is **not** used by EL Linux installations.
 
 Install ROCm_ RPMs as documented in
 `Installation via native package manager <https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/native-install/index.html>`_.
@@ -101,6 +106,26 @@ The directory name depends on the installed versions of ROCm_.
 .. _Linux_installation: https://rocm.docs.amd.com/en/latest/deploy/linux/os-native/install.html
 .. _Quick_Start: https://rocm.docs.amd.com/en/latest/deploy/linux/quick_start.html
 .. _EPEL: https://docs.fedoraproject.org/en-US/epel/
+
+Add UNIX groups render and video
+---------------------------------
+
+Two new UNIX groups ``video,render`` should be created::
+
+  sudo usermod -a -G render,video $LOGNAME
+
+and all ROCm_ users must be added to those groups.
+**Note:** If a ``modules`` user is used for building modules, this user must also be added to those groups.
+
+On some Linuxes (unfortunately not EL8 Linux) you can configure all new users to have these groups by appending to the file ``/etc/default/useradd``::
+
+  ADD_EXTRA_GROUPS=1
+  EXTRA_GROUPS=video
+  EXTRA_GROUPS=render
+
+The section `Setting Permissions for Groups <https://rocm.docs.amd.com/en/latest/deploy/linux/prerequisites.html#setting-permissions-for-groups>`_
+states that a file ``/etc/adduser.conf`` should be created.
+However, such a file is **not** used by EL Linux installations.
 
 Install ROCm runtimes
 ---------------------------
