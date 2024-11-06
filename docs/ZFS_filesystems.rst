@@ -195,6 +195,11 @@ First identify the disk device WWN_ names and the corresponding `/dev/sd...` dev
   /dev/disk/by-id/wwn-0x600508b1001cf4b3e98de44628d4583c is disk ../../sda
   ...
 
+or use one of the following commands::
+
+  lsblk
+  lsscsi --wwn --size
+
 For ZFS_ usage it is recommended to use the permanent hardware-based WWN_ names in stead of the Linux disk device names which are changeable.
 You should make a record of the above mapping of WWN_ names to Linux disk device names.
 
@@ -217,9 +222,10 @@ Adding disks for an SLOG
 Read about the *Separate Intent Logging Device* (SLOG) in the *ZFS Intent Log* (ZIL_) page.
 The disks should be as fast as possible, such as NVMe or SSD.
 
-To correlate a namespace to a disk device use the following command::
+To correlate a namespace to a disk device use one of the following commands::
 
   lsblk
+  lsscsi --wwn --size
 
 Use ``/dev/disk/by-id/*`` disk names with ZFS_ in stead of ``/dev/sd*`` which could become renamed.
 
@@ -275,7 +281,6 @@ Cache and mirror devices can be removed, if necessary, by the zpool-remove_ comm
 where the disks are listed by the zpool-status_ command.
 
 .. _zpool-remove: https://openzfs.github.io/openzfs-docs/man/8/zpool-remove.8.html
-
 .. _L2ARC_cache: https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/
 .. _WWN: https://en.wikipedia.org/wiki/World_Wide_Name
 
