@@ -43,7 +43,7 @@ You may find a ZFS_web_archive_ copy of this documentation.
   - A `ZFS setup for Lustre <https://github.com/ucphhpc/storage/blob/main/zfs/docs/zfs.rst>`_.
   - A `JBOD Setup <https://github.com/ucphhpc/storage/blob/main/jbod/doc/jbod.rst>`_ page.
 
-* `Zpool Concepts <https://openzfs.github.io/openzfs-docs/man/7/zpoolconcepts.7.html>`_.
+* zpool_concepts_ overview of ZFS_ storage pools.
 
 * `ZFS 101—Understanding ZFS storage and performance <https://arstechnica.com/information-technology/2020/05/zfs-101-understanding-zfs-storage-and-performance/>`_
   and `ZFS fans, rejoice—RAIDz expansion will be a thing very soon <https://arstechnica.com/gadgets/2021/06/raidz-expansion-code-lands-in-openzfs-master/>`_.
@@ -59,6 +59,7 @@ You may find a ZFS_web_archive_ copy of this documentation.
 .. _Lustre: https://wiki.lustre.org/Main_Page
 .. _FAQ: https://openzfs.github.io/openzfs-docs/Project%20and%20Community/FAQ.html
 .. _ZFS_checksums: https://openzfs.github.io/openzfs-docs/Basic%20Concepts/Checksums.html
+.. _zpool_concepts: https://openzfs.github.io/openzfs-docs/man/master/7/zpoolconcepts.7.html
 
 Installation of ZFS
 =========================
@@ -206,7 +207,9 @@ You should make a record of the above mapping of WWN_ names to Linux disk device
 Create RAIDZ disks
 ------------------------
 
-To setup a RAIDZ_ pool ``<poolname>`` with RAIDZ-1, we use zpool_ with the "raidz1" VDEV, for example::
+Read the zpool_concepts_ page about VDEV_ devices, Hot_spare_ etc.
+
+To setup a RAIDZ_ pool ``<poolname>`` with RAIDZ-1, we use zpool-create_ with the "raidz1" VDEV_, for example::
 
   zpool create <poolname> raidz1 sde sdf sdg
 
@@ -215,11 +218,23 @@ must include the ``wwn-`` string before the disks' WWN_ names, for example:::
 
   zpool create <poolname> raidz1 wwn-0x5000c500ec6e2b9f wwn-0x5000c500f294ad3f wwn-0x5000c500f29d1a3b
 
-To setup a RAIDZ_ pool with RAIDZ-2, we use the "raidz2" VDEV::
+To setup a RAIDZ_ pool with RAIDZ-2, we use the "raidz2" VDEV_::
 
   zpool create <poolname> raidz2 sde sdf sdg sdh
 
+You can also create a pool with multiple VDEV_ devices, so that each VDEV_ doesn't contain too many physical disks,
+for example::
+
+  zpool create <poolname> raidz2 sde sdf sdg sdh raidz2 sdi sdj sdk sdl
+
+You can even designate a Hot_spare_ disk to the pool::
+
+  zpool create <poolname> raidz2 sde sdf sdg sdh raidz2 sdi sdj sdk sdl spare sdm
+
+.. _zpool-create: https://openzfs.github.io/openzfs-docs/man/master/8/zpool-create.8.html
 .. _RAIDZ: https://www.raidz-calculator.com/raidz-types-reference.aspx
+.. _VDEV: https://www.45drives.com/community/articles/how-zfs-organizes-its-data/
+.. _Hot_spare: https://en.wikipedia.org/wiki/Hot_spare
 
 Adding disks for an SLOG
 ------------------------------
@@ -545,7 +560,7 @@ Use the zpool-replace_ command to replace a failed disk, for example disk *sde*:
 
 The ``-f`` flag may be required in case of errors such as ``invalid vdev specification``.
 
-Hot spare disks will **not** be added to the VDEV to replace a failed drive by default.
+Hot spare disks will **not** be added to the VDEV_ to replace a failed drive by default.
 You MUST enable this feature.
 Set the ``autoreplace`` feature to on, for example::
 
