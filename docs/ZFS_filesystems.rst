@@ -231,6 +231,10 @@ You can even designate one or more Hot_spare_ disks to the pool, for example a s
 
   zpool create <poolname>   raidz2 sde sdf sdg sdh   raidz2 sdi sdj sdk sdl   spare sdm
 
+Check the status of the pools::
+
+  zpool status
+
 .. _zpool-create: https://openzfs.github.io/openzfs-docs/man/master/8/zpool-create.8.html
 .. _RAIDZ: https://www.raidz-calculator.com/raidz-types-reference.aspx
 .. _VDEV: https://www.45drives.com/community/articles/how-zfs-organizes-its-data/
