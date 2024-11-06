@@ -227,7 +227,7 @@ for example::
 
   zpool create <poolname>   raidz2 sde sdf sdg sdh   raidz2 sdi sdj sdk sdl
 
-You can even designate a Hot_spare_ disk to the pool, for example ``sdm``::
+You can even designate one or more Hot_spare_ disks to the pool, for example a single disk ``sdm``::
 
   zpool create <poolname>   raidz2 sde sdf sdg sdh   raidz2 sdi sdj sdk sdl   spare sdm
 
