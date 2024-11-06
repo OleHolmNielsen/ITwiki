@@ -210,6 +210,11 @@ To setup a RAIDZ_ pool ``<poolname>`` with RAIDZ-1, we use zpool_ with the "raid
 
   zpool create <poolname> raidz1 sde sdf sdg
 
+The recommended disk naming with WWN_ names
+must include the ``wwn-`` string before the disks' WWN_ names, for example:::
+
+  zpool create <poolname> raidz1 wwn-0x5000c500ec6e2b9f wwn-0x5000c500f294ad3f wwn-0x5000c500f29d1a3b
+
 To setup a RAIDZ_ pool with RAIDZ-2, we use the "raidz2" VDEV::
 
   zpool create <poolname> raidz2 sde sdf sdg sdh
