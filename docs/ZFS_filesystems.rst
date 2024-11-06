@@ -225,11 +225,11 @@ To setup a RAIDZ_ pool with RAIDZ-2, we use the "raidz2" VDEV_::
 You can also create a pool with multiple VDEV_ devices, so that each VDEV_ doesn't contain too many physical disks,
 for example::
 
-  zpool create <poolname> raidz2 sde sdf sdg sdh raidz2 sdi sdj sdk sdl
+  zpool create <poolname>   raidz2 sde sdf sdg sdh   raidz2 sdi sdj sdk sdl
 
-You can even designate a Hot_spare_ disk to the pool::
+You can even designate a Hot_spare_ disk to the pool, for example ``sdm``::
 
-  zpool create <poolname> raidz2 sde sdf sdg sdh raidz2 sdi sdj sdk sdl spare sdm
+  zpool create <poolname>   raidz2 sde sdf sdg sdh   raidz2 sdi sdj sdk sdl   spare sdm
 
 .. _zpool-create: https://openzfs.github.io/openzfs-docs/man/master/8/zpool-create.8.html
 .. _RAIDZ: https://www.raidz-calculator.com/raidz-types-reference.aspx
