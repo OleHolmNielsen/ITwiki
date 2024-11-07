@@ -552,6 +552,8 @@ See the zpool-status_ if any disks have failed::
   zpool status
   zpool status -x       # Only pools with errors
   zpool status -e       # Only VDEVs with errors
+  zpool status -L       # Display real paths for vdevs resolving all symbolic links
+  zpool status -P       # Display full paths for vdevs
 
 The RHEL page `How to rescan the SCSI bus to add or remove a SCSI device without rebooting the computer  <https://access.redhat.com/solutions/3941>`_
 has useful information about ``Adding a Storage Device or a Path``.
