@@ -168,10 +168,6 @@ Define the mount point for the dataset by adding this option::
 
   -m <mountpoint>
 
-Destroy the testing zpool_::
-
-  zpool destroy tank
-
 A mirrored pool where all data are mirrored 4 times::
 
   zpool create tank mirror sde sdf sdg sdh
@@ -181,6 +177,26 @@ A RAID 0+1 pool with 2+2 disks::
   zpool create tank mirror sde sdf mirror sdg sdh
 
 .. _zpool: https://openzfs.github.io/openzfs-docs/man/8/zpool.8.html
+.. _zfs-hold: https://openzfs.github.io/openzfs-docs/man/master/8/zfs-hold.8.html
+
+Destroy ZFS pool (prevent accidents)
+--------------------------------------
+
+Destroy the testing zpool_ created above::
+
+  zpool destroy tank
+
+**WARNING:** The zpool-destroy_ command will **destroy your ZFS pool without any warnings!!**.
+
+It is recommended to create a zfs_snapshot_ and use zfs-hold_ to prevent zpool-destroy_ from destroying accidentally, 
+see `prevent dataset/zvol from accidental destroy  <https://www.reddit.com/r/zfs/comments/suh9nx/prevent_datasetzvol_from_accidental_destroy/>`_.
+
+For example::
+
+  zfs snapshot tank@snapshot1
+  zfs list -t snapshot
+  zfs hold for_safety tank@snapshot1
+  zfs holds tank@snapshot1
 
 Configuring ZFS
 ===================
@@ -388,17 +404,17 @@ You can create multiple separate filesystems within a ZFS_ pool, for example::
 
   zfs create -o mountpoint=/u/test1 zfspool1/test1
 
-ZFS_ filesystems can be unmounted and mounted manually by these commands::
+ZFS_ filesystems can be unmounted and mounted manually by zfs_mount_ commands::
 
   zfs unmount ...
   zfs mount ...
 
-See ``man zfs-mount`` for usage of these commands.
+.. _zfs_mount: https://openzfs.github.io/openzfs-docs/man/master/8/zfs-mount.8.html
 
 ZFS Snapshots and clones
 ------------------------
 
-ZFS_ snapshots (see ``man zfs-snapshot``) are similar to snapshots with Linux LVM, see Snapshots_and_clones_.
+zfs_snapshot_ is similar to a Linux LVM snapshot, see Snapshots_and_clones_.
 
 You can list snapshots by two methods::
 
@@ -412,11 +428,9 @@ You can access the files in a snapshot by mounting it, for example::
 The files will be visible in ``/mnt``.
 Remember to unmount ``/mnt`` afterwards.
 
-To destroy a snapshot::
+To destroy a snapshot use zfs_destroy_::
 
   zfs destroy [-Rdnprv] filesystem|volume@snap[%snap[,snap[%snap]]]
-
-see ``man zfs-destroy``.
 
 General snapshot advice:
 
@@ -424,6 +438,8 @@ General snapshot advice:
 * Snapshots are cheap, and can keep a plethora of file versions over time.
 * Consider using something like the zfs-auto-snapshot_ script.
 
+.. _zfs-snapshot: https://openzfs.github.io/openzfs-docs/man/master/8/zfs-snapshot.8.html
+.. _zfs_destroy: https://openzfs.github.io/openzfs-docs/man/master/8/zfs-destroy.8.html
 .. _Snapshots_and_clones: https://pthree.org/2012/12/19/zfs-administration-part-xii-snapshots-and-clones/
 .. _zfs-auto-snapshot: https://github.com/zfsonlinux/zfs-auto-snapshot
 
