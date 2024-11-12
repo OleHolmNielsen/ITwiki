@@ -178,27 +178,13 @@ A RAID 0+1 pool with 2+2 disks::
 
 .. _zpool: https://openzfs.github.io/openzfs-docs/man/8/zpool.8.html
 
-Destroy ZFS pool (prevent accidents)
---------------------------------------
-
-Destroy the testing zpool_ created above::
+Destroy the testing zpool_ created above with zpool-destroy_::
 
   zpool destroy tank
 
 **WARNING:** The zpool-destroy_ command will **destroy your ZFS pool without any warnings!!**.
 
-It is recommended to create a zfs_snapshot_ and use zfs-hold_ to prevent zpool-destroy_ from destroying accidentally, 
-see `prevent dataset/zvol from accidental destroy  <https://www.reddit.com/r/zfs/comments/suh9nx/prevent_datasetzvol_from_accidental_destroy/>`_.
-
-For example create a snapshot and hold it::
-
-  zfs snapshot tank@snapshot1
-  zfs list -t snapshot
-  zfs hold for_safety tank@snapshot1
-  zfs holds tank@snapshot1
-
 .. _zpool-destroy: https://openzfs.github.io/openzfs-docs/man/master/8/zpool-destroy.8.html
-.. _zfs-hold: https://openzfs.github.io/openzfs-docs/man/master/8/zfs-hold.8.html
 
 Configuring ZFS
 ===================
@@ -433,6 +419,18 @@ Remember to unmount ``/mnt`` afterwards.
 To destroy a snapshot use zfs-destroy_::
 
   zfs destroy [-Rdnprv] filesystem|volume@snap[%snap[,snap[%snap]]]
+
+It is recommended to create a zfs_snapshot_ and use zfs-hold_ to prevent zfs-destroy_ from destroying accidentally, 
+see `prevent dataset/zvol from accidental destroy  <https://www.reddit.com/r/zfs/comments/suh9nx/prevent_datasetzvol_from_accidental_destroy/>`_.
+
+For example create a snapshot and hold it::
+
+  zfs snapshot tank@snapshot1
+  zfs list -t snapshot
+  zfs hold for_safety tank@snapshot1
+  zfs holds tank@snapshot1
+
+.. _zfs-hold: https://openzfs.github.io/openzfs-docs/man/master/8/zfs-hold.8.html
 
 General snapshot advice:
 
