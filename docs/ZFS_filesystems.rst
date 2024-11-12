@@ -197,7 +197,7 @@ For example create a snapshot and hold it::
   zfs hold for_safety tank@snapshot1
   zfs holds tank@snapshot1
 
-.. _zfs-destroy: https://openzfs.github.io/openzfs-docs/man/master/8/zfs-destroy.8.html
+.. _zpool-destroy: https://openzfs.github.io/openzfs-docs/man/master/8/zpool-destroy.8.html
 .. _zfs-hold: https://openzfs.github.io/openzfs-docs/man/master/8/zfs-hold.8.html
 
 Configuring ZFS
@@ -430,7 +430,7 @@ You can access the files in a snapshot by mounting it, for example::
 The files will be visible in ``/mnt``.
 Remember to unmount ``/mnt`` afterwards.
 
-To destroy a snapshot use zfs_destroy_::
+To destroy a snapshot use zfs-destroy_::
 
   zfs destroy [-Rdnprv] filesystem|volume@snap[%snap[,snap[%snap]]]
 
@@ -441,7 +441,7 @@ General snapshot advice:
 * Consider using something like the zfs-auto-snapshot_ script.
 
 .. _zfs-snapshot: https://openzfs.github.io/openzfs-docs/man/master/8/zfs-snapshot.8.html
-.. _zfs_destroy: https://openzfs.github.io/openzfs-docs/man/master/8/zfs-destroy.8.html
+.. _zfs-destroy: https://openzfs.github.io/openzfs-docs/man/master/8/zfs-destroy.8.html
 .. _Snapshots_and_clones: https://pthree.org/2012/12/19/zfs-administration-part-xii-snapshots-and-clones/
 .. _zfs-auto-snapshot: https://github.com/zfsonlinux/zfs-auto-snapshot
 
