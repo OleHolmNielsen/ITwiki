@@ -420,6 +420,8 @@ To destroy a snapshot use zfs-destroy_::
 
   zfs destroy [-Rdnprv] filesystem|volume@snap[%snap[,snap[%snap]]]
 
+**WARNING:** The zfs-destroy_ command will **destroy your ZFS volume without any warnings!!**.
+
 It is recommended to create a zfs_snapshot_ and use zfs-hold_ to prevent zfs-destroy_ from destroying accidentally, 
 see `prevent dataset/zvol from accidental destroy  <https://www.reddit.com/r/zfs/comments/suh9nx/prevent_datasetzvol_from_accidental_destroy/>`_.
 
