@@ -177,7 +177,6 @@ A RAID 0+1 pool with 2+2 disks::
   zpool create tank mirror sde sdf mirror sdg sdh
 
 .. _zpool: https://openzfs.github.io/openzfs-docs/man/8/zpool.8.html
-.. _zfs-hold: https://openzfs.github.io/openzfs-docs/man/master/8/zfs-hold.8.html
 
 Destroy ZFS pool (prevent accidents)
 --------------------------------------
@@ -191,12 +190,15 @@ Destroy the testing zpool_ created above::
 It is recommended to create a zfs_snapshot_ and use zfs-hold_ to prevent zpool-destroy_ from destroying accidentally, 
 see `prevent dataset/zvol from accidental destroy  <https://www.reddit.com/r/zfs/comments/suh9nx/prevent_datasetzvol_from_accidental_destroy/>`_.
 
-For example::
+For example create a snapshot and hold it::
 
   zfs snapshot tank@snapshot1
   zfs list -t snapshot
   zfs hold for_safety tank@snapshot1
   zfs holds tank@snapshot1
+
+.. _zfs-destroy: https://openzfs.github.io/openzfs-docs/man/master/8/zfs-destroy.8.html
+.. _zfs-hold: https://openzfs.github.io/openzfs-docs/man/master/8/zfs-hold.8.html
 
 Configuring ZFS
 ===================
