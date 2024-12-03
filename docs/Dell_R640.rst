@@ -51,8 +51,8 @@ Download the OpenManage_ software ISO image from the R640_downloads_ page in the
 
 Download the *Dell EMC OpenManage Deployment Toolkit (Linux)* DTK ISO file and mount it on ``/mnt``.
 
-Dell EMC System Update (DSU)
-----------------------------
+Dell EMC System Update (DSU) and racadm
+---------------------------------------
 
 Dell EMC System Update (DSU_) is a script optimized update deployment tool for applying *Dell Update Packages* (DUP) to Dell EMC PowerEdge servers. 
 See the `DSU manuals <https://www.dell.com/support/home/us/en/04/product-support/product/system-update-v1.6.0/manuals>`_.
@@ -63,15 +63,25 @@ The commands are::
   curl -O https://linux.dell.com/repo/hardware/dsu/bootstrap.cgi
   bash bootstrap.cgi
 
-Alternatively, download the ``Systems-Management_Application_*`` file and execute it.
+Alternatively, download the ``Systems-Management_Application_*``
+file from the server's download category *Systems Management* and execute it::
+
+  ./Systems-Management_Application_MPVTK_LN64_2.1.0.0_A00.BIN
 
 This will create the Yum repository file::
 
   /etc/yum.repos.d/dell-system-update.repo
 
-Install RPM packages including iDRAC_ tools::
+Now you can install RPM packages including iDRAC_ tools::
 
-  yum install dell-system-update srvadmin-idracadm7 
+  yum install dell-system-update 
+
+or you can extract the RPM package::
+
+  ./Systems-Management_Application_MPVTK_LN64_2.1.0.0_A00.BIN --extract /tmp
+  ls -l /tmp/dell-system-update-2.1.0.0-24.09.00.x86_64.rpm
+  -rwxr-xr-x. 1 root root 6430762 Dec  3 08:21 /tmp/dell-system-update-2.1.0.0-24.09.00.x86_64.rpm
+  dnf install /tmp/dell-system-update-2.1.0.0-24.09.00.x86_64.rpm
 
 Using DSU_ to preview Dell upgrades::
 
@@ -82,6 +92,25 @@ To apply Dell upgrades::
     /usr/sbin/dsu -u
 
 .. _DSU: http://linux.dell.com/repo/hardware/dsu/
+
+Installing the racadm package
+.............................
+
+The ``racadm`` package is no longer contained in the dell-system-update.repo (Dec. 2024).
+You have to download the ``Dell iDRAC Tools for Linux`` tar-ball file (currently v11.2.1.0) 
+file from the server's download category *Systems Management*.
+
+Unpack the tar-ball::
+
+  tar xzvf Dell-iDRACTools-Web-LX-11.2.1.0-528_A00.tar.gz
+
+and go to the ``iDRACTools/racadm`` folder.
+Unfortunately, the ``install_racadm.sh`` script doesn't work on Rocky and other EL8/EL9 clones.
+Go to the appropriate subfolder and install the RPM packages::
+
+  cd iDRACTools/racadm/RHEL8/x86_64/
+  dnf install srvadmin-*rpm
+  ln -s /opt/dell/srvadmin/bin/idracadm7 /usr/local/bin/racadm  # Provides a "racadm" command
 
 Systems Management Managed Node Core and CLI
 --------------------------------------------
