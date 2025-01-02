@@ -585,8 +585,8 @@ Unfortunately, it may sometimes be necessary to reboot the server so that the OS
 
 Use the zpool-replace_ command to replace a failed disk, for example disk *sde*::
 
-  zpool replace <pool-name> sde sde
-  zpool replace -f <pool-name> sde sde
+  zpool replace <pool-name> sde(old) sde(new)
+  zpool replace -f <pool-name> sde(old) sde(new)
 
 The ``-f`` flag may be required in case of errors such as ``invalid vdev specification``.
 
