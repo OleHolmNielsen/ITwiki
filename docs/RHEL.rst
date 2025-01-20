@@ -25,6 +25,7 @@ Alma:ref:`Linux` resources:
 
 * `AlmaLinux Wiki <https://wiki.almalinux.org/>`_
 * Mirror list at https://mirrors.almalinux.org/
+* We have a local AlmaLinux_ mirror at https://mirror.fysik.dtu.dk/linux/almalinux/
 * To switch from CentOS 8 to Alma:ref:`Linux` use the EL to AlmaLinux migration tool in https://github.com/AlmaLinux/almalinux-deploy.
 
 .. _AlmaLinux: https://almalinux.org/
@@ -33,6 +34,8 @@ RockyLinux documentation
 ============================
 
 The Rocky:ref:`Linux` has a `download page <https://rockylinux.org/download>`_ and a `FAQ <https://rockylinux.org/faq/>`_.
+
+* We have a local RockyLinux_ mirror at https://mirror.fysik.dtu.dk/linux/rockylinux/
 
 Ansible_ 2.9.20 does not have Rocky:ref:`Linux` in the *hostname module* file */usr/lib/python3.6/site-packages/ansible/modules/system/hostname.py*.
 Updates have been committed to Ansible_ 2.9+ in PRs https://github.com/ansible/ansible/pull/74545 and https://github.com/ansible/ansible/issues/74565
