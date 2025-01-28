@@ -317,7 +317,7 @@ Test the Apache configuration by::
   apachectl configtest
 
 Apache and SSL security
------------------------
+............................
 
 Advice about SSL security in Apache_:
 
@@ -339,7 +339,7 @@ In fact, one may generate an appropriate Apache_ SSL configuration including SSL
 .. _SSLCipherSuite: https://httpd.apache.org/docs/2.2/mod/mod_ssl.html#sslciphersuite
 
 Start the web service
------------------------
+..........................
 
 When the Apache configuration test is OK, start the *httpd* service::
 
