@@ -190,7 +190,7 @@ NeDi database services
 ------------------------------
 
 Mariadb database service
------------------------------------
+...........................
 
 Start the MariaDB_ service::
 
@@ -203,7 +203,7 @@ Secure the database (root password etc.) by running::
   /usr/bin/mysql_secure_installation
 
 Initialize NeDi database
-------------------------
+............................
 
 See the NeDi_installation_ page about database initialization.
 If this is an **initial installation** of NeDi_,
@@ -375,6 +375,7 @@ Upgrading NeDi software
 
 From time to time a new version of NeDi_ may become available (see *Installation* above for downloads),
 and you may want to install the update.
+This can be done using the NeDi_ GUI, or in the server's OS as described below.
 
 The upgrading process must be run as the **root user**. 
 
