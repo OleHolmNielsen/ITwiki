@@ -493,7 +493,7 @@ The page *System-Export* also allows export of database contents.
 .. _MySQL: https://en.wikipedia.org/wiki/MySQL
 
 Restore of a NeDi backup
-------------------------
+...........................
 
 Step 1: The directory tree ``/var/nedi`` must be restored in stead of the vanilla distribution files, and the above `installation <NeDi#nedi-installation>`_ instructions must be followed.
 
@@ -512,7 +512,7 @@ If you for some reason need to drop the existing MySQL_ database, the NeDi_ comm
   ./nedi.pl -i
 
 Upgrade of MySQL/MariaDB
-------------------------
+..........................
 
 NOTE: At the time of writing (June 2023) NeDi version 2.3 does not yet support the MariaDB version 10.5,
 which is part of EL9 (RHEL 9 and clones).
