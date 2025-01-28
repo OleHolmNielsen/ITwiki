@@ -388,7 +388,7 @@ and comment out the discovery scripts in crontab::
 
   crontab -e -u nedi
 
-Now make a **database backup** as shown in the section below, just for safety.
+Now make a **database backup** as shown in the Database_backup_ section below, just for safety.
 
 The ``/var/nedi`` directory contains a lot of NeDi_ state information (RRD graphs, switch configurations, etc.) which you want to preserve across the update.
 So first make a **backup** of the old version ``/var/nedi``::
@@ -455,6 +455,8 @@ When the upgrading has completed successfully, restart all NeDi_ services (as *r
 and re-enable the discovery scripts in crontab::
 
   crontab -e -u nedi
+
+.. _Database_backup:
 
 Backup and restore of NeDi server
 -------------------------------------------------------------
