@@ -10,7 +10,7 @@ NeDi_ (*Network Discovery*) is an open source network monitoring tool.
 Please see first the general information in the NeDi_.
 
 This page describes how to install NeDi_ on RHEL (and clones such as AlmaLinux, RockyLinux) Linux servers.
-Please note that CentOS 7 is end-of-life.
+Please note that CentOS_ is end-of-life.
 See also the general NeDi_installation_ page.
 
 On the dedicated server for NeDi_ download the file ``nedi-XXX.tgz`` 
@@ -20,6 +20,7 @@ Paying customers may download the latest version (currently 2.3) from the NeDi_c
 
 .. _NeDi: https://www.nedi.ch/
 .. _NeDi_customer: https://www.nedi.ch/services/customer-area/index.html
+.. _CentOS: https://en.wikipedia.org/wiki/CentOS
 
 NeDi installation on EL8 
 ------------------------------
