@@ -426,7 +426,7 @@ Now you have to **edit** (do not copy) ``nedi.conf`` because changes always appe
 You have to go through ``nedi.conf.OLD`` and copy any local changes into the new ``nedi.conf`` file.
 The meld_ command is extremely useful for comparing files, install it by::
 
-  yum install meld
+  dnf install meld
 
 .. _meld: https://meldmerge.org
 
@@ -435,7 +435,7 @@ Set correct user and group ownership::
   chown -R nedi.apache /var/nedi/*
   chmod -R g+w /var/nedi/*
 
-**Note:** It is important **not** to make the directories /var/nedi and /var/nedi/.ssh group-writable, since this will cause security problems with SSH logins.
+**Note:** It is important **not** to make the directories ``/var/nedi`` and ``/var/nedi/.ssh`` group-writable, since this will cause security problems with SSH logins.
 
 Notice: The web interface user *admin* now has the default password *admin*.
 Change the *admin* password as described in our NeDi_ page.
