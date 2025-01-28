@@ -187,6 +187,8 @@ and then configure SELinux_ to permit read-write access for Apache::
   chcon -R -t httpd_sys_rw_content_t /var/nedi/html/map
   chcon -R -t httpd_sys_rw_content_t /var/nedi/sysobj/
 
+.. _database_service:
+
 NeDi database services
 ------------------------------
 
@@ -442,7 +444,7 @@ Change the *admin* password as described in our NeDi_ page.
 
 For major releases only, the **MySQL database structures may need updating**.
 This is **not required** for patch-releases!
-See the *MySQL service* section above before doing::
+See the database_service_ section above before doing::
 
   ./nedi.pl -i updatedb
 
