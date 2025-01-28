@@ -1,16 +1,16 @@
 .. _NeDi_installation_on_CentOS:
 
-==========================================================
-NeDi installation and upgrading on RHEL EL8 and EL7 Linux
-==========================================================
+======================================================================
+NeDi installation and upgrading on RHEL EL8 and EL9 Linux (and clones)
+======================================================================
 
 .. Contents::
 
 NeDi_ (*Network Discovery*) is an open source network monitoring tool.
 Please see first the general information in the NeDi_.
 
-This page describes how to install NeDi_ on RHEL
-(and clones such as AlmaLinux, RockyLinux, and CentOS) Linux servers.
+This page describes how to install NeDi_ on RHEL (and clones such as AlmaLinux, RockyLinux) Linux servers.
+Please note that CentOS 7 is end-of-life.
 See also the general NeDi_installation_ page.
 
 On the dedicated server for NeDi_ download the file ``nedi-XXX.tgz`` 
@@ -59,27 +59,6 @@ may be used to set up your own playbook for installing NeDi_ with Ansible_.
 .. _EPEL: https://docs.fedoraproject.org/en-US/epel/
 .. _CPAN: https://www.cpan.org/
 .. _Ansible: https://www.ansible.com/
-
-NeDi Installation on CentOS/RHEL 7
---------------------------------------
-
-Enable the EPEL_ repository, see the EPEL_ instructions.
-Install prerequisite packages::
-
-  yum install httpd mod_ssl php php-mysql mariadb-server mariadb-devel php-snmp php-gd php-process patch 
-  yum install net-snmpnet-snmp-utils rrdtool rrdtool-perl tcpdump postgresql.x86_64 php-pgsql.x86_64
-  yum install perl-Algorithm-Diff perl-Net-Telnet perl-Net-DNS perl-Socket6 perl-Test-Exception perl-DBD-Pg.x86_64 perl-Module-Build
-  yum install perl-CPAN perl-App-cpanminus
-
-Then install additional packages from EPEL_::
-
-  yum install perl-Net-SNMP perl-IO-Pty-Easy.noarch
-
-Some packages must be installed manually as CPAN_ modules::
-
-  cpanm RRD::Simple
-  cpanm Time::HiRes::Value
-
 .. _RRD-Simple: https://search.cpan.org/~nicolaw/RRD-Simple-1.44/lib/RRD/Simple.pm
 .. _Time-HiRes-Value: https://metacpan.org/pod/Time::HiRes::Value
 .. _Class-DBI-Pg: https://search.cpan.org/~dmaki/Class-DBI-Pg-0.09/lib/Class/DBI/Pg.pm
@@ -293,7 +272,7 @@ For an introduction see `Setting up an SSL secured Webserver with CentOS <https:
 The unencrypted HTTP service on port 80 should be redirected to the SSL-encrypted port 443 (see https://wiki.apache.org/httpd/RedirectSSL) as shown in the example below.
 
 You may either use a self-signed SSL certificate, or use a commercial SSL certificate valid for your web server according to your site's security policies.
-The SSL certificate files must be copied to the ``/etc/pki/tls/{certs,private}/`` directories (see above CentOS instructions).
+The SSL certificate files must be copied to the ``/etc/pki/tls/{certs,private}/`` directories (see above instructions).
 
 In the Apache_ configuration directory ``/etc/httpd/conf.d/`` create the file ``03nedi.conf`` and change DNS domain names (here *example.com*) as required::
 
@@ -358,12 +337,6 @@ In fact, one may generate an appropriate Apache_ SSL configuration including SSL
 * https://mozilla.github.io/server-side-tls/ssl-config-generator/
 
 .. _SSLCipherSuite: https://httpd.apache.org/docs/2.2/mod/mod_ssl.html#sslciphersuite
-
-There seems to be a bug in the CentOS/RHEL 7 *httpd* package file ``/etc/httpd/conf.modules.d/00-lua.conf`` giving a syslog error message::
-
-  httpd: Syntax error on line 56 of /etc/httpd/conf/httpd.conf: Syntax error on line 1 of /etc/httpd/conf.modules.d/00-lua.conf: Cannot load modules/mod_lua.so into server: /etc/httpd/modules/mod_lua.so: undefined symbol: apr_bcrypt_encode
-
-On EL7 comment out (insert #) the line 1 in ``/etc/httpd/conf.modules.d/00-lua.conf``.
 
 Start the web service
 -----------------------
