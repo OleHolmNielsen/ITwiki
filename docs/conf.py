@@ -8,7 +8,7 @@
 import sphinx_rtd_theme
 
 project = 'IT documentation'
-copyright = '2022, Ole Holm Nielsen'
+copyright = '2025, Ole Holm Nielsen'
 author = 'Ole Holm Nielsen'
 
 version = '24.07'
