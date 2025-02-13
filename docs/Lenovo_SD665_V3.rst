@@ -133,9 +133,23 @@ which recommends:
 OFED software and drivers
 -------------------------
 
-The OpenFabrics Enterprise Distribution (OFED_) is open-source software for RDMA and kernel bypass applications, as provided by the `OpenFabrics Alliance <http://en.wikipedia.org/wiki/OFED>`_.
+The OpenFabrics Enterprise Distribution (OFED_) is open-source software for RDMA and kernel bypass applications,
+as provided by the `OpenFabrics Alliance <http://en.wikipedia.org/wiki/OFED>`_.
 Mellanox provides some information about Inbox_drivers_ from various OS vendors,
-but it is not stated whether they can be used in place of the drivers from Mellanox described below.
+but it is not stated whether they can be used in place of the drivers from NVIDIA/Mellanox described below.
+
+**IMPORTANT:** The NVIDIA `Red Hat Enterprise Linux (RHEL) 8.10 Driver Documentation <https://docs.nvidia.com/networking/display/rhel810/general+support>`_
+has the statement::
+
+  Warning
+  ConnectX-7 is only supported as technical preview (i.e., the feature is not fully supported for production).
+
+Since the SD665_V3_ nodes have ``ConnectX-7`` adapters, these are **NOT SUPPORTED** by the Inbox_drivers_ of RHEL drivers at present! 
+
+.. _Inbox_drivers: https://network.nvidia.com/products/adapter-software/ethernet/inbox-drivers/
+
+Installing NVIDIA OFED drivers
+..................................
 
 NVIDIA offers a `Linux MLNX OFED repository <https://network.nvidia.com/support/mlnx-ofed-public-repository/>`_ which is enabled by:
 
@@ -150,16 +164,6 @@ NVIDIA offers a `Linux MLNX OFED repository <https://network.nvidia.com/support/
      dnf clean all
 
 3. Install driver packages: TBD?
-
-**IMPORTANT:** The NVIDIA `Red Hat Enterprise Linux (RHEL) 8.10 Driver Documentation <https://docs.nvidia.com/networking/display/rhel810/general+support>`_
-has the statement::
-
-  Warning
-  ConnectX-7 is only supported as technical preview (i.e., the feature is not fully supported for production).
-
-Since the SD665_V3_ nodes have ``ConnectX-7`` adapters, these are **NOT SUPPORTED** at present! 
-
-.. _Inbox_drivers: https://network.nvidia.com/products/adapter-software/ethernet/inbox-drivers/
 
 Install these prerequisite packages::
 
