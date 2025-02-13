@@ -151,7 +151,7 @@ NVIDIA offers a `Linux MLNX OFED repository <https://network.nvidia.com/support/
 
 3. Install driver packages: TBD?
 
-Nvidia's `Red Hat Enterprise Linux (RHEL) Inbox Driver documentation <https://docs.nvidia.com/networking/display/rhel89/general+support>`_
+**IMPORTANT:** The NVIDIA `Red Hat Enterprise Linux (RHEL) 8.10 Driver Documentation <https://docs.nvidia.com/networking/display/rhel810/general+support>`_
 has the statement::
 
   Warning
