@@ -20,6 +20,7 @@ Lenovo warrants EveryScale_Best_Recipes_ components to work seamlessly together 
 .. _SMM2: https://pubs.lenovo.com/mgt_tools_smm2/
 .. _SD665_V3: https://lenovopress.lenovo.com/lp1612-lenovo-thinksystem-sd665-v3-server
 .. _DW612S: https://pubs.lenovo.com/dw612s_neptune_enclosure/
+.. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 .. _IPMItool: https://github.com/ipmitool/ipmitool
 .. _Lenovo_EveryScale: https://lenovopress.lenovo.com/lp0900-lenovo-everyscale-lesi
 .. _NVIDIA_Lenovo_EveryScale: https://network.nvidia.com/support/firmware/lenovo-intelligent-cluster/
@@ -143,6 +144,7 @@ Therefore we have developed and tested this procedure:
 
 If all firmwares are now up-to-date, you may return the nodes to Slurm_ production.
 
+.. _Slurm: https://www.schedmd.com/
 .. _update.sh: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/nodes/update.sh
 .. _power_ipmi: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/power_save/power_ipmi
 
