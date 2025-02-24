@@ -98,41 +98,47 @@ If you reboot the right-hand node or update the Mellanox adapters' firmware,
 the Infiniband network interface on the left-hand node will disappear :-(
 Therefore we have developed and tested this procedure:
 
-1. All pairs of SD665_V3_ must be upgraded together.
-   Make a Slurm_ system reservation of the nodes or drain the nodes in Slurm_ so they don't run any jobs.
+1. All pairs of SD665_V3_ nodes must be upgraded together.
+   Make a Slurm_ system reservation of the nodes or drain the nodes in Slurm_,
+   so they don't run any jobs before you proceed to the next step.
 
 2. It is a good idea to update Linux OS software (including kernel), UEFI and XCC/BMC firmware when the nodes are down anyway.
    You may find the update.sh_ script useful for automating this process.
 
-3. First select to update the **right-hand** (SharedIO master) nodes fully.
+3. First select to update the **right-hand** (SharedIO Primary) nodes fully, possibly using the update.sh_ script.
+
    Do not update or shut down the **left-hand** nodes!
+
    Update all OS software and firmwares including the Mellanox ``mlxfwmanager_LES_24B_OFED-24.10-1_build5`` (or newer) firmware update.
-   Reboot the **right-hand** nodes, and then check that OS kernel, UEFI, and XCC/BMC have the correct versions.
-   Check the Mellanox firmware version::
+   Reboot the **right-hand** nodes, and then check that OS kernel, UEFI, and XCC/BMC have the correct versions, for example::
 
-     mlxfwmanager_LES_24B_OFED-24.10-1_build5 --query
+     clush -bw <nodelist> 'uname -r; dmidecode -s bios-version; ipmitool bmc info'
 
-   Check that **Status: Up to date**.
-   The Mellanox **FW (Running)** firmware is probably still outdated!
+   Check the Mellanox firmware version using the tool discussed above::
+
+     clush -bw <nodelist> <some-path>/mlxfwmanager_LES_24B_OFED-24.10-1_build5 --query
+
+   Check that you have **Status: Up to date**.
+   The Mellanox **FW (Running)** firmware is probably still outdated at this stage and until you have made Virtual Reset operations!
 
 4. Then select to update the **left-hand** (SharedIO Auxiliary) nodes fully like in item 3.
 
 5. After both right-hand and left-hand nodes have been successfully updated, except for the Mellanox **FW (Running)** firmware,
-   shut down the nodes::
+   then shut down the nodes::
 
      clush -bw <nodelist> shutdown -h now
 
 6. Now make *Virtual Reseat* of all the nodes using the *Lenovo System Management Module 2* (SMM2) web GUI interface.
    This will activate the new Mellanox firmware when nodes are powered up again.
 
-7. Power up all the **right-hand** (SharedIO master) nodes.
+7. Power up all the **right-hand** (SharedIO Primary) nodes.
    If using IPMI_ this may be performed using the power_ipmi_ script, for example::
 
      power_ipmi -r e002,e004,e006,e008
 
    You may alternatively push the nodes' power button.
 
-8. When the **right-hand** (SharedIO master) nodes are up again,
+8. When the **right-hand** (SharedIO Primary) nodes are up again,
    check the Mellanox firmware version::
 
      mlxfwmanager_LES_24B_OFED-24.10-1_build5 --query
