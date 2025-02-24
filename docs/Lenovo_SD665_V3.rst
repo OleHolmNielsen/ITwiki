@@ -119,12 +119,12 @@ Therefore we have developed and tested this procedure:
      clush -bw <nodelist> <some-path>/mlxfwmanager_LES_24B_OFED-24.10-1_build5 --query
 
    Check that you have **Status: Up to date**.
-   The Mellanox **FW (Running)** firmware is probably still outdated at this stage and until you have made Virtual Reset operations!
+   The Mellanox **FW (Running)** firmware is probably still outdated at this stage and until you have made *Virtual Reseat* operations!
 
 4. Then select to update the **left-hand** (SharedIO Auxiliary) nodes fully like in item 3.
 
 5. After both right-hand and left-hand nodes have been successfully updated, except for the Mellanox **FW (Running)** firmware,
-   then shut down the nodes::
+   then shut down all the nodes::
 
      clush -bw <nodelist> shutdown -h now
 
@@ -146,6 +146,7 @@ Therefore we have developed and tested this procedure:
   If the *Current* (Running) firmware is the same as the installed *Available* firmware, the upgrade was successful :-)
 
 9. Power up all the **left-hand** (SharedIO Auxiliary) nodes like in item 7.
+
    Check the *Current* (Running) firmware like in item 8.
 
 If all firmwares are now up-to-date, you may return the nodes to Slurm_ production.
