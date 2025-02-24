@@ -14,17 +14,17 @@ See the SMM2_ page with SMM2_ functions and IPMItool_ commands for managing the 
 
 To offer solution-level interoperability support for HPC and AI configurations based on the Lenovo ThinkSystem portfolio and OEM components,
 Lenovo_EveryScale_ extensively tests the components and their combinations.
-The extensive testing results in a Best_Recipe_ release of software and firmware levels.
-Lenovo warrants Best_Recipe_ components to work seamlessly together as a fully integrated data center solution instead of a collection of individual components at the time of implementation.
+The extensive testing results in a EveryScale_Best_Recipes_ release of software and firmware levels.
+Lenovo warrants EveryScale_Best_Recipes_ components to work seamlessly together as a fully integrated data center solution instead of a collection of individual components at the time of implementation.
 
 .. _SMM2: https://pubs.lenovo.com/mgt_tools_smm2/
 .. _SD665_V3: https://lenovopress.lenovo.com/lp1612-lenovo-thinksystem-sd665-v3-server
 .. _DW612S: https://pubs.lenovo.com/dw612s_neptune_enclosure/
 .. _IPMItool: https://github.com/ipmitool/ipmitool
 .. _Lenovo_EveryScale: https://lenovopress.lenovo.com/lp0900-lenovo-everyscale-lesi
-.. _Best_Recipe: https://support.lenovo.com/us/en/solutions/HT510136
 .. _NVIDIA_Lenovo_EveryScale: https://network.nvidia.com/support/firmware/lenovo-intelligent-cluster/
 .. _Lenovo_Archive: https://network.nvidia.com/support/firmware/lenovo-archive/
+.. _EveryScale_Best_Recipes: https://support.lenovo.com/us/en/solutions/HT510136
 
 NVIDIA InfiniBand Adapter (SharedIO)
 =======================================
@@ -55,7 +55,7 @@ Updating Mellanox Infiniband firmware
 
 The Lenovo Mellanox adapters' firmware **must** be updated with the special Lenovo firmware executable, for example::
 
-  mlxfwmanager_LES_24A_ES_OFED-24.04-0_build1
+  mlxfwmanager_LES_24B_OFED-24.10-1_build5
 
 Adding the ``--query`` flag will display firmware versions.
 
@@ -88,6 +88,63 @@ To select only a specific firmware family: **TBD**
 .. _OneCLI: https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli
 .. _Confluent: https://hpc.lenovo.com/users/documentation/whatisconfluent.html
 .. _Virtual_Reseat: https://pubs.lenovo.com/mgt_tools_smm2/c_chassis_front_overview
+
+Procedure for Updating Mellanox Infiniband firmware
+----------------------------------------------------
+
+It is **really cumbersome** to update the SharedIO Mellanox Infiniband firmware!
+If you reboot the right-hand node or update the Mellanox adapters' firmware,
+the Infiniband network interface on the left-hand node will disappear :-(
+Therefore we have developed and tested this procedure:
+
+1. All pairs of SD665_V3_ must be upgraded together.
+   Make a Slurm_ system reservation of the nodes or drain the nodes in Slurm_ so they don't run any jobs.
+
+2. It is a good idea to update Linux OS software (including kernel), UEFI and XCC/BMC firmware when the nodes are down anyway.
+   You may find the update.sh_ script useful for automating this process.
+
+3. First select to update the **right-hand** (SharedIO master) nodes fully.
+   Do not update or shut down the **left-hand** nodes!
+   Update all OS software and firmwares including the Mellanox ``mlxfwmanager_LES_24B_OFED-24.10-1_build5`` (or newer) firmware update.
+   Reboot the **right-hand** nodes, and then check that OS kernel, UEFI, and XCC/BMC have the correct versions.
+   Check the Mellanox firmware version::
+
+     mlxfwmanager_LES_24B_OFED-24.10-1_build5 --query
+
+   Check that **Status: Up to date**.
+   The Mellanox **FW (Running)** firmware is probably still outdated!
+
+4. Then select to update the **left-hand** (SharedIO Auxiliary) nodes fully like in item 3.
+
+5. After both right-hand and left-hand nodes have been successfully updated, except for the Mellanox **FW (Running)** firmware,
+   shut down the nodes::
+
+     clush -bw <nodelist> shutdown -h now
+
+6. Now make *Virtual Reseat* of all the nodes using the *Lenovo System Management Module 2* (SMM2) web GUI interface.
+   This will activate the new Mellanox firmware when nodes are powered up again.
+
+7. Power up all the **right-hand** (SharedIO master) nodes.
+   If using IPMI_ this may be performed using the power_ipmi_ script, for example::
+
+     power_ipmi -r e002,e004,e006,e008
+
+   You may alternatively push the nodes' power button.
+
+8. When the **right-hand** (SharedIO master) nodes are up again,
+   check the Mellanox firmware version::
+
+     mlxfwmanager_LES_24B_OFED-24.10-1_build5 --query
+
+  If the *Current* (Running) firmware is the same as the installed *Available* firmware, the upgrade was successful :-)
+
+9. Power up all the **left-hand** (SharedIO Auxiliary) nodes like in item 7.
+   Check the *Current* (Running) firmware like in item 8.
+
+If all firmwares are now up-to-date, you may return the nodes to Slurm_ production.
+
+.. _update.sh: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/nodes/update.sh
+.. _power_ipmi: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/power_save/power_ipmi
 
 MST (Mellanox Software Tools) service
 ----------------------------------------
