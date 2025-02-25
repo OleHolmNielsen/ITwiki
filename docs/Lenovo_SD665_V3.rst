@@ -101,6 +101,7 @@ Therefore we have developed the following procedure:
 * Firstly, the **right-hand** (SharedIO Primary) nodes which hold the physical adapter are updated.
 * Secondly, the **left-hand** (SharedIO Auxiliary) nodes which only have a cable connection to the physical adapter are updated.
 * Finally *Virtual Reseat* operations must be made to remove power completely from both nodes and thus reinitialize the adapters.
+  *Virtual Reseat* is a supported feature of the System Management Module (SMM2_) which simulates physically removing the node from AC power and reconnecting the node to AC power.
 
 The detailed steps in the procedure are:
 
@@ -134,7 +135,7 @@ The detailed steps in the procedure are:
 
      clush -bw <nodelist> shutdown -h now
 
-6. Now make *Virtual Reseat* of all the nodes using the *Lenovo System Management Module 2* (SMM2) web GUI interface.
+6. Now make *Virtual Reseat* of all the nodes using the *Lenovo System Management Module 2* (SMM2_) web GUI interface.
    This will activate the new Mellanox firmware when nodes are powered up again.
 
 7. Power up all the **right-hand** (SharedIO Primary) nodes.
