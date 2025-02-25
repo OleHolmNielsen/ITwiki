@@ -102,6 +102,7 @@ Therefore we have developed the following procedure:
 * Secondly, the **left-hand** (SharedIO Auxiliary) nodes which only have a cable connection to the physical adapter are updated.
 * Finally *Virtual Reseat* operations must be made to remove power completely from both nodes and thus reinitialize the adapters.
   *Virtual Reseat* is a feature of the *System Management Module* (SMM2_) which simulates physically removing the node from AC power and reconnecting the node to AC power.
+  In the SMM2_ *Enclosure Rear Overview* page the entire enclosure can be reseated at once.
 
 The detailed steps in the procedure are:
 
