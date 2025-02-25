@@ -96,7 +96,9 @@ Procedure for Updating Mellanox Infiniband firmware
 It is **really cumbersome** to update the SharedIO Mellanox Infiniband firmware!
 If you reboot the right-hand node or update the Mellanox adapters' firmware,
 the Infiniband network interface on the left-hand node will disappear :-(
-Therefore we have developed and tested this procedure:
+
+Therefore we have developed and tested the following procedure where the **right-hand** (SharedIO Primary) nodes which hold the physical adapter are updated first,
+then the **left-hand** (SharedIO Auxiliary) nodes are updated, and finally *Virtual Reseat* operations must be made to remove power from the nodes and thus reinitialize the adapters.
 
 1. All pairs of SD665_V3_ nodes must be upgraded together.
    Make a Slurm_ system reservation of the nodes or drain the nodes in Slurm_,
