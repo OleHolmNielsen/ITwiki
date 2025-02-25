@@ -116,7 +116,8 @@ The detailed steps in the procedure are:
 
 3. First select to update the **right-hand** (SharedIO Primary) nodes fully, possibly using the update.sh_ script.
 
-   Do not update or shut down the **left-hand** nodes!
+   **Do not update** or shut down the **left-hand** nodes!
+   You must wait until the physical adapters in the **right-hand** (SharedIO Primary) nodes have been updated.
 
    Update all OS software and firmwares including the Mellanox ``mlxfwmanager_LES_24B_OFED-24.10-1_build5`` (or newer) firmware update.
    Reboot the **right-hand** nodes, and then check that OS kernel, UEFI, and XCC/BMC have the correct versions, for example::
