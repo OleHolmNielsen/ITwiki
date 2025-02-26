@@ -89,6 +89,7 @@ To select only a specific firmware family: **TBD**
 .. _OneCLI: https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli
 .. _Confluent: https://hpc.lenovo.com/users/documentation/whatisconfluent.html
 .. _Virtual_Reseat: https://pubs.lenovo.com/mgt_tools_smm2/c_chassis_front_overview
+.. _EveryScale_Best_Recipes: https://support.lenovo.com/us/en/solutions/HT510136
 
 Procedure for Updating Mellanox Infiniband firmware
 ----------------------------------------------------
@@ -104,6 +105,8 @@ Therefore we have developed the following procedure:
 
   *Virtual Reseat* is a feature of the *System Management Module* (SMM2_) which simulates physically removing the node from AC power and reconnecting the node to AC power.
   In the SMM2_ *Enclosure Rear Overview* page the entire enclosure can be reseated at once.
+
+The Lenovo EveryScale_Best_Recipes_ lists the latest available firmware and software versions.
 
 The detailed steps in the procedure are:
 
