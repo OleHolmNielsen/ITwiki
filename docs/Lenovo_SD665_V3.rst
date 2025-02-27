@@ -110,7 +110,7 @@ The Lenovo EveryScale_Best_Recipes_ lists the latest available firmware and soft
 
 The detailed steps in the procedure are:
 
-1. All pairs of SD665_V3_ nodes must be upgraded together.
+1. All trays/pairs of SD665_V3_ nodes must be upgraded together because of the SharedIO adapter..
    Make a Slurm_ system reservation of the nodes or drain the nodes in Slurm_,
    so they don't run any jobs before you proceed to the next step.
 
