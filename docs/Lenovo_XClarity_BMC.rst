@@ -129,7 +129,7 @@ Replicating the system configuration from a file::
 * Use the ``onecli config restore`` command **only** to restore previous settings on the **same** server.
 
 * If you made a ``onecli config save`` file, make sure to delete the line with ``IMM.IMMInfo_Name`` from that file because it 
-will be overwritten by the *replicate* command.
+  will be overwritten by the *replicate* command.
 
 * In the ``onecli config replicate`` log file you should identify all **VPD setting** parameters and delete those from the file, for example::
 
