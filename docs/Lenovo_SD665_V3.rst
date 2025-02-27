@@ -127,7 +127,7 @@ The detailed steps in the procedure are:
    Update all OS software and firmwares including the Mellanox ``mlxfwmanager_LES_24B_OFED-24.10-1_build5`` (or newer) firmware update.
    Reboot the **right-hand** nodes, and then check that OS kernel, UEFI, and XCC/BMC have the correct versions, for example::
 
-     clush -bw <nodelist> 'uname -r; dmidecode -s bios-version; ipmitool bmc info'
+     clush -bw <nodelist> 'uname -r; dmidecode -s bios-version; ipmitool bmc info|grep Firmware'
 
    Check the Mellanox firmware version using the tool discussed above::
 
