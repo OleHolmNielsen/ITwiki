@@ -84,24 +84,6 @@ A node Virtual_Reseat_ power cycling can be done (Out-of-band_ is recommended :-
 
   onecli ospower acpower
 
-Saving and replicating the system configuration::
-
-  onecli config save --file <savetofilename> [--group <groupname>] [--excbackupctl] [<options>] # Save the current settings
-  onecli config replicate --file <filename> [<options>] # Replicate the settings to ANOTHER system
-
-Use the ``onecli config restore`` command **only** to restore previous settings on the **same** server.
-If you made a ``onecli config save`` file, make sure to delete the line with ``IMM.IMMInfo_Name`` from that file because it 
-will be overwritten by the *replicate* command.
-In the ``onecli config replicate`` log file you should identify all **VPD setting** parameters and delete those from the file, for example::
-
-  Some settings are failed to set with some reason. The settings and reasons are as following:
-  SYSTEM_PROD_DATA.SysInfoSerialNum
-        Reason:SYSTEM_PROD_DATA.SysInfoSerialNum is skipped since this is VPD setting
-
-The ``noreplicate`` parameters may be printed by the command::
-
-  onecli config show noreplicate
-
 Some system health commands::
 
   onecli misc syshealth
@@ -130,6 +112,27 @@ Enable promoting the primary BMC firmware to the backup firmware::
 
 .. _Out-of-band: https://en.wikipedia.org/wiki/Out-of-band_management
 .. _Virtual_Reseat: https://pubs.lenovo.com/mgt_tools_smm2/c_chassis_front_overview
+
+Replicating UEFI configuration parameters
+------------------------------------------
+
+Saving and replicating the system configuration::
+
+  onecli config save --file <savetofilename> [--group <groupname>] [--excbackupctl] [<options>] # Save the current settings
+  onecli config replicate --file <filename> [<options>] # Replicate the settings to ANOTHER system
+
+Use the ``onecli config restore`` command **only** to restore previous settings on the **same** server.
+If you made a ``onecli config save`` file, make sure to delete the line with ``IMM.IMMInfo_Name`` from that file because it 
+will be overwritten by the *replicate* command.
+In the ``onecli config replicate`` log file you should identify all **VPD setting** parameters and delete those from the file, for example::
+
+  Some settings are failed to set with some reason. The settings and reasons are as following:
+  SYSTEM_PROD_DATA.SysInfoSerialNum
+        Reason:SYSTEM_PROD_DATA.SysInfoSerialNum is skipped since this is VPD setting
+
+The ``noreplicate`` parameters may be printed by the command::
+
+  onecli config show noreplicate
 
 Upload system logs to Lenovo
 ------------------------------
