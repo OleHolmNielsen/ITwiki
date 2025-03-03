@@ -108,7 +108,39 @@ Therefore we have developed the following procedure:
 
 The Lenovo EveryScale_Best_Recipes_ lists the latest available firmware and software versions.
 
-The detailed steps in the procedure are:
+Hostlist expressions for left-hand and right-hand nodes
+........................................................
+
+When managing separately the left-hand and right-hand nodes in a Lenovo compute tray,
+the ClusterShell_tool_ comes in handily for selecting subsets of nodes.
+Let us assume that nodes are named numerically so that left-hand nodes have odd numbers,
+whereas right-hand nodes have even numbers, for example the *left,right,left,right,...* nodes::
+
+  e001,e002,...,e023,e024
+
+The clush_ command can now perform commands separately::
+
+  clush -bw e[001-023/2] echo I am a left-hand node
+  clush -bw e[002-024/2] echo I am a right-hand node
+
+Unfortunately, Slurm_ doesn't recognize this syntax of node number increments.
+Here you can use the ClusterShell_tool_'s command nodeset_ to print Slurm_ compatible nodelists to be used as Slurm_ command arguments::
+
+  $ nodeset -f e[001-024/2]
+  e[001,003,005,007,009,011,013,015,017,019,021,023]
+  $ nodeset -f e[002-024/2]
+  e[002,004,006,008,010,012,014,016,018,020,022,024]
+
+An example may be::
+
+  $ sinfo -n `nodeset -f e[002-024/2]`
+
+.. _ClusterShell_tool: https://clustershell.readthedocs.io/en/latest/intro.html
+.. _clush: https://clustershell.readthedocs.io/en/latest/tools/clush.html
+.. _nodeset: https://clustershell.readthedocs.io/en/latest/tools/nodeset.html
+
+The detailed steps in the procedure 
+........................................
 
 1. All trays/pairs of SD665_V3_ nodes must be upgraded together because of the SharedIO adapter.
 
@@ -119,10 +151,12 @@ The detailed steps in the procedure are:
    You may find the update.sh_ script useful for automating this process.
 
 3. First select to update the **right-hand** (SharedIO Primary) nodes fully, possibly using the update.sh_ script.
-   Note:
+   Notes:
 
    * **Do not update** or shut down the **left-hand** nodes!
      You must wait until the physical adapters in the **right-hand** (SharedIO Primary) nodes have been updated.
+
+   * Remember that you can select the left-hand and right-hand nodenames (<nodelist>) as shown in the above section using the nodeset_ command.
 
    Update all OS software and firmwares including the Mellanox ``mlxfwmanager_LES_24B_OFED-24.10-1_build5`` (or newer) firmware update.
    Reboot the **right-hand** nodes, and then check that OS kernel, UEFI, and XCC/BMC have the correct versions, for example::
