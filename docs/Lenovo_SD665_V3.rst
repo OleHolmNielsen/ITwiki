@@ -185,7 +185,9 @@ The detailed steps in the procedure
 
      power_ipmi -r e002,e004,e006,e008
 
-   You may alternatively push the nodes' power button.
+   * Remember that you can select the left-hand and right-hand nodenames (<nodelist>) as shown in the above section using the nodeset_ command.
+
+   * You may alternatively push the nodes' power button.
 
 8. When the **right-hand** (SharedIO Primary) nodes are up again,
    check the Mellanox firmware version::
