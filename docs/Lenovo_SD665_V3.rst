@@ -180,6 +180,10 @@ The detailed steps in the procedure
 6. Now make *Virtual Reseat* of all the nodes using the *Lenovo System Management Module 2* (SMM2_) web GUI interface.
    This will activate the new Mellanox firmware when nodes are powered up again.
 
+   **Note:** If any nodes are having errors (PCIe adapter, BMC, etc.),
+   it is recommended to shutdown the nodes and make a **physical reseat** of the tray.
+   The experience is that physically disconneting the tray from the DW612S_ chassis is more thorough than Lenovo's recommended *Virtual Reseat*.
+
 7. Power up all the **right-hand** (SharedIO Primary) nodes.
    If using IPMI_ this may be performed using the power_ipmi_ script, for example::
 
