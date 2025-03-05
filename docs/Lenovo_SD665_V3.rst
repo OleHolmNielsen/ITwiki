@@ -114,9 +114,9 @@ Hostlist expressions for left-hand and right-hand nodes
 When managing separately the left-hand and right-hand nodes in a Lenovo compute tray,
 the ClusterShell_tool_ comes in handily for selecting subsets of nodes.
 Let us assume that nodes are named numerically so that left-hand nodes have odd numbers,
-whereas right-hand nodes have even numbers, for example the *left,right,left,right,...* nodes::
+whereas right-hand nodes have even numbers, for example::
 
-  e001,e002,...,e023,e024
+  e001,e002,...,e023,e024       # left,right,...,left,right
 
 The clush_ command can now perform commands separately::
 
