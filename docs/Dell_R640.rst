@@ -714,7 +714,7 @@ Then see the guide
 
 Use the iDRAC web GUI:
 
-* In *iDRAC Settings->Connectivity->Network->Common Settings* and configure the DNS domain name and hostname.
+* In *iDRAC Settings->Connectivity->Network->Common Settings* configure the iDRAC's hostname and DNS domain name.
 
 * In *iDRAC Settings->Settings->SMTP (Email) Server Settings* configure your ``SMTP (Email) Server IP Address or FQDN / DNS Name``.
 
