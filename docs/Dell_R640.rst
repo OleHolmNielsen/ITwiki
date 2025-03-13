@@ -708,7 +708,9 @@ View the server's Inlet temperature history::
 SMTP alerts from iDRAC
 ----------------------
 
-First you must configure the DNS name of the iDRAC, see https://www.dell.com/support/article/us/en/04/sln309388/dell-idrac-how-to-configure-the-email-notifications-for-system-alerts-on-idrac-7-8-and-9?lang=en.
+First you must configure the DNS name of the iDRAC. 
+Then see the guide
+`PowerEdge: How to Configure iDRAC Email Alerts <https://www.dell.com/support/article/us/en/04/sln309388/dell-idrac-how-to-configure-the-email-notifications-for-system-alerts-on-idrac-7-8-and-9?lang=en>`_.
 In the iDRAC web GUI go to *iDRAC Settings->Connectivity->Common Settings* and configure the DNS domain name and hostname.
 
 * In *iDRAC Settings->Settings->SMTP (Email) Server Settings* configure your ``SMTP (Email) Server IP Address or FQDN / DNS Name``.
