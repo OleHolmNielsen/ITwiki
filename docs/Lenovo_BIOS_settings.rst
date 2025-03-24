@@ -67,6 +67,9 @@ BMC network settings
 
 You may change the ``BMC Configuration`` ``Network`` settings:
 
+* If it is available, change the ``Network Interface Port`` to ``Dedicated`` (default may be LOM).
+  Note that the MAC-address will be different for the different Ethernet ports!
+
 * Change the BMC ``Hostname`` to the server's DNS name, or select ``Obtain Hostname from DHCP``.
 
 * Configure ``DHCP control`` to ``DHCP enabled``.
