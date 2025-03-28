@@ -345,6 +345,22 @@ and then add the **disk partitions 1 and 2** as ZFS_ cache and log::
 .. _3D_XPoint: https://en.wikipedia.org/wiki/3D_XPoint
 .. _PMem: https://docs.pmem.io/persistent-memory/
 
+ARC RAM cache
+-------------
+
+**Adaptive Replacement Cache** (ARC_) is a page replacement algorithm with better performance than LRU (least recently used).
+This is accomplished by keeping track of both frequently used and recently used pages plus a recent eviction history for both.
+ZFS automatically uses RAM memory for ARC_ caching.
+
+There is also a secondary ARC_ cache called L2ARC_cache_ (**Level II Adaptive Replacement Cache**) using fast persistent storage.
+
+The ``arc_summary`` command prints statistics on the ZFS_ ARC_ Cache and other information.
+
+The arcstat_ command reports ZFS ARC_ and L2ARC_cache_ statistics.
+
+.. _ARC: https://en.wikipedia.org/wiki/Adaptive_replacement_cache
+.. _arcstat: https://openzfs.github.io/openzfs-docs/man/master/1/arcstat.1.html
+
 ZFS pool capacity should be under 80%
 -------------------------------------------
 
