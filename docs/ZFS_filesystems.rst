@@ -352,12 +352,9 @@ ARC RAM cache
 This is accomplished by keeping track of both frequently used and recently used pages plus a recent eviction history for both.
 
 ZFS automatically uses RAM memory for ARC_ caching, and by default 50% of RAM memory is used for ARC_ caching.
-
 There is also a secondary ARC_ cache called L2ARC_cache_ (**Level II Adaptive Replacement Cache**) using fast persistent storage.
 
-The ``arc_summary`` command prints statistics on the ZFS_ ARC_ Cache and other information.
-
-The arcstat_ command reports ZFS ARC_ and L2ARC_cache_ statistics, for example::
+The ``arc_summary`` command prints statistics on the ZFS_ ARC_ Cache and other information, for example::
 
   ARC size (current):                                  99.6 %  125.0 GiB
         Target size (adaptive):                       100.0 %  125.4 GiB
@@ -370,6 +367,8 @@ The arcstat_ command reports ZFS ARC_ and L2ARC_cache_ statistics, for example::
         Dnode cache size (hard limit):                 10.0 %    9.4 GiB
         Dnode cache size (current):                    26.6 %    2.5 GiB
   ...
+
+The arcstat_ command reports ZFS ARC_ and L2ARC_cache_ statistics.
 
 .. _ARC: https://en.wikipedia.org/wiki/Adaptive_replacement_cache
 .. _arcstat: https://openzfs.github.io/openzfs-docs/man/master/1/arcstat.1.html
