@@ -367,6 +367,15 @@ The ``arc_summary`` command prints statistics on the ZFS_ ARC_ Cache and other i
         Dnode cache size (hard limit):                 10.0 %    9.4 GiB
         Dnode cache size (current):                    26.6 %    2.5 GiB
   ...
+  L2ARC size (adaptive):                                         283.9 GiB
+        Compressed:                                    78.5 %  222.8 GiB
+        Header size:                                  < 0.1 %  122.3 MiB
+        MFU allocated size:                             8.7 %   19.5 GiB
+        MRU allocated size:                            91.1 %  203.0 GiB
+        Prefetch allocated size:                        0.2 %  349.8 MiB
+        Data (buffer content) allocated size:          99.9 %  222.7 GiB
+        Metadata (buffer content) allocated size:       0.1 %  161.5 MiB
+  ...
 
 The arcstat_ command reports ZFS ARC_ and L2ARC_cache_ statistics.
 
