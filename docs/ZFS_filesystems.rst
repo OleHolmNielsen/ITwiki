@@ -350,7 +350,8 @@ ARC RAM cache
 
 **Adaptive Replacement Cache** (ARC_) is a page replacement algorithm with better performance than LRU (least recently used).
 This is accomplished by keeping track of both frequently used and recently used pages plus a recent eviction history for both.
-ZFS automatically uses RAM memory for ARC_ caching.
+
+ZFS automatically uses RAM memory for ARC_ caching, and by default 50% of RAM memory is used for ARC_ caching.
 
 There is also a secondary ARC_ cache called L2ARC_cache_ (**Level II Adaptive Replacement Cache**) using fast persistent storage.
 
