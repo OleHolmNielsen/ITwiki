@@ -457,6 +457,11 @@ A ``MinimumFanSpeed`` value of **255** indicates the **Default** setting.
 Values between 21 (the default) and 100 may be used, but high values consume lots of power and generate noise.
 For HPC systems a ``MinimumFanSpeed`` of 40 to 50 may perhaps be useful.
 
+To configure the default thermal settings::
+
+  racadm set System.Thermalsettings.ThermalProfile "Default Thermal Profile Settings"
+  racadm set System.ThermalSettings.MinimumFanSpeed 255
+
 System Security menu
 --------------------
 
