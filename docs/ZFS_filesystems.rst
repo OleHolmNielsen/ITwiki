@@ -357,7 +357,19 @@ There is also a secondary ARC_ cache called L2ARC_cache_ (**Level II Adaptive Re
 
 The ``arc_summary`` command prints statistics on the ZFS_ ARC_ Cache and other information.
 
-The arcstat_ command reports ZFS ARC_ and L2ARC_cache_ statistics.
+The arcstat_ command reports ZFS ARC_ and L2ARC_cache_ statistics, for example::
+
+  ARC size (current):                                  99.6 %  125.0 GiB
+        Target size (adaptive):                       100.0 %  125.4 GiB
+        Min size (hard limit):                          6.2 %    7.8 GiB
+        Max size (high water):                           16:1  125.4 GiB
+        Most Frequently Used (MFU) cache size:          8.6 %   10.4 GiB
+        Most Recently Used (MRU) cache size:           91.4 %  109.6 GiB
+        Metadata cache size (hard limit):              75.0 %   94.1 GiB
+        Metadata cache size (current):                  7.4 %    7.0 GiB
+        Dnode cache size (hard limit):                 10.0 %    9.4 GiB
+        Dnode cache size (current):                    26.6 %    2.5 GiB
+  ...
 
 .. _ARC: https://en.wikipedia.org/wiki/Adaptive_replacement_cache
 .. _arcstat: https://openzfs.github.io/openzfs-docs/man/master/1/arcstat.1.html
