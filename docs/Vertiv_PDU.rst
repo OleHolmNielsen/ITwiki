@@ -2,6 +2,9 @@
 Vertiv PDUs
 #########################
 
+.. toctree::
+   :maxdepth: 1
+
 This page contains information about Vertiv PDUs as delivered by Lenovo.
 
 * Lenovo_PDU_ power distribution units.
