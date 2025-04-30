@@ -2,8 +2,7 @@
 Vertiv PDUs
 #########################
 
-.. toctree::
-   :maxdepth: 1
+.. Contents::
 
 This page contains information about Vertiv PDUs as delivered by Lenovo.
 
