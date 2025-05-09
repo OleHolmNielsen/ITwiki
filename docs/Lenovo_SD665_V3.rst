@@ -95,6 +95,11 @@ Procedure for Updating Mellanox Infiniband firmware
 ----------------------------------------------------
 
 It is **really cumbersome** to update the SharedIO Mellanox Infiniband firmware!
+Lenovo has described a procedure `SharedIO Nvidia ConnectX-7 FW may not be reflected - Lenovo ThinkSystem SD665 V3 and SD665-N V3 <https://datacentersupport.lenovo.com/de/en/solutions/tt2312-sharedio-nvidia-connectx-7-fw-may-not-be-reflected-lenovo-thinksystem-sd665-v3-and-sd665-n-v3>`_
+which requires a power-off of both nodes in the tray.
+What isn't mentioned is that power-off actually means to do a *Virtual Reseat* (a physical reseat will also work) operation of the tray.
+
+Our approach is:
 If you reboot the right-hand node or update the Mellanox adapters' firmware,
 the Infiniband network interface on the left-hand node will disappear :-(
 Therefore we have developed the following procedure:
@@ -107,6 +112,7 @@ Therefore we have developed the following procedure:
   In the SMM2_ *Enclosure Rear Overview* page the entire enclosure can be reseated at once.
 
 The Lenovo EveryScale_Best_Recipes_ lists the latest available firmware and software versions.
+
 
 Hostlist expressions for left-hand and right-hand nodes
 ........................................................
