@@ -40,8 +40,9 @@ Collecting BoMC log file
 
 New log information is appended to the ``bomc103.log`` file in the ``/var/log/Lenovo_Support/`` folder.
 
-If some operations are failed when booting the ISO/USB/PXE image. For example, failed to update the
-firmware while booting the BoMC-created ISO image on a server, do the following:
+If some operations failed while executing the BoMC_ image, for example,
+failed to update the firmware while booting the BoMC_-created ISO image on a server,
+do the following:
 
 1. Click Save Logs in the last page.
 2. Save the logs in the storage device or the SFTP server.
