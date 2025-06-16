@@ -25,7 +25,7 @@ Documentation and software
 Lenovo XClarity Essentials Bootable Media Creator (BoMC)
 ===========================================================
 
-You can use Lenovo XClarity Essentials Bootable Media Creator (BoMC_) to create bootable media suitable for
+You can use Lenovo XClarity Essentials *Bootable Media Creator* (BoMC_) to create bootable media suitable for
 firmware updates, VPD updates, inventory and FFDC collection, advanced system configuration, FoD Keys management, secure erase, RAID configuration, and diagnostics.
 
 Download the utility from the BoMC_ page, and run the Linux executable ``lnvgy_utl_lxce_bomc01t-14.2.0_linux_indiv`` (a GUI tool) as the root user.
@@ -38,7 +38,7 @@ There is a `Lenovo Bootable Media Creator Installation and User Guide <https://p
 Collecting BoMC log file
 ------------------------
 
-New log information is appended to the ``bomc103.log`` file in the `` /var/log/Lenovo_Support/`` folder.
+New log information is appended to the ``bomc103.log`` file in the ``/var/log/Lenovo_Support/`` folder.
 
 If some operations are failed when booting the ISO/USB/PXE image. For example, failed to update the
 firmware while booting the BoMC-created ISO image on a server, do the following:
