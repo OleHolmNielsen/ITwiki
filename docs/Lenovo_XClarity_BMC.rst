@@ -44,7 +44,7 @@ If some operations failed while executing the BoMC_ image, for example,
 failed to update the firmware while booting the BoMC_-created ISO image on a server,
 do the following:
 
-1. Click Save Logs in the last page.
+1. Click ``Save Logs`` in the last page.
 2. Save the logs in the storage device or the SFTP server.
 
 .. _BoMC: https://support.lenovo.com/us/en/solutions/ht115048-lenovo-xclarity-essentials-bootable-media-creator
