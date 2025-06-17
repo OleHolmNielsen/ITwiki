@@ -64,6 +64,13 @@ We currently do not have a workaround for this issue.
 
 Lenovo has a `Repair status <https://support.lenovo.com/us/en/repairstatus>`_ page.
 
+Collecting inventory and service data on Linux
+===================================================
+
+This `page <https://pubs.lenovo.com/lxce-onecli/collect_inventory_and_service_data_linux>`_ 
+explains how to collect inventory and service data on Linux
+using the ``lnvgy_utl_lxceb_oneclixxx-xxx.bin`` tool.
+
 XCC licenses
 ================
 
