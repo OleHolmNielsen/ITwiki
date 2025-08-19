@@ -1,5 +1,5 @@
 ########################################
-Linux documentation 
+Linux public documentation 
 ########################################
 
 .. toctree::
