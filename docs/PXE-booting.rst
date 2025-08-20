@@ -13,23 +13,23 @@ See also pages on:
 * The section Automated_network_installation_with_pxeconfig_ below.
 
 .. _BIOS: https://en.wikipedia.org/wiki/BIOS
-.. _PXE: http://en.wikipedia.org/wiki/Preboot_Execution_Environment
+.. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
 .. _PXE_and_UEFI: https://wiki.fysik.dtu.dk/ITwiki/PXE_and_UEFI
 .. _UEFI: https://en.wikipedia.org/wiki/UEFI
 
 SYSLINUX and PXELINUX
 ==========================
 
-`PXE network booting <http://en.wikipedia.org/wiki/Preboot_Execution_Environment>`_
-from Linux servers uses the `SYSLINUX <http://syslinux.zytor.com/>`_ and 
-`PXELINUX <http://syslinux.zytor.com/pxe.php>`_ utilities
-(see also this `Wikipedia article <http://en.wikipedia.org/wiki/Syslinux>`_).
+`PXE network booting <https://en.wikipedia.org/wiki/Preboot_Execution_Environment>`_
+from Linux servers uses the `SYSLINUX <https://syslinux.zytor.com/>`_ and 
+`PXELINUX <https://syslinux.zytor.com/pxe.php>`_ utilities
+(see also this `Wikipedia article <https://en.wikipedia.org/wiki/Syslinux>`_).
 Read the documentation on these pages to get an understanding of the process.
-The `SYSLINUX source code <http://www.kernel.org/pub/linux/utils/boot/syslinux/>`_ has
+The `SYSLINUX source code <https://www.kernel.org/pub/linux/utils/boot/syslinux/>`_ has
 additional very useful documentation which we have copied here: :ref:`syslinux.doc` and :ref:`pxelinux.doc`.
 
-There is a `SYSLINUX mailing list <http://www.zytor.com/mailman/listinfo/syslinux>`_
-as well as a `SYSLINUX Wiki <http://syslinux.zytor.com/wiki/index.php/Main_Page>`_.
+There is a `SYSLINUX mailing list <https://www.zytor.com/mailman/listinfo/syslinux>`_
+as well as a `SYSLINUX Wiki <https://syslinux.zytor.com/wiki/index.php/Main_Page>`_.
 
 .. toctree::
    :maxdepth: 1
@@ -57,13 +57,13 @@ whose name is usually either:
  1) the client's hexadecimally encoded IP-address (such as ``0A018219``), or 
  2) the file named ``default``.
 
-With `newer versions of SYSLINUX <http://www.kernel.org/pub/linux/utils/boot/syslinux/>`_
+With `newer versions of SYSLINUX <https://www.kernel.org/pub/linux/utils/boot/syslinux/>`_
 it is also possible to PXE-boot into the
-`SYSLINUX menu systems <http://syslinux.zytor.com/menu.php>`_ where many booting options can be configured.
+`SYSLINUX menu systems <https://syslinux.zytor.com/menu.php>`_ where many booting options can be configured.
 This is a very flexible way to boot, for example, diskette images with BIOS_ upgrades, hardware testers, or
 Kickstart_ installation, etc.
 
-.. _TFTP: http://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol
+.. _TFTP: https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol
 .. _DHCP: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
 .. _Kickstart: https://anaconda-installer.readthedocs.io/en/latest/kickstart.html
 
@@ -71,7 +71,7 @@ Installing the SYSLINUX tools
 -----------------------------
 
 Although your Linux machine may already have some of the SYSLINUX tools installed, 
-it is recommended that you get the latest `version of SYSLINUX <http://www.kernel.org/pub/linux/utils/boot/syslinux/>`_.
+it is recommended that you get the latest `version of SYSLINUX <https://www.kernel.org/pub/linux/utils/boot/syslinux/>`_.
 
 Unpack the tar-ball and copy the following SYSLINUX files to the ``/tftpboot`` directory on the DHCP_/TFTP_ server::
 
@@ -103,7 +103,7 @@ You must also create a default PXE boot file ``/tftpboot/pxelinux.cfg/default`` 
 node how to boot in case there is no hexadecimally encoded IP-address file.
 Probably the most sensible default boot method is *local hard disk* which is configured as follows:
 
-We assume that you have installed the SYSLINUX tools as shown above, in particular the `chain.c32 <http://syslinux.zytor.com/wiki/index.php/Comboot/chain.c32>`_ tool.
+We assume that you have installed the SYSLINUX tools as shown above, in particular the `chain.c32 <https://syslinux.zytor.com/wiki/index.php/Comboot/chain.c32>`_ tool.
 Then create the file named ``default`` containing these lines::
 
   default harddisk
@@ -119,29 +119,29 @@ For comparison, in many places you will find the following recipe for the defaul
 
 This recipe can be error-prone and actually means *boot from the next device in the BIOS boot order*,
 rather than booting from the hard disk as you would be led to believe.
-For more information read this `article from the SYSLINUX mailing list <http://syslinux.zytor.com/archives/2006-August/007131.html>`_
+For more information read this `article from the SYSLINUX mailing list <https://syslinux.zytor.com/archives/2006-August/007131.html>`_
 (look at the bottom of the article).
 
 Etherboot/gPXE
 --------------
 
-Something to consider for the future is the `Etherboot/gPXE project <http://www.etherboot.org/wiki/start>`_
+Something to consider for the future is the `Etherboot/gPXE project <https://www.etherboot.org/wiki/start>`_
 which permits a larger set of boot media, includign also HTTP-servers.
-For PXE-booting into gPXE see `PXE chainloading <http://www.etherboot.org/wiki/pxechaining>`_.
+For PXE-booting into gPXE see `PXE chainloading <https://www.etherboot.org/wiki/pxechaining>`_.
 
 Linux and Windows deployment (WDS)
 ----------------------------------
 
 A Microsoft *Windows Deployment Service* WDS_ takes over PXE_ booting of any PXE_ clients it has configured, thus the clients will ignore the Linux PXE_ boot server.
 
-.. _WDS: http://en.wikipedia.org/wiki/Windows_Deployment_Services
+.. _WDS: https://en.wikipedia.org/wiki/Windows_Deployment_Services
 
-For a solution, see `Linux and Windows deployment <http://www.syslinux.org/wiki/index.php/Linux_and_Windows_deployment>`_:
+For a solution, see `Linux and Windows deployment <https://www.syslinux.org/wiki/index.php/Linux_and_Windows_deployment>`_:
 
 * This covers the setup and deployment of a PXE_ boot solution consisting of 2 pxe servers and one dhcp server. 
   The 2 PXE_ servers are linux and windows - the former running pxelinux and tftp and the latter one running WDS (Windows Deployment Services), with a linux server providing DHCP_ services.
 
-See also `Peaceful Coexistence: WDS and Linux PXE Servers <http://www.vcritical.com/2011/06/peaceful-coexistence-wds-and-linux-pxe-servers/>`_:
+See also `Peaceful Coexistence: WDS and Linux PXE Servers <https://www.vcritical.com/2011/06/peaceful-coexistence-wds-and-linux-pxe-servers/>`_:
 
 * As it turns out, thanks to the lesser-known pxechain utility, it is possible to seamlessly jump from one PXE host to another.
   With a few tweaks to your WDS server, you can continue to use it for Windows OS installs and bounce over to a Linux host for Linux, ESXi, or rescue-CD purposes.
@@ -149,9 +149,9 @@ See also `Peaceful Coexistence: WDS and Linux PXE Servers <http://www.vcritical.
 SYSLINUX Menu systems
 =====================
 
-With `newer versions of SYSLINUX <http://www.kernel.org/pub/linux/utils/boot/syslinux/>`_
+With `newer versions of SYSLINUX <https://www.kernel.org/pub/linux/utils/boot/syslinux/>`_
 it is possible to PXE-boot into the
-`SYSLINUX menu systems <http://syslinux.zytor.com/menu.php>`_ where many booting options can be configured.
+`SYSLINUX menu systems <https://syslinux.zytor.com/menu.php>`_ where many booting options can be configured.
 This is a very flexible way to boot, for example, diskette images with BIOS_ upgrades, hardware testers, or
 Kickstart_ installation, etc.
 
@@ -186,12 +186,12 @@ as described in the ``menu label`` lines.
 Password protection of PXELINUX menu items
 ------------------------------------------
 
-It is possible to password protect a PXELINUX menu item in recent versions of PXELINUX, see http://www.syslinux.org/wiki/index.php/Menu#MENU_PASSWD.
+It is possible to password protect a PXELINUX menu item in recent versions of PXELINUX, see https://www.syslinux.org/wiki/index.php/Menu#MENU_PASSWD.
 For example, a menu item may have a line::
 
   menu passwd <password-hash>
 
-To generate the MD5 or SHA1 password hash, make sure you have a recent version of syslinux, or download the code from http://www.kernel.org/pub/linux/utils/boot/syslinux/.
+To generate the MD5 or SHA1 password hash, make sure you have a recent version of syslinux, or download the code from https://www.kernel.org/pub/linux/utils/boot/syslinux/.
 Locate the scripts ``sha1pass`` and ``md5pass`` (subdirectory ``utils/`` in the source).
 Also, install this prerequisite::
 
@@ -204,7 +204,7 @@ Alternatively, you can use the command ``/sbin/grub-md5-crypt`` (MD5 passwords o
 Hardware Detection Tool (HDT)
 -----------------------------
 
-SYSLINUX version 4 contains a `HDT - Hardware Detection Tool <http://hdt-project.org/>`_.
+SYSLINUX version 4 contains a `HDT - Hardware Detection Tool <https://hdt-project.org/>`_.
 HDT (stands for Hardware Detection Tool) is a Syslinux com32 module that displays low-level information for any x86 compatible system. 
 It provides both a command line interface and a semi-graphical menu mode for browsing. 
 
@@ -223,8 +223,8 @@ Boot images from Ultimatebootcd.com
 -----------------------------------
 
 If you would like a very complete set of tools to boot from the PXE menus, you may want to take a look at the
-`Ultimate Boot CD <http://www.ultimatebootcd.com/>`_ project.
-You can `download an ISO image <http://www.ultimatebootcd.com/download.html>`_ for burning your own CD.
+`Ultimate Boot CD <https://www.ultimatebootcd.com/>`_ project.
+You can `download an ISO image <https://www.ultimatebootcd.com/download.html>`_ for burning your own CD.
 
 While you could boot the Ultimate Boot CD directly, you could also extract the utilities from the CD and put them into your PXE menus.
 This is easier than downloading the tools yourself from very many different places.
@@ -245,7 +245,7 @@ and add this configuration to the SYSLINUX menu file::
         append ubcd/menus/syslinux/main.cfg
 
 Alternatively, with SYSLINUX version 4 and above you can PXE-boot the 300MB UBC ISO-image directly (loading the TFTP_ server much more).
-The loading of ISO CD images with SYSLINUX is described in http://syslinux.zytor.com/wiki/index.php/MEMDISK#ISO_images.
+The loading of ISO CD images with SYSLINUX is described in https://syslinux.zytor.com/wiki/index.php/MEMDISK#ISO_images.
 The SYSLINUX menu file could have a section like::
 
   label UBCMenu-iso

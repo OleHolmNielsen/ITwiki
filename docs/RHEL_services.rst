@@ -533,7 +533,7 @@ Install the TFTP server and client package by::
 
   yum install tftp-server tftp
 
-.. _TFTP: http://en.wikipedia.org/wiki/Tftp
+.. _TFTP: https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol
 
 The TFTP_ service is controlled by Systemd_.
 If you want to modify the TFTP_ service, first copy the file to the directory for customized services::

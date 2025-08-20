@@ -26,7 +26,7 @@ PXELINUX is a SYSLINUX derivative, for booting Linux off a network
 server, using a network ROM conforming to the Intel PXE (Pre-Execution
 Environment) specification.  PXELINUX is *not* a program that is
 intended to be flashed or burned into a PROM on the network card; if
-you want that, check out Etherboot (http://www.etherboot.org/).
+you want that, check out Etherboot (https://www.etherboot.org/).
 Etherboot 5.4 or later can also be used to create a PXE-compliant boot
 PROM for many network cards.
 
@@ -105,10 +105,10 @@ PXELINUX currently requires that the boot server has a TFTP server
 which supports the "tsize" TFTP option (RFC 1784/RFC 2349).  The
 "tftp-hpa" TFTP server, which support options, is available at:
 
-      * http://www.kernel.org/pub/software/network/tftp/
+      * https://www.kernel.org/pub/software/network/tftp/
       * ftp://www.kernel.org/pub/software/network/tftp/
 
-and on any kernel.org mirror (see http://www.kernel.org/mirrors/).
+and on any kernel.org mirror (see https://www.kernel.org/mirrors/).
 
 Another TFTP server which supports this is atftp by Jean-Pierre
 Lefebvre:
@@ -119,7 +119,7 @@ If your boot server is running Windows (and you can't fix that), try
 tftpd32 by Philippe Jounin (you need version 2.11 or later; previous
 versions had a bug which made it incompatible with PXELINUX):
 
-      * http://tftpd32.jounin.net/
+      * https://tftpd32.jounin.net/
 
 
 SETTING UP THE DHCP SERVER
@@ -171,7 +171,7 @@ If this does not work for your configuration, you probably should set
 up a "PXE boot server" on port 4011 of your TFTP server; a free PXE
 boot server is available at:
 
-      * http://www.kano.org.uk/projects/pxe/
+      * https://www.kano.org.uk/projects/pxe/
 
 With such a boot server defined, your DHCP configuration should look
 the same except for an "option dhcp-class-identifier" ("option
@@ -361,7 +361,7 @@ This allows an unattended machine to recover in case it had bad enough
 luck of trying to boot at the same time the TFTP server goes down.
 
 Lots of PXE stacks, especially old ones, have various problems of
-varying degrees of severity.  Please see http://syslinux.zytor.com/hardware.php
+varying degrees of severity.  Please see https://syslinux.zytor.com/hardware.php
 for a list of currently known hardware problems, with workarounds
 if known.
 

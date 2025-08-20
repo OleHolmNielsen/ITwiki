@@ -328,7 +328,7 @@ See these pages:
 
 * https://www.systutorials.com/configuration-of-linux-kernel-video-mode/
 * https://cromwell-intl.com/open-source/grub-vga-modes.html
-* http://pierre.baudu.in/other/grub.vga.modes.html
+* https://pierre.baudu.in/other/grub.vga.modes.html
 
 You can add a vga= directive to the kernel line in the GRUB file, something like the following::
 
