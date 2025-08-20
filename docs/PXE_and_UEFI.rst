@@ -542,9 +542,11 @@ Then download by TFTP of ``grub.cfg`` files are attempted in the following order
 
 The first match of a ``grub.cfg`` file will then be booted.
 
-Hint: Use ``gethostip`` from the ``syslinux`` package to convert hostnames and IP-addresses to hexadecimal, for example::
+Hint: Use ``gethostip`` from the syslinux_ RPM package to convert hostnames and IP-addresses to hexadecimal, for example::
 
   $ gethostip -f s001
   s001.(domainname) 10.2.130.21 0A028215
   $ gethostip -x s001
   0A028215
+
+.. _syslinux: https://en.wikipedia.org/wiki/SYSLINUX
