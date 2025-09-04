@@ -12,7 +12,7 @@ The Lenovo ThinkSystem SD650-N_V2_ is a 2-socket 1U server that features the Int
 The nodes are housed in the upgraded ThinkSystem DW612S_ enclosure.
 
 .. _DW612S: https://pubs.lenovo.com/dw612s_neptune_enclosure/
-.. _SD650-N_V2: https://lenovopress.lenovo.com/lp1613-thinksystem-sd650-n-v2-server
+.. _SD650-N_V2: https://lenovopress.lenovo.com/lp1396-thinksystem-sd650-n-v2-server
 .. _A100: https://www.nvidia.com/en-us/data-center/a100/
 .. _NVLink: https://en.wikipedia.org/wiki/NVLink
 
