@@ -257,4 +257,17 @@ To display Vital Product Data::
    vpd comp - displays Vital Product Data for the system components
    vpd pcie - displays Vital Product Data for PCIe devices
 
+XCC Effortless Reset
+========================
 
+It is possible to reset the system to factory default settings with the XCC Effortless_Reset_ tool 
+which is available in the *F1 Setup* console window.
+You can select one or more resets from the list:
+
+1. To erase the data on all RAID volumes and all disk devices (including HDD, SSD, and SED), select **Permanently erase all data on storage devices**.
+
+2. To clear all system logs, including LSI RAID Event Log and System Event Log (SEL), select **Clear all system logs**.
+
+3. To reset the credentials and networking of UEFI, BMC, TPM, and CMOS to factory default settings, select **Reset all system to factory default, including credentials and networking**.
+
+.. _Effortless_Reset: https://pubs.lenovo.com/lxpm-v3/effortless_reset
