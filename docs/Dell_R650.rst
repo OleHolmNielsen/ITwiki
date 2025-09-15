@@ -81,19 +81,19 @@ The following BIOS settings should be made on HPC nodes::
   [Key=BIOS.Setup.1-1#DellControlledTurbo]
   ControlledTurbo=Disabled
   [Key=BIOS.Setup.1-1#IntegratedDevices]
-  SnoopHldOff=Roll8KCycles
+  SnoopHldOff=Roll2KCycles
 
 The CLI commands are::
 
   racadm set BIOS.SysProfileSettings.SysProfile PerfOptimized
   racadm set BIOS.SysProfileSettings.WorkloadProfile HpcProfile
   racadm set BIOS.DellControlledTurbo.ControlledTurbo Disabled
-  racadm set BIOS.IntegratedDevices.SnoopHldOff Roll8KCycles
+  racadm set BIOS.IntegratedDevices.SnoopHldOff Roll2KCycles
   racadm jobqueue create BIOS.Setup.1-1
 
 and then reboot the server.
 
-The *SnoopHldOff* value (should be 8K or 4K, the default 256 is too small) is important for high performance Omni-Path or Infiniband network fabrics.
+The *SnoopHldOff* value (should be 2K since the default value 256 is too small) is important for high performance Omni-Path or Infiniband network fabrics.
 
 System Thermal settings
 -----------------------
