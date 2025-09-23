@@ -91,11 +91,11 @@ of `vmlinuz` and  `initrd` in ``/tftpboot/CentOS-X.Y``.
 DHCP configuration file dhcpd.conf
 ==================================
 
-The following entry in ``/etc/dhcpd.conf`` enables PXE_ boot by means of the PXELINUX_ software::
+The following entry in ``/etc/dhcp/dhcpd.conf`` enables PXE_ boot by means of the PXELINUX_ software::
 
   # TFTP download from intra5:
   next-server 130.225.86.6;
   # Start up PXELINUX:
   filename "pxelinux.bin";
 
-These lines are added to ``/etc/dhcpd.conf`` on the DHCP_ servers. 
+These lines are added to ``/etc/dhcp/dhcpd.conf`` on the DHCP_ servers. 

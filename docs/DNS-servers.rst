@@ -164,7 +164,7 @@ DNS caches
 The DNS caches on our internal networks, which cannot be reached by external machines for DNS lookups, should be used by all DNS clients 
 (desktop machines as well as servers) at FYS.
 
-This is configured in ``/etc/resolv.conf`` (Linux/UNIX static IP configuration), and in ``/etc/dhcpd.conf`` (Windows/Linux DHCP clients).
+This is configured in ``/etc/resolv.conf`` (Linux/UNIX static IP configuration), and in ``/etc/dhcp/dhcpd.conf`` (Windows/Linux DHCP clients).
 
 The DTU Fysik DNS cache servers are::
 

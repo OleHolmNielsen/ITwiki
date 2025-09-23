@@ -40,7 +40,7 @@ Setting up the DHCP and PXE server
 Enable UEFI support in the DHCP server
 --------------------------------------
 
-We assume a Linux DHCP server and add the following to ``/etc/dhcpd.conf`` in the top (global) section::
+We assume a Linux DHCP server and add the following to ``/etc/dhcp/dhcpd.conf`` in the top (global) section::
 
   # These settings are required for UEFI boot:
   option arch code 93 = unsigned integer 16; # RFC4578
@@ -80,7 +80,7 @@ NOTES:
 * It seems that having the boot file in a subdirectory such as ``uefi/BOOTX64.EFI``
   will cause the client host PXE to download all further files also from that same ``uefi/`` subdirectory, so you need to place other files there.
 
-* **Probably obsolete:** The ``shimx64.efi`` bootloader_ may be required in stead of ``BOOTX64.EFI`` in the above ``/etc/dhcpd.conf``.
+* **Probably obsolete:** The ``shimx64.efi`` bootloader_ may be required in stead of ``BOOTX64.EFI`` in the above ``/etc/dhcp/dhcpd.conf``.
 
 Copy UEFI boot files
 --------------------
