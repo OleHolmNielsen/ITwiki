@@ -97,14 +97,14 @@ Symptoms may be that TFTP_ download of large ``vmlinuz`` or ``initrd.img`` files
 during Kickstart fail with a message *error: timeout reading ...*.
 
 Download **all .efi files** from a mirror site, 
-for example the AlmaLinux mirror at https://mirror.fysik.dtu.dk/linux/almalinux/8.10/BaseOS/x86_64/kickstart/EFI/BOOT/
+for example the AlmaLinux_ mirror at https://mirror.fysik.dtu.dk/linux/almalinux/8/BaseOS/x86_64/kickstart/EFI/BOOT/
 to the TFTP_ server's folder ``/tftpboot/uefi/``.
 
 Download Linux boot images
 -----------------------------
 
 For each EL Linux (and other OS) version you should copy Linux boot images to a separate directory on the TFTP_ server,
-for example, for AlmaLinux 8.10::
+for example, for AlmaLinux_ 8.10::
 
   mkdir /var/lib/tftpboot/AlmaLinux-8.10-x86_64/
 
@@ -145,17 +145,17 @@ Create the file ``/var/lib/tftpboot/uefi/grub.cfg`` with the contents::
   insmod part_gpt
   insmod ext2
   set timeout=60
-  menuentry 'RockyLinux 8.10 minimal Kickstart' --class centos --class gnu-linux --class gnu --class os --unrestricted {
+  menuentry 'AlmaLinux 8.10 minimal Kickstart' --class centos --class gnu-linux --class gnu --class os --unrestricted {
     # Note: IPv6 disable during initial boot:
-    linuxefi (tftp)/RockyLinux-8.10-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:130.225.86.3:/u/kickstart/ks-rockylinux-8-minimal-x86_64.cfg ipv6.disable=1
-    initrdefi (tftp)/RockyLinux-8.10-x86_64/initrd.img
+    linuxefi (tftp)/AlmaLinux-8.10-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:130.225.86.3:/u/kickstart/ks-rockylinux-8-minimal-x86_64.cfg ipv6.disable=1
+    initrdefi (tftp)/AlmaLinux-8.10-x86_64/initrd.img
   }
 
 Additional menu entries may be appended to the above, for example::
 
-  menuentry 'RockyLinux 9.6 minimal Kickstart' --class centos --class gnu-linux --class gnu --class os --unrestricted {
-    linuxefi (tftp)/RockyLinux-9.6-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:130.225.86.3:/u/kickstart/ks-rockylinux-9-minimal-x86_64.cfg ipv6.disable=1
-    initrdefi (tftp)/RockyLinux-9.6-x86_64/initrd.img
+  menuentry 'AlmaLinux 9.6 minimal Kickstart' --class centos --class gnu-linux --class gnu --class os --unrestricted {
+    linuxefi (tftp)/AlmaLinux-9.6-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:130.225.86.3:/u/kickstart/ks-rockylinux-9-minimal-x86_64.cfg ipv6.disable=1
+    initrdefi (tftp)/AlmaLinux-9.6-x86_64/initrd.img
   }
 
 It is useful to have a ``grub.cfg`` menu item from the TFTP_ server which allows to boot the system from an existing OS installation on disk.
