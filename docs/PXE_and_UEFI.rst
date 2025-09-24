@@ -112,15 +112,13 @@ In this directory create the following ``Makefile``::
 
   OS=almalinux
   VERSION=8.10
-  MIRROR=https://mirror.fysik.dtu.dk/linux
+  MIRROR=<your-favorite-mirror>
   default:
         @echo "NOTE: Boot images are from ${OS} version ${VERSION}"
         @wget --timestamping ${MIRROR}/${OS}/${VERSION}/BaseOS/x86_64/os/images/pxeboot/initrd.img
         @wget --timestamping ${MIRROR}/${OS}/${VERSION}/BaseOS/x86_64/os/images/pxeboot/vmlinuz
 
 and run a ``make`` command to download the boot image files.
-Other mirror sites may be used in stead of *mirror.fysik.dtu.dk*,
-and other versions of ``OS`` and ``VERSION``.
 
 Create a grub.cfg file
 -----------------------------
