@@ -218,7 +218,7 @@ A Kickstart_ installation can be made using :ref:`PXE-booting` or PXE_and_UEFI_ 
 Automated installation using Anaconda_ is possible with UEFI_ as well as PXE_ legacy booting.
 In the above ``grub.cfg`` file use:
 
-* ``inst.ks=`` Gives the location of a Kickstart_ file to be used to automate the installation.
+* The inst.ks_ Gives the location of a Kickstart_ file to be used to automate the installation.
 
 For example, the following menu item may be added to ``grub.cfg`` to download a Kickstart_ file ``ks-almalinux-8.10-minimal-x86_64.cfg``
 from the NFS_ server at IP address ``<server-IP>``::
@@ -238,6 +238,7 @@ A Legacy PXE_ BIOS boot file ``/tftpboot/pxelinux.cfg/default`` example using th
 (Setting up an NFS_ server at ``<server-IP>`` is not discussed here.)
 
 .. _Anaconda: https://fedoraproject.org/wiki/Anaconda
+.. _inst.ks: https://docs.fedoraproject.org/en-US/fedora/f36/install-guide/advanced/Boot_Options/#sect-boot-options-kickstart
 
 Bootloader command
 ------------------
@@ -342,7 +343,7 @@ Boot disk device selection
 
 The server or PC computer may have multiple disk devices, and each device may have different bus interfaces to the system such as NVME_ or SATA_.
 
-When the Kickstart_ installation starts up, the file given by *inst.ks* must select, format and partition the system boot disk.
+When the Kickstart_ installation starts up, the file given by inst.ks_ must select, format and partition the system boot disk.
 However, you do not want to install the Linux OS on a large disk device which should be used for data storage!
 Another problem is that NVME_ and SATA_ devices have different device names in the Linux kernel, for example:
 
