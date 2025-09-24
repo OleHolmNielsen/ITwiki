@@ -210,9 +210,6 @@ There is documentation of the Kickstart_file_ syntax.
 
 A Kickstart_ installation can be made using :ref:`PXE-booting` or PXE_and_UEFI_ network booting.
 
-An example Kickstart_file_ is
-:download:`ks-almalinux-8.10-minimal-x86_64.cfg <attachments/ks-almalinux-8.10-minimal-x86_64.cfg>`.
-
 .. _Kickstart: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-1-introduction
 .. _Kickstart_file: https://anaconda-installer.readthedocs.io/en/latest/kickstart.html
 .. _RHEL: https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux
@@ -540,4 +537,10 @@ After GRUB2_ has started, files on the TFTP server will be accessible via the ``
 The server IP_address_ can be controlled by changing the ``(tftp)`` device name to ``(tftp,server-ip)``.
 Note that this should be changed both in the prefix and in any references to the device name in the configuration file.
 
+.. _IPv4: http://en.wikipedia.org/wiki/Ipv4
+.. _IPv6: http://en.wikipedia.org/wiki/Ipv6
+.. _Ethernet: https://en.wikipedia.org/wiki/Ethernet
+.. _MAC_address: https://en.wikipedia.org/wiki/MAC_address
+.. _UUID: https://en.wikipedia.org/wiki/Universally_unique_identifier
+.. _Hexadecimal: https://en.wikipedia.org/wiki/Hexadecimal
 .. _syslinux: https://en.wikipedia.org/wiki/SYSLINUX
