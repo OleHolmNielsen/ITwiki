@@ -539,6 +539,7 @@ Note that this should be changed both in the prefix and in any references to the
 
 .. _IPv4: http://en.wikipedia.org/wiki/Ipv4
 .. _IPv6: http://en.wikipedia.org/wiki/Ipv6
+.. _IP_address: https://en.wikipedia.org/wiki/IP_address
 .. _Ethernet: https://en.wikipedia.org/wiki/Ethernet
 .. _MAC_address: https://en.wikipedia.org/wiki/MAC_address
 .. _UUID: https://en.wikipedia.org/wiki/Universally_unique_identifier
