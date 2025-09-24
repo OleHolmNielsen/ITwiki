@@ -323,6 +323,20 @@ This simple python command can be used to convert a hex-number 0xYYY::
 
   python -c "print 0xYYY"
 
+Capture the %pre logfile
+------------------------
+
+The ``%pre`` command can create a logfile::
+
+  # Start of the %pre section with logging into /root/ks-pre.log
+  %pre --log=/root/ks-pre.log
+
+but since this exists only in the memory file system, the logfile is lost after the system has rebooted.
+
+There are methods to get a copy of the ``%pre`` logfile:
+
+* https://unix.stackexchange.com/questions/78388/logging-pre-during-kickstart-logfile-doesnt-exist-after-boot
+
 Boot disk device selection
 --------------------------
 
@@ -338,7 +352,7 @@ Another problem is that NVME_ and SATA_ devices have different device names in t
 and the correct device name must be given to Kickstart_.
 
 A nice and flexible solution to this issue is given in the thread https://access.redhat.com/discussions/3144131.
-You configure an ``%include`` line where you normally partition the disk::
+You configure an ``%include`` line where you would normally partition the disk::
 
   # The file /tmp/part-include is created below in the %pre section
   %include /tmp/part-include
@@ -354,7 +368,7 @@ section with ``%pre``, here with a number of improvements::
   DIR="/sys/block"
   # minimum and maximum size of hard drive needed specified in GIGABYTES
   MINSIZE=100
-  MAXSIZE=1200
+  MAXSIZE=1999
   # The loop first checks NVME then SATA/SAS drives:
   for d in $DIR/nvme* $DIR/sd*
   do
@@ -398,20 +412,6 @@ section with ``%pre``, here with a number of improvements::
 .. _NVME: https://en.wikipedia.org/wiki/NVM_Express
 .. _SATA: https://en.wikipedia.org/wiki/Serial_ATA
 .. _Nehalem: https://en.wikipedia.org/wiki/Nehalem_(microarchitecture)
-
-Capture the %pre logfile
-------------------------
-
-The ``%pre`` command can create a logfile::
-
-  # Start of the %pre section with logging into /root/ks-pre.log
-  %pre --log=/root/ks-pre.log
-
-but since this exists only in the memory file system, the logfile is lost after the system has rebooted.
-
-There are methods to get a copy of the ``%pre`` logfile:
-
-* https://unix.stackexchange.com/questions/78388/logging-pre-during-kickstart-logfile-doesnt-exist-after-boot
 
 Disk partitions
 ---------------
