@@ -246,15 +246,13 @@ The bootloader_ command (required) specifies how the boot loader should be insta
 
 You should always use a password to protect your boot loader. An unprotected boot loader can allow a potential attacker to modify the system’s boot options and gain unauthorized access to the system:
 
-* ``--password``
-
+* ``--password`` 
   If using GRUB2_ as the boot loader, sets the boot loader password to the one specified with this option.
   This should be used to restrict access to the GRUB2_ shell, where arbitrary kernel options can be passed.
   If a password is specified, GRUB2_ will also ask for a user name.
   The user name is always **root**.
 
-* ``--iscrypted``
-
+* ``--iscrypted`` 
   Normally, when you specify a boot loader password using the --password= option, it will be stored in the Kickstart file in plain text.
   If you want to encrypt the password, use this option and an encrypted password.
 
@@ -340,7 +338,7 @@ Another problem is that NVME_ and SATA_ devices have different device names in t
 and the correct device name must be given to Kickstart_.
 
 A nice and flexible solution to this issue is given in the thread https://access.redhat.com/discussions/3144131.
-You configure an *%include* line where you normally partition the disk::
+You configure an ``%include`` line where you normally partition the disk::
 
   # The file /tmp/part-include is created below in the %pre section
   %include /tmp/part-include
@@ -348,7 +346,7 @@ You configure an *%include* line where you normally partition the disk::
   %end
 
 Then you define a `pre-install <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-4-pre-installation-script>`_ 
-section with *%pre*, here with a number of improvements::
+section with ``%pre``, here with a number of improvements::
 
   # Start of the %pre section with logging into /root/ks-pre.log
   %pre --log=/root/ks-pre.log
