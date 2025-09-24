@@ -13,7 +13,7 @@ This *HowTo* guide documents how to install EL/RHEL_ Linux using PXE_ on a clien
 
 This page assumes that you already have a working DHCP_ and PXE_ boot server for installing client hosts using the Legacy_BIOS_boot_ method. 
 We will show how to support also UEFI_ booting with PXE_.
-Optionally, you may also use an NFS server to store Kickstart_ files.
+Optionally, you may also use an NFS_ server to store Kickstart_ files.
 
 See also our network :ref:`PXE-booting` page for Linux OS installation, and also these useful pages:
 
@@ -31,6 +31,7 @@ See also our network :ref:`PXE-booting` page for Linux OS installation, and also
 .. _Legacy_BIOS_boot: https://en.wikipedia.org/wiki/Legacy_mode
 .. _PXE-booting: https://wiki.fysik.dtu.dk/niflheim/PXE-booting
 .. _GRUB2: https://fedoraproject.org/wiki/GRUB_2
+.. _NFS: https://en.wikipedia.org/wiki/Network_File_System
 
 Setting up the DHCP and PXE server
 ==================================
@@ -220,7 +221,7 @@ In the above ``grub.cfg`` file use:
 * ``inst.ks=`` Gives the location of a Kickstart_ file to be used to automate the installation.
 
 For example, the following menu item may be added to ``grub.cfg`` to download a Kickstart_ file ``ks-almalinux-8.10-minimal-x86_64.cfg``
-from the NFS server at IP address ``<server-IP>``::
+from the NFS_ server at IP address ``<server-IP>``::
 
   menuentry 'AlmaLinux 8.10 minimal Kickstart' --class centos --class gnu-linux --class gnu --class os --unrestricted {
     linuxefi (tftp)/AlmaLinux-8.10-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:<server-IP>:/u/kickstart/ks-almalinux-8.10-minimal-x86_64.cfg
@@ -234,7 +235,7 @@ A Legacy PXE_ BIOS boot file ``/tftpboot/pxelinux.cfg/default`` example using th
         kernel AlmaLinux-8.10-x86_64/vmlinuz
         append load_ramdisk=1 initrd=AlmaLinux-8.10-x86_64/initrd.img network inst.ks=nfs:nfsvers=3:<server-IP>:/u/kickstart/ks-almalinux-8.10-minimal-x86_64.cfg vga=792
 
-(Setting up an NFS server at ``<server-IP>`` is not discussed here.)
+(Setting up an NFS_ server at ``<server-IP>`` is not discussed here.)
 
 .. _Anaconda: https://fedoraproject.org/wiki/Anaconda
 
@@ -245,14 +246,14 @@ The bootloader_ command (required) specifies how the boot loader should be insta
 
 You should always use a password to protect your boot loader. An unprotected boot loader can allow a potential attacker to modify the system’s boot options and gain unauthorized access to the system:
 
-* --password=
+* ``--password``
 
   If using GRUB2_ as the boot loader, sets the boot loader password to the one specified with this option.
   This should be used to restrict access to the GRUB2_ shell, where arbitrary kernel options can be passed.
   If a password is specified, GRUB2_ will also ask for a user name.
   The user name is always **root**.
 
-* --iscrypted
+* ``--iscrypted``
 
   Normally, when you specify a boot loader password using the --password= option, it will be stored in the Kickstart file in plain text.
   If you want to encrypt the password, use this option and an encrypted password.
