@@ -24,7 +24,6 @@ See also our network :ref:`PXE-booting` page for Linux OS installation, and also
 * https://github.com/quattor/aii/issues/216
 * UEFI security: `UEFI DEFENSIVE PRACTICES GUIDANCE <https://www.nsa.gov/portals/75/documents/what-we-do/cybersecurity/professional-resources/ctr-uefi-defensive-practices-guidance.pdf>`_.
 
-.. _CentOS: https://www.centos.org/
 .. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
 .. _TFTP: https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol
 .. _DHCP: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
@@ -158,7 +157,7 @@ Additional menu entries may be appended to the above, for example::
 
 It is useful to have a ``grub.cfg`` menu item from the TFTP_ server which allows to boot the system from an existing OS installation on disk.
 This should be the default menu item.
-To boot a CentOS system with ``grubx64.efi`` (provided by the ``grub2-efi-x64`` package) in the 1st partition of the first disk hd0::
+To boot a system with ``grubx64.efi`` (provided by the ``grub2-efi-x64`` package) in the 1st partition of the first disk hd0::
 
   menuentry 'Useless: Boot from local disk' {
     # Undocumented "exit" command.  Returns to BIOS boot menu on Dell 9020
@@ -173,11 +172,11 @@ it is useful to define a fallback_ boot menu item as in this example::
 
   set default=0
   set fallback=1
-  menuentry 'Boot CentOS from local disk hd0' {
+  menuentry 'Boot from local disk hd0' {
    set root=(hd0,1)
    chainloader /efi/centos/grubx64.efi
   }
-  menuentry 'Boot CentOS from local disk hd1' {
+  menuentry 'Boot from local disk hd1' {
    set root=(hd1,1)
    chainloader /efi/centos/grubx64.efi
   }
