@@ -9,7 +9,7 @@ Install EL Linux via PXE and UEFI
 Overview
 ========
 
-This *HowTo* guide documents how to install EL Linux using PXE_ on a client host booting by UEFI_.
+This *HowTo* guide documents how to install EL/RHEL_ Linux using PXE_ on a client host booting by UEFI_.
 
 This page assumes that you already have a working DHCP_ and PXE_ boot server for installing client hosts using the Legacy_BIOS_boot_ method. 
 We will show how to support also UEFI_ booting with PXE_.
@@ -102,7 +102,7 @@ to the TFTP_ server's folder ``/tftpboot/uefi/``.
 Download Linux boot images
 -----------------------------
 
-For each EL Linux (and other OS) version you should copy Linux boot images to a separate directory on the TFTP_ server,
+For each EL/RHEL_ Linux (and other OS) version you should copy Linux boot images to a separate directory on the TFTP_ server,
 for example, for AlmaLinux_ 8.10::
 
   mkdir /var/lib/tftpboot/AlmaLinux-8.10-x86_64/
@@ -192,7 +192,7 @@ Configuring Kickstart automated install
 EL Linux installation with Kickstart
 ----------------------------------------
 
-RHEL_ Linux and EL clones such as AlmaLinux_ or RockyLinux_, as well as Fedora_, can be installed using Kickstart_.
+RHEL_ Linux and *EL clones* such as AlmaLinux_ or RockyLinux_, as well as Fedora_, can be installed using Kickstart_.
 See a general description from the Fedora page:
 
 * Many system administrators would prefer to use an automated installation method to install Fedora_ or Red Hat Enterprise Linux on their machines.
@@ -450,7 +450,7 @@ If the PXE_ client system BIOS is configured for UEFI_ Secure_Boot_
 then the PXE_ boot will fail with an error about an **invalid signature**.
 
 As explained in `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_
-RedHat is currently working on a solution for RHEL 8.
+RedHat is currently working on a solution for RHEL_ 8.
 
 **Workaround:** Disable secureboot from BIOS settings.
 
