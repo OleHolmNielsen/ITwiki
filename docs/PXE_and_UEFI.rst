@@ -25,6 +25,7 @@ See also our network :ref:`PXE-booting` page for Linux OS installation, and also
 .. _TFTP: https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol
 .. _DHCP: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
 .. _ISC_DHCP: http://www.isc.org/software/dhcp
+.. _DHCP_Handbook: https://www.amazon.com/DHCP-Handbook-Ralph-Droms-Ph-D/dp/0672323273
 .. _UEFI: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface
 .. _Legacy_BIOS_boot: https://en.wikipedia.org/wiki/Legacy_mode
 .. _PXE-booting: https://wiki.fysik.dtu.dk/niflheim/PXE-booting
@@ -39,7 +40,15 @@ Setting up the DHCP, TFTP and PXE services
 Enable UEFI support in the DHCP server
 --------------------------------------
 
-We assume that you have an ISC_DHCP_ Linux server.
+We assume that you have an ISC_DHCP_ Linux server on EL Linux.
+Install the packages::
+
+  dnf install dhcp-server dhcp-common grub2-efi-x64
+
+To get started with configuration the packages contain an example file ``/usr/share/doc/dhcp-server/dhcpd.conf.example``.
+It is also recommended to consult examples on the internet,
+or to read the DHCP_Handbook_ for complete coverage of the ISC_DHCP_ server.
+
 Add the following to the configuration file ``/etc/dhcp/dhcpd.conf`` in the top (global) section::
 
   # These settings are required for UEFI boot:
@@ -83,6 +92,16 @@ NOTES:
 
 * **Probably obsolete:**
   The ``shimx64.efi`` bootloader_ may be required in stead of ``BOOTX64.EFI`` in the above ``/etc/dhcp/dhcpd.conf``.
+
+When you have completed configuring the ``dhcpd.conf`` file, open the firewall for DHCP_ (port 67)::
+
+  firewall-cmd --add-service=dhcp --permanent
+  firewall-cmd --reload
+
+and start the DHCP_ service::
+
+  systemctl enable dhcpd
+  systemctl restart dhcpd
 
 Configure the TFTP service
 ---------------------------
