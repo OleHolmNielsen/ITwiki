@@ -28,6 +28,7 @@ See also our network :ref:`PXE-booting` page for Linux OS installation, and also
 .. _DHCP_Handbook: https://www.amazon.com/DHCP-Handbook-Ralph-Droms-Ph-D/dp/0672323273
 .. _ISC_KEA: https://www.isc.org/kea/
 .. _UEFI: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface
+.. _BIOS: https://en.wikipedia.org/wiki/BIOS
 .. _Legacy_BIOS_boot: https://en.wikipedia.org/wiki/Legacy_mode
 .. _PXE-booting: https://wiki.fysik.dtu.dk/niflheim/PXE-booting
 .. _GRUB2: https://fedoraproject.org/wiki/GRUB_2
@@ -44,7 +45,7 @@ Enable UEFI support in the DHCP server
 
 We use an ISC_DHCP_ Linux server on EL/RHEL_ Linux.
 The ISC_DHCP_ server has actually been superceded by the ISC_KEA_ server, but we do not consider it here.
-On EL Linux ISC_KEA_ can be installed from EPEL_ with ``dnf install kea kea-hooks``.
+On EL Linux ISC_KEA_ can be installed (in EL8/EL9 from EPEL_) with ``dnf install kea kea-hooks kea-doc kea-keama``.
 
 Install the ISC_DHCP_ packages::
 
@@ -149,7 +150,7 @@ The OS installation ``*.efi`` files **must** be copied from the OS installation 
 since the versions contained in EL8 ``shim-x64`` RPM package seem to be buggy,
 see for example https://forums.rockylinux.org/t/pxe-boot-uefi-mode/4852.
 Symptoms may be that TFTP_ download of large ``vmlinuz`` or ``initrd.img`` files 
-during Kickstart fail with a message *error: timeout reading ...*.
+during Kickstart_ fail with a message *error: timeout reading ...*.
 
 Download **all .efi files** from a mirror site, 
 for example the AlmaLinux_ mirror at https://mirror.fysik.dtu.dk/linux/almalinux/8/BaseOS/x86_64/kickstart/EFI/BOOT/
@@ -251,15 +252,15 @@ EL Linux installation with Kickstart
 RHEL_ Linux and *EL clones* such as AlmaLinux_ or RockyLinux_, as well as Fedora_, can be installed using Kickstart_.
 See a general description from the Fedora page:
 
-* Many system administrators would prefer to use an automated installation method to install Fedora_ or Red Hat Enterprise Linux on their machines.
+* Many system administrators would prefer to use an automated installation method to install Fedora_ or RHEL_ on their machines.
   To answer this need, Red Hat created the Kickstart_ installation method.
   Using Kickstart_, a system administrator can create a single file containing the answers to all the questions that would normally be asked during a typical installation.
 
-* Kickstart_ files can be kept on a server system and read by individual computers during the installation.
-  This installation method can support the use of a single Kickstart_file_ to install Fedora_ or Red Hat Enterprise Linux on multiple machines,
+* A Kickstart_file_ can be kept on a server system and read by individual computers during the installation.
+  This installation method can support the use of a single Kickstart_file_ to install Fedora_ or RHEL_ on multiple machines,
   making it ideal for network and system administrators.
 
-There is documentation of the Kickstart_file_ syntax.
+Please read the documentation of the Kickstart_file_ syntax.
 
 A Kickstart_ installation can be made using :ref:`PXE-booting` or PXE_and_UEFI_ network booting.
 
@@ -271,19 +272,17 @@ A Kickstart_ installation can be made using :ref:`PXE-booting` or PXE_and_UEFI_ 
 .. _Fedora: https://fedoraproject.org/
 
 Automated installation using Anaconda_ is possible with UEFI_ as well as PXE_ legacy booting.
-In the above ``grub.cfg`` file use:
+In the above ``grub.cfg`` file use the inst.ks_ parameter to specify the location of a Kickstart_file_.
 
-* The inst.ks_ gives the location of a Kickstart_ file to be used to automate the installation.
-
-For example, the following menu item may be added to ``grub.cfg`` to download a Kickstart_ file ``ks-almalinux-8.10-minimal-x86_64.cfg``
-from the NFS_ server at IP address ``<server-IP>``::
+For example, the following menu item may be added to ``grub.cfg`` to download a Kickstart_file_ ``ks-almalinux-8.10-minimal-x86_64.cfg``
+from the NFS_ (version 3) server at IP address ``<server-IP>``::
 
   menuentry 'AlmaLinux 8.10 minimal Kickstart' --class centos --class gnu-linux --class gnu --class os --unrestricted {
     linuxefi (tftp)/AlmaLinux-8.10-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:<server-IP>:/u/kickstart/ks-almalinux-8.10-minimal-x86_64.cfg
     initrdefi (tftp)/AlmaLinux-8.10-x86_64/initrd.img
   }
 
-A Legacy PXE_ BIOS boot file ``/tftpboot/pxelinux.cfg/default`` example using the same Kickstart_ file is::
+A Legacy PXE_ BIOS_ boot file ``/tftpboot/pxelinux.cfg/default`` example using the same Kickstart_file_ is::
 
   label AlmaLinux8.10 minimal-x86_64
         menu label Clean AlmaLinux-8.10-x86_64, minimal install
@@ -291,6 +290,8 @@ A Legacy PXE_ BIOS boot file ``/tftpboot/pxelinux.cfg/default`` example using th
         append load_ramdisk=1 initrd=AlmaLinux-8.10-x86_64/initrd.img network inst.ks=nfs:nfsvers=3:<server-IP>:/u/kickstart/ks-almalinux-8.10-minimal-x86_64.cfg vga=792
 
 (Setting up an NFS_ server at ``<server-IP>`` is not discussed here.)
+
+In the following sections we discuss relevant sections of the Kickstart_file_.
 
 .. _Anaconda: https://fedoraproject.org/wiki/Anaconda
 .. _inst.ks: https://docs.fedoraproject.org/en-US/fedora/f36/install-guide/advanced/Boot_Options/#sect-boot-options-kickstart
@@ -305,30 +306,31 @@ You should always use a password to protect your boot loader. An unprotected boo
 * ``--password`` 
   If using GRUB2_ as the boot loader, sets the boot loader password to the one specified with this option.
   This should be used to restrict access to the GRUB2_ shell, where arbitrary kernel options can be passed.
-  If a password is specified, GRUB2_ will also ask for a user name.
-  The user name is always **root**.
+  If a password is specified, GRUB2_ will also ask for a user name, and the user name is always ``root``.
 
 * ``--iscrypted`` 
-  Normally, when you specify a boot loader password using the --password= option, it will be stored in the Kickstart file in plain text.
-  If you want to encrypt the password, use this option and an encrypted password.
-
-  To generate an encrypted password, use the::
+  Normally, when you specify a boot loader password using the ``--password=`` option,
+  it will be stored in the Kickstart_file_ in plain text.
+  If you want to encrypt the password, use this option and specify an encrypted password.
+  To generate an encrypted password use the command::
 
     grub2-mkpasswd-pbkdf2
 
-  command, enter the password you want to use, and copy the command’s output (the hash starting with ``grub.pbkdf2``) into the Kickstart file.
-  An example bootloader_ Kickstart entry with an encrypted password will look similar to the following::
+  Enter the password you want to use, and copy the command’s output (the hash starting with ``grub.pbkdf2``) into the Kickstart_file_.
+  An example bootloader_ Kickstart_ entry with an encrypted password will look similar to the following::
 
     bootloader --iscrypted --password=grub.pbkdf2.sha512.10000.5520C6C9832F3AC3D149AC0B24BE69E2D4FB0DBEEDBD29CA1D30A044DE2645C4C7A291E585D4DC43F8A4D82479F8B95CA4BA4381F8550510B75E8E0BB2938990.C688B6F0EF935701FF9BD1A8EC7FE5BD2333799C98F28420C5CC8F1A2A233DE22C83705BB614EA17F3FDFDF4AC2161CEA3384E56EB38A2E39102F5334C47405E
 
-Some systems require a special partition for installing the boot loader. The type and size of this partition depends on whether the disk you are installing the boot loader to uses the Master Boot Record (MBR) or a GUID Partition Table (GPT) schema. For more information, see Boot Loader Installation.
+Some systems require a special partition for installing the boot loader.
+The type and size of this partition depends on whether the disk you are installing the boot loader to uses the Master Boot Record (MBR) or a GUID Partition Table (GPT) schema.
+For more information, see the bootloader_ page.
 
 .. _bootloader: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#bootloader
 
 Installation screen resolution
 ------------------------------
 
-If you have an old server or PC where the VGA graphics adapter only supports screen resolutions up to 1024x768 or 1280x1024,
+If you have an old server or PC where the VGA_ graphics adapter only supports screen resolutions up to 1024x768 or 1280x1024,
 then the kernel in EL8 Linux may select a higher, unsupported screen resolution which gives a flickering monitor with no image!
 See these pages:
 
@@ -341,7 +343,7 @@ You can add a vga= directive to the kernel line in the GRUB file, something like
   linuxefi /vmlinuz-X.Y.Z vga=792 
 
 You will, of course, see something specific in place of X.Y.Z and you can use numbers other than 792, which gives 1024×768 with 65,536 possible colors. 
-This is a partial list of GRUB VGA Modes::
+This is a partial list of GRUB VGA_ Modes::
 
   Colour depth	640x480	1024x768
   8 (256)	769	773
@@ -349,15 +351,17 @@ This is a partial list of GRUB VGA Modes::
   16 (65K)	785	791
   24 (16M)	786	792
 
+.. _VGA: https://en.wikipedia.org/wiki/Video_Graphics_Array
+
 Linux kernel with 16-bit boot protocol
 ......................................
 
 From https://www.systutorials.com/configuration-of-linux-kernel-video-mode/ we see:
 
-* Switching VESA modes of Linux kernel at boot time can be done by using the “vga=…“ kernel boot parameter. 
-  This parameter accept the decimal value of Linux video mode numbers instead of VESA video mode numbers. 
+* Switching VESA_ modes of Linux kernel at boot time can be done by using the “vga=…“ kernel boot parameter. 
+  This parameter accept the decimal value of Linux video mode numbers instead of VESA_ video mode numbers. 
 
-The video mode number of the Linux kernel is the VESA mode number plus 0×200::
+The video mode number of the Linux kernel is the VESA_ mode number plus 0×200::
 
   Linux_kernel_mode_number = VESA_mode_number + 0x200
 
@@ -379,6 +383,8 @@ This simple python command can be used to convert a hex-number 0xYYY::
 
   python -c "print 0xYYY"
 
+.. _VESA: https://en.wikipedia.org/wiki/VESA_BIOS_Extensions
+
 Capture the %pre logfile
 ------------------------
 
@@ -387,7 +393,8 @@ The ``%pre`` command can create a logfile::
   # Start of the %pre section with logging into /root/ks-pre.log
   %pre --log=/root/ks-pre.log
 
-but since this exists only in the memory file system, the logfile is lost after the system has rebooted.
+However, this file exists **only in the memory file system** during installation,
+and the logfile will be lost after the system has rebooted.
 
 There are methods to get a copy of the ``%pre`` logfile:
 
@@ -399,7 +406,7 @@ Boot disk device selection
 The server or PC computer may have multiple disk devices, and each device may have different bus interfaces to the system such as NVME_ or SATA_.
 
 When the Kickstart_ installation starts up, the file given by inst.ks_ must select, format and partition the system boot disk.
-However, you do not want to install the Linux OS on a large disk device which should be used for data storage!
+However, you do not want to install the Linux OS on a large disk device which might be used only for data storage!
 Another problem is that NVME_ and SATA_ devices have different device names in the Linux kernel, for example:
 
 * SATA_: /dev/sda 
@@ -408,15 +415,14 @@ Another problem is that NVME_ and SATA_ devices have different device names in t
 and the correct device name must be given to Kickstart_.
 
 A nice and flexible solution to this issue is given in the thread https://access.redhat.com/discussions/3144131.
-You configure an ``%include`` line where you would normally partition the disk::
+You configure a Kickstart_file_ ``%include`` line where you would traditionally partition the disk::
 
   # The file /tmp/part-include is created below in the %pre section
   %include /tmp/part-include
   %packages
   %end
 
-Then you define a `pre-install <https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-4-pre-installation-script>`_ 
-section with ``%pre``, here with a number of improvements::
+Then you define a pre-install_ section with ``%pre``, here adding a number of improvements::
 
   # Start of the %pre section with logging into /root/ks-pre.log
   %pre --log=/root/ks-pre.log
@@ -467,17 +473,14 @@ section with ``%pre``, here with a number of improvements::
 
 .. _NVME: https://en.wikipedia.org/wiki/NVM_Express
 .. _SATA: https://en.wikipedia.org/wiki/Serial_ATA
+.. _pre-install: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-4-pre-installation-script
 .. _Nehalem: https://en.wikipedia.org/wiki/Nehalem_(microarchitecture)
 
 Disk partitions
 ---------------
 
-With UEFI_ systems it is **required** to configure a special partition::
-
-  /boot/efi
-
-in your Kickstart_ file.
-See also:
+With UEFI_ systems it is **required** to configure a special ``/boot/efi`` partition in your Kickstart_file_,
+see also:
 
 * https://access.redhat.com/solutions/1369253
 * https://fedoraproject.org/wiki/Anaconda/Kickstart#bootloader
@@ -485,12 +488,10 @@ See also:
 It is most convenient to configure boot partitions using reqpart_: 
 
 * Automatically create partitions required by your hardware platform.
-  These include a /boot/efi for x86_64 and Aarch64 systems with UEFI_ firmware,
-  biosboot for x86_64 systems with BIOS firmware and GPT, and PRePBoot for IBM Power Systems.
+  These include a ``/boot/efi`` for x86_64 and Aarch64 systems with UEFI_ firmware,
+  ``biosboot`` for x86_64 systems with BIOS_ firmware and GPT, and ``PRePBoot`` for IBM Power Systems.
 
-.. _reqpart: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#reqpart
-
-An example Kickstart_ file section about disk partitions and using reqpart_ may be::
+An example Kickstart_file_ section specifying disk partitions and using reqpart_ may be::
 
   reqpart --add-boot
   part swap --size 50000 --asprimary
@@ -498,16 +499,19 @@ An example Kickstart_ file section about disk partitions and using reqpart_ may 
   volgroup VolGroup00 pv.01
   logvol / --fstype xfs --name=lv_root --vgname=VolGroup00 --size=32768
 
+.. _reqpart: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#reqpart
+
 Disable Secure Boot in BIOS
 ---------------------------
 
-If the PXE_ client system BIOS is configured for UEFI_ Secure_Boot_
+If the PXE_ client system BIOS_ is configured for UEFI_ Secure_Boot_
 then the PXE_ boot will fail with an error about an **invalid signature**.
+See also `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_.
 
 As explained in `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_
 RedHat is currently working on a solution for RHEL_ 8.
 
-**Workaround:** Disable secureboot from BIOS settings.
+**Workaround:** Disable secureboot from BIOS_ settings.
 
 .. _Secure_Boot: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface#SECURE-BOOT
 
