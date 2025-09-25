@@ -26,11 +26,13 @@ See also our network :ref:`PXE-booting` page for Linux OS installation, and also
 .. _DHCP: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
 .. _ISC_DHCP: http://www.isc.org/software/dhcp
 .. _DHCP_Handbook: https://www.amazon.com/DHCP-Handbook-Ralph-Droms-Ph-D/dp/0672323273
+.. _ISC_KEA: https://www.isc.org/kea/
 .. _UEFI: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface
 .. _Legacy_BIOS_boot: https://en.wikipedia.org/wiki/Legacy_mode
 .. _PXE-booting: https://wiki.fysik.dtu.dk/niflheim/PXE-booting
 .. _GRUB2: https://fedoraproject.org/wiki/GRUB_2
 .. _NFS: https://en.wikipedia.org/wiki/Network_File_System
+.. _EPEL: https://fedoraproject.org/wiki/EPEL
 
 =====================================================================================================
 
@@ -40,7 +42,10 @@ Setting up the DHCP, TFTP and PXE services
 Enable UEFI support in the DHCP server
 --------------------------------------
 
-We assume that you have an ISC_DHCP_ Linux server on EL Linux.
+We use an ISC_DHCP_ Linux server on EL/RHEL_ Linux.
+The ISC_DHCP_ server has actually been superceded by the ISC_KEA_ server, but we do not consider it here.
+On EL Linux ISC_KEA_ can be installed from EPEL_ with ``dnf install kea``.
+
 Install the packages::
 
   dnf install dhcp-server dhcp-common grub2-efi-x64
