@@ -209,7 +209,6 @@ it is useful to define a fallback_ boot menu item as in this example::
 
 .. _Grub: https://en.wikipedia.org/wiki/GNU_GRUB
 .. _fallback: https://www.gnu.org/software/grub/manual/grub/html_node/fallback.html
-.. _Fedora: https://www.fedoraproject.org/
 
 =======================================================================================================
 
