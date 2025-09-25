@@ -44,9 +44,9 @@ Enable UEFI support in the DHCP server
 
 We use an ISC_DHCP_ Linux server on EL/RHEL_ Linux.
 The ISC_DHCP_ server has actually been superceded by the ISC_KEA_ server, but we do not consider it here.
-On EL Linux ISC_KEA_ can be installed from EPEL_ with ``dnf install kea``.
+On EL Linux ISC_KEA_ can be installed from EPEL_ with ``dnf install kea kea-hooks``.
 
-Install the packages::
+Install the ISC_DHCP_ packages::
 
   dnf install dhcp-server dhcp-common grub2-efi-x64
 
@@ -116,9 +116,13 @@ Install these packages::
 
   dnf install tftp-server tftp shim-x64
 
-Edit the file ``/etc/systemd/system/tftp.service`` to change this line::
+Copy the service file to make local customizations::
 
-  ExecStart=/usr/sbin/in.tftpd -4 -v -s /var/lib/tftpboot
+  cp /usr/lib/systemd/system/tftp.service /etc/systemd/system/tftp.service
+
+Edit the file ``/etc/systemd/system/tftp.service`` to add the in.tftpd_ options ``--secure --ipv4``::
+
+  ExecStart=/usr/sbin/in.tftpd -v --secure --ipv4 /var/lib/tftpboot
 
 Open the firewall for TFTP_ (port 69)::
 
@@ -129,6 +133,8 @@ and start the service::
 
   systemctl enable tftp
   systemctl restart tftp
+
+.. _in.tftpd: https://linux.die.net/man/8/in.tftpd
 
 Download UEFI boot files
 ---------------------------
