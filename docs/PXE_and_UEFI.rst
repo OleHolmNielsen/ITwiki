@@ -11,10 +11,7 @@ Overview
 
 This *HowTo* guide documents how to install EL/RHEL_ Linux using PXE_ on a client host booting by UEFI_.
 
-This page assumes that you already have a working DHCP_ and PXE_ boot server for installing client hosts using the Legacy_BIOS_boot_ method. 
-We will show how to support also UEFI_ booting with PXE_.
-Optionally, you may also use an NFS_ server to store Kickstart_ files.
-
+We will show how to support UEFI_ booting with PXE_, downloading files from your TFTP_ server.
 See also our network :ref:`PXE-booting` page for Linux OS installation, and also these useful pages:
 
 * https://www.gnu.org/software/grub/manual/grub/grub.html
@@ -27,11 +24,14 @@ See also our network :ref:`PXE-booting` page for Linux OS installation, and also
 .. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
 .. _TFTP: https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol
 .. _DHCP: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
+.. _ISC_DHCP: http://www.isc.org/software/dhcp
 .. _UEFI: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface
 .. _Legacy_BIOS_boot: https://en.wikipedia.org/wiki/Legacy_mode
 .. _PXE-booting: https://wiki.fysik.dtu.dk/niflheim/PXE-booting
 .. _GRUB2: https://fedoraproject.org/wiki/GRUB_2
 .. _NFS: https://en.wikipedia.org/wiki/Network_File_System
+
+=====================================================================================================
 
 Setting up the DHCP and PXE server
 ==================================
@@ -39,7 +39,7 @@ Setting up the DHCP and PXE server
 Enable UEFI support in the DHCP server
 --------------------------------------
 
-We assume that you have a Linux DHCP_ server.
+We assume that you have a ISC_DHCP_ Linux server.
 Add the following to the configuration file ``/etc/dhcp/dhcpd.conf`` in the top (global) section::
 
   # These settings are required for UEFI boot:
@@ -82,16 +82,39 @@ NOTES:
 
 * **Probably obsolete:** The ``shimx64.efi`` bootloader_ may be required in stead of ``BOOTX64.EFI`` in the above ``/etc/dhcp/dhcpd.conf``.
 
-Copy UEFI boot files
---------------------
+Configure a TFTP server
+---------------------------
+
+Your DHCP_ server should also run a TFTP_ service for file downloads.
+Install packages::
+
+  dnf install tftp-server tftp shim-x64
+
+Edit the file ``/etc/systemd/system/tftp.service`` to change this line::
+
+  ExecStart=/usr/sbin/in.tftpd -4 -v -s /var/lib/tftpboot
+
+Open the firewall for TFTP_ (port 69)::
+
+  firewall-cmd --add-service=tftp --permanent
+  firewall-cmd --reload
+
+and start the service::
+
+  systemctl enable tftp
+  systemctl restart tftp
+
+Download UEFI boot files
+---------------------------
 
 We create a special directory for UEFI_ boot files on the TFTP_ server::
 
   mkdir /var/lib/tftpboot/uefi
   ln -s /var/lib/tftpboot/uefi /tftpboot/uefi
 
+**NOTE:**
 The OS installation ``*.efi`` files **must** be copied from the OS installation image,
-since the versions contained in EL8 RPM packages seem to be buggy,
+since the versions contained in EL8 ``shim-x64`` RPM package seem to be buggy,
 see for example https://forums.rockylinux.org/t/pxe-boot-uefi-mode/4852.
 Symptoms may be that TFTP_ download of large ``vmlinuz`` or ``initrd.img`` files 
 during Kickstart fail with a message *error: timeout reading ...*.
@@ -218,7 +241,7 @@ A Kickstart_ installation can be made using :ref:`PXE-booting` or PXE_and_UEFI_ 
 Automated installation using Anaconda_ is possible with UEFI_ as well as PXE_ legacy booting.
 In the above ``grub.cfg`` file use:
 
-* The inst.ks_ Gives the location of a Kickstart_ file to be used to automate the installation.
+* The inst.ks_ gives the location of a Kickstart_ file to be used to automate the installation.
 
 For example, the following menu item may be added to ``grub.cfg`` to download a Kickstart_ file ``ks-almalinux-8.10-minimal-x86_64.cfg``
 from the NFS_ server at IP address ``<server-IP>``::
