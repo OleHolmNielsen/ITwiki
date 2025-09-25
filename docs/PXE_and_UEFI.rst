@@ -33,13 +33,13 @@ See also our network :ref:`PXE-booting` page for Linux OS installation, and also
 
 =====================================================================================================
 
-Setting up the DHCP and PXE server
-==================================
+Setting up the DHCP, TFTP and PXE services
+================================================
 
 Enable UEFI support in the DHCP server
 --------------------------------------
 
-We assume that you have a ISC_DHCP_ Linux server.
+We assume that you have an ISC_DHCP_ Linux server.
 Add the following to the configuration file ``/etc/dhcp/dhcpd.conf`` in the top (global) section::
 
   # These settings are required for UEFI boot:
@@ -56,8 +56,8 @@ Add these options only if you need to support MTFTP_ (*Multicast TFTP*) as recom
   option PXE.mtftp-tmout code 4 = unsigned integer 8;
   option PXE.mtftp-delay code 5 = unsigned integer 8;
 
-.. _RFC4578: https://tools.ietf.org/html/rfc4578
-.. _MTFTP: https://tools.ietf.org/html/draft-henry-remote-boot-protocol-00
+.. _RFC4578: https://datatracker.ietf.org/doc/html/rfc4578#section-2.1
+.. _MTFTP: https://datatracker.ietf.org/doc/html/draft-henry-remote-boot-protocol-00
 
 In the DHCP_ subnet section(s) define UEFI_ RFC4578_ or PXE_ (legacy) boot image types in the ``/tftpboot/uefi/`` subdirectory::
 
@@ -75,18 +75,20 @@ In the DHCP_ subnet section(s) define UEFI_ RFC4578_ or PXE_ (legacy) boot image
 
 NOTES: 
 
-* the ``BOOTX64.EFI`` file name seems to be upper case in the EL8 installation images.
+* The ``BOOTX64.EFI`` file name is upper case in the EL8 installation images.
 
-* It seems that having the boot file in a subdirectory such as ``uefi/BOOTX64.EFI``
-  will cause the client host PXE_ to download all further files also from that same ``uefi/`` subdirectory, so you need to place other files there.
+* Having the boot file in a subdirectory such as ``uefi/BOOTX64.EFI``
+  will cause the client host PXE_ to download all further files also from that same ``uefi/`` subdirectory,
+  so you need to place other files there.
 
-* **Probably obsolete:** The ``shimx64.efi`` bootloader_ may be required in stead of ``BOOTX64.EFI`` in the above ``/etc/dhcp/dhcpd.conf``.
+* **Probably obsolete:**
+  The ``shimx64.efi`` bootloader_ may be required in stead of ``BOOTX64.EFI`` in the above ``/etc/dhcp/dhcpd.conf``.
 
-Configure a TFTP server
+Configure the TFTP service
 ---------------------------
 
 Your DHCP_ server should also run a TFTP_ service for file downloads.
-Install packages::
+Install these packages::
 
   dnf install tftp-server tftp shim-x64
 
@@ -107,7 +109,7 @@ and start the service::
 Download UEFI boot files
 ---------------------------
 
-We create a special directory for UEFI_ boot files on the TFTP_ server::
+Create a special directory for UEFI_ boot files on the TFTP_ server::
 
   mkdir /var/lib/tftpboot/uefi
   ln -s /var/lib/tftpboot/uefi /tftpboot/uefi
@@ -188,7 +190,7 @@ To boot a system with ``grubx64.efi`` (provided by the ``grub2-efi-x64`` package
     exit
   }
 
-The ``.efi`` files of other Linux distributions will be in different subdirectories of ``/boot/efi/EFI``.
+In other Linux distributions such as Fedora_ the ``.efi`` files will be in different subdirectories of ``/boot/efi/EFI``.
 
 If there are multiple disks in the server, Grub_ will label them as *hd0, hd1, hd2*, etc.
 It seems that the numbering of such disks may vary, and if the OS installation is suddenly in disk *hd1* in stead of *hd0*,
@@ -207,6 +209,7 @@ it is useful to define a fallback_ boot menu item as in this example::
 
 .. _Grub: https://en.wikipedia.org/wiki/GNU_GRUB
 .. _fallback: https://www.gnu.org/software/grub/manual/grub/html_node/fallback.html
+.. _Fedora: https://www.fedoraproject.org/
 
 =======================================================================================================
 
