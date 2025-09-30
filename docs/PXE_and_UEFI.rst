@@ -550,7 +550,7 @@ Please note:
 - The ``grub.cfg`` file is placed in the same directory as the path output by ``grub-mknetdir`` hereafter referred to as ``(FWPATH)``.
   Note: Our setup uses ``FWPATH=/tftpboot/uefi``.
 
-The PXE_ bootloader image ``/tftpboot/uefi/BOOTX64.EFI`` executing in the computer's Ethernet_ NIC adapter
+The PXE_ bootloader image ``/tftpboot/uefi/BOOTX64.EFI`` executing in the computer's NIC_ adapter
 will search for GRUB2_ configuration files in order using the following rules,
 where the appended value corresponds to a value on the client machine::
 
@@ -597,6 +597,7 @@ Note that this should be changed both in the prefix and in any references to the
 .. _IPv6: http://en.wikipedia.org/wiki/Ipv6
 .. _IP_address: https://en.wikipedia.org/wiki/IP_address
 .. _Ethernet: https://en.wikipedia.org/wiki/Ethernet
+.. _NIC: https://en.wikipedia.org/wiki/Network_interface_controller
 .. _MAC_address: https://en.wikipedia.org/wiki/MAC_address
 .. _UUID: https://en.wikipedia.org/wiki/Universally_unique_identifier
 .. _Hexadecimal: https://en.wikipedia.org/wiki/Hexadecimal
