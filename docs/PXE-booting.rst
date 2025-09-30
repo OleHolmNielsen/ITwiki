@@ -395,6 +395,10 @@ corresponding to the client IP-address which did the ``telnet`` connection.
 The pxeconfigd daemon on EL9
 ----------------------------
 
+When SELinux has been configured, it is necessary to relabel the ``pxeconfigd`` executable::
+
+  restorecon -v /usr/local/sbin/pxeconfigd
+
 On **EL9 systems** xinetd_ no longer exists, and xinetd_ services would have to be converted to Systemd_,
 see `How to convert xinetd service to systemd? <https://access.redhat.com/solutions/1609583>`_.
 A possibility is to create the socket file ``/etc/systemd/system/pxeconfigd.socket``::
@@ -421,7 +425,8 @@ and the service file ``/etc/systemd/system/pxeconfigd.service``::
   Group=sys
   StandardInput=socket
 
-Howerver, this is not working at present.
+However, this is not working at present.
 
 
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
+.. _SELinux: http://selinuxproject.org/page/Main_Page
