@@ -427,6 +427,5 @@ and the service file ``/etc/systemd/system/pxeconfigd.service``::
 
 However, this is not working at present.
 
-
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
 .. _SELinux: http://selinuxproject.org/page/Main_Page
