@@ -250,13 +250,12 @@ it is useful to define a fallback_ boot menu item as in this example::
 Automated network installation with pxeconfig
 =============================================
 
-**NOTE:** We assume throughout the use of client UEFI_ booting,
-since the old BIOS_ booting is more or less deprecated.
-
-You can automate the PXE/network booting process completely using the pxeconfig_toolkit_ written by Bas van der Vlies.
-
+You can automate the PXE_ network booting process completely using the pxeconfig_toolkit_ written by Bas van der Vlies.
 Download the pxeconfig_toolkit_ and read the 
 `pxeconfig installation instructions <https://gitlab.com/surfsara/pxeconfig/-/blob/master/INSTALL>`_. 
+
+**NOTE:** We assume throughout the use of client UEFI_ booting,
+since the old BIOS_ booting is more or less deprecated.
 
 Installation on EL Linux
 ----------------------------
@@ -278,7 +277,7 @@ Configure the default boot method as UEFI_ in ``/usr/local/etc/pxeconfig.conf``:
 This configures the pxeconfig_ command to create ``grub.cfg`` files in the ``/tftpboot/uefi/`` directory
 which was created in the :ref:`create_grub.cfg` section.
 
-Add the pxeconfigd_ service to the services_ file::
+Add the pxeconfigd_ service to the services_ file ``/etc/services``::
 
   pxeconfigd 6611/tcp   # pxeconfig daemon
 
@@ -289,13 +288,15 @@ Open port 6611 in the firewall::
 Now setup the pxeconfigd_ service with Systemd_::
 
   restorecon -v /usr/local/sbin/pxeconfigd
-  cp /usr/local/share/doc/pxeconfig/examples/pxeconfigd* /etc/systemd/system/
+  cp /usr/local/share/doc/pxeconfig/examples/pxeconfigd@.socket /etc/systemd/system/
+  cp /usr/local/share/doc/pxeconfig/examples/pxeconfigd@.service /etc/systemd/system/
   systemctl daemon-reload
   systemctl enable pxeconfigd.socket
   systemctl start pxeconfigd.socket
 
 Note that it is ``pxeconfigd.socket`` which handles the pxeconfigd_ service,
-similar to the normal telnet_ service.
+similar to the normal telnet_ service,
+and not the ``.service`` file.
 
 .. _pxeconfig_toolkit: https://gitlab.com/surfsara/pxeconfig
 .. _pxeconfigd: https://gitlab.com/surfsara/pxeconfig/-/blob/master/src/pxeconfigd.py
@@ -308,13 +309,13 @@ similar to the normal telnet_ service.
 Hexadecimally encoded IP-addresses
 ---------------------------------------
 
-For information,
-the pxeconfig_toolkit_ manipulates configuration files in the server's ``/tftpboot/uefi/`` directory,
-namely the client's hexadecimally encoded IP-address, for example::
+To understand the client's hexadecimally encoded IP-address, 
+which the pxeconfig_toolkit_ manipulates in the server's ``/tftpboot/uefi/`` directory,
+we show some examples::
 
   0A018219 decodes as 10.1.130.25
 
-You can use gethostip_ from the ``syslinux`` package to convert hostnames and IP-addresses to hexadecimal, for example::
+You can use the gethostip_ command from the ``syslinux`` package to convert hostnames and IP-addresses to hexadecimal, for example::
 
   $ gethostip -f s001
   s001.(domainname) 10.2.130.21 0A028215
