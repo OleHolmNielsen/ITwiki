@@ -176,8 +176,10 @@ In this directory create the following ``Makefile``::
 
 and run a ``make`` command to download the boot image files.
 
-Create a grub.cfg file
------------------------------
+.. _create_grub.cfg:
+
+Create a grub.cfg file in /tftpboot/uefi/
+---------------------------------------------
 
 The ``uefi/BOOTX64.EFI`` boot file will be looking for a GRUB2_/Grub_ configuration file ``uefi/grub.cfg`` in the same subdirectory.
 Create the file ``/var/lib/tftpboot/uefi/grub.cfg`` with the contents::
@@ -240,6 +242,141 @@ it is useful to define a fallback_ boot menu item as in this example::
 
 .. _Grub: https://en.wikipedia.org/wiki/GNU_GRUB
 .. _fallback: https://www.gnu.org/software/grub/manual/grub/html_node/fallback.html
+
+=======================================================================================================
+
+.. _Automated_network_installation_with_pxeconfig:
+
+Automated network installation with pxeconfig
+=============================================
+
+**NOTE:** We assume throughout the use of client UEFI_ booting,
+since the old BIOS_ booting is more or less deprecated.
+
+You can automate the PXE/network booting process completely using the pxeconfig_toolkit_ written by Bas van der Vlies.
+
+Download the pxeconfig_toolkit_ and read the 
+`pxeconfig installation instructions <https://gitlab.com/surfsara/pxeconfig/-/blob/master/INSTALL>`_. 
+
+Installation on EL Linux
+----------------------------
+
+Briefly, the installation steps for EL Linux are::
+
+  dnf install autoconf make gcc telnet 
+  tar xf pxeconfig-5.1.3.tar.gz
+  cd pxeconfig-5.1.3/
+  /usr/bin/autoconf
+  ./configure --prefix=/usr/local
+  make install DESTDIR=/
+
+Configure the default boot method as UEFI_ in ``/usr/local/etc/pxeconfig.conf``::
+
+  [DEFAULT]
+  boot_method=uefi
+
+This configures the pxeconfig_ command to create ``grub.cfg`` files in the ``/tftpboot/uefi/`` directory
+which was created in the :ref:`create_grub.cfg` section.
+
+Add the pxeconfigd_ service to the services_ file::
+
+  pxeconfigd 6611/tcp   # pxeconfig daemon
+
+Open port 6611 in the firewall::
+
+  firewall-cmd --permanent --zone=public --add-port=6611/tcp --reload
+
+Now setup the pxeconfigd_ service with Systemd_::
+
+  restorecon -v /usr/local/sbin/pxeconfigd
+  cp /usr/local/share/doc/pxeconfig/examples/pxeconfigd* /etc/systemd/system/
+  systemctl daemon-reload
+  systemctl enable pxeconfigd.socket
+  systemctl start pxeconfigd.socket
+
+Note that it is ``pxeconfigd.socket`` which handles the pxeconfigd_ service,
+similar to the normal telnet_ service.
+
+.. _pxeconfig_toolkit: https://gitlab.com/surfsara/pxeconfig
+.. _pxeconfigd: https://gitlab.com/surfsara/pxeconfig/-/blob/master/src/pxeconfigd.py
+.. _pxeconfig: https://gitlab.com/surfsara/pxeconfig/-/blob/master/src/pxeconfig.py
+.. _hexls: https://gitlab.com/surfsara/pxeconfig/-/blob/master/src/hexls.in
+.. _services: https://man7.org/linux/man-pages/man5/services.5.html
+.. _telnet: https://en.wikipedia.org/wiki/Telnet
+.. _Systemd: https://en.wikipedia.org/wiki/Systemd
+
+Hexadecimally encoded IP-addresses
+---------------------------------------
+
+For information,
+the pxeconfig_toolkit_ manipulates configuration files in the server's ``/tftpboot/uefi/`` directory,
+namely the client's hexadecimally encoded IP-address, for example::
+
+  0A018219 decodes as 10.1.130.25
+
+You can use gethostip_ from the ``syslinux`` package to convert hostnames and IP-addresses to hexadecimal, for example::
+
+  $ gethostip -f s001
+  s001.(domainname) 10.2.130.21 0A028215
+  $ gethostip -x s001
+  0A028215
+
+.. _gethostip: https://linux.die.net/man/1/gethostip
+
+The pxeconfig command
+---------------------
+
+To use pxeconfig_ you should create any number of configuration files named ``default.<something>``
+which contain different PXELINUX commands that perform the desired actions, for example,
+BIOS_ updates, firmware updates, hardware diagnostics, or network installation.
+See the above :ref:`create_grub.cfg` section.
+
+Use the pxeconfig_ command to configure those client nodes that you wish to install 
+(the remaining nodes will simply boot from their hard disk).
+An example is::
+
+  $ pxeconfig c150
+  Which pxe config file must we use: ?
+  1 : default.rockylinux-8-sr850v3-x86_64
+  2 : default.rockylinux-8-x86_64
+
+The pxeconfig_ command creates soft-links in the ``/tftpboot/uefi/`` directory named as 
+the hexadecimally encoded IP-address of the clients, pointing to one of the files ``default.*``. 
+As designed, the PXE_ network booting process will download the file given by the hexadecimal IP-address, 
+and hence network installation of the node will take place.
+
+If desired you can remove the soft-link::
+
+  $ pxeconfig -r c150
+
+The hexls command
+-----------------
+
+To list the soft links created by pxeconfig_ use the tool hexls_ and look for the IP-addresses and/or hostnames.  
+An example output is::
+
+  $ hexls /tftpboot/uefi/ 
+  default.rockylinux-8-x86_64
+  grub.cfg
+  grub.cfg-0A028396 => 10.2.131.150 => c150.nifl.fysik.dtu.dk -> default.rockylinux-8-x86_64
+
+The pxeconfigd service
+------------------------
+
+The pxeconfigd_ service will remove the hexadecimally encoded IP-address soft-link on the server when contacted on port 6611 by the client node. 
+In order for this to happen, you must create the client's post-install script to make an action such as this example::
+
+  #!/bin/sh
+  # To be used with the pxeconfigd service:
+  # Remove the <hex_ipaddr> file from the pxelinux.cfg directory so the client will boot from disk.
+  telnet <IMAGESERVER> 6611
+  sleep 1
+  exit 0
+
+When this script is executed on the node in the post-install phase,
+the telnet_ command connects to the pxeconfigd_ service on the image server,
+and this daemon will remove the hexadecimally encoded IP-address soft-link in ``/tftpboot/uefi/``
+corresponding to the client IP-address which did the telnet_ connection.
 
 =======================================================================================================
 
