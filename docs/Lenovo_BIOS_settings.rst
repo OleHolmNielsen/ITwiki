@@ -92,10 +92,6 @@ Therefore a complicated procedure is required for the user name change:
 
 * Recommended for security: In the ``User/LDAP`` menu delete the temporary ``root3`` user.
 
-Optional: If your server is actually up and running a Linux OS,
-you can also use OneCLI_ to configure BMC network parameters,
-see the :ref:`XClarity_Essentials_OneCLI` page.
-
 .. _OneCLI: https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli
 
 BMC Security
@@ -137,6 +133,10 @@ Modify the ``DNS and DDNS`` settings:
   If an LXCA_ instance is found, the BMC will attempt to announce its presence to the selected address of LXCA_ instance.
 
 * When done press ``Apply``.
+
+Optional: If your server is actually up and running a Linux OS,
+you can also use OneCLI_ to configure BMC network parameters,
+see the :ref:`XClarity_Essentials_OneCLI` page.
 
 .. _MAC_address: http://en.wikipedia.org/wiki/MAC_address
 .. _DDNS: https://en.wikipedia.org/wiki/Dynamic_DNS
