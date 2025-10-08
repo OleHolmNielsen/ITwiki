@@ -86,6 +86,8 @@ The license key file can be downloaded or E-mailed.
 The license key can be installed in the XCC web-page's ``BMC License`` item or the menu 
 *BMC Configuration->License* page.
 
+.. _XClarity_Essentials_OneCLI:
+
 XClarity Essentials OneCLI
 ==============================
 
@@ -93,7 +95,7 @@ Lenovo XClarity Essentials OneCLI_ is a collection of command line applications 
 Lenovo server management by providing functions, such as system configuration, system inventory,
 firmware and device driver updates.
 
-Download the ``lnvgy_utl_lxcer_onecli01z-4.2.0_linux_x86-64`` RPM file from the download page and install it.
+Download the ``lnvgy_utl_lxcer_onecli02d-5.3.0_linux_indiv`` RPM file from the OneCLI_ page and install it.
 This will create a soft-link ``/usr/bin/onecli`` to the OneCLI_ command.
 There is a OneCLI_User_Guide_ and you may read the online help::
 
@@ -103,9 +105,16 @@ The OneCLI_ can be used Out-of-band_ from a management server with arguments for
 
   onecli <some command> -N --bmc $IPMI_USER:$IPMI_PASSWORD@<XCC-address>
 
-where the IPMI login is defined by the variables $IPMI_USER:$IPMI_PASSWORD.
+where the IPMI_ login is defined by the variables ``$IPMI_USER:$IPMI_PASSWORD``.
 
-Some useful OneCLI_ commands are::
+For example, you can use OneCLI_ to configure some desirable XCC networking parameters::
+
+  onecli config set IMM.IMMInfo_Name `hostname -s`
+  onecli config set IMM.HostName1 `hostname -s`b
+  onecli config set IMM.MinPasswordLen 8
+  onecli config set IMM.DDNS_Enable Disabled
+
+Other useful OneCLI_ commands are::
 
   onecli config show
   onecli config show system_prod_data
@@ -146,6 +155,7 @@ Enable promoting the primary BMC firmware to the backup firmware::
 
 .. _Out-of-band: https://en.wikipedia.org/wiki/Out-of-band_management
 .. _Virtual_Reseat: https://pubs.lenovo.com/mgt_tools_smm2/c_chassis_front_overview
+.. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 
 Replicating UEFI configuration parameters
 ------------------------------------------
