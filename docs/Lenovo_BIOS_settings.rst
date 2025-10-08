@@ -166,36 +166,31 @@ The BMC GUI has a ``Remote Console`` menu to open a console in a new browser tab
 Press ``F1`` during start-up to enter the BIOS and firmware setup menus.
 In the BMC GUI you may also press ``Quick Actions`` and select the *Power Action* ``Boot Server to System Setup``.
 
+UEFI Setup
+----------------
+
 Use the console to configure the ``UEFI setup``.
-
-Go to the menu ``BMC settings`` submenu ``Network settings``:
-
-* Configure ``DHCP control`` to ``DHCP enabled``.
-  **Important**: Set the BMC network address selection to ``Obtain IP from DHCP``
-  in stead of the default ``First DHCP, then static IP`` so that the BMC does not fall back to a private IP-address!
-
-* Set ``IPv6`` to ``Disabled``.
-
-* When done press ``Save Network Settings``.
 
 Go to the menu ``UEFI Setup``:
 
-* In ``System Settings -> Processors`` select Disable ``SMT Mode`` (Symmetric Multithreading).
+* In ``System Settings -> Processors`` select Disable SMT_ Mode (*Symmetric Multithreading*) aka Hyperthreading_.
 
-* In ``System Settings -> Network -> Network Stack Settings`` you probably want to set ``IPv6 PXE Support`` to Disabled.
+* In ``System Settings -> Network -> Network Stack Settings`` you probably want to Disable ``IPv6 PXE Support``.
 
-* In ``System Settings -> Network -> Network Boot Settings`` you have to ``unconfigure PXE``
-  for each individual NIC in the ``MAC address`` submenu that will never be used for network PXE booting:
+* In ``System Settings -> Network -> Network Boot Settings`` you have to **unconfigure PXE**
+  for each individual NIC in the MAC_address_ submenu that will never be used for network PXE_ booting:
 
   - Set ``UEFI PXE Mode`` to Disabled.
   - Set ``Legacy PXE Mode`` to Disabled.
 
-* In ``Boot Manager -> Change Boot Order`` use + and - to change the boot order items to 1) Network, 2) Hard disk.
+* In ``Boot Manager -> Change Boot Order`` use + and - to change the boot order items (if desired) to 1) Network, 2) Hard disk.
   Press ``Commit Changes and Exit``.
 
 * In ``Boot Manager -> Set Boot Priority -> Network Priority`` use + and - to move down the priority of IPv6.
 
 * When done press ``Save Settings``.
 
-* When all configuration is finished press ``Exit UEFI Setup``.
+* When all configuration is finished press ``Exit UEFI Setup`` and boot the server.
 
+.. _SMT: https://en.wikipedia.org/wiki/Simultaneous_multithreading
+.. _Hyperthreading: https://en.wikipedia.org/wiki/Hyper-threading
