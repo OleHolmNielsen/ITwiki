@@ -92,12 +92,16 @@ Therefore a complicated procedure is required for the user name change:
 
 * Recommended for security: In the ``User/LDAP`` menu delete the temporary ``root3`` user.
 
+Optional: If your server is actually up and running a Linux OS,
+you can also use OneCLI_ to configure BMC network parameters,
+see the :ref:`XClarity_Essentials_OneCLI` page.
+
 .. _OneCLI: https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli
 
 BMC Security
 --------------
 
-You may change the ``BMC Configuration`` ``Security`` settings:
+You may change the ``BMC Configuration->Security`` settings:
 
 * If desired set the ``IPMI SEL Log Wrapping`` to ``Enabled``.
 
@@ -152,10 +156,6 @@ When using the Linux FreeIPMI_ CLI commands use the `-I CIPHER-SUITE-ID` option,
   ipmipower -I 17 -D LAN_2_0 ....
 
 **NOTE:** Some BMC brands (HPE, SuperMicro) unfortunately only support the default cipher suite ``-I 3`` and will reject connections with ``-I 17``.
-
-Optional: If your server is actually up and running a Linux OS,
-you can also use OneCLI_ to configure BMC network parameters,
-see the :ref:`XClarity_Essentials_OneCLI` page.
 
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
 
