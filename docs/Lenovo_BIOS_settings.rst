@@ -16,7 +16,7 @@ Booting and BIOS configuration
 * Press ``F10`` for PXE_ network boot.
 * Press ``F12`` for a one-time boot menu with all available selections.
 
-The Lenovo UEFI_ boot goes through PEI_ and DXE_ phases before booting the OS.
+Note: The Lenovo UEFI_ boot goes through PEI_ and DXE_ phases before booting the OS.
 
 .. _UEFI: https://en.wikipedia.org/wiki/UEFI
 .. _PEI: https://uefi.org/specs/PI/1.8/V1_Services_PEI.html
@@ -36,18 +36,18 @@ Notes:
 * At the first login the user ``USERID`` is **required to change the password**.
   By default the password must be at least 10 characters long and have some complexity.
 
-* If you have several SSH_ authentication key files (``$HOME/.ssh/id_*``) they will be tried in turn, 
-  and since the BMC accepts a maximum of 5 login attempts, SSH_ logins may fail with the error::
+* If using SSH login and you have several SSH_ authentication key files (``$HOME/.ssh/id_*``) they will be tried in turn, 
+  and since the BMC accepts a maximum of 5 failed login attempts, SSH_ logins may fail with the error::
 
     Received disconnect from 10.x.x.x port 22:2: Too many authentication failures
 
-  Workaround: Specify only one specified key to the SSH_ command, for example::
+  Workaround: Specify only one selected key to the SSH_ command, for example::
 
     ssh -i $HOME/.ssh/id_rsa <BMC_hostname>
 
 .. _SSH: https://en.wikipedia.org/wiki/Secure_Shell
 
-Minimal configuration of the BMC of a new server or a new motherboard
+Minimal configuration of the BMC of a new server or replaced motherboard
 =============================================================================
 
 At our site the following minimal settings are required to configure a new server
@@ -56,38 +56,41 @@ or a replacement motherboard in an existing server.
 The BMC setup is accessed via the physical console or BMC web GUI.
 Login with the above credentials.
 
-Go to the ``BMC Configuration -> User/LDAP`` menus and modify the login credentials:
+BMC user configuration
+------------------------
 
-* Click on ``Global Settings`` and make some modifications:
+Go to the ``BMC Configuration -> User/LDAP`` menus and modify the login credentials
+
+Click on ``Global Settings`` and make some modifications:
  
-  * Deselect ``Force to change password on first access`` 
-  * Deselect ``Complex password required`` 
-  * Set ``Minimum password length`` to ``8`` (or according to your site security policies).
-  * Change ``Minimum password change interval`` to ``0`` so that you can change the password as needed.
+* Deselect ``Force to change password on first access`` 
+* Deselect ``Complex password required`` 
+* Set ``Minimum password length`` to ``8`` (or according to your site security policies).
+* Change ``Minimum password change interval`` to ``0`` so that you can change the password as needed.
 
-* In the ``User/LDAP`` menu it is preferable to change the BMC local ``User name``
-  from the factory default value of ``USERID`` to ``root``.
-  Unfortunately, it is **no longer possible** to change a BMC user name while that user is logged in!
+In the ``User/LDAP`` menu it is preferable to change the BMC local ``User name``
+from the factory default value of ``USERID`` to ``root``.
+Unfortunately, it is **no longer possible** to change a BMC user name while that user is logged in!
 
-  Therefore a complicated procedure is required for the user name change:
+Therefore a complicated procedure is required for the user name change:
 
-  * Click on ``+ Create`` to create a new **temporary user**, say, ``root3``.
-    Enter a password for the ``root3`` user and click **Apply**.
-    Note: The ``root3`` user will have an ``ID=3`` value as shown by the Linux command
-    (if the OS is up and running)::
+* Click on ``+ Create`` to create a new **temporary user**, say, ``root3``.
+  Enter a password for the ``root3`` user and click **Apply**.
+  Note: The ``root3`` user will have an ``ID=3`` value as shown by the Linux command
+  (if the OS is up and running)::
 
-      ipmitool user list 2
+    ipmitool user list 2
 
-  * Logout user ``USERID`` from the BMC GUI, and login again as the ``root3`` user.
+* Logout user ``USERID`` from the BMC GUI, and login again as the ``root3`` user.
 
-  * Go to the ``User/LDAP`` menu and change the original user name ``USERID`` into ``root``.
-    In ``User accessible interface`` use the pull-down menu to add also ``IPMI over Lan``.
-    After this you are requested to enter a new password for the renamed ``root`` user.
-    Then click ``Apply``.
+* Go to the ``User/LDAP`` menu and change the original user name ``USERID`` into ``root``.
+  In ``User accessible interface`` use the pull-down menu to add also ``IPMI over Lan``.
+  After this you are requested to enter a new password for the renamed ``root`` user.
+  Then click ``Apply``.
 
-  * Logout user ``root3`` of the BMC GUI, and login again as the ``root`` user.
+* Logout user ``root3`` of the BMC GUI, and login again as the ``root`` user.
 
-  * Recommended for security: In the ``User/LDAP`` menu delete the temporary ``root3`` user.
+* Recommended for security: In the ``User/LDAP`` menu delete the temporary ``root3`` user.
 
 .. _OneCLI: https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli
 
