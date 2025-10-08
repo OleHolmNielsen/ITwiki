@@ -59,14 +59,14 @@ Login with the above credentials.
 BMC user configuration
 ------------------------
 
-Go to the ``BMC Configuration -> User/LDAP`` menus and modify the login credentials
+Go to the ``BMC Configuration -> User/LDAP`` menus and modify the login credentials as follows.
 
-Click on ``Global Settings`` and make some modifications:
+Click on ``Global Settings``:
  
-* Deselect ``Force to change password on first access`` 
-* Deselect ``Complex password required`` 
-* Set ``Minimum password length`` to ``8`` (or according to your site security policies).
-* Change ``Minimum password change interval`` to ``0`` so that you can change the password as needed.
+1. Deselect ``Force to change password on first access`` 
+2. Deselect ``Complex password required`` 
+3. Set ``Minimum password length`` to ``8`` (or according to your site security policies).
+4. Change ``Minimum password change interval`` to ``0`` so that you can change the password as needed.
 
 In the ``User/LDAP`` menu it is preferable to change the BMC local ``User name``
 from the factory default value of ``USERID`` to ``root``.
@@ -105,9 +105,7 @@ You may change the ``BMC Configuration->Network`` settings:
 * Select ``Obtain Hostname from DHCP``.
   Alternatively, change the ``Host Name`` field to the BMC's DNS name. 
 
-* Configure ``DHCP control`` to ``DHCP enabled``.
-
-  **Important**: Set the BMC network address selection to ``Obtain IP from DHCP``
+* In the ``Ethernet Configuration`` field ``Method`` menu change the setting to ``DHCP enabled``
   in stead of the default ``First DHCP, then static IP``
   so that the BMC does not fall back to an unreachable private IP-address!
 
@@ -123,14 +121,18 @@ Modify the ``DNS and DDNS`` settings:
 
 * Disable ``Use DNS to discover Lenovo XClarity Administrator``.
   Note: If your network has a DNS server configured to advertise the address of a *Lenovo XClarity Administrator* (LXCA_) instance.
-  Lenovo offers a 90 days trial license for LXCA_.
-  The BMC will periodically search each DNS server for SRV records defined as: ``_lxca._tcp``.
+  Lenovo offers a **90 days trial license** for LXCA_.
+  The BMC will periodically search each DNS server for SRV records defined as: ``_lxca._tcp`` in your DNS domain.
   If an LXCA_ instance is found, the BMC will attempt to announce its presence to the selected address of LXCA_ instance.
 
 * When done press ``Apply``.
 
+.. _MAC_address: http://en.wikipedia.org/wiki/MAC_address
 .. _DDNS: https://en.wikipedia.org/wiki/Dynamic_DNS
 .. _LXCA: https://sysmgt.lenovofiles.com/help/index.jsp?topic=%2Fcom.lenovo.lxca.doc%2Flxca_overview.html
+
+IPMI over Lan
+...................
 
 In ``Service Enablement and Port Assignment`` enable the ``IPMI over LAN``.
 The web GUI says::
@@ -148,7 +150,6 @@ Optional: If your server is actually up and running a Linux OS,
 you can also use OneCLI_ to configure BMC network parameters,
 see the :ref:`XClarity_Essentials_OneCLI` page.
 
-.. _MAC_address: http://en.wikipedia.org/wiki/MAC_address
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
 
 BMC Security
