@@ -110,7 +110,7 @@ You may change the ``BMC Configuration->Network`` settings:
   Note that the ports' MAC_address_ are different for the different Ethernet ports!
 
 * Select ``Obtain Hostname from DHCP``.
-  Alternatively, change the ``Host Name`` field to the BMC's DNS name. 
+  Alternatively, change the ``Host Name`` field to the BMC's DNS_ name. 
 
 * In the ``Ethernet Configuration`` field ``Method`` menu change the setting to ``DHCP enabled``
   in stead of the default ``First DHCP, then static IP``
@@ -122,15 +122,17 @@ You may change the ``BMC Configuration->Network`` settings:
 
 Modify the ``DNS and DDNS`` settings:
 
-* Change DNS ``Preferred address type`` to ``IPv4``.
+* Change DNS_ ``Preferred address type`` to ``IPv4``.
 
 * Change DDNS_ to ``Disabled``.
 
 * Disable ``Use DNS to discover Lenovo XClarity Administrator``.
-  Note: If your network has a DNS server configured to advertise the address of a *Lenovo XClarity Administrator* (LXCA_) instance.
-  Lenovo offers a **90 days trial license** for LXCA_.
-  The BMC will periodically search each DNS server for SRV records defined as: ``_lxca._tcp`` in your DNS domain.
+
+  By default the BMC will periodically search DNS_ for SRV_ records defined as: ``_lxca._tcp`` in your DNS_ domain.
   If an LXCA_ instance is found, the BMC will attempt to announce its presence to the selected address of LXCA_ instance.
+
+  Note: If your network has a DNS_ server configured to advertise the address of a *Lenovo XClarity Administrator* (LXCA_) instance.
+  Lenovo offers a **90 days trial license** for LXCA_.
 
 * When done press ``Apply``.
 
@@ -141,6 +143,8 @@ see the :ref:`XClarity_Essentials_OneCLI` page.
 .. _MAC_address: http://en.wikipedia.org/wiki/MAC_address
 .. _DDNS: https://en.wikipedia.org/wiki/Dynamic_DNS
 .. _LXCA: https://sysmgt.lenovofiles.com/help/index.jsp?topic=%2Fcom.lenovo.lxca.doc%2Flxca_overview.html
+.. _DNS: https://en.wikipedia.org/wiki/Domain_Name_System
+.. _SRV_record: https://en.wikipedia.org/wiki/SRV_record
 
 IPMI over Lan
 ...................
