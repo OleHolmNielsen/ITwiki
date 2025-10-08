@@ -56,6 +56,9 @@ or a replacement motherboard in an existing server.
 The BMC setup is accessed via the physical console or BMC web GUI.
 Login with the above credentials.
 
+Note: These settings were made with XCC/BMC firmware versions dated from the fall of 2025.
+Older or newer firmwares may behave slightly differently.
+
 BMC user configuration
 ------------------------
 
