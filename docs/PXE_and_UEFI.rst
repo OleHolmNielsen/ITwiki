@@ -251,11 +251,12 @@ Automated network installation with pxeconfig
 =============================================
 
 You can automate the PXE_ network booting process completely using the pxeconfig_toolkit_ written by Bas van der Vlies.
-Download the pxeconfig_toolkit_ and read the 
-`pxeconfig installation instructions <https://gitlab.com/surfsara/pxeconfig/-/blob/master/INSTALL>`_. 
+Download the pxeconfig_toolkit_ and read the pxeconfig_installation_ page.
 
 **NOTE:** We assume throughout the use of client UEFI_ booting,
 since the old BIOS_ booting is more or less deprecated.
+
+.. _pxeconfig_installation: https://gitlab.com/surfsara/pxeconfig/-/wikis/installation
 
 Installation on EL Linux
 ----------------------------
@@ -285,7 +286,7 @@ Open port 6611 in the firewall::
 
   firewall-cmd --permanent --zone=public --add-port=6611/tcp --reload
 
-Now setup the pxeconfigd_ service with Systemd_::
+After installation setup the pxeconfigd_ service with Systemd_::
 
   restorecon -v /usr/local/sbin/pxeconfigd
   cp /usr/local/share/doc/pxeconfig/examples/pxeconfigd@.socket /etc/systemd/system/
