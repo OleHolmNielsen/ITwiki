@@ -94,6 +94,13 @@ Therefore a complicated procedure is required for the user name change:
 
 .. _OneCLI: https://support.lenovo.com/us/en/solutions/ht116433-lenovo-xclarity-essentials-onecli-onecli
 
+BMC Security
+--------------
+
+You may change the ``BMC Configuration`` ``Security`` settings:
+
+* If desired set the ``IPMI SEL Log Wrapping`` to ``Enabled``.
+
 BMC network settings
 ----------------------
 
@@ -151,13 +158,6 @@ you can also use OneCLI_ to configure BMC network parameters,
 see the :ref:`XClarity_Essentials_OneCLI` page.
 
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
-
-BMC Security
---------------
-
-You may change the ``BMC Configuration`` ``Security`` settings:
-
-* If desired set the ``IPMI SEL Log Wrapping`` to ``Enabled``.
 
 Configuration using the console
 ==================================
