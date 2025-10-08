@@ -169,9 +169,7 @@ In the BMC GUI you may also press ``Quick Actions`` and select the *Power Action
 UEFI Setup
 ----------------
 
-Use the console to configure the ``UEFI setup``.
-
-Go to the menu ``UEFI Setup``:
+In the console go to the menu ``UEFI Setup``:
 
 * In ``System Settings -> Processors`` select Disable SMT_ Mode (*Symmetric Multithreading*) aka Hyperthreading_.
 
