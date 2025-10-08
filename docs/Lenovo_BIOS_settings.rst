@@ -178,7 +178,9 @@ UEFI Setup
 
 In the console go to the menu ``UEFI Setup``:
 
-* In ``System Settings -> Processors`` select Disable SMT_ Mode (*Symmetric Multithreading*) aka Hyperthreading_.
+* In ``System Settings -> Processors`` select Disable SMT_ Mode (*Symmetric Multithreading*) aka Hyperthreading_ 
+  for HPC compute nodes.
+  For general IT loads you may keep the default SMT_ Mode setting.
 
 * In ``System Settings -> Network -> Network Stack Settings`` you probably want to Disable ``IPv6 PXE Support``.
 
