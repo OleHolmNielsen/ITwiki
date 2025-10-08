@@ -131,7 +131,7 @@ Modify the ``DNS and DDNS`` settings:
 
 * Disable ``Use DNS to discover Lenovo XClarity Administrator``.
 
-  Explanation: By default the BMC will periodically search DNS_ for a SRV_ record ``_lxca._tcp`` in your DNS_ domain.
+  Explanation: By default the BMC will periodically search DNS_ for a SRV_record_ ``_lxca._tcp`` in your DNS_ domain.
   If an LXCA_ instance is found, the BMC will attempt to announce its presence to the selected address of LXCA_ instance.
 
   Note: Your network may have a DNS_ configuration which advertises the address of a *Lenovo XClarity Administrator* (LXCA_) instance.
