@@ -414,12 +414,14 @@ Automated installation using Anaconda_ is possible with UEFI_ as well as PXE_ le
 In the above ``grub.cfg`` file use the inst.ks_ parameter to specify the location of a Kickstart_file_.
 
 For example, the following menu item may be added to ``grub.cfg`` to download a Kickstart_file_ ``ks-almalinux-8.10-minimal-x86_64.cfg``
-from the NFS_ (version 3) server at IP address ``<server-IP>``::
+from the NFS_ (version 3) server at IP address ``10.10.10.3``::
 
   menuentry 'AlmaLinux 8.10 minimal Kickstart' --class centos --class gnu-linux --class gnu --class os --unrestricted {
-    linuxefi (tftp)/AlmaLinux-8.10-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:<server-IP>:/u/kickstart/ks-almalinux-8.10-minimal-x86_64.cfg
+    linuxefi (tftp)/AlmaLinux-8.10-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:10.10.10.3:/u/kickstart/ks-almalinux-8.10-minimal-x86_64.cfg
     initrdefi (tftp)/AlmaLinux-8.10-x86_64/initrd.img
   }
+
+Some example files can be found in https://github.com/OleHolmNielsen/ansible/tree/master/roles/pxeconfigd/files
 
 A Legacy PXE_ BIOS_ boot file ``/tftpboot/pxelinux.cfg/default`` example using the same Kickstart_file_ is::
 
