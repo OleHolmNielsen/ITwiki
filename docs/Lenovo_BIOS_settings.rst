@@ -104,6 +104,10 @@ You may change the ``BMC Configuration->Security`` settings:
 
 * If desired set the ``IPMI SEL Log Wrapping`` to ``Enabled``.
 
+While this is theoretically a security risk,
+we prefer to store all the latest IPMI SEL Log events even if the Log has become full,
+so Log wrapping is preferres.
+
 BMC network settings
 ----------------------
 
