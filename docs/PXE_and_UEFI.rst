@@ -35,6 +35,75 @@ See also our network :ref:`PXE-booting` page for Linux OS installation, and also
 .. _NFS: https://en.wikipedia.org/wiki/Network_File_System
 .. _EPEL: https://fedoraproject.org/wiki/EPEL
 
+=======================================================================================================
+
+UEFI network boot process
+=========================
+
+In this section we describe how a computer doing an UEFI_ PXE_ boot will download a GRUB2_ bootfile
+from the network server and execute it.
+Please note:
+
+- This GRUB2_ information has been copied from the local Linux ``grub.html`` manual's `Network` section in ``/usr/share/doc/grub2-common/grub.html``
+  because the `original manual <https://www.gnu.org/software/grub/manual/grub/html_node/Network.html>`_ from `gnu.org` is frequently inaccessible.
+  Make sure that the package ``grub2-common`` containing the ``grub.html`` file has been installed on your PC.
+
+- The ``grub.cfg`` file is placed in the same directory as the path output by ``grub-mknetdir`` hereafter referred to as ``(FWPATH)``.
+  Note: Our setup uses ``FWPATH=/tftpboot/uefi``.
+
+The PXE_ bootloader image ``/tftpboot/uefi/BOOTX64.EFI`` executing in the computer's NIC_ adapter
+will search for GRUB2_ configuration files in order using the following rules,
+where the appended value corresponds to a value on the client machine::
+
+  (FWPATH)/grub.cfg-(UUID OF NIC)
+  (FWPATH)/grub.cfg-(MAC ADDRESS OF NIC)
+  (FWPATH)/grub.cfg-(IPv4 OR IPv6 ADDRESS)
+  (FWPATH)/grub.cfg
+
+Hint: Use the ``gethostip`` command from the syslinux_ RPM package to convert hostnames and IP-addresses to hexadecimal, for example::
+
+  $ gethostip -f s001
+  s001.(domainname) 10.2.130.21 0A028215
+  $ gethostip -x s001
+  0A028215
+
+The client will only attempt to look up an IPv6_ address config once, however, it will try the IPv4_ address multiple times.
+The first file in this list which can be downloaded successfully will be used for network booting.
+The concrete example below shows what would happen under the IPv4_ case:
+
+* UUID_: 7726a678-7fc0-4853-a4f6-c85ac36a120a
+* MAC_address_:  52:54:00:ec:33:81
+* IP_address_: 10.0.0.130 (Hexadecimal_ digits: 0A000082)
+
+The GRUB2_ bootloader will attempt TFTP_ download of this list of configuration files in order::
+
+  (FWPATH)/grub.cfg-7726a678-7fc0-4853-a4f6-c85ac36a120a
+  (FWPATH)/grub.cfg-52-54-00-ec-33-81
+  (FWPATH)/grub.cfg-0A000082
+  (FWPATH)/grub.cfg-0A00008
+  (FWPATH)/grub.cfg-0A0000
+  (FWPATH)/grub.cfg-0A000
+  (FWPATH)/grub.cfg-0A00
+  (FWPATH)/grub.cfg-0A0
+  (FWPATH)/grub.cfg-0A
+  (FWPATH)/grub.cfg-0
+  (FWPATH)/grub.cfg
+
+After GRUB2_ has started, files on the TFTP server will be accessible via the ``(tftp)`` device.
+
+The server IP_address_ can be controlled by changing the ``(tftp)`` device name to ``(tftp,server-ip)``.
+Note that this should be changed both in the prefix and in any references to the device name in the configuration file.
+
+.. _IPv4: http://en.wikipedia.org/wiki/Ipv4
+.. _IPv6: http://en.wikipedia.org/wiki/Ipv6
+.. _IP_address: https://en.wikipedia.org/wiki/IP_address
+.. _Ethernet: https://en.wikipedia.org/wiki/Ethernet
+.. _NIC: https://en.wikipedia.org/wiki/Network_interface_controller
+.. _MAC_address: https://en.wikipedia.org/wiki/MAC_address
+.. _UUID: https://en.wikipedia.org/wiki/Universally_unique_identifier
+.. _Hexadecimal: https://en.wikipedia.org/wiki/Hexadecimal
+.. _syslinux: https://en.wikipedia.org/wiki/SYSLINUX
+
 =====================================================================================================
 
 Setting up the DHCP, TFTP and PXE services
@@ -674,72 +743,3 @@ Some useful command options (see the efibootmgr_ page)::
         -O | --delete-bootorder   delete BootOrder
 
 .. _efibootmgr: https://github.com/rhboot/efibootmgr
-
-=======================================================================================================
-
-UEFI network boot process
-=========================
-
-In this section we describe how a computer doing an UEFI_ PXE_ boot will download a GRUB2_ bootfile
-from the network server and execute it.
-Please note:
-
-- This GRUB2_ information has been copied from the local Linux ``grub.html`` manual's `Network` section in ``/usr/share/doc/grub2-common/grub.html``
-  because the `original manual <https://www.gnu.org/software/grub/manual/grub/html_node/Network.html>`_ from `gnu.org` is frequently inaccessible.
-  Make sure that the package ``grub2-common`` containing the ``grub.html`` file has been installed on your PC.
-
-- The ``grub.cfg`` file is placed in the same directory as the path output by ``grub-mknetdir`` hereafter referred to as ``(FWPATH)``.
-  Note: Our setup uses ``FWPATH=/tftpboot/uefi``.
-
-The PXE_ bootloader image ``/tftpboot/uefi/BOOTX64.EFI`` executing in the computer's NIC_ adapter
-will search for GRUB2_ configuration files in order using the following rules,
-where the appended value corresponds to a value on the client machine::
-
-  (FWPATH)/grub.cfg-(UUID OF NIC)
-  (FWPATH)/grub.cfg-(MAC ADDRESS OF NIC)
-  (FWPATH)/grub.cfg-(IPv4 OR IPv6 ADDRESS)
-  (FWPATH)/grub.cfg
-
-Hint: Use the ``gethostip`` command from the syslinux_ RPM package to convert hostnames and IP-addresses to hexadecimal, for example::
-
-  $ gethostip -f s001
-  s001.(domainname) 10.2.130.21 0A028215
-  $ gethostip -x s001
-  0A028215
-
-The client will only attempt to look up an IPv6_ address config once, however, it will try the IPv4_ address multiple times.
-The first file in this list which can be downloaded successfully will be used for network booting.
-The concrete example below shows what would happen under the IPv4_ case:
-
-* UUID_: 7726a678-7fc0-4853-a4f6-c85ac36a120a
-* MAC_address_:  52:54:00:ec:33:81
-* IP_address_: 10.0.0.130 (Hexadecimal_ digits: 0A000082)
-
-The GRUB2_ bootloader will attempt TFTP_ download of this list of configuration files in order::
-
-  (FWPATH)/grub.cfg-7726a678-7fc0-4853-a4f6-c85ac36a120a
-  (FWPATH)/grub.cfg-52-54-00-ec-33-81
-  (FWPATH)/grub.cfg-0A000082
-  (FWPATH)/grub.cfg-0A00008
-  (FWPATH)/grub.cfg-0A0000
-  (FWPATH)/grub.cfg-0A000
-  (FWPATH)/grub.cfg-0A00
-  (FWPATH)/grub.cfg-0A0
-  (FWPATH)/grub.cfg-0A
-  (FWPATH)/grub.cfg-0
-  (FWPATH)/grub.cfg
-
-After GRUB2_ has started, files on the TFTP server will be accessible via the ``(tftp)`` device.
-
-The server IP_address_ can be controlled by changing the ``(tftp)`` device name to ``(tftp,server-ip)``.
-Note that this should be changed both in the prefix and in any references to the device name in the configuration file.
-
-.. _IPv4: http://en.wikipedia.org/wiki/Ipv4
-.. _IPv6: http://en.wikipedia.org/wiki/Ipv6
-.. _IP_address: https://en.wikipedia.org/wiki/IP_address
-.. _Ethernet: https://en.wikipedia.org/wiki/Ethernet
-.. _NIC: https://en.wikipedia.org/wiki/Network_interface_controller
-.. _MAC_address: https://en.wikipedia.org/wiki/MAC_address
-.. _UUID: https://en.wikipedia.org/wiki/Universally_unique_identifier
-.. _Hexadecimal: https://en.wikipedia.org/wiki/Hexadecimal
-.. _syslinux: https://en.wikipedia.org/wiki/SYSLINUX
