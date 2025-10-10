@@ -173,6 +173,9 @@ When using the Linux FreeIPMI_ CLI commands use the `-I CIPHER-SUITE-ID` option,
 Configuration using the console
 ==================================
 
+While many settings can be performed in the BMC Web GUI,
+processor and boot UEFI_ settings must be configured in the system console.
+
 The BMC GUI has a ``Remote Console`` menu to open a console in a new browser tab.
 Press ``F1`` during start-up to enter the BIOS and firmware setup menus.
 In the BMC GUI you may also press ``Quick Actions`` and select the *Power Action* ``Boot Server to System Setup``.
