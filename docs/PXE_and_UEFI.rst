@@ -331,15 +331,6 @@ Installation of pxeconfig on EL Linux
 -----------------------------------------
 
 See the pxeconfig_installation_ page.
-Briefly, the installation steps for EL8/EL9 Linux are::
-
-  dnf install autoconf make gcc telnet 
-  tar xf pxeconfig-5.1.3.tar.gz
-  cd pxeconfig-5.1.3/
-  /usr/bin/autoconf
-  ./configure --prefix=/usr/local
-  make install DESTDIR=/
-
 Configure the default boot method as UEFI_ in ``/usr/local/etc/pxeconfig.conf``::
 
   [DEFAULT]
@@ -348,26 +339,17 @@ Configure the default boot method as UEFI_ in ``/usr/local/etc/pxeconfig.conf``:
 This configures the pxeconfig_ command to create ``grub.cfg`` files in the ``/tftpboot/uefi/`` directory
 which was created in the :ref:`create_grub.cfg` section.
 
-Add the pxeconfigd_ service to the services_ file ``/etc/services``::
-
-  pxeconfigd 6611/tcp   # pxeconfig daemon
-
-Open port 6611 in the firewall::
+Having added the port 6611 pxeconfigd_ service to the services_ file ``/etc/services``,
+you must also open port 6611 in the firewall::
 
   firewall-cmd --permanent --zone=public --add-port=6611/tcp --reload
 
-After installation setup the pxeconfigd_ service with Systemd_::
+Setup the pxeconfigd_ service with Systemd_.
+Note that it is ``pxeconfigd.socket`` which handles the pxeconfigd_ service,
+similar to the normal telnet_ service, and not the ``.service`` file.
+Remember to set the SELinux_ context::
 
   restorecon -v /usr/local/sbin/pxeconfigd
-  cp /usr/local/share/doc/pxeconfig/examples/pxeconfigd@.socket /etc/systemd/system/
-  cp /usr/local/share/doc/pxeconfig/examples/pxeconfigd@.service /etc/systemd/system/
-  systemctl daemon-reload
-  systemctl enable pxeconfigd.socket
-  systemctl start pxeconfigd.socket
-
-Note that it is ``pxeconfigd.socket`` which handles the pxeconfigd_ service,
-similar to the normal telnet_ service,
-and not the ``.service`` file.
 
 .. _pxeconfig_toolkit: https://gitlab.com/surfsara/pxeconfig
 .. _pxeconfigd: https://gitlab.com/surfsara/pxeconfig/-/blob/master/src/pxeconfigd.py
@@ -376,6 +358,7 @@ and not the ``.service`` file.
 .. _services: https://man7.org/linux/man-pages/man5/services.5.html
 .. _telnet: https://en.wikipedia.org/wiki/Telnet
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
+.. _SELinux: http://selinuxproject.org/page/Main_Page
 
 Hexadecimally encoded IP-addresses
 ---------------------------------------
