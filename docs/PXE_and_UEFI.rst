@@ -358,7 +358,7 @@ Remember to set the SELinux_ context::
 .. _services: https://man7.org/linux/man-pages/man5/services.5.html
 .. _telnet: https://en.wikipedia.org/wiki/Telnet
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
-.. _SELinux: http://selinuxproject.org/page/Main_Page
+.. _SELinux: https://en.wikipedia.org/wiki/Security-Enhanced_Linux
 
 Hexadecimally encoded IP-addresses
 ---------------------------------------

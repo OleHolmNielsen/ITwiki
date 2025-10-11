@@ -153,13 +153,12 @@ Either reboot the server, or set *Permissive* mode immediately using this comman
 
   setenforce Permissive
 
-.. _SELinux: https://wiki.centos.org/HowTos/SELinux
-
 See the man-page httpd_selinux_ for information about Apache and SELinux.
 
-.. _httpd_selinux: https://fedoraproject.org/wiki/SELinux/apache
-
 Warning messages from SELinux_ will appear in the system syslog ``/var/log/messages``.
+
+.. _SELinux: https://en.wikipedia.org/wiki/Security-Enhanced_Linux
+.. _httpd_selinux: https://fedoraproject.org/wiki/SELinux/apache
 
 Configuring NeDi for secure SELinux operation
 .............................................

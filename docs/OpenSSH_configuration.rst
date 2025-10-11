@@ -203,12 +203,12 @@ If your system runs SELinux_, set the SELinux_ security context::
 
   chcon -v --type=etc_t /etc/ssh/moduli
 
-.. _SELinux: https://en.wikipedia.org/wiki/Security-Enhanced_Linux
-
 Please verify the correct SELinux_ settings::
 
   # ls -Z /etc/ssh/moduli 
   -rw-r--r--. root root system_u:object_r:etc_t:s0       /etc/ssh/moduli
+
+.. _SELinux: https://en.wikipedia.org/wiki/Security-Enhanced_Linux
 
 Generating user keys
 ====================

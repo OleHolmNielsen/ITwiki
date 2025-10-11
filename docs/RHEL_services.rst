@@ -843,8 +843,7 @@ On a Samba server open the ports in the firewall::
   firewall-cmd --reload
 
 .. _smb.conf: https://www.samba.org/samba/docs/man/manpages-3/smb.conf.5.html
-.. _SELinux: http://selinuxproject.org/page/Main_Page
-
+.. _SELinux: https://en.wikipedia.org/wiki/Security-Enhanced_Linux
 
 Apple Time Machine support
 --------------------------------
