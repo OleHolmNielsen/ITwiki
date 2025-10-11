@@ -327,10 +327,11 @@ since the old BIOS_ booting is more or less deprecated.
 
 .. _pxeconfig_installation: https://gitlab.com/surfsara/pxeconfig/-/wikis/installation
 
-Installation on EL Linux
-----------------------------
+Installation of pxeconfig on EL Linux
+-----------------------------------------
 
-Briefly, the installation steps for EL Linux are::
+See the pxeconfig_installation_ page.
+Briefly, the installation steps for EL8/EL9 Linux are::
 
   dnf install autoconf make gcc telnet 
   tar xf pxeconfig-5.1.3.tar.gz
