@@ -208,25 +208,52 @@ The server's firmware versions can be displayed by::
 This command must be executed Out-of-band_ because OneCLI_ refuses to work locally on non-supported OSes (bug discovered August 2024).
 
 Updating a single firmware file on a single server can be performed with OneCLI_, but the no working examples have been found in the OneCLI_User_Guide_.
-We have tested this procedure:
 
-1. Unpack the firmware payload zip file in a dedicated directory (example `XCC` firmware file `lnvgy_fw_xcc_qgx330d-5.10_anyos_comp.zip`)::
+We have tested these procedures:
+
+V3/V4 server firmware updates
+..............................
+
+In case the firmware is delivered from Data_Center_Support_ as a ZIP_ archive (for V3 and V4servers):
+
+1. Unpack the firmware payload ZIP_ file in a dedicated directory (example `XCC` firmware file `lnvgy_fw_xcc_qgx330d-5.10_anyos_comp.zip`)::
 
      mkdir XCC
      cd XCC
      unzip <somewhere>/lnvgy_fw_xcc_qgx330d-5.10_anyos_comp.zip
 
-   A subdirectory ``payload`` will contain the firmware file.
-   Change the `XCC` directory name for other firmwares such as `UEFI`.
+   A subdirectory ``payload`` will now contain the firmware payload file.
+   Note: Change the ``XCC`` directory name for other firmwares such as `UEFI`.
 
-2. Execute this command::
+2. Execute this command (example filename only)::
 
      onecli update flash --scope individual --dir <somewhere>/XCC --nocompare --includeid lnvgy_fw_xcc_qgx330d-5.10_anyos_comp --output /tmp
 
-Note that the firmware file extension must be omitted,
-and that output logs will be written to `/tmp` (useful if the `XCC` directory is on a remote file server)..
+V2 server firmware updates
+..............................
 
-Special notes:
+In case the firmware is delivered only as a Lenovo-special compressed ``.uxz`` file (for V2 servers):
+
+1. Download **both** the firmware payload ``.uxz`` file as well as the accompanying ``.xml`` file from Data_Center_Support_.
+
+2. Copy the firmware payload ``.uxz`` and the ``.xml`` file to a dedicated directory, for example::
+
+     mkdir XCC
+     cd XCC
+
+   Note: Change the ``XCC`` directory name for other firmwares such as `UEFI`.
+
+3. Execute this command (example filename only)::
+
+     onecli update flash --scope individual --dir <somewhere>/XCC --nocompare --includeid lnvgy_fw_xcc_tgbt58d-6.10_anyos_noarch -- output /tmp
+
+Firmware update notes
+.............................
+
+* The firmware file extension must be omitted.
+* Output logs will be written to `/tmp` (useful if the `XCC` directory is on a remote file server)..
+
+Special notes on booting the server:
 
 * When the XCC (BMC) is updated it will be rebooted as part of the firmware update.
 
@@ -245,6 +272,9 @@ See also:
 
 * `How to use Lenovo XClarity Essentials OneCLI to locally update your system <https://support.lenovo.com/us/en/solutions/ht511326-how-to-use-lenovo-xclarity-essentials-onecli-to-locally-update-your-system>`_.
 * *Lenovo XClarity Administrator Quick Start Guide* `Updating firmware and software <https://sysmgt.lenovofiles.com/help/topic/com.lenovo.lxca.doc/lxca_qsg_update_sw_fw.pdf>`_.
+
+.. _ZIP: https://en.wikipedia.org/wiki/ZIP_(file_format)
+.. _Data_Center_Support: https://datacentersupport.lenovo.com/us/en
 
 XCC CLI access using SSH
 ==========================
