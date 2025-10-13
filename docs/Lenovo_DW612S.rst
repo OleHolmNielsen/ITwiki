@@ -18,6 +18,7 @@ Documentation
 * DW612S_User_Guide_.
 * SMM2_ management module SMM2_Users_Guide_.
 * SMM2_ functions and IPMI commands.
+* SMM2_Messages_ and events.
 
 .. _Lenovo_Neptune: https://www.lenovo.com/us/en/servers-storage/neptune/
 .. _DW612S: https://pubs.lenovo.com/dw612s_neptune_enclosure/
@@ -25,6 +26,7 @@ Documentation
 .. _DW612S_User_Guide: https://pubs.lenovo.com/dw612s_neptune_enclosure/dw612s_user_guide.pdf
 .. _SMM2: https://pubs.lenovo.com/mgt_tools_smm2/
 .. _SMM2_Users_Guide: https://pubs.lenovo.com/mgt_tools_smm2/smm2_users_guide.pdf
+.. _SMM2_Messages: https://pubs.lenovo.com/dw612s_neptune_enclosure/messages_introduction
 
 Configuration of the DW612S System Management Module 2 (SMM2_)
 ---------------------------------------------------------------
