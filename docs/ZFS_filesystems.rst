@@ -244,6 +244,7 @@ Check the status of the pools::
 
 .. _zpool-create: https://openzfs.github.io/openzfs-docs/man/master/8/zpool-create.8.html
 .. _zpool-add: https://openzfs.github.io/openzfs-docs/man/master/8/zpool-add.8.html
+.. _zpool-set: https://openzfs.github.io/openzfs-docs/man/master/8/zpool-set.8.html
 .. _RAIDZ: https://www.raidz-calculator.com/raidz-types-reference.aspx
 .. _VDEV: https://www.45drives.com/community/articles/how-zfs-organizes-its-data/
 .. _Hot_spare: https://en.wikipedia.org/wiki/Hot_spare
@@ -602,6 +603,15 @@ Weekly and monthly timer units are provided::
 
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
 
+Hot spare disks
+-------------------
+
+Hot spare disks will **not** be added to the VDEV_ to replace a failed drive by default.
+You MUST enable this feature.
+Set the zpool-set_ ``autoreplace`` feature to on, for example::
+
+  zpool set autoreplace=on <pool-name>
+
 Replacing defective disks
 -------------------------------
 
@@ -621,15 +631,10 @@ You should make a record of the above mapping of WWN_ names to Linux disk device
 Use the zpool-replace_ command to replace a failed disk, for example the old disk ``wwn-0x5000cca232ae3fe0``, by a new one::
 
   zpool replace <pool-name> wwn-0x5000cca232ae3fe0(old) wwn-0x5000cca232af661c(new)
+
+The ``-f`` flag may possibly be required in case of errors such as ``invalid vdev specification``::
+
   zpool replace -f <pool-name> wwn-0x5000cca232ae3fe0(old) wwn-0x5000cca232af661c(new)
-
-The ``-f`` flag may be required in case of errors such as ``invalid vdev specification``.
-
-Hot spare disks will **not** be added to the VDEV_ to replace a failed drive by default.
-You MUST enable this feature.
-Set the ``autoreplace`` feature to on, for example::
-
-  zpool set autoreplace=on <pool-name>
 
 Replacing disks can come with big problems, see 
 `How to force ZFS to replace a failed drive in place <https://alchemycs.com/2019/05/how-to-force-zfs-to-replace-a-failed-drive-in-place/>`_.
