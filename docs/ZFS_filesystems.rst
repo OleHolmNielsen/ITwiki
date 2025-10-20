@@ -618,7 +618,7 @@ Please read the section :ref:`list-disks` above.
 For ZFS_ usage it is recommended to use the permanent hardware-based WWN_ names in stead of the Linux disk device names which are changeable.
 You should make a record of the above mapping of WWN_ names to Linux disk device names.
 
-Use the zpool-replace_ command to replace a failed disk, for example disk ``wwn-0x5000cca232ae3fe0``::
+Use the zpool-replace_ command to replace a failed disk, for example the old disk ``wwn-0x5000cca232ae3fe0``, by a new one::
 
   zpool replace <pool-name> wwn-0x5000cca232ae3fe0(old) wwn-0x5000cca232af661c(new)
   zpool replace -f <pool-name> wwn-0x5000cca232ae3fe0(old) wwn-0x5000cca232af661c(new)
