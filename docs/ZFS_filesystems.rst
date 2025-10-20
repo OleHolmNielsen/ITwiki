@@ -438,7 +438,7 @@ ZFS_ filesystems can be unmounted and mounted manually by zfs_mount_ commands::
 ZFS Snapshots and clones
 ------------------------
 
-zfs_snapshot_ is similar to a Linux LVM snapshot, see Snapshots_and_clones_.
+zfs-snapshot_ is similar to a Linux LVM snapshot, see Snapshots_and_clones_.
 
 You can list snapshots by two methods::
 
@@ -458,7 +458,7 @@ To destroy a snapshot use zfs-destroy_::
 
 **WARNING:** The zfs-destroy_ command will **destroy your ZFS volume without any warnings!!**.
 
-It is recommended to create a zfs_snapshot_ and use zfs-hold_ to prevent zfs-destroy_ from destroying accidentally, 
+It is recommended to create a zfs-snapshot_ and use zfs-hold_ to prevent zfs-destroy_ from destroying accidentally, 
 see `prevent dataset/zvol from accidental destroy  <https://www.reddit.com/r/zfs/comments/suh9nx/prevent_datasetzvol_from_accidental_destroy/>`_.
 
 For example create a snapshot and hold it::
