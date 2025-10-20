@@ -207,9 +207,8 @@ The server's firmware versions can be displayed by::
 
 This command must be executed Out-of-band_ because OneCLI_ refuses to work locally on non-supported OSes (bug discovered August 2024).
 
-Updating a single firmware file on a single server can be performed with OneCLI_, but the no working examples have been found in the OneCLI_User_Guide_.
-
-We have tested these procedures:
+Updating a single firmware file on a single server can be performed with OneCLI_, but no working examples have been found in the OneCLI_User_Guide_.
+However, we have tested these procedures successfully:
 
 V3/V4 server firmware updates
 ..............................
