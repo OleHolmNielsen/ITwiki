@@ -99,14 +99,11 @@ There does not seem to be any module for zpool_ management, however.
 
 .. _Ansible: https://www.ansible.com/
 
-List disks in the system
+Identifying disks in the system
 =================================
 
 The disks in the system must be identified.
-The following commands are useful for listing disk block devices::
-
-  lsblk
-  lsscsi --wwn --size
+Please read the section :ref:`list-disks` below.
 
 List HPE server's disks
 -----------------------------
@@ -158,9 +155,9 @@ Trying out ZFS
 
 Aaron_Toponce_ 's page has some initial examples.
 
-Create a simple zpool_ named *tank* with 4 unused drives (sde sdf sdg sdh)::
+Create a simple zpool_ named *tank* with 4 unused drives (wwn-0x5000cca232ae2514 wwn-0x5000cca232aaef30 wwn-0x5000cca232adc8ac wwn-0x5000cca232add4cc)::
 
-  zpool create tank sde sdf sdg sdh
+  zpool create tank wwn-0x5000cca232ae2514 wwn-0x5000cca232aaef30 wwn-0x5000cca232adc8ac wwn-0x5000cca232add4cc
   zpool status tank
   df -Ph /tank
 
@@ -170,11 +167,11 @@ Define the mount point for the dataset by adding this option::
 
 A mirrored pool where all data are mirrored 4 times::
 
-  zpool create tank mirror sde sdf sdg sdh
+  zpool create tank mirror wwn-0x5000cca232ae2514 wwn-0x5000cca232aaef30 wwn-0x5000cca232adc8ac wwn-0x5000cca232add4cc
 
 A RAID 0+1 pool with 2+2 disks::
 
-  zpool create tank mirror sde sdf mirror sdg sdh
+  zpool create tank mirror wwn-0x5000cca232ae2514 wwn-0x5000cca232aaef30 mirror wwn-0x5000cca232adc8ac wwn-0x5000cca232add4cc 
 
 .. _zpool: https://openzfs.github.io/openzfs-docs/man/8/zpool.8.html
 
@@ -190,6 +187,8 @@ Configuring ZFS
 ===================
 
 The sections below describe how we have configured ZFS_.
+
+.. _list-disks:
 
 List disks in the system
 ---------------------------
@@ -215,7 +214,7 @@ Read the zpool_concepts_ page about VDEV_ devices, Hot_spare_ etc.
 
 To setup a RAIDZ_ pool ``<poolname>`` with RAIDZ-1, we use zpool-create_ with the "raidz1" VDEV_, for example::
 
-  zpool create <poolname> raidz1 sde sdf sdg
+  zpool create <poolname> raidz1 wwn-0x5000cca232ae2514 wwn-0x5000cca232aaef30 wwn-0x5000cca232adc8ac 
 
 The recommended disk naming with WWN_ names
 must include the ``wwn-`` string before the disks' WWN_ names, for example:::
@@ -224,20 +223,20 @@ must include the ``wwn-`` string before the disks' WWN_ names, for example:::
 
 To setup a RAIDZ_ pool with RAIDZ-2, we use the "raidz2" VDEV_::
 
-  zpool create <poolname> raidz2 sde sdf sdg sdh
+  zpool create <poolname> raidz2 wwn-0x5000cca232ae2514 wwn-0x5000cca232aaef30 wwn-0x5000cca232adc8ac wwn-0x5000cca232add4cc
 
 You can also create a pool with multiple VDEV_ devices, so that each VDEV_ doesn't contain too many physical disks,
 for example::
 
-  zpool create <poolname>   raidz2 sde sdf sdg sdh   raidz2 sdi sdj sdk sdl
+  zpool create <poolname>   raidz2 wwn-0x5000cca232ae2514 wwn-0x5000cca232aaef30 wwn-0x5000cca232adc8ac wwn-0x5000cca232add4cc   raidz2 wwn-0x5000cca232add7e0 wwn-0x5000cca232ae3878 wwn-0x5000cca232ae0c14 wwn-0x5000cca232aa1dec
 
 or add a new VDEV_ device with zpool-add_ to an existing pool::
 
-  zpool add <poolname>   raidz2 sdi sdj sdk sdl
+  zpool add <poolname>   raidz2 wwn-0x5000cca232add7e0 wwn-0x5000cca232ae3878 wwn-0x5000cca232ae0c14 wwn-0x5000cca232aa1dec
 
 You may even designate one or more Hot_spare_ disks to the pool, for example a single spare disk ``sdm``::
 
-  zpool create <poolname>   raidz2 sde sdf sdg sdh   raidz2 sdi sdj sdk sdl   spare sdm
+  zpool create <poolname>   raidz2 wwn-0x5000cca232ae2514 wwn-0x5000cca232aaef30 wwn-0x5000cca232adc8ac wwn-0x5000cca232add4cc   raidz2 wwn-0x5000cca232add7e0 wwn-0x5000cca232ae3878 wwn-0x5000cca232ae0c14 wwn-0x5000cca232aa1dec   spare sdm
 
 Check the status of the pools::
 
@@ -269,11 +268,15 @@ Add SLOG and ZIL disks
 
 This section shows how to configure an L2ARC_cache_ on 2 disk devices.
 
-Assume that the 2 disks ``/dev/sdb`` and ``/dev/sdc`` will be used.
+To add 2 disks, for example ``sdb`` and ``sdc``, to the SLOG, first identify the device WWN_ names::
+
+  ls -l /dev/disk/by-id/* | egrep 'sdb|sdc' | grep wwn
+
+Assume that the 2 disks ``wwn-0x58ce38ee201fe7b5`` (sdb) and ``wwn-0x600508b1001c45bf78142b67cda9c82b`` (sdc) will be used.
 First partition the disks::
 
   parted /dev/sdb unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
-  parted /dev/sdc unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
+  parted /dev/sdb unit s mklabel gpt mkpart primary 2048 4G mkpart primary 4G 120G
 
 Note: Perhaps it is necessary to use the ``parted`` command line and make individual commands like::
 
@@ -286,10 +289,6 @@ Note: Perhaps it is necessary to use the ``parted`` command line and make indivi
   (parted) quit
 
 Use ``/dev/disk/by-id/*`` disk names with ZFS_ in stead of ``/dev/sd*`` which could become renamed.
-
-To add 2 disks, for example ``/dev/sdb`` and ``/dev/sdc``, to the SLOG, first identify the device WWN_ names::
-
-  ls -l /dev/disk/by-id/* | egrep 'sdb|sdc' | grep wwn
 
 The disks and their partitions ``partN`` may be listed as in this example::
 
@@ -615,15 +614,14 @@ See the zpool-status_ if any disks have failed::
   zpool status -L       # Display real paths for vdevs resolving all symbolic links
   zpool status -P       # Display full paths for vdevs
 
-The RHEL page `How to rescan the SCSI bus to add or remove a SCSI device without rebooting the computer  <https://access.redhat.com/solutions/3941>`_
-has useful information about ``Adding a Storage Device or a Path``.
-You may scan the system for disk changes using ``/usr/bin/rescan-scsi-bus.sh`` from the `sg3_utils` package.
-Unfortunately, it may sometimes be necessary to reboot the server so that the OS will discover the replaced ``/dev/sd???`` disk device.
+Please read the section :ref:`list-disks` above.
+For ZFS_ usage it is recommended to use the permanent hardware-based WWN_ names in stead of the Linux disk device names which are changeable.
+You should make a record of the above mapping of WWN_ names to Linux disk device names.
 
-Use the zpool-replace_ command to replace a failed disk, for example disk *sde*::
+Use the zpool-replace_ command to replace a failed disk, for example disk *wwn-0x...*::
 
-  zpool replace <pool-name> sde(old) sde(new)
-  zpool replace -f <pool-name> sde(old) sde(new)
+  zpool replace <pool-name> wwn-0x5000cca232ae3fe0(old) wwn-0x5000cca232af661c(new)
+  zpool replace -f <pool-name> wwn-0x5000cca232ae3fe0(old) wwn-0x5000cca232af661c(new)
 
 The ``-f`` flag may be required in case of errors such as ``invalid vdev specification``.
 
@@ -635,6 +633,11 @@ Set the ``autoreplace`` feature to on, for example::
 
 Replacing disks can come with big problems, see 
 `How to force ZFS to replace a failed drive in place <https://alchemycs.com/2019/05/how-to-force-zfs-to-replace-a-failed-drive-in-place/>`_.
+
+The RHEL page `How to rescan the SCSI bus to add or remove a SCSI device without rebooting the computer  <https://access.redhat.com/solutions/3941>`_
+has useful information about ``Adding a Storage Device or a Path``.
+You may scan the system for disk changes using ``/usr/bin/rescan-scsi-bus.sh`` from the `sg3_utils` package.
+Unfortunately, it may sometimes be necessary to reboot the server so that the OS will discover the replaced ``/dev/sd???`` disk device.
 
 .. _zpool-status: https://openzfs.github.io/openzfs-docs/man/8/zpool-status.8.html
 .. _zpool-replace: https://openzfs.github.io/openzfs-docs/man/8/zpool-replace.8.html
