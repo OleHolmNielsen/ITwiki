@@ -111,7 +111,7 @@ since this app does not have the functionality of the proper Outlook_ app!
 Linux E-mail clients
 -----------------------------
 
-We have found some good help pages for Linux E-mail clients:
+We have found some good help pages for Linux E-mail clients, for example Thunderbird_:
 
 * `Microsoft 365 (Thunderbird) - Configure Modern Authentication <https://kb.wisc.edu/helpdesk/page.php?id=102005>`_.
 * `How to Configure Thunderbird for Office 365 Using IMAP (Oauth2) <https://uit.stanford.edu/service/office365/configure/thunderbird-oauth2>`_.
@@ -136,6 +136,34 @@ In all IMAP/SMTP mail clients the following server settings must be used:
     Username: <DTU-initials>@dtu.dk
 
 Authentication of your login will proceed with Azure_MFA_ and the Microsoft_Authenticator_ app on your smartphone.
+
+.. _Thunderbird: https://www.thunderbird.net/en-US/
+
+Safe Links in Microsoft Defender for Office 365
+=================================================
+
+At DTU it was decided (summer 2025) to enable Safe_Links_ in Microsoft Defender for Office 365 which is explained as::
+
+  In organizations with Microsoft Defender for Office 365, Safe Links scanning protects your organization from malicious links that are used in phishing and other attacks.
+  Specifically, Safe Links provides URL scanning and rewriting of inbound email messages during mail flow, and time-of-click verification of URLs and links in email messages, Teams, and supported Office 365 apps.
+  Safe Links scanning occurs in addition to regular anti-spam and anti-malware protection.
+
+In Outlook_ or Outlook_Web_Access_ you can hold the mouse over the Safe_Links_ and the Mouseover_ shows the original link.
+
+.. _Safe_Links: https://learn.microsoft.com/en-us/defender-office-365/safe-links-about
+.. _Mouseover: https://en.wikipedia.org/wiki/Mouseover
+
+Thunderbird unmangle Safe Links
+----------------------------------
+
+Since many users find Safe_Links_ annoying,
+links can be restored to normal links in the Thunderbird_ mail client 
+by installing the add-on Unmangle_Microsoft_ATP_Safelinks_ described as::
+
+  Office 365 Advanced Threat Protection will change all url's in emails to redirect them to an Microsoft filter before opening.
+  This will leak information to microsoft and makes it impossible to see if the original url was safe to open.
+
+.. _Unmangle_Microsoft_ATP_Safelinks: https://addons.thunderbird.net/en-US/thunderbird/addon/unmangle-outlook-safelinks/
 
 Calendar client setup at DTU
 ==================================
