@@ -105,6 +105,8 @@ Identifying disks in the system
 The disks in the system must be identified.
 Please read the section :ref:`list-disks` below.
 
+.. _list-HPE-disks:
+
 List HPE server's disks
 -----------------------------
 
@@ -187,6 +189,9 @@ Configuring ZFS
 ===================
 
 The sections below describe how we have configured ZFS_.
+
+For ZFS_ usage it is recommended to use the permanent hardware-based WWN_ names in stead of the Linux disk device names which are changeable.
+You should make a record of the above mapping of WWN_ names to Linux disk device names.
 
 .. _list-disks:
 
@@ -586,7 +591,7 @@ Scrub and Resilver disks
 --------------------------
 
 With ZFS_ on Linux, detecting and correcting silent data errors is done through scrubbing the disks,
-see the Scrub_and_Resilver_ page.
+see the Scrub_and_Resilver_ or Resilver_ pages.
 
 .. _Scrub_and_Resilver: https://pthree.org/2012/12/11/zfs-administration-part-vi-scrub-and-resilver/
 
@@ -602,6 +607,7 @@ Weekly and monthly timer units are provided::
   systemctl enable zfs-scrub-monthly@<pool-name>.timer --now
 
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
+.. _Resilver: https://docs.oracle.com/cd/E19253-01/819-5461/gbcus/index.html
 
 Hot spare disks
 -------------------
@@ -616,25 +622,13 @@ Replacing defective disks
 -------------------------------
 
 Detecting broken disks is explained in the Scrub_and_Resilver_ page.
-See the zpool-status_ if any disks have failed::
+Check the zpool-status_ if any disks have failed::
 
   zpool status
   zpool status -x       # Only pools with errors
   zpool status -e       # Only VDEVs with errors
   zpool status -L       # Display real paths for vdevs resolving all symbolic links
   zpool status -P       # Display full paths for vdevs
-
-Please read the section :ref:`list-disks` above.
-For ZFS_ usage it is recommended to use the permanent hardware-based WWN_ names in stead of the Linux disk device names which are changeable.
-You should make a record of the above mapping of WWN_ names to Linux disk device names.
-
-Use the zpool-replace_ command to replace a failed disk, for example the old disk ``wwn-0x5000cca232ae3fe0``, by a new one::
-
-  zpool replace <pool-name> wwn-0x5000cca232ae3fe0(old) wwn-0x5000cca232af661c(new)
-
-The ``-f`` flag may possibly be required in case of errors such as ``invalid vdev specification``::
-
-  zpool replace -f <pool-name> wwn-0x5000cca232ae3fe0(old) wwn-0x5000cca232af661c(new)
 
 Replacing disks can come with big problems, see 
 `How to force ZFS to replace a failed drive in place <https://alchemycs.com/2019/05/how-to-force-zfs-to-replace-a-failed-drive-in-place/>`_.
@@ -643,6 +637,76 @@ The RHEL page `How to rescan the SCSI bus to add or remove a SCSI device without
 has useful information about ``Adding a Storage Device or a Path``.
 You may scan the system for disk changes using ``/usr/bin/rescan-scsi-bus.sh`` from the `sg3_utils` package.
 Unfortunately, it may sometimes be necessary to reboot the server so that the OS will discover the replaced ``/dev/sd???`` disk device.
+
+Identify the broken disk
+...........................
+
+Identify the broken (removed) ZFS_ drive's WWN_ name::
+
+  zpool status | grep REMOVED
+    wwn-0x5000cca232ae3fe0    REMOVED      0     0     0
+
+The difficult part is identifying exactly the physical disk slot in the server corresponding to the WWN_ name.
+Please read the section :ref:`list-disks` above, and :ref:`list-HPE-disks` for HPE Proliant servers in particular.
+For example, the disk may be shown as (omit the ``wwn-`` part of the name)::
+
+  lsscsi --wwn --size | grep 0x5000cca232ae3fe0
+  [1:0:54:0] disk HP MB6000FEDAU HPD7 0x5000cca232ae3fe0 /dev/sdbc 6.00TB
+
+Unfortunately, the device name ``/dev/sdbc`` or the bus-id ``[1:0:54:0]`` do not 
+identify the slot in the disk cage unambiguously.
+You have to locate the WWN_ name or device name in the disk controller to identify the disk slot,
+for example :ref:`list-HPE-disks` may show `WWID`::
+
+  physicaldrive 1I:1:55
+    Port: 1I
+    Box: 1
+    Bay: 55
+    ...
+    Serial Number: 1EK2USPH
+    WWID: 5000CCA232AE3FE1
+    Model: HP      MB6000FEDAU
+    ...
+    Disk Name: /dev/sdbc 
+
+**NOTE:** The WWN_ name of a disk can differ the last digit, here 0 and 1, 
+because the disk may have multiple ports,
+so when searching for WWN_ you should omit the last digit.
+
+In this example the ``Disk bay: 55`` contains the defective disk,
+and the disk slot should be identifiable on the disk cage cabinet.
+
+Some storage systems allow you to **blink** the disk LED for easy identification.
+If the disk is completely dead, blinking the two disks left and right allows you to identify the disk in the middle.
+
+Replace the disk drive
+..........................
+
+Obtain a new disk drive of the same size etc. as the defective drive.
+
+**Important:** Take a photo of the disk drive label which should display the WWN_ name, serial number, and size,
+and record this information for reference.
+
+Remove the defective drive from the disk slot.
+**Double check** the WWN_ name, serial number, and size of the removed drive.
+
+Now use the zpool-replace_ command to replace a failed ZFS_ disk,
+for example the old disk ``wwn-0x5000cca232ae3fe0``, by a new one::
+
+  zpool replace <pool-name> wwn-0x5000cca232ae3fe0(old) wwn-0x5000cca232af661c(new)
+
+The ``-f`` flag may possibly be required in case of errors such as ``invalid vdev specification``::
+
+  zpool replace -f <pool-name> wwn-0x5000cca232ae3fe0(old) wwn-0x5000cca232af661c(new)
+
+Now you can see the disk Resilver_ taking place::
+
+  zpool status
+  ...
+  replacing-0                 DEGRADED     0     0     0
+   wwn-0x5000cca232ae3fe0    REMOVED      0     0     0
+   wwn-0x5000cca232af661c    ONLINE       0     0     0  (resilvering)
+  ...
 
 .. _zpool-status: https://openzfs.github.io/openzfs-docs/man/8/zpool-status.8.html
 .. _zpool-replace: https://openzfs.github.io/openzfs-docs/man/8/zpool-replace.8.html
