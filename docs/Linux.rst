@@ -38,4 +38,5 @@ Linux public documentation
 
 Other information:
 
+* :ref:`Email`
 * `Microsoft Defender @ DTU <https://defender.ait.dtu.dk/>`_
