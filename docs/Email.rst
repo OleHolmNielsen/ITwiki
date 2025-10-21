@@ -4,6 +4,11 @@
 E-mail at DTU 
 =========================
 
+.. Contents::
+
+Office365 at DTU
+=====================
+
 **Note:** Since May 2023 DTU users' mailboxes have been migrated to the Azure cloud service Office365_.
 Users must configure their Office365_ DTU account, and using Azure_MFA_ is required for access.
 See the DTU Inside page `Outlook mailboxes will be moved to the Cloud (Exchange Online) <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-service-generelt/mailmigrering-foraar-2023>`_
