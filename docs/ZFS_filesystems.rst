@@ -641,7 +641,7 @@ Unfortunately, it may sometimes be necessary to reboot the server so that the OS
 Identify the broken disk
 ...........................
 
-Identify the broken (removed) ZFS_ drive's WWN_ name::
+Identify the broken (``REMOVED``) ZFS_ drive's WWN_ name::
 
   zpool status | grep REMOVED
     wwn-0x5000cca232ae3fe0    REMOVED      0     0     0
