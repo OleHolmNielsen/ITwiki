@@ -593,7 +593,7 @@ Scrub and Resilver disks
 With ZFS_ on Linux, detecting and correcting silent data errors is done through scrubbing the disks,
 see the Scrub_and_Resilver_ or Resilver_ pages.
 
-.. _Scrub_and_Resilver: https://pthree.org/2012/12/11/zfs-administration-part-vi-scrub-and-resilver/
+.. _Scrub_and_Resilver: https://web.archive.org/web/20230828015540/https://pthree.org/2012/12/11/zfs-administration-part-vi-scrub-and-resilver/
 
 Scrubbing can be made regularly with crontab, for example monthly::
 
@@ -669,8 +669,8 @@ for example :ref:`list-HPE-disks` may show `WWID`::
     ...
     Disk Name: /dev/sdbc 
 
-**NOTE:** The WWN_ name of a disk can differ the last digit, here 0 and 1, 
-because the disk may have multiple ports,
+**NOTE:** The WWN_ name of a disk can differ on the last digit, here 0 and 1,
+because the disk may have multiple ports with different WWN_ names,
 so when searching for WWN_ you should omit the last digit.
 
 In this example the ``Disk bay: 55`` contains the defective disk,
