@@ -688,7 +688,7 @@ Obtain a new disk drive of the same size etc. as the defective drive.
 and record this information for reference.
 
 Remove the defective drive from the disk slot.
-**Double check** the WWN_ name, serial number, and size of the removed drive.
+**Double check** the WWN_ name, serial number, and size of the removed drive and compare with the above ``REMOVED`` drive.
 
 Now use the zpool-replace_ command to replace a failed ZFS_ disk,
 for example the old disk ``wwn-0x5000cca232ae3fe0``, by a new one::
