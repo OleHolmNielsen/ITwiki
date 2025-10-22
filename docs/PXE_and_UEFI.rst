@@ -28,6 +28,7 @@ See also our network :ref:`PXE-booting` page for Linux OS installation, and also
 .. _DHCP_Handbook: https://www.amazon.com/DHCP-Handbook-Ralph-Droms-Ph-D/dp/0672323273
 .. _ISC_KEA: https://www.isc.org/kea/
 .. _UEFI: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface
+.. _UEFI_specification: https://uefi.org/sites/default/files/resources/UEFI_Spec_Final_2.11.pdf
 .. _BIOS: https://en.wikipedia.org/wiki/BIOS
 .. _Legacy_BIOS_boot: https://en.wikipedia.org/wiki/Legacy_mode
 .. _PXE-booting: https://wiki.fysik.dtu.dk/niflheim/PXE-booting
@@ -40,18 +41,12 @@ See also our network :ref:`PXE-booting` page for Linux OS installation, and also
 UEFI network boot process
 =========================
 
-In this section we describe how a computer doing an UEFI_ PXE_ boot will download a GRUB2_ bootfile
-from the network server and execute it.
-Please note:
+In this section we describe how a computer doing an UEFI_ network PXE_ boot will download a bootloader file from the network server and execute it.
+For 64-bit UEFI_ systems the file name convention is ``BOOTX64.EFI``,
+and it is located at the standard path ``/efi/boot/`` on a bootable drive.
+Other CPU architectures are listed in the UEFI_specification_ section 3.5.
 
-- This GRUB2_ information has been copied from the local Linux ``grub.html`` manual's `Network` section in ``/usr/share/doc/grub2-common/grub.html``
-  because the `original manual <https://www.gnu.org/software/grub/manual/grub/html_node/Network.html>`_ from `gnu.org` is frequently inaccessible.
-  Make sure that the package ``grub2-common`` containing the ``grub.html`` file has been installed on your PC.
-
-- The ``grub.cfg`` file is placed in the same directory as the path output by ``grub-mknetdir`` hereafter referred to as ``(FWPATH)``.
-  Note: Our setup uses ``FWPATH=/tftpboot/uefi``.
-
-The PXE_ bootloader image ``/tftpboot/uefi/BOOTX64.EFI`` executing in the computer's NIC_ adapter
+The PXE_ bootloader image ``/tftpboot/uefi/BOOTX64.EFI`` (see below) executing in the computer's UEFI_ capable NIC_ adapter
 will search for GRUB2_ configuration files in order using the following rules,
 where the appended value corresponds to a value on the client machine::
 
@@ -60,12 +55,12 @@ where the appended value corresponds to a value on the client machine::
   (FWPATH)/grub.cfg-(IPv4 OR IPv6 ADDRESS)
   (FWPATH)/grub.cfg
 
-Hint: Use the ``gethostip`` command from the syslinux_ RPM package to convert hostnames and IP-addresses to hexadecimal, for example::
+- Note that this GRUB2_ information has been copied from the local Linux ``grub.html`` manual's `Network` section in ``/usr/share/doc/grub2-common/grub.html``
+  because the `original manual <https://www.gnu.org/software/grub/manual/grub/html_node/Network.html>`_ from `gnu.org` is frequently inaccessible.
+  Make sure that the package containing the ``grub.html`` file has been installed on your PC by ``dnf install grub2-common``.
 
-  $ gethostip -f s001
-  s001.(domainname) 10.2.130.21 0A028215
-  $ gethostip -x s001
-  0A028215
+- The ``grub.cfg`` file is placed in the same directory as the path output by ``grub-mknetdir`` hereafter referred to as ``(FWPATH)``.
+  Note: Our setup uses ``FWPATH=/tftpboot/uefi``.
 
 The client will only attempt to look up an IPv6_ address config once, however, it will try the IPv4_ address multiple times.
 The first file in this list which can be downloaded successfully will be used for network booting.
@@ -89,6 +84,13 @@ The GRUB2_ bootloader will attempt TFTP_ download of this list of configuration 
   (FWPATH)/grub.cfg-0
   (FWPATH)/grub.cfg
 
+Hint: Use the ``gethostip`` command from the syslinux_ RPM package to convert hostnames and IP-addresses to hexadecimal, for example::
+
+  $ gethostip -f s001
+  s001.(domainname) 10.2.130.21 0A028215
+  $ gethostip -x s001
+  0A028215
+
 After GRUB2_ has started, files on the TFTP server will be accessible via the ``(tftp)`` device.
 
 The server IP_address_ can be controlled by changing the ``(tftp)`` device name to ``(tftp,server-ip)``.
@@ -108,6 +110,19 @@ Note that this should be changed both in the prefix and in any references to the
 
 Setting up the DHCP, TFTP and PXE services
 ================================================
+
+Install the BOOTX64.EFI bootloader file
+-------------------------------------------
+
+Download the ``BOOTX64.EFI`` file from a Linux distribution's Kickstart_ boot-image files,
+for example https://mirror.fysik.dtu.dk/linux/rockylinux/9/BaseOS/x86_64/kickstart/EFI/BOOT/
+The ``BOOTX64.EFI`` file name is in upper case in Linux installation images.
+
+Placing the boot-image file in a subdirectory, for example ``uefi/BOOTX64.EFI``,
+will cause the client host PXE_ boot process to download all further files also from that same ``uefi/`` subdirectory,
+so you need to place other files there.
+
+**Probably obsolete:** The ``shimx64.efi`` bootloader_ file from the ``shim`` package may be used in stead of ``BOOTX64.EFI``.
 
 Enable UEFI support in the DHCP server
 --------------------------------------
@@ -156,17 +171,6 @@ In the DHCP_ subnet section(s) define UEFI_ RFC4578_ or PXE_ (legacy) boot image
         # PXE boot
         filename "pxelinux.0";
   }
-
-NOTES: 
-
-* The ``BOOTX64.EFI`` file name is upper case in the EL8 installation images.
-
-* Having the boot file in a subdirectory such as ``uefi/BOOTX64.EFI``
-  will cause the client host PXE_ to download all further files also from that same ``uefi/`` subdirectory,
-  so you need to place other files there.
-
-* **Probably obsolete:**
-  The ``shimx64.efi`` bootloader_ may be required in stead of ``BOOTX64.EFI`` in the above ``/etc/dhcp/dhcpd.conf``.
 
 When you have completed configuring the ``dhcpd.conf`` file, open the firewall for DHCP_ (port 67)::
 
