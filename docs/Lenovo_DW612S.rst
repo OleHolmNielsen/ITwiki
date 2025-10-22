@@ -35,7 +35,7 @@ Add the SMM2_ Ethernet MAC address to the DHCP server, then go to the SMM2_ logi
 The default administrator username may be *admin* or *USERID*,
 and the password may be the default *PASSW0RD* or something else configured by Lenovo.
 
-After logging in to the SMM2_ Web Gui click on the *Configuration* tab:
+After logging in to the SMM2_ Web GUI click on the **Configuration** tab:
 
 * **Account Security**: Change *Minimum password length* and *Minimum password reuse cycle* as needed.
 
