@@ -67,7 +67,8 @@ After logging in to the SMM2_ Web Gui click on the *Configuration* tab:
     * Set ``SMTP IP address`` (can be a DNS name!) and ``SMTP Port Number``.
     * If needed by your site, define the ``SMTP Authentication`` settings.
 
-  * Test SMTP by ``Send Alert 1`` (correct network DNS server configuration is required)
+  * Test SMTP by ``Send Alert 1``
+    Note: Correct network configuration of DNS server is required!
 
 .. _IPv6: http://en.wikipedia.org/wiki/Ipv6
 
