@@ -53,10 +53,10 @@ After logging in to the SMM2_ Web Gui click on the *Configuration* tab:
     * Click ``Apply`` (you will be logged out and have to login again)
     * Return to this page and check that the ``Preferred DNS Server`` IP-address is correct.
 
-* Check the Date and time in **Time settings**.
-
 * **NTP**: Set your site's NTP server and your Timezone.
   Click ``Apply`` and ``Sync Time Now``.
+
+* **Time settings:** Check date and time as obtained by the NTP settings.
 
 * In **SMTP** define E-mail alerts:
 
