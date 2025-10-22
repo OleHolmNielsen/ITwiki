@@ -68,7 +68,7 @@ The concrete example below shows what would happen under the IPv4_ case:
 
 * UUID_: 7726a678-7fc0-4853-a4f6-c85ac36a120a
 * MAC_address_:  52:54:00:ec:33:81
-* IP_address_: 10.0.0.130 (Hexadecimal_ digits: 0A000082)
+* IP_address_: 10.0.0.130 (Hexadecimal_ digits: 0A000082, see :ref:`hexadecimal_ip-address`)
 
 The GRUB2_ bootloader_ will attempt TFTP_ download of this list of configuration files in order::
 
@@ -83,13 +83,6 @@ The GRUB2_ bootloader_ will attempt TFTP_ download of this list of configuration
   (FWPATH)/grub.cfg-0A
   (FWPATH)/grub.cfg-0
   (FWPATH)/grub.cfg
-
-Hint: Use the ``gethostip`` command from the syslinux_ RPM package to convert hostnames and IP-addresses to hexadecimal, for example::
-
-  $ gethostip -f s001
-  s001.(domainname) 10.2.130.21 0A028215
-  $ gethostip -x s001
-  0A028215
 
 After GRUB2_ has started, files on the TFTP server will be accessible via the ``(tftp)`` device.
 
@@ -118,11 +111,14 @@ Create a special directory for UEFI_ bootloader_ files on the TFTP_ server::
 
   mkdir /var/lib/tftpboot/uefi
   ln -s /var/lib/tftpboot /tftpboot
-  ln -s /var/lib/tftpboot/uefi /tftpboot/uefi
 
 Download the ``BOOTX64.EFI`` file from a Linux distribution's Kickstart_ boot-image files,
-for example the https://mirror.fysik.dtu.dk/linux/rockylinux/9/BaseOS/x86_64/kickstart/EFI/BOOT/ folder
-to the server's folder ``/tftpboot/uefi/``.
+for example from a `RockyLinux mirror <https://mirror.fysik.dtu.dk/linux/rockylinux/9/BaseOS/x86_64/kickstart/EFI/BOOT/>`_ folder
+to the server's folder ``/tftpboot/uefi/``::
+
+  cd /tftpboot/uefi/
+  wget https://mirror.fysik.dtu.dk/linux/rockylinux/9/BaseOS/x86_64/kickstart/EFI/BOOT/BOOTX64.EFI
+
 The ``BOOTX64.EFI`` file name is in upper case in Linux installation images.
 
 Placing the boot-image file in a subdirectory, for example ``uefi/BOOTX64.EFI``,
@@ -163,7 +159,8 @@ Add these options only if you need to support MTFTP_ (*Multicast TFTP*) as recom
 .. _RFC4578: https://datatracker.ietf.org/doc/html/rfc4578#section-2.1
 .. _MTFTP: https://datatracker.ietf.org/doc/html/draft-henry-remote-boot-protocol-00
 
-In the DHCP_ subnet section(s) define UEFI_ RFC4578_ or PXE_ (legacy) boot image types in the ``/tftpboot/uefi/`` subdirectory::
+In the ``dhcpd.conf`` subnet section(s) define UEFI_ RFC4578_ or PXE_ (legacy) bootloader_ image types in the ``/tftpboot/uefi/`` subdirectory,
+such as ``BOOTX64.EFI``::
 
   # UEFI x86-64 boot (RFC4578 architecture types 7, 8 and 9)
   if option arch = 00:07 {          
@@ -240,7 +237,7 @@ and run a ``make`` command to download the boot image files.
 Create a grub.cfg file in /tftpboot/uefi/
 ---------------------------------------------
 
-The ``uefi/BOOTX64.EFI`` boot file will be looking for a GRUB2_/Grub_ configuration file ``uefi/grub.cfg`` in the same subdirectory.
+The ``uefi/BOOTX64.EFI`` boot file will be looking for a GRUB2_ or Grub_ configuration file ``uefi/grub.cfg`` in the same subdirectory.
 Create the file ``/var/lib/tftpboot/uefi/grub.cfg`` with the contents::
 
   set default="0"
@@ -321,7 +318,7 @@ Installation of pxeconfig on EL Linux
 -----------------------------------------
 
 See the pxeconfig_installation_ page.
-Configure the default boot method as UEFI_ in ``/usr/local/etc/pxeconfig.conf``::
+Configure the default boot method to be UEFI_ in ``/usr/local/etc/pxeconfig.conf``::
 
   [DEFAULT]
   boot_method=uefi
@@ -349,6 +346,8 @@ Remember to set the SELinux_ context::
 .. _telnet: https://en.wikipedia.org/wiki/Telnet
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
 .. _SELinux: https://en.wikipedia.org/wiki/Security-Enhanced_Linux
+
+.. _hexadecimal_ip-address:
 
 Hexadecimally encoded IP-addresses
 ---------------------------------------
