@@ -470,9 +470,8 @@ Creating a Kickstart_file_
 
 In the following sections we discuss relevant sections of the Kickstart_file_.
 
-In the ``grub.cfg`` file described above you can use the inst.ks_ parameter to specify the location
+In the ``grub.cfg`` file you can use the inst.ks_ parameter to specify the location
 (on the network, for example) of the Kickstart_file_ that you want to use.
-
 As an example, the following menu item may be added to the ``grub.cfg`` file 
 to download a Kickstart_file_ named ``ks-almalinux-8.10-minimal-x86_64.cfg``
 from the NFS_ (version 3) server at IP address ``10.10.10.3``::
@@ -482,8 +481,7 @@ from the NFS_ (version 3) server at IP address ``10.10.10.3``::
     initrdefi (tftp)/AlmaLinux-8.10-x86_64/initrd.img
   }
 
-Setting up an NFS_ server at ``<server-IP>`` is not discussed here, however.
-
+Setting up an NFS_ server is not discussed here, however.
 Additional example files can be found in https://github.com/OleHolmNielsen/ansible/tree/master/roles/pxeconfigd/files
 
 A Legacy PXE_ BIOS_ boot file ``/tftpboot/pxelinux.cfg/default`` example using the same Kickstart_file_ is::
