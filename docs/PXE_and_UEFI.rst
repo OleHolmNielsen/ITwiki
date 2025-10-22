@@ -114,15 +114,20 @@ Setting up the DHCP, TFTP and PXE services
 Install the BOOTX64.EFI bootloader file
 -------------------------------------------
 
+Create a special directory for UEFI_ bootloader_ files on the TFTP_ server::
+
+  mkdir /var/lib/tftpboot/uefi
+  ln -s /var/lib/tftpboot /tftpboot
+  ln -s /var/lib/tftpboot/uefi /tftpboot/uefi
+
 Download the ``BOOTX64.EFI`` file from a Linux distribution's Kickstart_ boot-image files,
-for example the https://mirror.fysik.dtu.dk/linux/rockylinux/9/BaseOS/x86_64/kickstart/EFI/BOOT/ folder.
+for example the https://mirror.fysik.dtu.dk/linux/rockylinux/9/BaseOS/x86_64/kickstart/EFI/BOOT/ folder
+to the server's folder ``/tftpboot/uefi/``.
 The ``BOOTX64.EFI`` file name is in upper case in Linux installation images.
 
 Placing the boot-image file in a subdirectory, for example ``uefi/BOOTX64.EFI``,
 will cause the client host PXE_ boot process to download all further files also from that same ``uefi/`` subdirectory,
 so you need to place other files there.
-
-**Probably obsolete:** The ``shimx64.efi`` bootloader_ file from the ``shim`` package may be used in stead of ``BOOTX64.EFI``.
 
 Enable UEFI support in the DHCP server
 --------------------------------------
@@ -210,26 +215,7 @@ and start the service::
 
 .. _in.tftpd: https://linux.die.net/man/8/in.tftpd
 
-Download UEFI boot files
----------------------------
-
-Create a special directory for UEFI_ boot files on the TFTP_ server::
-
-  mkdir /var/lib/tftpboot/uefi
-  ln -s /var/lib/tftpboot/uefi /tftpboot/uefi
-
-**NOTE:**
-The OS installation ``*.efi`` files **must** be copied from the OS installation image,
-since the versions contained in EL8 ``shim-x64`` RPM package seem to be buggy,
-see for example https://forums.rockylinux.org/t/pxe-boot-uefi-mode/4852.
-Symptoms may be that TFTP_ download of large ``vmlinuz`` or ``initrd.img`` files 
-during Kickstart_ fail with a message *error: timeout reading ...*.
-
-Download **all .efi files** from a mirror site, 
-for example the AlmaLinux_ mirror at https://mirror.fysik.dtu.dk/linux/almalinux/8/BaseOS/x86_64/kickstart/EFI/BOOT/
-to the TFTP_ server's folder ``/tftpboot/uefi/``.
-
-Download Linux boot images
+Download Linux OS boot images
 -----------------------------
 
 For each EL/RHEL_ Linux (and other OS) version you should copy Linux boot images to a separate directory on the TFTP_ server,
