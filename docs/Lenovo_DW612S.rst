@@ -62,7 +62,11 @@ After logging in to the SMM2_ Web Gui click on the *Configuration* tab:
 
   * Sender Information (for example, admin@smm.<domain>).
   * Destination Email Addresses for alert recipients.
-  * SMTP (email) Server Settings.
+  * **SMTP (email) Server Settings**:
+   
+    * Set ``SMTP IP address`` (can be a DNS name!) and ``SMTP Port Number``.
+    * If needed by your site, define the ``SMTP Authentication`` settings.
+
   * Test SMTP by ``Send Alert 1`` (correct network DNS server configuration is required)
 
 .. _IPv6: http://en.wikipedia.org/wiki/Ipv6
