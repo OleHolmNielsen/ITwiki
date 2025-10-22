@@ -39,15 +39,25 @@ After logging in to the SMM2_ Web Gui click on the *Configuration* tab:
 
 * **Account Security**: Change *Minimum password length* and *Minimum password reuse cycle* as needed.
 * **User account**: Change the login name (if desired), and/or add and enable your site's login username/password with **Administrator** priviledges.
-* **Network Configuration**: Define the SMM2_'s DNS hostname and domainname.
-  You should leave IPv6 as enabled for future management access.
+* **Network Configuration**:
+  - Define the SMM2_'s DNS ``Host Name`` and ``DNS Domain Name``.
+  - You should leave IPv6_ as enabled for future management access.
+  - Click on **Advanced Settings** network ``eth0`` name and define:
+    - **IPv4 method:** Obtain IP from DHCP
+    - Check the box **Use DHCP to obtain DNS server addresses**
+    - Click ``Apply`` (you will be logged out and have to login again)
+    - Return to this page and check that the ``Preferred DNS Server`` IP-address is correct.
 * Check the Date and time in **Time settings**.
 * **NTP**: Set your site's NTP server and your Timezone.
+  Click ``Apply`` and ``Sync Time Now``.
 * In **SMTP** define E-mail alerts:
 
   * Sender Information (for example, admin@smm.<domain>).
   * Destination Email Addresses for alert recipients.
   * SMTP (email) Server Settings.
+  * Test SMTP by ``Send Alert 1`` (correct network DNS server configuration is required)
+
+.. _IPv6: http://en.wikipedia.org/wiki/Ipv6
 
 SMM2_ ipmitool commands
 ------------------------
