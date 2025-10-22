@@ -442,6 +442,7 @@ See a general description from the Fedora page:
   making it ideal for network and system administrators.
 
 Please read the documentation of the Kickstart_file_ syntax.
+In the following sections we discuss relevant sections of the Kickstart_file_.
 
 A Kickstart_ installation can be made using :ref:`PXE-booting` or PXE_and_UEFI_ network booting.
 
@@ -453,7 +454,7 @@ A Kickstart_ installation can be made using :ref:`PXE-booting` or PXE_and_UEFI_ 
 .. _Fedora: https://fedoraproject.org/
 
 Automated installation using Anaconda_ is possible with UEFI_ as well as PXE_ legacy booting.
-In the above ``grub.cfg`` file use the inst.ks_ parameter to specify the location of a Kickstart_file_.
+In the above ``grub.cfg`` file you can use the inst.ks_ parameter to specify the location of a Kickstart_file_.
 
 For example, the following menu item may be added to ``grub.cfg`` to download a Kickstart_file_ ``ks-almalinux-8.10-minimal-x86_64.cfg``
 from the NFS_ (version 3) server at IP address ``10.10.10.3``::
@@ -462,6 +463,8 @@ from the NFS_ (version 3) server at IP address ``10.10.10.3``::
     linuxefi (tftp)/AlmaLinux-8.10-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:10.10.10.3:/u/kickstart/ks-almalinux-8.10-minimal-x86_64.cfg
     initrdefi (tftp)/AlmaLinux-8.10-x86_64/initrd.img
   }
+
+Setting up an NFS_ server at ``<server-IP>`` is not discussed here.
 
 Some example files can be found in https://github.com/OleHolmNielsen/ansible/tree/master/roles/pxeconfigd/files
 
@@ -472,29 +475,26 @@ A Legacy PXE_ BIOS_ boot file ``/tftpboot/pxelinux.cfg/default`` example using t
         kernel AlmaLinux-8.10-x86_64/vmlinuz
         append load_ramdisk=1 initrd=AlmaLinux-8.10-x86_64/initrd.img network inst.ks=nfs:nfsvers=3:<server-IP>:/u/kickstart/ks-almalinux-8.10-minimal-x86_64.cfg vga=792
 
-(Setting up an NFS_ server at ``<server-IP>`` is not discussed here.)
-
-In the following sections we discuss relevant sections of the Kickstart_file_.
-
 .. _Anaconda: https://fedoraproject.org/wiki/Anaconda
 .. _inst.ks: https://docs.fedoraproject.org/en-US/fedora/f36/install-guide/advanced/Boot_Options/#sect-boot-options-kickstart
 
 Bootloader command
 ------------------
 
-The bootloader_ command (required) specifies how the boot loader should be installed.
+The bootloader_ command (required) specifies how the bootloader_ should be installed.
 
-You should always use a password to protect your boot loader. An unprotected boot loader can allow a potential attacker to modify the system’s boot options and gain unauthorized access to the system:
+You should always use a password to protect your bootloader_.
+An unprotected bootloader_ can allow a potential attacker to modify the system’s boot options and gain unauthorized access to the system:
 
 * ``--password`` 
-  If using GRUB2_ as the boot loader, sets the boot loader password to the one specified with this option.
+  If using GRUB2_ as the bootloader_, this sets the bootloader_ password to the one specified.
   This should be used to restrict access to the GRUB2_ shell, where arbitrary kernel options can be passed.
-  If a password is specified, GRUB2_ will also ask for a user name, and the user name is always ``root``.
+  If a password is specified, GRUB2_ will also ask for a user name, and that user name is always ``root``.
 
 * ``--iscrypted`` 
-  Normally, when you specify a boot loader password using the ``--password=`` option,
-  it will be stored in the Kickstart_file_ in plain text.
-  If you want to encrypt the password, use this option and specify an encrypted password.
+  Normally, when you specify a bootloader_ password using the ``--password=`` option,
+  it will be stored in the Kickstart_file_ in plain text,
+  but you may use this option to specify an encrypted password.
   To generate an encrypted password use the command::
 
     grub2-mkpasswd-pbkdf2
@@ -504,69 +504,11 @@ You should always use a password to protect your boot loader. An unprotected boo
 
     bootloader --iscrypted --password=grub.pbkdf2.sha512.10000.5520C6C9832F3AC3D149AC0B24BE69E2D4FB0DBEEDBD29CA1D30A044DE2645C4C7A291E585D4DC43F8A4D82479F8B95CA4BA4381F8550510B75E8E0BB2938990.C688B6F0EF935701FF9BD1A8EC7FE5BD2333799C98F28420C5CC8F1A2A233DE22C83705BB614EA17F3FDFDF4AC2161CEA3384E56EB38A2E39102F5334C47405E
 
-Some systems require a special partition for installing the boot loader.
-The type and size of this partition depends on whether the disk you are installing the boot loader to uses the Master Boot Record (MBR) or a GUID Partition Table (GPT) schema.
+Some systems require a special partition for installing the bootloader_.
+The type and size of this partition depends on whether the disk you are installing the bootloader_ to uses the Master Boot Record (MBR) or a GUID Partition Table (GPT) schema.
 For more information, see the bootloader_ page.
 
 .. _bootloader: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#bootloader
-
-Installation screen resolution
-------------------------------
-
-If you have an old server or PC where the VGA_ graphics adapter only supports screen resolutions up to 1024x768 or 1280x1024,
-then the kernel in EL8 Linux may select a higher, unsupported screen resolution which gives a flickering monitor with no image!
-See these pages:
-
-* https://www.systutorials.com/configuration-of-linux-kernel-video-mode/
-* https://cromwell-intl.com/open-source/grub-vga-modes.html
-* https://pierre.baudu.in/other/grub.vga.modes.html
-
-You can add a vga= directive to the kernel line in the GRUB file, something like the following::
-
-  linuxefi /vmlinuz-X.Y.Z vga=792 
-
-You will, of course, see something specific in place of X.Y.Z and you can use numbers other than 792, which gives 1024×768 with 65,536 possible colors. 
-This is a partial list of GRUB VGA_ Modes::
-
-  Colour depth	640x480	1024x768
-  8 (256)	769	773
-  15 (32K)	784	790
-  16 (65K)	785	791
-  24 (16M)	786	792
-
-.. _VGA: https://en.wikipedia.org/wiki/Video_Graphics_Array
-
-Linux kernel with 16-bit boot protocol
-......................................
-
-From https://www.systutorials.com/configuration-of-linux-kernel-video-mode/ we see:
-
-* Switching VESA_ modes of Linux kernel at boot time can be done by using the “vga=…“ kernel boot parameter. 
-  This parameter accept the decimal value of Linux video mode numbers instead of VESA_ video mode numbers. 
-
-The video mode number of the Linux kernel is the VESA_ mode number plus 0×200::
-
-  Linux_kernel_mode_number = VESA_mode_number + 0x200
-
-So the table for the Kernel mode numbers are::
-
-      | 640x480  800x600  1024x768 1280x1024
-  ----+-------------------------------------
-  256 |  0x301    0x303    0x305    0x307
-  32k |  0x310    0x313    0x316    0x319
-  64k |  0x311    0x314    0x317    0x31A
-  16M |  0x312    0x315    0x318    0x31B
-
-The decimal value of the Linux kernel video mode number can be passed to the kernel in the form “vga=YYY“, where YYY is the decimal value.
-
-The parameter ``vga=ask`` is often mentioned, but is not supported by GRUB2_.
-
-Last, calculate the decimal value of the Linux video mode number. 
-This simple python command can be used to convert a hex-number 0xYYY::
-
-  python -c "print 0xYYY"
-
-.. _VESA: https://en.wikipedia.org/wiki/VESA_BIOS_Extensions
 
 Capture the %pre logfile
 ------------------------
@@ -694,9 +636,68 @@ See also `What is UEFI Secure Boot and how it works? <https://access.redhat.com/
 As explained in `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_
 RedHat is currently working on a solution for RHEL_ 8.
 
-**Workaround:** Disable secureboot from BIOS_ settings.
+**Workaround:** Disable secureboot from UEFI_ or BIOS_ settings.
 
 .. _Secure_Boot: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface#SECURE-BOOT
+
+Installation screen resolution
+------------------------------
+
+If you have an old server or PC where the VGA_ graphics adapter only supports screen resolutions up to 1024x768 or 1280x1024,
+then the kernel in EL8 Linux may select a higher, unsupported screen resolution which gives a flickering monitor with no image!
+See these pages:
+
+* https://www.systutorials.com/configuration-of-linux-kernel-video-mode/
+* https://cromwell-intl.com/open-source/grub-vga-modes.html
+* https://pierre.baudu.in/other/grub.vga.modes.html
+
+You can add a vga= directive to the kernel line in the GRUB file, something like the following::
+
+  linuxefi /vmlinuz-X.Y.Z vga=792 
+
+(X.Y.Z is your version)
+and you can use numbers other than ``792`` which would give a resolution of 1024×768 with 65,536 possible colors. 
+This is a partial list of the GRUB_ VGA_ Modes::
+
+  Colour depth	640x480	1024x768
+  8 (256)	769	773
+  15 (32K)	784	790
+  16 (65K)	785	791
+  24 (16M)	786	792
+
+.. _VGA: https://en.wikipedia.org/wiki/Video_Graphics_Array
+
+Linux kernel with 16-bit boot protocol
+......................................
+
+From https://www.systutorials.com/configuration-of-linux-kernel-video-mode/ we see:
+
+* Switching VESA_ modes of Linux kernel at boot time can be done by using the “vga=…“ kernel boot parameter. 
+  This parameter accept the decimal value of Linux video mode numbers instead of VESA_ video mode numbers. 
+
+The video mode number of the Linux kernel is the VESA_ mode number plus 0×200::
+
+  Linux_kernel_mode_number = VESA_mode_number + 0x200
+
+So the table for the Kernel mode numbers are::
+
+      | 640x480  800x600  1024x768 1280x1024
+  ----+-------------------------------------
+  256 |  0x301    0x303    0x305    0x307
+  32k |  0x310    0x313    0x316    0x319
+  64k |  0x311    0x314    0x317    0x31A
+  16M |  0x312    0x315    0x318    0x31B
+
+The decimal value of the Linux kernel video mode number can be passed to the kernel in the form “vga=YYY“, where YYY is the decimal value.
+
+The parameter ``vga=ask`` is often mentioned, but is not supported by GRUB2_.
+
+Last, calculate the decimal value of the Linux video mode number. 
+This simple python command can be used to convert a hex-number 0xYYY::
+
+  python -c "print 0xYYY"
+
+.. _VESA: https://en.wikipedia.org/wiki/VESA_BIOS_Extensions
 
 efibootmgr - manipulate the EFI Boot Manager
 ============================================
