@@ -440,6 +440,20 @@ See a general description from the Fedora page:
 
 A Kickstart_ installation can be made using :ref:`PXE-booting` or PXE_and_UEFI_ network booting.
 
+Disable Secure Boot in BIOS
+---------------------------
+
+If the PXE_ client system BIOS_ is configured for UEFI_ Secure_Boot_
+then the PXE_ boot will fail with an error about an **invalid signature**.
+See also `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_.
+
+As explained in `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_
+RedHat is currently working on a solution for RHEL_ 8.
+
+**Workaround:** Disable secureboot from UEFI_ or BIOS_ settings.
+
+.. _Secure_Boot: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface#SECURE-BOOT
+
 Automated Kickstart installation
 -----------------------------------
 
@@ -497,7 +511,7 @@ A Legacy PXE_ BIOS_ boot file ``/tftpboot/pxelinux.cfg/default`` example using t
 Bootloader command
 ------------------
 
-The bootloader_ command (required) specifies how the bootloader_ should be installed.
+The Kickstart_file_ bootloader_ command (required) specifies how the bootloader_ should be installed.
 
 You should always use a password to protect your bootloader_.
 An unprotected bootloader_ can allow a potential attacker to modify the system’s boot options and gain unauthorized access to the system:
@@ -526,23 +540,8 @@ For more information, see the bootloader_ page.
 
 .. _bootloader: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#bootloader
 
-Capture the %pre logfile
-------------------------
-
-The ``%pre`` command can create a logfile::
-
-  # Start of the %pre section with logging into /root/ks-pre.log
-  %pre --log=/root/ks-pre.log
-
-However, this file exists **only in the memory file system** during installation,
-and the logfile will be lost after the system has rebooted.
-
-There are methods to get a copy of the ``%pre`` logfile:
-
-* https://unix.stackexchange.com/questions/78388/logging-pre-during-kickstart-logfile-doesnt-exist-after-boot
-
-Boot disk device selection
---------------------------
+Automatic boot disk device selection 
+---------------------------------------
 
 The server or PC computer may have multiple disk devices, and each device may have different bus interfaces to the system such as NVME_ or SATA_.
 
@@ -642,19 +641,20 @@ An example Kickstart_file_ section specifying disk partitions and using reqpart_
 
 .. _reqpart: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#reqpart
 
-Disable Secure Boot in BIOS
----------------------------
+Capture the %pre logfile
+------------------------
 
-If the PXE_ client system BIOS_ is configured for UEFI_ Secure_Boot_
-then the PXE_ boot will fail with an error about an **invalid signature**.
-See also `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_.
+The Kickstart_file_ ``%pre`` command can create a logfile::
 
-As explained in `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_
-RedHat is currently working on a solution for RHEL_ 8.
+  # Start of the %pre section with logging into /root/ks-pre.log
+  %pre --log=/root/ks-pre.log
 
-**Workaround:** Disable secureboot from UEFI_ or BIOS_ settings.
+However, this file exists **only in the memory file system** during installation,
+and the logfile will be lost after the system has rebooted.
 
-.. _Secure_Boot: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface#SECURE-BOOT
+There are methods to get a copy of the ``%pre`` logfile:
+
+* https://unix.stackexchange.com/questions/78388/logging-pre-during-kickstart-logfile-doesnt-exist-after-boot
 
 Installation screen resolution
 ------------------------------
