@@ -444,9 +444,8 @@ Automated Kickstart installation
 -----------------------------------
 
 Automated installation using Anaconda_ is possible with UEFI_ as well as PXE_ legacy booting.
-Please read the documentation of the Kickstart_file_ syntax.
 
-If the node's **boot order** has been configured with PXE_ network bootign as the first boot device,
+If the node's **boot order** has been configured with PXE_ network booting as the first boot device,
 and you have also installed the above pxeconfig_toolkit_,
 then it is sufficient to power cycle and/or start up the server:
 
@@ -470,8 +469,9 @@ Creating a Kickstart_file_
 -------------------------------
 
 In the following sections we discuss relevant sections of the Kickstart_file_.
-In the above ``grub.cfg`` file you can use the inst.ks_ parameter to specify the location
-(on the network, for example) of a Kickstart_file_.
+
+In the ``grub.cfg`` file described above you can use the inst.ks_ parameter to specify the location
+(on the network, for example) of the Kickstart_file_ that you want to use.
 
 As an example, the following menu item may be added to the ``grub.cfg`` file 
 to download a Kickstart_file_ named ``ks-almalinux-8.10-minimal-x86_64.cfg``
