@@ -41,12 +41,12 @@ See also our network :ref:`PXE-booting` page for Linux OS installation, and also
 UEFI network boot process
 =========================
 
-In this section we describe how a computer doing an UEFI_ network PXE_ boot will download a bootloader file from the network server and execute it.
+In this section we describe how a computer doing an UEFI_ network PXE_ boot will download a bootloader_ file from the network server and execute it.
 For 64-bit UEFI_ systems the file name convention is ``BOOTX64.EFI``,
 and it is located at the standard path ``/efi/boot/`` on a bootable drive.
 Other CPU architectures are listed in the UEFI_specification_ section 3.5.
 
-The PXE_ bootloader image ``/tftpboot/uefi/BOOTX64.EFI`` (see below) executing in the computer's UEFI_ capable NIC_ adapter
+The PXE_ bootloader_ image ``/tftpboot/uefi/BOOTX64.EFI`` (see below) executing in the computer's UEFI_ capable NIC_ adapter
 will search for GRUB2_ configuration files in order using the following rules,
 where the appended value corresponds to a value on the client machine::
 
@@ -70,7 +70,7 @@ The concrete example below shows what would happen under the IPv4_ case:
 * MAC_address_:  52:54:00:ec:33:81
 * IP_address_: 10.0.0.130 (Hexadecimal_ digits: 0A000082)
 
-The GRUB2_ bootloader will attempt TFTP_ download of this list of configuration files in order::
+The GRUB2_ bootloader_ will attempt TFTP_ download of this list of configuration files in order::
 
   (FWPATH)/grub.cfg-7726a678-7fc0-4853-a4f6-c85ac36a120a
   (FWPATH)/grub.cfg-52-54-00-ec-33-81
@@ -115,7 +115,7 @@ Install the BOOTX64.EFI bootloader file
 -------------------------------------------
 
 Download the ``BOOTX64.EFI`` file from a Linux distribution's Kickstart_ boot-image files,
-for example https://mirror.fysik.dtu.dk/linux/rockylinux/9/BaseOS/x86_64/kickstart/EFI/BOOT/
+for example the https://mirror.fysik.dtu.dk/linux/rockylinux/9/BaseOS/x86_64/kickstart/EFI/BOOT/ folder.
 The ``BOOTX64.EFI`` file name is in upper case in Linux installation images.
 
 Placing the boot-image file in a subdirectory, for example ``uefi/BOOTX64.EFI``,
