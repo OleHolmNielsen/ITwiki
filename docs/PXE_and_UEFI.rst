@@ -424,11 +424,8 @@ corresponding to the client IP-address which did the telnet_ connection.
 
 =======================================================================================================
 
-Configuring Kickstart automated install
-=======================================
-
-EL Linux installation with Kickstart
-----------------------------------------
+Configuring Kickstart install of EL Linux systems
+================================================================
 
 RHEL_ Linux and *EL clones* such as AlmaLinux_ or RockyLinux_, as well as Fedora_, can be installed using Kickstart_.
 See a general description from the Fedora page:
@@ -441,10 +438,26 @@ See a general description from the Fedora page:
   This installation method can support the use of a single Kickstart_file_ to install Fedora_ or RHEL_ on multiple machines,
   making it ideal for network and system administrators.
 
+A Kickstart_ installation can be made using :ref:`PXE-booting` or PXE_and_UEFI_ network booting.
+
+Automated Kickstart installation
+-----------------------------------
+
+Automated installation using Anaconda_ is possible with UEFI_ as well as PXE_ legacy booting.
 Please read the documentation of the Kickstart_file_ syntax.
 In the following sections we discuss relevant sections of the Kickstart_file_.
 
-A Kickstart_ installation can be made using :ref:`PXE-booting` or PXE_and_UEFI_ network booting.
+If the node's **boot order** has been configured with PXE_ network bootign as the first boot device,
+and you have also installed the above pxeconfig_toolkit_,
+then it is sufficient to power cycle and/or start up the server:
+
+* Kickstart_ OS installation will be performed automatically without any user intervention.
+* The installation process can be viewed in the node's console (physically or in the BMC_ web browser window).
+* The Kickstart_ method described above therefore provides a **totally automatic and hands-free** Linux OS installation of nodes,
+  suitable for a large Linux cluster and other scenarios.
+
+Alternatively, when powering up the server, PXE_ network boot can be selected from the console,
+typically by pressing the F12 or F10 button as shown in the console.
 
 .. _Kickstart: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-1-introduction
 .. _Kickstart_file: https://anaconda-installer.readthedocs.io/en/latest/kickstart.html
@@ -452,8 +465,11 @@ A Kickstart_ installation can be made using :ref:`PXE-booting` or PXE_and_UEFI_ 
 .. _AlmaLinux: https://almalinux.org/
 .. _RockyLinux: https://www.rockylinux.org
 .. _Fedora: https://fedoraproject.org/
+.. _BMC: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface#Baseboard_management_controller
 
-Automated installation using Anaconda_ is possible with UEFI_ as well as PXE_ legacy booting.
+Creating a Kickstart_file_
+-------------------------------
+
 In the above ``grub.cfg`` file you can use the inst.ks_ parameter to specify the location of a Kickstart_file_.
 
 For example, the following menu item may be added to ``grub.cfg`` to download a Kickstart_file_ ``ks-almalinux-8.10-minimal-x86_64.cfg``
