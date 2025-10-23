@@ -115,7 +115,7 @@ Install the boot-image packages::
 
   dnf install grub2-efi-x64 shim-x64
 
-Create a special directory for UEFI_ bootloader_ files on the TFTP_ server::
+Create a special directory for UEFI_ bootloader_ files on the TFTP_ server (see below)::
 
   mkdir /var/lib/tftpboot/uefi
   ln -s /var/lib/tftpboot /tftpboot
