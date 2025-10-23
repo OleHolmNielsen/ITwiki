@@ -766,10 +766,10 @@ This simple python command can be used to convert a hex-number 0xYYY::
 
 .. _VESA: https://en.wikipedia.org/wiki/VESA_BIOS_Extensions
 
-efibootmgr - manipulate the EFI Boot Manager
-============================================
+efibootmgr - manipulate the UEFI Boot Manager
+===============================================
 
-efibootmgr_ is a userspace application used to modify the Intel Extensible Firmware Interface (EFI) Boot Manager.  
+efibootmgr_ is a userspace application used to modify the UEFI_ Boot Manager.  
 This application can create and destroy boot entries, change the boot order, change the next running boot option, and more.
 
 To show the current boot order::
