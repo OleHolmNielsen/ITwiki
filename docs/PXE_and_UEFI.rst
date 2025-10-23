@@ -165,9 +165,9 @@ We use an ISC_DHCP_ Linux server on EL/RHEL_ Linux.
 The ISC_DHCP_ server has actually been superceded by the ISC_KEA_ server, but we do not consider it here.
 On EL Linux ISC_KEA_ can be installed (in EL8/EL9 from EPEL_) with ``dnf install kea kea-hooks kea-doc kea-keama``.
 
-Install the ISC_DHCP_ packages::
+Install the ISC_DHCP_ packages and boot-image packages::
 
-  dnf install dhcp-server dhcp-common grub2-efi-x64
+  dnf install dhcp-server dhcp-common grub2-efi-x64 shim-x64
 
 To get started with configuration the packages contain an example file ``/usr/share/doc/dhcp-server/dhcpd.conf.example``.
 It is also recommended to consult examples on the internet,
