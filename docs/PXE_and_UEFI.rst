@@ -41,7 +41,7 @@ See also our network :ref:`PXE-booting` page for Linux OS installation, and also
 UEFI network boot process
 =========================
 
-In this section we describe how a computer doing an UEFI_ network PXE_ boot will download a bootloader_ file from the network server and execute it.
+In this section we describe how a computer doing an UEFI_ network PXE_ boot will download a bootloader_ file from the network TFTP_ server and execute it.
 For 64-bit UEFI_ systems the file name convention is ``BOOTX64.EFI``,
 and it is located at the standard path ``/efi/boot/`` on a bootable drive.
 Other CPU architectures are listed in the UEFI_specification_ section 3.5.
@@ -51,7 +51,9 @@ The Linux boot process is explained in detail in
 and `Differences between grubx64 and shimx64 <https://www.baeldung.com/linux/grubx64-vs-shimx64>`_.
 
 The PXE_ bootloader_ image ``BOOTX64.EFI`` (see below) executes in the computer's UEFI_ capable NIC_ adapter.
-It will search for GRUB2_ configuration files in order using the following rules,
+The Linux image ``BOOTX64.EFI`` will subsequently download another image ``grubx64.efi`` from the TFTP_ server.
+
+The ``grubx64.efi`` will attempt to download GRUB2_ configuration files in order using the following rules,
 where the appended value corresponds to a value on the client machine::
 
   (FWPATH)/grub.cfg-(UUID OF NIC)
@@ -111,23 +113,25 @@ Setting up the DHCP, TFTP and PXE services
 Install the BOOTX64.EFI bootloader file
 -------------------------------------------
 
+Install the boot-image packages::
+
+  dnf install grub2-efi-x64 shim-x64
+
 Create a special directory for UEFI_ bootloader_ files on the TFTP_ server::
 
   mkdir /var/lib/tftpboot/uefi
   ln -s /var/lib/tftpboot /tftpboot
 
-Download the ``BOOTX64.EFI`` file from a Linux distribution's Kickstart_ boot-image files,
-for example from a `RockyLinux mirror <https://mirror.fysik.dtu.dk/linux/rockylinux/9/BaseOS/x86_64/kickstart/EFI/BOOT/>`_ folder
-to the server's folder ``/tftpboot/uefi/``::
+Determine the OS family name for the subfolder in ``/boot/efi/EFI/`` by::
 
-  cd /tftpboot/uefi/
-  wget https://mirror.fysik.dtu.dk/linux/rockylinux/9/BaseOS/x86_64/kickstart/EFI/BOOT/BOOTX64.EFI
+  $ grep '^ID=' /etc/os-release
+  ID="almalinux"        # Or "rocky", "rhel", "centos" or something else
 
-The ``BOOTX64.EFI`` file name is in upper case in Linux installation images.
+Copy the boot image files from the packages installed above::
 
-Placing the boot-image file in a subdirectory, for example ``uefi/BOOTX64.EFI``,
-will cause the client host PXE_ boot process to download all further files also from that same ``uefi/`` subdirectory,
-so you need to place other files there.
+  cp -p /boot/efi/EFI/BOOT/BOOTX64.EFI /tftpboot/uefi/
+  cp -p /boot/efi/EFI/<insert OS ID here>/grubx64.efi /tftpboot/uefi/
+  chmod 644 /tftpboot/uefi/BOOTX64.EFI /tftpboot/uefi/grubx64.efi
 
 Verify secure boot image signature
 ...................................
@@ -206,6 +210,13 @@ such as ``BOOTX64.EFI``::
         # PXE boot
         filename "pxelinux.0";
   }
+
+Other CPU architectures are listed in the UEFI_specification_ section 3.5.
+
+Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder,
+for example ``uefi/BOOTX64.EFI``,
+will cause the client host PXE_ boot process to download all further files also from that same ``uefi/`` subdirectory,
+so you need to place other files there.
 
 When you have completed configuring the ``dhcpd.conf`` file, open the firewall for DHCP_ (port 67)::
 
