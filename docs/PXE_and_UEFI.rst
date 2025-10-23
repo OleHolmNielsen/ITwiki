@@ -46,8 +46,12 @@ For 64-bit UEFI_ systems the file name convention is ``BOOTX64.EFI``,
 and it is located at the standard path ``/efi/boot/`` on a bootable drive.
 Other CPU architectures are listed in the UEFI_specification_ section 3.5.
 
-The PXE_ bootloader_ image ``/tftpboot/uefi/BOOTX64.EFI`` (see below) executing in the computer's UEFI_ capable NIC_ adapter
-will search for GRUB2_ configuration files in order using the following rules,
+The Linux boot process is explained in detail in
+`Guide to the Boot Process of a Linux System <https://www.baeldung.com/linux/boot-process>`_
+and `Differences between grubx64 and shimx64 <https://www.baeldung.com/linux/grubx64-vs-shimx64>`_.
+
+The PXE_ bootloader_ image ``BOOTX64.EFI`` (see below) executes in the computer's UEFI_ capable NIC_ adapter.
+It will search for GRUB2_ configuration files in order using the following rules,
 where the appended value corresponds to a value on the client machine::
 
   (FWPATH)/grub.cfg-(UUID OF NIC)
@@ -124,6 +128,35 @@ The ``BOOTX64.EFI`` file name is in upper case in Linux installation images.
 Placing the boot-image file in a subdirectory, for example ``uefi/BOOTX64.EFI``,
 will cause the client host PXE_ boot process to download all further files also from that same ``uefi/`` subdirectory,
 so you need to place other files there.
+
+Verify secure boot image signature
+...................................
+
+This is only optional:
+You can verify the signature of UEFI_ secure boot images using the ``sbverify`` command
+which is located in the Linux distrubition's *Devel* repository
+(which should not be enabled by default!),
+for example::
+
+  $ dnf install sbsigntools
+  $ sbverify --list /boot/efi/EFI/BOOT/BOOTX64.EFI
+  signature 1
+  image signature issuers:
+   - /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation UEFI CA 2011
+  image signature certificates:
+   - subject: /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Windows UEFI Driver Publisher
+     issuer:  /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation UEFI CA 2011
+   - subject: /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation UEFI CA 2011
+     issuer:  /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation Third Party Marketplace Root
+  $ sbverify --list /boot/efi/EFI/almalinux/grubx64.efi
+  signature 1
+  image signature issuers:
+   - /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
+  image signature certificates:
+   - subject: /emailAddress=security@almalinux.com/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot Signing
+     issuer:  /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
+   - subject: /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
+     issuer:  /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
 
 Enable UEFI support in the DHCP server
 --------------------------------------
