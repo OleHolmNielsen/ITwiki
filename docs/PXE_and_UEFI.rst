@@ -108,9 +108,6 @@ Note that this should be changed both in the prefix and in any references to the
 
 =====================================================================================================
 
-Setting up the DHCP, TFTP and PXE services
-================================================
-
 Install the BOOTX64.EFI bootloader file
 -------------------------------------------
 
@@ -162,6 +159,11 @@ for example::
      issuer:  /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
    - subject: /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
      issuer:  /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
+
+=====================================================================================================
+
+Setting up the DHCP, TFTP and PXE services
+================================================
 
 Enable UEFI support in the DHCP server
 --------------------------------------
