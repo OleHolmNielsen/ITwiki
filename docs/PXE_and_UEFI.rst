@@ -457,11 +457,13 @@ corresponding to the client IP-address which did the telnet_ connection.
 
 =======================================================================================================
 
-Configuring Kickstart install of EL Linux systems
+Configuring Kickstart installation of EL Linux systems
 ================================================================
 
-RHEL_ Linux and *EL clones* such as AlmaLinux_ or RockyLinux_, as well as Fedora_, can be installed using Kickstart_.
-See a general description from the Fedora page:
+Linux OS installation of RHEL_ Linux and *EL clones* (AlmaLinux_, RockyLinux_, and more),
+as well as Fedora_,
+can be made using the automated Kickstart_ method.
+There is a general description from the Fedora_ page:
 
 * Many system administrators would prefer to use an automated installation method to install Fedora_ or RHEL_ on their machines.
   To answer this need, Red Hat created the Kickstart_ installation method.
@@ -471,7 +473,7 @@ See a general description from the Fedora page:
   This installation method can support the use of a single Kickstart_file_ to install Fedora_ or RHEL_ on multiple machines,
   making it ideal for network and system administrators.
 
-A Kickstart_ installation can be made using :ref:`PXE-booting` or PXE_and_UEFI_ network booting.
+A Kickstart_ installation can be made using PXE_and_UEFI_ network booting.
 
 Disable Secure Boot in BIOS
 ---------------------------
@@ -481,11 +483,13 @@ then the PXE_ boot will fail with an error about an **invalid signature**.
 See also `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_.
 
 As explained in `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_
-RedHat is currently working on a solution for RHEL_ 8.
+
+ToDo: The PXE_ booting with UEFI_ Secure_Boot_ may be enabled with the SHIM_ first-stage UEFI bootloader.
 
 **Workaround:** Disable secureboot from UEFI_ or BIOS_ settings.
 
 .. _Secure_Boot: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface#SECURE-BOOT
+.. _SHIM: https://github.com/rhboot/shim/blob/main/README.md
 
 Automated Kickstart installation
 -----------------------------------
