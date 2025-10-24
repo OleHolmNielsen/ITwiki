@@ -516,17 +516,17 @@ Disable Secure Boot in setup
 
 If the PXE_ client system is configured for UEFI_ Secure_Boot_
 then the PXE_ boot may likely fail with an error about an **invalid signature**.
-See also `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_.
-
-There is an explanation in `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_
+See `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_.
+and `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_
 
 **Workaround:** Disable Secure_Boot_ from UEFI_ or BIOS_ settings.
-After the OS installation has completed, Secure_Boot_ may be reenabled and the OS should boot correctly in this mode.
+After the OS installation has completed, Secure_Boot_ may be reenabled and the OS should boot correctly in this mode,
+unless you build your own custom kernel due to special device drivers etc.
 
-In special cases it may actually be possible to make a successful PXE_ Secure_Boot_ installation,
+In some cases it is actually possible to make a successful PXE_ Secure_Boot_ installation,
 provided these conditions are fulfilled:
 
-* The DHCP_ server (see below) has been configured to serve the ``shimx64.efi`` boot image
+* In :ref:`DHCP_server_UEFI_configuration` serve the ``shimx64.efi`` boot image
   in stead of the usual ``BOOTX64.EFI``::
 
     filename "uefi/shimx64.efi";
