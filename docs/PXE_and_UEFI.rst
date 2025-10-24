@@ -114,6 +114,8 @@ Note that this should be changed both in the prefix and in any references to the
 Configure your network installation server
 ===============================================
 
+.. _Install_bootloader_images:
+
 Install the BOOTX64.EFI and other bootloader files
 -------------------------------------------------------
 
@@ -181,9 +183,9 @@ We use an ISC_DHCP_ Linux server on EL/RHEL_ Linux.
 The ISC_DHCP_ server has actually been superceded by the ISC_KEA_ server, but we do not consider it here.
 On EL Linux ISC_KEA_ can be installed (in EL8/EL9 from EPEL_) with ``dnf install kea kea-hooks kea-doc kea-keama``.
 
-Install the ISC_DHCP_ packages and boot-image packages::
+Install the ISC_DHCP_ packages::
 
-  dnf install dhcp-server dhcp-common grub2-efi-x64 shim-x64
+  dnf install dhcp-server dhcp-common 
 
 To get started with configuration the packages contain an example file ``/usr/share/doc/dhcp-server/dhcpd.conf.example``.
 It is also recommended to consult examples on the internet,
@@ -225,6 +227,8 @@ such as ``BOOTX64.EFI``::
 
 Other CPU architectures than x86-64_ are listed in the UEFI_specification_ section 3.5.
 
+Remember also to :ref:`Install_bootloader_images`.
+
 For Secure_Boot_ you can alternatively serve the ``shimx64.efi`` boot image in stead of the usual ``BOOTX64.EFI``,
 see the :ref:`Secure_Boot_Setup` section,
 by configuring::
@@ -232,9 +236,9 @@ by configuring::
   filename "uefi/shimx64.efi";
 
 Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder,
-for example ``uefi/BOOTX64.EFI``,
+for example ``/tftpboot/uefi/BOOTX64.EFI``,
 will cause the client host PXE_ boot process to download all further files also from that same ``uefi/`` subdirectory,
-so you need to place other files there.
+so you need to place any other files there.
 
 When you have completed configuring the ``dhcpd.conf`` file, open the firewall for DHCP_ (port 67)::
 
@@ -256,7 +260,7 @@ Configure the TFTP service
 Your DHCP_ server should also run a TFTP_ service for file downloads.
 Install these packages::
 
-  dnf install tftp-server tftp shim-x64
+  dnf install tftp-server tftp 
 
 Copy the service file to make local customizations::
 
