@@ -111,6 +111,9 @@ Note that this should be changed both in the prefix and in any references to the
 
 =====================================================================================================
 
+Configure your network installation server
+===============================================
+
 Install the BOOTX64.EFI bootloader file
 -------------------------------------------
 
