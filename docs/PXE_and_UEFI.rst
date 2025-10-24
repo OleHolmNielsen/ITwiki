@@ -51,8 +51,7 @@ This file is located in the folder ``/boot/efi/`` on a bootable drive.
 Other CPU architectures than x86-64_ are listed in the UEFI_specification_ section 3.5.
 
 The Linux boot process is explained in detail in
-`Guide to the Boot Process of a Linux System <https://www.baeldung.com/linux/boot-process>`_
-and `Differences between grubx64 and shimx64 <https://www.baeldung.com/linux/grubx64-vs-shimx64>`_.
+`Guide to the Boot Process of a Linux System <https://www.baeldung.com/linux/boot-process>`_.
 
 When you :ref:`DHCP_server_UEFI_configuration` the client computer will download 
 the PXE_ bootloader_ image ``BOOTX64.EFI``.
@@ -234,11 +233,11 @@ Other CPU architectures than x86-64_ are listed in the UEFI_specification_ secti
 
 Remember also to :ref:`Install_bootloader_images`.
 For clients with Secure_Boot_ enabled you should serve the ``shimx64.efi`` first-stage bootloader image
-in stead of the usual ``BOOTX64.EFI``,
-see the :ref:`Secure_Boot_Setup` section,
-by configuring::
+in stead of the usual ``BOOTX64.EFI``, see the :ref:`Secure_Boot_Setup` section, by configuring::
 
   filename "uefi/shimx64.efi";
+
+See the article `Differences between grubx64 and shimx64 <https://www.baeldung.com/linux/grubx64-vs-shimx64>`_.
 
 Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder,
 for example ``/tftpboot/uefi/BOOTX64.EFI``,
