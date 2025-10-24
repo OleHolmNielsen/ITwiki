@@ -51,15 +51,17 @@ This file is located in the folder ``/boot/efi/`` on a bootable drive.
 Other CPU architectures than x86-64_ are listed in the UEFI_specification_ section 3.5.
 
 The Linux boot process is explained in detail in
-`Guide to the Boot Process of a Linux System <https://www.baeldung.com/linux/boot-process>`_.
+`Guide to the Boot Process of a Linux System <https://www.baeldung.com/linux/boot-process>`_
+and `Booting process of Linux <https://en.wikipedia.org/wiki/Booting_process_of_Linux>`_.
 
 When you :ref:`DHCP_server_UEFI_configuration` the client computer will download 
 the PXE_ bootloader_ image ``BOOTX64.EFI``.
 This image is executed in the client computer's UEFI_ capable NIC_ adapter,
 and it will subsequently download the main bootloader_ image ``grubx64.efi`` from the TFTP_ server,
-which subsequently loads the Linux kernel and initrd.
+which subsequently loads the Linux_kernel_ and initrd_.
 
-.. _Linux_kernel: 
+.. _Linux_kernel: https://en.wikipedia.org/wiki/Linux_kernel
+.. _initrd: https://en.wikipedia.org/wiki/Initial_ramdisk
 
 The ``grubx64.efi`` image will now attempt to download GRUB2_ configuration files in order using the following rules,
 where the appended value corresponds to a value on the client machine::
@@ -535,7 +537,7 @@ and `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with er
 
 **Workaround:** Disable Secure_Boot_ from UEFI_ or BIOS_ settings.
 After the OS installation has completed, Secure_Boot_ may be reenabled and the OS should boot correctly in this mode,
-unless you build your own custom kernel due to special device drivers etc.
+unless you build your own custom Linux_kernel_ due to special device drivers etc.
 
 In some cases it is actually possible to make a successful PXE_ Secure_Boot_ installation,
 provided these conditions are fulfilled:
@@ -549,7 +551,7 @@ provided these conditions are fulfilled:
   Note: You may :ref:`Verify_signatures` if necessary.
 
 In this case the client's Secure_Boot_ of ``shimx64.efi`` will accept the signature of the ``grubx64.efi`` boot image
-as well as the signature of the Linux installation kernel when it gets loaded.
+as well as the signature of the Linux_kernel_ when it gets loaded.
 For example, if all boot images are from the same ``RockyLinux 9.6`` OS, 
 then the image signatures will be verified correctly by the UEFI_ Secure_Boot_ in the client.
 
@@ -631,7 +633,7 @@ An unprotected bootloader_ can allow a potential attacker to modify the system�
 
 * ``--password`` 
   If using GRUB2_ as the bootloader_, this sets the bootloader_ password to the one specified.
-  This should be used to restrict access to the GRUB2_ shell, where arbitrary kernel options can be passed.
+  This should be used to restrict access to the GRUB2_ shell, where arbitrary Linux_kernel_ options can be passed.
   If a password is specified, GRUB2_ will also ask for a user name, and that user name is always ``root``.
 
 * ``--iscrypted`` 
@@ -660,7 +662,7 @@ The server or PC computer may have multiple disk devices, and each device may ha
 
 When the Kickstart_ installation starts up, the file given by inst.ks_ must select, format and partition the system boot disk.
 However, you do not want to install the Linux OS on a large disk device which might be used only for data storage!
-Another problem is that NVME_ and SATA_ devices have different device names in the Linux kernel, for example:
+Another problem is that NVME_ and SATA_ devices have different device names in the Linux_kernel_, for example:
 
 * SATA_: /dev/sda 
 * NVME_: /dev/nvme0n1
@@ -773,14 +775,14 @@ Installation screen resolution
 ------------------------------
 
 If you have an old server or PC where the VGA_ graphics adapter only supports screen resolutions up to 1024x768 or 1280x1024,
-then the kernel in EL8 Linux may select a higher, unsupported screen resolution which gives a flickering monitor with no image!
+then the Linux_kernel_ EL8 may select a higher, unsupported screen resolution which gives a flickering monitor with no image!
 See these pages:
 
 * https://www.systutorials.com/configuration-of-linux-kernel-video-mode/
 * https://cromwell-intl.com/open-source/grub-vga-modes.html
 * https://pierre.baudu.in/other/grub.vga.modes.html
 
-You can add a vga= directive to the kernel line in the GRUB file, something like the following::
+You can add a vga= directive to the Linux_kernel_ line in the GRUB file, something like the following::
 
   linuxefi /vmlinuz-X.Y.Z vga=792 
 
@@ -801,10 +803,10 @@ Linux kernel with 16-bit boot protocol
 
 From https://www.systutorials.com/configuration-of-linux-kernel-video-mode/ we see:
 
-* Switching VESA_ modes of Linux kernel at boot time can be done by using the “vga=…“ kernel boot parameter. 
+* Switching VESA_ modes of Linux_kernel_ at boot time can be done by using the “vga=…“ Linux_kernel_ parameter. 
   This parameter accept the decimal value of Linux video mode numbers instead of VESA_ video mode numbers. 
 
-The video mode number of the Linux kernel is the VESA_ mode number plus 0×200::
+The video mode number of the Linux_kernel_ is the VESA_ mode number plus 0×200::
 
   Linux_kernel_mode_number = VESA_mode_number + 0x200
 
@@ -817,7 +819,7 @@ So the table for the Kernel mode numbers are::
   64k |  0x311    0x314    0x317    0x31A
   16M |  0x312    0x315    0x318    0x31B
 
-The decimal value of the Linux kernel video mode number can be passed to the kernel in the form “vga=YYY“, where YYY is the decimal value.
+The decimal value of the Linux_kernel_ video mode number can be passed to the kernel in the form “vga=YYY“, where YYY is the decimal value.
 
 The parameter ``vga=ask`` is often mentioned, but is not supported by GRUB2_.
 
