@@ -54,7 +54,11 @@ The Linux boot process is explained in detail in
 `Guide to the Boot Process of a Linux System <https://www.baeldung.com/linux/boot-process>`_
 and `Booting process of Linux <https://en.wikipedia.org/wiki/Booting_process_of_Linux>`_.
 
-When you :ref:`DHCP_server_UEFI_configuration` the client computer will download by means of PXE_ the bootloader_ image ``BOOTX64.EFI``.
+When powering up the client computer, PXE_ network booting can be selected using the console,
+typically by pressing the F12 or F10 Function_key_ as shown in the console.
+
+When you :ref:`DHCP_server_UEFI_configuration` and network boot the client computer,
+it will download the bootloader_ image ``BOOTX64.EFI``.
 This image is executed in the client computer's UEFI_ capable NIC_ adapter,
 and it will subsequently download the main bootloader_ image ``grubx64.efi`` from the TFTP_ server,
 which subsequently loads the Linux_kernel_ and initrd_.
@@ -96,9 +100,9 @@ The GRUB2_ bootloader_ will attempt TFTP_ download of this list of configuration
   (FWPATH)/grub.cfg-0
   (FWPATH)/grub.cfg
 
-After GRUB2_ has started, files on the TFTP server will be accessible via the ``(tftp)`` device.
+After GRUB2_ has started, files on the TFTP_ server will be accessible via the ``(tftp)`` device.
 
-The server IP_address_ can be controlled by changing the ``(tftp)`` device name to ``(tftp,server-ip)``.
+The TFTP_ server IP_address_ can be controlled by changing the ``(tftp)`` device name to ``(tftp,server-ip)``.
 Note that this should be changed both in the prefix and in any references to the device name in the configuration file.
 
 .. _IPv4: http://en.wikipedia.org/wiki/Ipv4
@@ -362,7 +366,7 @@ To boot a system with ``grubx64.efi`` (provided by the ``grub2-efi-x64`` package
     exit
   }
 
-If there are multiple disks in the server, Grub_ will name them as *hd0, hd1, hd2*, etc.
+If there are multiple disks in the client computer, Grub_ will name them as *hd0, hd1, hd2*, etc.
 It seems that the numbering of such disks may vary, and if the OS installation is suddenly in disk *hd1* in stead of *hd0*,
 it is useful to define a fallback_ boot menu item as in this example::
 
@@ -570,11 +574,11 @@ You can either:
 
 * Configure the node's **boot order** with PXE_ network booting as the first boot device, or
 
-* When powering up the server, PXE_ network booting can be selected using the console,
+* When powering up the client computer, PXE_ network booting can be selected using the console,
   typically by pressing the F12 or F10 Function_key_ as shown in the console.
 
 When you have installed the above pxeconfig_toolkit_ and used pxeconfig_ to setup the client boot process,
-then it is sufficient to power cycle and/or start up the server.
+then it is sufficient to power cycle and/or start up the client computer.
 
 The :ref:`UEFI_network_boot` ensures that:
 
@@ -656,7 +660,7 @@ For more information, see the bootloader_ page.
 Automatic boot disk device selection 
 ---------------------------------------
 
-The server or PC computer may have multiple disk devices, and each device may have different bus interfaces to the system such as NVME_ or SATA_.
+The client computer may have multiple disk devices, and each device may have different bus interfaces to the system such as NVME_ or SATA_.
 
 When the Kickstart_ installation starts up, the file given by inst.ks_ must select, format and partition the system boot disk.
 However, you do not want to install the Linux OS on a large disk device which might be used only for data storage!
