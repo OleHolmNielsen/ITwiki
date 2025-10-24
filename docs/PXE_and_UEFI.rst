@@ -233,7 +233,8 @@ such as ``BOOTX64.EFI``::
 Other CPU architectures than x86-64_ are listed in the UEFI_specification_ section 3.5.
 
 Remember also to :ref:`Install_bootloader_images`.
-For Secure_Boot_ you can alternatively serve the ``shimx64.efi`` boot image in stead of the usual ``BOOTX64.EFI``,
+For clients with Secure_Boot_ enabled you should serve the ``shimx64.efi`` first-stage bootloader image
+in stead of the usual ``BOOTX64.EFI``,
 see the :ref:`Secure_Boot_Setup` section,
 by configuring::
 
