@@ -65,7 +65,7 @@ which subsequently loads the Linux_kernel_ and initrd_
 (see the *Kernel* section in `Booting process of Linux <https://en.wikipedia.org/wiki/Booting_process_of_Linux>`_).
 
 The ``grubx64.efi`` image will now attempt to download GRUB2_ configuration files in order using the following rules,
-where the appended value ``-<something>`` corresponds to a property or address of the client machine::
+where the appended value ``-(something)`` corresponds to a property or address of the client machine::
 
   (FWPATH)/grub.cfg-(UUID OF NIC)
   (FWPATH)/grub.cfg-(MAC ADDRESS OF NIC)
@@ -79,8 +79,11 @@ where the appended value ``-<something>`` corresponds to a property or address o
 - The ``grub.cfg`` file is placed in the same directory as the path output by ``grub-mknetdir`` hereafter referred to as ``(FWPATH)``.
   Note: Our setup uses ``FWPATH=/tftpboot/uefi``.
 
-The client will only attempt to look up an IPv6_ address config once, however, it will try the IPv4_ address multiple times.
+The client will only attempt to look up an IPv6_ address value once, however,
+it will try the smaller and smaller parts of IPv4_ address multiple times as shown below.
 The first file in this list which can be downloaded successfully will be used for network booting.
+This gives flexibility when configuring multiple client computers.
+
 The concrete example below shows what would happen under the IPv4_ case:
 
 * UUID_: 7726a678-7fc0-4853-a4f6-c85ac36a120a
