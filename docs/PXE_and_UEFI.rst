@@ -117,11 +117,11 @@ Configure your network installation server
 Install the BOOTX64.EFI bootloader file
 -------------------------------------------
 
-Install the boot-image packages::
+Install the boot-image packages on your network installation server::
 
   dnf install grub2-efi-x64 shim-x64
 
-Create a special directory for UEFI_ bootloader_ files on the TFTP_ server (see below)::
+:ref:`Configure_TFTP_service` and create a special directory for UEFI_ bootloader_ files::
 
   mkdir /var/lib/tftpboot/uefi
   ln -s /var/lib/tftpboot /tftpboot
@@ -246,6 +246,8 @@ and start the DHCP_ service::
   systemctl restart dhcpd
 
 .. _x86-64: https://en.wikipedia.org/wiki/X86-64
+
+.. _Configure_TFTP_service:
 
 Configure the TFTP service
 ---------------------------
