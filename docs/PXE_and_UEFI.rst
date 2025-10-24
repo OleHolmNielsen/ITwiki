@@ -528,8 +528,6 @@ There is a general description from the Fedora_ page:
   This installation method can support the use of a single Kickstart_file_ to install Fedora_ or RHEL_ on multiple machines,
   making it ideal for network and system administrators.
 
-A Kickstart_ installation can be made using PXE_and_UEFI_ network booting.
-
 .. _Secure_Boot_Setup:
 
 Disable Secure Boot in client setup
