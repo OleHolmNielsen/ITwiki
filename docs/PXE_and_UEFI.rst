@@ -152,9 +152,10 @@ Copy the boot image files from the packages installed above (remember to change 
   cp -p /boot/efi/EFI/<insert OS ID here>/shimx64.efi /tftpboot/uefi/
   chmod 644 /tftpboot/uefi/BOOTX64.EFI /tftpboot/uefi/grubx64.efi /tftpboot/uefi/shimx86.efi
 
-Note: See the article grubx64_versus_shimx64_.
+Note: See the article grubx64_versus_shimx64_ and the shim_ homepage.
 
 .. _grubx64_versus_shimx64: https://www.baeldung.com/linux/grubx64-vs-shimx64
+.. _shim: https://github.com/rhboot/shim/blob/main/README.md
 
 .. _Verify_signatures:
 
@@ -251,7 +252,7 @@ in stead of the usual ``BOOTX64.EFI``, see the :ref:`Secure_Boot_Setup` section,
 
   filename "uefi/shimx64.efi";
 
-Note: See the article grubx64_versus_shimx64_.
+Note: See the article grubx64_versus_shimx64_ and the shim_ homepage.
 
 Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder,
 for example ``/tftpboot/uefi/BOOTX64.EFI``,
@@ -562,10 +563,10 @@ Any signature mismatch will cause the installation to fail,
 since different OS images cannot verify the image signatures of other OSes,
 for example ``RHEL`` versus ``AlmaLinux`` versus ``RockyLinux``.
 
-Note: See the article grubx64_versus_shimx64_.
+Note: See the article grubx64_versus_shimx64_ and the shim_ homepage.
+
 
 .. _Secure_Boot: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface#SECURE-BOOT
-.. _SHIM: https://github.com/rhboot/shim/blob/main/README.md
 
 Automated Kickstart installation
 -----------------------------------
