@@ -46,7 +46,7 @@ UEFI network boot process
 In this section we describe how a computer doing an UEFI_ network PXE_ boot will download a bootloader_ image file
 from the network's TFTP_ server and execute it.
 For 64-bit UEFI_ systems with the x86-64_ architecture,
-the boot file name convention is ``BOOTX64.EFI``.
+the boot file name by convention is ``BOOTX64.EFI``.
 This file is located in the folder ``/boot/efi/`` on a bootable drive.
 Other CPU architectures than x86-64_ are listed in the UEFI_specification_ section 3.5.
 
@@ -56,7 +56,10 @@ The Linux boot process is explained in detail in
 When you :ref:`DHCP_server_UEFI_configuration` the client computer will download 
 the PXE_ bootloader_ image ``BOOTX64.EFI``.
 This image is executed in the client computer's UEFI_ capable NIC_ adapter,
-and it will subsequently download another image ``grubx64.efi`` from the TFTP_ server.
+and it will subsequently download the main bootloader_ image ``grubx64.efi`` from the TFTP_ server,
+which subsequently loads the Linux kernel and initrd.
+
+.. _Linux_kernel: 
 
 The ``grubx64.efi`` image will now attempt to download GRUB2_ configuration files in order using the following rules,
 where the appended value corresponds to a value on the client machine::
@@ -140,6 +143,10 @@ Copy the boot image files from the packages installed above (remember to change 
   cp -p /boot/efi/EFI/<insert OS ID here>/grubx64.efi /tftpboot/uefi/
   cp -p /boot/efi/EFI/<insert OS ID here>/shimx64.efi /tftpboot/uefi/
   chmod 644 /tftpboot/uefi/BOOTX64.EFI /tftpboot/uefi/grubx64.efi /tftpboot/uefi/shimx86.efi
+
+Note: See the article grubx64_versus_shimx64_.
+
+.. _grubx64_versus_shimx64: https://www.baeldung.com/linux/grubx64-vs-shimx64
 
 .. _Verify_signatures:
 
@@ -237,7 +244,7 @@ in stead of the usual ``BOOTX64.EFI``, see the :ref:`Secure_Boot_Setup` section,
 
   filename "uefi/shimx64.efi";
 
-See the article `Differences between grubx64 and shimx64 <https://www.baeldung.com/linux/grubx64-vs-shimx64>`_.
+Note: See the article grubx64_versus_shimx64_.
 
 Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder,
 for example ``/tftpboot/uefi/BOOTX64.EFI``,
@@ -549,6 +556,8 @@ then the image signatures will be verified correctly by the UEFI_ Secure_Boot_ i
 Any signature mismatch will cause the installation to fail,
 since different OS images cannot verify the image signatures of other OSes,
 for example ``RHEL`` versus ``AlmaLinux`` versus ``RockyLinux``.
+
+Note: See the article grubx64_versus_shimx64_.
 
 .. _Secure_Boot: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface#SECURE-BOOT
 .. _SHIM: https://github.com/rhboot/shim/blob/main/README.md
