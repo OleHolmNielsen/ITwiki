@@ -333,14 +333,16 @@ Create the file ``/var/lib/tftpboot/uefi/grub.cfg`` with the contents::
   set timeout=60
   menuentry 'AlmaLinux 8.10 minimal Kickstart' --class centos --class gnu-linux --class gnu --class os --unrestricted {
     # Note: IPv6 disable during initial boot:
-    linuxefi (tftp)/AlmaLinux-8.10-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:130.225.86.3:/u/kickstart/ks-rockylinux-8-minimal-x86_64.cfg ipv6.disable=1
+    linuxefi (tftp)/AlmaLinux-8.10-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:10.10.10.3:/u/kickstart/ks-rockylinux-8-minimal-x86_64.cfg ipv6.disable=1
     initrdefi (tftp)/AlmaLinux-8.10-x86_64/initrd.img
   }
+
+**Note:** Change the IP address ``10.10.10.3`` to that of your local NFS_ server.
 
 Additional menu entries may be appended to the above, for example::
 
   menuentry 'AlmaLinux 9.6 minimal Kickstart' --class centos --class gnu-linux --class gnu --class os --unrestricted {
-    linuxefi (tftp)/AlmaLinux-9.6-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:130.225.86.3:/u/kickstart/ks-rockylinux-9-minimal-x86_64.cfg ipv6.disable=1
+    linuxefi (tftp)/AlmaLinux-9.6-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:10.10.10.3:/u/kickstart/ks-rockylinux-9-minimal-x86_64.cfg ipv6.disable=1
     initrdefi (tftp)/AlmaLinux-9.6-x86_64/initrd.img
   }
 
