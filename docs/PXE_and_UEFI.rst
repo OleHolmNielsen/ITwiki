@@ -54,10 +54,10 @@ and `Differences between grubx64 and shimx64 <https://www.baeldung.com/linux/gru
 
 When you :ref:`DHCP_server_UEFI_configuration` the client computer will download 
 the PXE_ bootloader_ image ``BOOTX64.EFI``.
-This image is executed in the client computer's UEFI_ capable NIC_ adapter.
-The image ``BOOTX64.EFI`` will subsequently download another image ``grubx64.efi`` from the TFTP_ server.
+This image is executed in the client computer's UEFI_ capable NIC_ adapter,
+and it will subsequently download another image ``grubx64.efi`` from the TFTP_ server.
 
-The ``grubx64.efi`` will now attempt to download GRUB2_ configuration files in order using the following rules,
+The ``grubx64.efi`` image will now attempt to download GRUB2_ configuration files in order using the following rules,
 where the appended value corresponds to a value on the client machine::
 
   (FWPATH)/grub.cfg-(UUID OF NIC)
