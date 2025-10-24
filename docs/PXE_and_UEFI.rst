@@ -38,6 +38,8 @@ See also our network :ref:`PXE-booting` page for Linux OS installation, and also
 
 =======================================================================================================
 
+.. _UEFI_network_boot:
+
 UEFI network boot process
 =========================
 
@@ -519,8 +521,8 @@ Disable Secure Boot in client setup
 
 If the PXE_ client system is configured for UEFI_ Secure_Boot_
 then the PXE_ boot may likely fail with an error about an **invalid signature**.
-See `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_.
-and `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_
+See `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_
+and `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_.
 
 **Workaround:** Disable Secure_Boot_ from UEFI_ or BIOS_ settings.
 After the OS installation has completed, Secure_Boot_ may be reenabled and the OS should boot correctly in this mode,
@@ -552,11 +554,12 @@ for example ``RHEL`` versus ``AlmaLinux`` versus ``RockyLinux``.
 Automated Kickstart installation
 -----------------------------------
 
-Automated installation using Anaconda_ is possible using either UEFI_ or PXE_ legacy BIOS_ booting.
+Automated installation with PXE_ and Anaconda_ is possible using either UEFI_ or legacy BIOS_ booting.
 
 If the node's **boot order** has been configured with PXE_ network booting as the first boot device,
-and you have also installed the above pxeconfig_toolkit_,
-then it is sufficient to power cycle and/or start up the server:
+and you have also installed the above pxeconfig_toolkit_ and used pxeconfig_ to setup the client boot process,
+then it is sufficient to power cycle and/or start up the server.
+The :ref:`_UEFI_network_boot` ensures that:
 
 * Kickstart_ OS installation will be performed automatically without any user intervention.
 * The installation process can be viewed in the node's console (physically or in the BMC_ web browser window).
