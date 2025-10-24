@@ -53,15 +53,15 @@ Other CPU architectures than x86-64_ are listed in the UEFI_specification_ secti
 The Linux boot process is explained in detail in
 `Guide to the Boot Process of a Linux System <https://www.baeldung.com/linux/boot-process>`_
 and `Booting process of Linux <https://en.wikipedia.org/wiki/Booting_process_of_Linux>`_.
-
 When powering up the client computer, PXE_ network booting can be selected using the console,
 typically by pressing the F12 or F10 Function_key_ as shown in the console.
 
 When you :ref:`DHCP_server_UEFI_configuration` and network boot the client computer,
-it will download the bootloader_ image ``BOOTX64.EFI``.
+it will first download the bootloader_ image ``BOOTX64.EFI``.
 This image is executed in the client computer's UEFI_ capable NIC_ adapter,
 and it will subsequently download the main bootloader_ image ``grubx64.efi`` from the TFTP_ server,
-which subsequently loads the Linux_kernel_ and initrd_.
+which subsequently loads the Linux_kernel_ and initrd_
+(see the section *Kernel* in `Booting process of Linux <https://en.wikipedia.org/wiki/Booting_process_of_Linux>`_).
 
 The ``grubx64.efi`` image will now attempt to download GRUB2_ configuration files in order using the following rules,
 where the appended value corresponds to a value on the client machine::
