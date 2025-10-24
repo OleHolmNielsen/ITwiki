@@ -151,6 +151,7 @@ which is located in the Linux distrubition's *Devel* repository
 (which should not be enabled by default!),
 for example::
 
+  # AlmaLinux only: dnf install almalinux-release-devel
   $ dnf install sbsigntools
   $ sbverify --list /boot/efi/EFI/BOOT/BOOTX64.EFI
   signature 1
@@ -513,8 +514,8 @@ A Kickstart_ installation can be made using PXE_and_UEFI_ network booting.
 
 .. _Secure_Boot_Setup:
 
-Disable Secure Boot in setup
-----------------------------
+Disable Secure Boot in client setup
+----------------------------------------
 
 If the PXE_ client system is configured for UEFI_ Secure_Boot_
 then the PXE_ boot may likely fail with an error about an **invalid signature**.
@@ -551,7 +552,7 @@ for example ``RHEL`` versus ``AlmaLinux`` versus ``RockyLinux``.
 Automated Kickstart installation
 -----------------------------------
 
-Automated installation using Anaconda_ is possible with UEFI_ as well as PXE_ legacy booting.
+Automated installation using Anaconda_ is possible using either UEFI_ or PXE_ legacy BIOS_ booting.
 
 If the node's **boot order** has been configured with PXE_ network booting as the first boot device,
 and you have also installed the above pxeconfig_toolkit_,
