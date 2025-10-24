@@ -54,14 +54,10 @@ The Linux boot process is explained in detail in
 `Guide to the Boot Process of a Linux System <https://www.baeldung.com/linux/boot-process>`_
 and `Booting process of Linux <https://en.wikipedia.org/wiki/Booting_process_of_Linux>`_.
 
-When you :ref:`DHCP_server_UEFI_configuration` the client computer will download 
-the PXE_ bootloader_ image ``BOOTX64.EFI``.
+When you :ref:`DHCP_server_UEFI_configuration` the client computer will download by means of PXE_ the bootloader_ image ``BOOTX64.EFI``.
 This image is executed in the client computer's UEFI_ capable NIC_ adapter,
 and it will subsequently download the main bootloader_ image ``grubx64.efi`` from the TFTP_ server,
 which subsequently loads the Linux_kernel_ and initrd_.
-
-.. _Linux_kernel: https://en.wikipedia.org/wiki/Linux_kernel
-.. _initrd: https://en.wikipedia.org/wiki/Initial_ramdisk
 
 The ``grubx64.efi`` image will now attempt to download GRUB2_ configuration files in order using the following rules,
 where the appended value corresponds to a value on the client machine::
@@ -114,6 +110,8 @@ Note that this should be changed both in the prefix and in any references to the
 .. _UUID: https://en.wikipedia.org/wiki/Universally_unique_identifier
 .. _Hexadecimal: https://en.wikipedia.org/wiki/Hexadecimal
 .. _syslinux: https://en.wikipedia.org/wiki/SYSLINUX
+.. _Linux_kernel: https://en.wikipedia.org/wiki/Linux_kernel
+.. _initrd: https://en.wikipedia.org/wiki/Initial_ramdisk
 
 =====================================================================================================
 
