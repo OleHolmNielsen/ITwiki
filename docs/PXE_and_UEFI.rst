@@ -140,6 +140,8 @@ Copy the boot image files from the packages installed above (remember to change 
   cp -p /boot/efi/EFI/<insert OS ID here>/shimx64.efi /tftpboot/uefi/
   chmod 644 /tftpboot/uefi/BOOTX64.EFI /tftpboot/uefi/grubx64.efi /tftpboot/uefi/shimx86.efi
 
+.. _Verify_signatures:
+
 Verify secure boot image signature
 ...................................
 
@@ -526,13 +528,13 @@ unless you build your own custom kernel due to special device drivers etc.
 In some cases it is actually possible to make a successful PXE_ Secure_Boot_ installation,
 provided these conditions are fulfilled:
 
-* In :ref:`DHCP_server_UEFI_configuration` serve the ``shimx64.efi`` boot image
+* In :ref:`DHCP_server_UEFI_configuration` serve the ``shimx64.efi`` boot image from ``dhcpd.conf``
   in stead of the usual ``BOOTX64.EFI``::
 
     filename "uefi/shimx64.efi";
 
-* The ``shimx64.efi`` boot image originates from the **same Linux OS version** as the OS you are trying to install.
-  Note: The image signatures which can be verified by the ``sbverify`` command (see above).
+* The ``shimx64.efi`` boot image must originate from the **same Linux OS version** as the OS you are trying to install.
+  Note: You may :ref:`Verify_signatures` if necessary.
 
 In this case the client's Secure_Boot_ of ``shimx64.efi`` will accept the signature of the ``grubx64.efi`` boot image
 as well as the signature of the Linux installation kernel when it gets loaded.
