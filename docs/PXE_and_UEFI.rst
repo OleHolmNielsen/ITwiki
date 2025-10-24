@@ -559,9 +559,9 @@ Automated installation with PXE_ and Anaconda_ is possible using either UEFI_ or
 If the node's **boot order** has been configured with PXE_ network booting as the first boot device,
 and you have also installed the above pxeconfig_toolkit_ and used pxeconfig_ to setup the client boot process,
 then it is sufficient to power cycle and/or start up the server.
-The :ref:`_UEFI_network_boot` ensures that:
+The :ref:`UEFI_network_boot` ensures that:
 
-* Kickstart_ OS installation will be performed automatically without any user intervention.
+* Kickstart_ OS installation will be performed automatically.
 * The installation process can be viewed in the node's console (physically or in the BMC_ web browser window).
 * The Kickstart_ method described above therefore provides a **totally automatic and hands-free** Linux OS installation of nodes,
   suitable for a large Linux cluster and other scenarios.
