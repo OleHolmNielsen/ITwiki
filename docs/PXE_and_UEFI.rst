@@ -41,17 +41,19 @@ See also our network :ref:`PXE-booting` page for Linux OS installation, and also
 UEFI network boot process
 =========================
 
-In this section we describe how a computer doing an UEFI_ network PXE_ boot will download a bootloader_ file from the network TFTP_ server and execute it.
-For 64-bit UEFI_ systems the file name convention is ``BOOTX64.EFI``,
-and it is located at the standard path ``/efi/boot/`` on a bootable drive.
-Other CPU architectures are listed in the UEFI_specification_ section 3.5.
+In this section we describe how a computer doing an UEFI_ network PXE_ boot will download a bootloader_ image file
+from the network's TFTP_ server and execute it.
+For 64-bit UEFI_ systems with the x86-64_ architecture,
+the boot file name convention is ``BOOTX64.EFI``.
+This file is located in the folder ``/boot/efi/`` on a bootable drive.
+Other CPU architectures than x86-64_ are listed in the UEFI_specification_ section 3.5.
 
 The Linux boot process is explained in detail in
 `Guide to the Boot Process of a Linux System <https://www.baeldung.com/linux/boot-process>`_
 and `Differences between grubx64 and shimx64 <https://www.baeldung.com/linux/grubx64-vs-shimx64>`_.
 
-The PXE_ bootloader_ image ``BOOTX64.EFI`` configured in your DHCP_ server (see below)
-executes in the computer's UEFI_ capable NIC_ adapter.
+The PXE_ bootloader_ image ``BOOTX64.EFI`` defined in your :ref:`DHCP_server_UEFI_configuration`,
+and it is executed in the client computer's UEFI_ capable NIC_ adapter.
 The image ``BOOTX64.EFI`` will subsequently download another image ``grubx64.efi`` from the TFTP_ server.
 
 The ``grubx64.efi`` will now attempt to download GRUB2_ configuration files in order using the following rules,
@@ -164,6 +166,8 @@ for example::
 
 Setting up the DHCP, TFTP and PXE services
 ================================================
+
+.. _DHCP_server_UEFI_configuration:
 
 Enable UEFI support in the DHCP server
 --------------------------------------
