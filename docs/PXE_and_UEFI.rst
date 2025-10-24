@@ -114,8 +114,8 @@ Note that this should be changed both in the prefix and in any references to the
 Configure your network installation server
 ===============================================
 
-Install the BOOTX64.EFI bootloader file
--------------------------------------------
+Install the BOOTX64.EFI and other bootloader files
+-------------------------------------------------------
 
 Install the boot-image packages on your network installation server::
 
@@ -131,11 +131,12 @@ Determine the OS family name for the subfolder in ``/boot/efi/EFI/`` by::
   $ grep '^ID=' /etc/os-release
   ID="almalinux"        # Or "rocky", "rhel", "centos" or something else
 
-Copy the boot image files from the packages installed above::
+Copy the boot image files from the packages installed above (remember to change their permissions)::
 
   cp -p /boot/efi/EFI/BOOT/BOOTX64.EFI /tftpboot/uefi/
   cp -p /boot/efi/EFI/<insert OS ID here>/grubx64.efi /tftpboot/uefi/
-  chmod 644 /tftpboot/uefi/BOOTX64.EFI /tftpboot/uefi/grubx64.efi
+  cp -p /boot/efi/EFI/<insert OS ID here>/shimx64.efi /tftpboot/uefi/
+  chmod 644 /tftpboot/uefi/BOOTX64.EFI /tftpboot/uefi/grubx64.efi /tftpboot/uefi/shimx86.efi
 
 Verify secure boot image signature
 ...................................
