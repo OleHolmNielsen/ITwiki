@@ -214,7 +214,13 @@ such as ``BOOTX64.EFI``::
         filename "pxelinux.0";
   }
 
-Other CPU architectures are listed in the UEFI_specification_ section 3.5.
+Other CPU architectures than x86-64_ are listed in the UEFI_specification_ section 3.5.
+
+For Secure_Boot_ you can alternatively serve the ``shimx64.efi`` boot image in stead of the usual ``BOOTX64.EFI``,
+see the :ref:`Secure_Boot_Setup` section,
+by configuring::
+
+  filename "uefi/shimx64.efi";
 
 Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder,
 for example ``uefi/BOOTX64.EFI``,
@@ -230,6 +236,8 @@ and start the DHCP_ service::
 
   systemctl enable dhcpd
   systemctl restart dhcpd
+
+.. _x86-64: https://en.wikipedia.org/wiki/X86-64
 
 Configure the TFTP service
 ---------------------------
@@ -489,18 +497,39 @@ There is a general description from the Fedora_ page:
 
 A Kickstart_ installation can be made using PXE_and_UEFI_ network booting.
 
-Disable Secure Boot in BIOS
----------------------------
+.. _Secure_Boot_Setup:
 
-If the PXE_ client system BIOS_ is configured for UEFI_ Secure_Boot_
-then the PXE_ boot will fail with an error about an **invalid signature**.
+Disable Secure Boot in setup
+----------------------------
+
+If the PXE_ client system is configured for UEFI_ Secure_Boot_
+then the PXE_ boot may likely fail with an error about an **invalid signature**.
 See also `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_.
 
-As explained in `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_
+There is an explanation in `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_
 
-ToDo: The PXE_ booting with UEFI_ Secure_Boot_ may be enabled with the SHIM_ first-stage UEFI bootloader.
+**Workaround:** Disable Secure_Boot_ from UEFI_ or BIOS_ settings.
+After the OS installation has completed, Secure_Boot_ may be reenabled and the OS should boot correctly in this mode.
 
-**Workaround:** Disable secureboot from UEFI_ or BIOS_ settings.
+In special cases it may actually be possible to make a successful PXE_ Secure_Boot_ installation,
+provided these conditions are fulfilled:
+
+* The DHCP_ server (see below) has been configured to serve the ``shimx64.efi`` boot image
+  in stead of the usual ``BOOTX64.EFI``::
+
+    filename "uefi/shimx64.efi";
+
+* The ``shimx64.efi`` boot image originates from the **same Linux OS version** as the OS you are trying to install.
+  Note: The image signatures which can be verified by the ``sbverify`` command (see above).
+
+In this case the client's Secure_Boot_ of ``shimx64.efi`` will accept the signature of the ``grubx64.efi`` boot image
+as well as the signature of the Linux installation kernel when it gets loaded.
+For example, if all boot images are from the same ``RockyLinux 9.6`` OS, 
+then the image signatures will be verified correctly by the UEFI_ Secure_Boot_ in the client.
+
+Any signature mismatch will cause the installation to fail,
+since different OS images cannot verify the image signatures of other OSes,
+for example ``RHEL`` versus ``AlmaLinux`` versus ``RockyLinux``.
 
 .. _Secure_Boot: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface#SECURE-BOOT
 .. _SHIM: https://github.com/rhboot/shim/blob/main/README.md
