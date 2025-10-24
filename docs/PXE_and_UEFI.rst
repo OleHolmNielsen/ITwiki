@@ -555,19 +555,22 @@ Automated Kickstart installation
 -----------------------------------
 
 Automated installation with PXE_ and Anaconda_ is possible using either UEFI_ or legacy BIOS_ booting.
+You can either:
 
-If the node's **boot order** has been configured with PXE_ network booting as the first boot device,
-and you have also installed the above pxeconfig_toolkit_ and used pxeconfig_ to setup the client boot process,
+* Configure the node's **boot order** with PXE_ network booting as the first boot device, or
+
+* When powering up the server, PXE_ network booting can be selected using the console,
+  typically by pressing the F12 or F10 Function_key_ as shown in the console.
+
+When you have installed the above pxeconfig_toolkit_ and used pxeconfig_ to setup the client boot process,
 then it is sufficient to power cycle and/or start up the server.
+
 The :ref:`UEFI_network_boot` ensures that:
 
 * Kickstart_ OS installation will be performed automatically.
 * The installation process can be viewed in the node's console (physically or in the BMC_ web browser window).
 * The Kickstart_ method described above therefore provides a **totally automatic and hands-free** Linux OS installation of nodes,
   suitable for a large Linux cluster and other scenarios.
-
-Alternatively, when powering up the server, PXE_ network boot can be selected from the console,
-typically by pressing the F12 or F10 button as shown in the console.
 
 .. _Kickstart: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-1-introduction
 .. _Kickstart_file: https://anaconda-installer.readthedocs.io/en/latest/kickstart.html
@@ -576,6 +579,7 @@ typically by pressing the F12 or F10 button as shown in the console.
 .. _RockyLinux: https://www.rockylinux.org
 .. _Fedora: https://fedoraproject.org/
 .. _BMC: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface#Baseboard_management_controller
+.. _Function_key: https://en.wikipedia.org/wiki/Function_key
 
 Creating a Kickstart_file_
 -------------------------------
