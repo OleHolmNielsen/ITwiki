@@ -65,7 +65,7 @@ which subsequently loads the Linux_kernel_ and initrd_
 (see the *Kernel* section in `Booting process of Linux <https://en.wikipedia.org/wiki/Booting_process_of_Linux>`_).
 
 The ``grubx64.efi`` image will now attempt to download GRUB2_ configuration files in order using the following rules,
-where the appended value corresponds to a value on the client machine::
+where the appended value ``-<something>`` corresponds to a property or address of the client machine::
 
   (FWPATH)/grub.cfg-(UUID OF NIC)
   (FWPATH)/grub.cfg-(MAC ADDRESS OF NIC)
@@ -87,7 +87,7 @@ The concrete example below shows what would happen under the IPv4_ case:
 * MAC_address_:  52:54:00:ec:33:81
 * IP_address_: 10.0.0.130 (Hexadecimal_ digits: 0A000082, see :ref:`hexadecimal_ip-address`)
 
-The GRUB2_ bootloader_ will attempt TFTP_ download of this list of configuration files in order::
+The GRUB2_ bootloader_ will attempt TFTP_ download of this list of configuration files in sequential order::
 
   (FWPATH)/grub.cfg-7726a678-7fc0-4853-a4f6-c85ac36a120a
   (FWPATH)/grub.cfg-52-54-00-ec-33-81
