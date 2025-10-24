@@ -162,9 +162,8 @@ Verify secure boot image signature
 ...................................
 
 This is only optional:
-You can verify the signature of UEFI_ secure boot images using the ``sbverify`` command
-which is located in the Linux distrubition's *Devel* repository
-(which should not be enabled by default!),
+You can verify the signature of UEFI_ secure boot images using the ``sbverify`` UEFI_ secure boot verification tool,
+which is located in the Linux distrubition's *Devel* repository (which should **not** be enabled by default!),
 for example::
 
   # AlmaLinux only: dnf install almalinux-release-devel
