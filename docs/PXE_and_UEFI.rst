@@ -228,7 +228,6 @@ such as ``BOOTX64.EFI``::
 Other CPU architectures than x86-64_ are listed in the UEFI_specification_ section 3.5.
 
 Remember also to :ref:`Install_bootloader_images`.
-
 For Secure_Boot_ you can alternatively serve the ``shimx64.efi`` boot image in stead of the usual ``BOOTX64.EFI``,
 see the :ref:`Secure_Boot_Setup` section,
 by configuring::
@@ -349,9 +348,7 @@ To boot a system with ``grubx64.efi`` (provided by the ``grub2-efi-x64`` package
     exit
   }
 
-In other Linux distributions such as Fedora_ the ``.efi`` files will be in different subdirectories of ``/boot/efi/EFI``.
-
-If there are multiple disks in the server, Grub_ will label them as *hd0, hd1, hd2*, etc.
+If there are multiple disks in the server, Grub_ will name them as *hd0, hd1, hd2*, etc.
 It seems that the numbering of such disks may vary, and if the OS installation is suddenly in disk *hd1* in stead of *hd0*,
 it is useful to define a fallback_ boot menu item as in this example::
 
