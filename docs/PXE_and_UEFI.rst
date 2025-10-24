@@ -52,8 +52,9 @@ The Linux boot process is explained in detail in
 `Guide to the Boot Process of a Linux System <https://www.baeldung.com/linux/boot-process>`_
 and `Differences between grubx64 and shimx64 <https://www.baeldung.com/linux/grubx64-vs-shimx64>`_.
 
-The PXE_ bootloader_ image ``BOOTX64.EFI`` defined in your :ref:`DHCP_server_UEFI_configuration`,
-and it is executed in the client computer's UEFI_ capable NIC_ adapter.
+When you :ref:`DHCP_server_UEFI_configuration` the client computer will download 
+the PXE_ bootloader_ image ``BOOTX64.EFI``.
+This image is executed in the client computer's UEFI_ capable NIC_ adapter.
 The image ``BOOTX64.EFI`` will subsequently download another image ``grubx64.efi`` from the TFTP_ server.
 
 The ``grubx64.efi`` will now attempt to download GRUB2_ configuration files in order using the following rules,
