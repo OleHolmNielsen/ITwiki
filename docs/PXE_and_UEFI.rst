@@ -152,7 +152,11 @@ Copy the boot image files from the packages installed above (remember to change 
   cp -p /boot/efi/EFI/<insert OS ID here>/shimx64.efi /tftpboot/uefi/
   chmod 644 /tftpboot/uefi/BOOTX64.EFI /tftpboot/uefi/grubx64.efi /tftpboot/uefi/shimx86.efi
 
-Note: See the article grubx64_versus_shimx64_ and the shim_ homepage.
+Further information:
+* The **shim** is a minimal bootloader, which is a precompiled, signed bootloader that allows the user to individually trust keys provided by Linux distributions.
+* The article grubx64_versus_shimx64_.
+* The shim_ homepage.
+* The section `Secure Boot` in the UEFI_ page on Wikipedia.
 
 .. _grubx64_versus_shimx64: https://www.baeldung.com/linux/grubx64-vs-shimx64
 .. _shim: https://github.com/rhboot/shim/blob/main/README.md
