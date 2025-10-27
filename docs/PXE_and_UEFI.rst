@@ -313,7 +313,7 @@ i.e., the PXE_ installation Linux_kernel_ ``vmlinuz`` (see below) **must** have 
 We have not been able to find a way to support multiple OS versions with Secure_Boot_ clients.
 Any signature mismatch will cause the installation to fail,
 since different OS images cannot verify the image signatures of other OSes,
-for example ``RHEL`` versus ``AlmaLinux`` versus ``RockyLinux``.
+for example RHEL_ versus AlmaLinux_ versus RockyLinux_.
 
 Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder,
 for example in ``/tftpboot/uefi/``,
