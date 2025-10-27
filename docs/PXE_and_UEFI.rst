@@ -284,7 +284,7 @@ Remember also to :ref:`Install_bootloader_images`.
 If you have any PXE boot clients with Secure_Boot_ enabled,
 you **must** serve the ``shimx64.efi`` first-stage bootloader image
 in stead of the often-cited ``BOOTX64.EFI``, see the :ref:`Secure_Boot_Setup` section.
-Note: See the article grubx64_versus_shimx64_ and the shim_ homepage.
+See also the article grubx64_versus_shimx64_ and the shim_ homepage.
 
 You should therefore serve the ``shimx64.efi`` first-stage bootloader image::
 
@@ -300,7 +300,7 @@ You should therefore serve the ``shimx64.efi`` first-stage bootloader image::
         filename "pxelinux.0";
   }
 
-The ``shimx64.efi`` chainloads ``grubx64.efi`` after verifying the Secure_Boot_ signatures,
+The ``shimx64.efi`` chainloads ``grubx64.efi`` after you Verify_signatures_,
 and this also works on clients that have disabled the Secure_Boot_ feature.
 
 Note: The ``shimx64.efi`` and ``grubx64.efi`` bootloader_ images must be copied from the
@@ -308,7 +308,11 @@ Note: The ``shimx64.efi`` and ``grubx64.efi`` bootloader_ images must be copied 
 i.e., the PXE_ installation kernel ``vmlinuz`` (see below) **must** have the same signature.
 We have not been able to find a way to support multiple OS versions with Secure_Boot_ clients.
 
-Other CPU architectures besides x86-64_ are listed in the UEFI_specification_ section 3.5.
+Any signature mismatch will cause the installation to fail,
+since different OS images cannot verify the image signatures of other OSes,
+for example ``RHEL`` versus ``AlmaLinux`` versus ``RockyLinux``.
+
+Note: Other CPU architectures besides x86-64_ are listed in the UEFI_specification_ section 3.5.
 
 Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder,
 for example in ``/tftpboot/uefi/``,
@@ -600,26 +604,7 @@ After the OS installation has completed, Secure_Boot_ may be reenabled and the O
 unless you build your own custom Linux_kernel_ due to special device drivers etc.
 
 In some cases it is actually possible to make a successful PXE_ Secure_Boot_ installation,
-provided these conditions are fulfilled:
-
-* In :ref:`DHCP_server_UEFI_configuration` serve the ``shimx64.efi`` boot image from ``dhcpd.conf``
-  in stead of the usual ``BOOTX64.EFI``::
-
-    filename "uefi/shimx64.efi";
-
-* The ``shimx64.efi`` boot image must originate from the **same Linux OS version** as the OS you are trying to install.
-  Note: You may :ref:`Verify_signatures` if necessary.
-
-In this case the client's Secure_Boot_ of ``shimx64.efi`` will accept the signature of the ``grubx64.efi`` boot image
-as well as the signature of the Linux_kernel_ when it gets loaded.
-For example, if all boot images are from the same ``RockyLinux 9.6`` OS, 
-then the image signatures will be verified correctly by the UEFI_ Secure_Boot_ in the client.
-
-Any signature mismatch will cause the installation to fail,
-since different OS images cannot verify the image signatures of other OSes,
-for example ``RHEL`` versus ``AlmaLinux`` versus ``RockyLinux``.
-
-Note: See the article grubx64_versus_shimx64_ and the shim_ homepage.
+see the section on DHCP_server_UEFI_configuration_.
 
 Automated Kickstart installation
 -----------------------------------
