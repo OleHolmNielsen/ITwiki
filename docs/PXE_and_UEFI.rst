@@ -286,7 +286,7 @@ you **must** serve the ``shimx64.efi`` first-stage bootloader image
 in stead of the often-cited ``BOOTX64.EFI``, see the :ref:`Secure_Boot_Setup` section.
 See also the article grubx64_versus_shimx64_ and the shim_ homepage.
 
-You should therefore serve the ``shimx64.efi`` first-stage bootloader image::
+You should therefore always serve the ``shimx64.efi`` first-stage bootloader image::
 
   # UEFI x86-64 boot (RFC4578 architecture types 7, 8 and 9)
   if option arch = 00:07 {          
@@ -300,6 +300,8 @@ You should therefore serve the ``shimx64.efi`` first-stage bootloader image::
         filename "pxelinux.0";
   }
 
+Note: Other CPU architectures besides x86-64_ are listed in the UEFI_specification_ section 3.5.
+
 The ``shimx64.efi`` chainloads ``grubx64.efi`` after you Verify_signatures_,
 and this also works on clients that have disabled the Secure_Boot_ feature.
 
@@ -311,8 +313,6 @@ We have not been able to find a way to support multiple OS versions with Secure_
 Any signature mismatch will cause the installation to fail,
 since different OS images cannot verify the image signatures of other OSes,
 for example ``RHEL`` versus ``AlmaLinux`` versus ``RockyLinux``.
-
-Note: Other CPU architectures besides x86-64_ are listed in the UEFI_specification_ section 3.5.
 
 Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder,
 for example in ``/tftpboot/uefi/``,
