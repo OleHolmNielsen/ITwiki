@@ -155,14 +155,13 @@ Copy the boot image files from the packages installed above (remember to change 
 The shim bootloader
 .........................
 
-According to the `Cambridge Dictionary <https://dictionary.cambridge.org/dictionary/english/shim>`_ *shim* is 
+According to the `Cambridge Dictionary <https://dictionary.cambridge.org/dictionary/english/shim>`_ **shim** is 
 *a small object or piece of material used between two parts of something to make them fit together*.
 
 The ``shimx64.efi`` is an EFI application that functions as a first-stage bootloader for systems with Secure_Boot_ enabled.
 Additionally, ``shimx64.efi`` works within the constraints of Secure_Boot_,
 which requires all bootloaders and kernels to be signed with a trusted Microsoft key.
 It allows the user to individually trust keys provided by various Linux distributions.
-
 Further information:
 
 * The article grubx64_versus_shimx64_.
@@ -182,12 +181,13 @@ This is only optional:
 You can verify the signature of UEFI_ secure boot images using the ``sbverify`` UEFI_ secure boot verification tool,
 which is installed from the Linux distrubition's *Devel* repository (which should **not** be enabled by default!)::
 
-  # AlmaLinux only: dnf install almalinux-release-devel
+  # AlmaLinux 8 only: dnf install almalinux-release-devel
+  # AlmaLinux 9 only: dnf install epel-release
   $ dnf install sbsigntools
 
 Some examples of signatures are:
 
-* ``shimx64.efi``::
+* Any Linux ``shimx64.efi``::
 
     sbverify --list /boot/efi/EFI/rocky/shimx64.efi
     warning: data remaining[832368 vs 959224]: gaps between PE/COFF sections?
@@ -200,7 +200,7 @@ Some examples of signatures are:
      - subject: /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation UEFI CA 2011
        issuer:  /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation Third Party Marketplace Root
 
-* ``BOOTX64.EFI``::
+* Any Linux ``BOOTX64.EFI``::
   
     $ sbverify --list /boot/efi/EFI/BOOT/BOOTX64.EFI
     signature 1
@@ -212,7 +212,7 @@ Some examples of signatures are:
      - subject: /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation UEFI CA 2011
        issuer:  /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation Third Party Marketplace Root
 
-* ``grubx64.efi``::
+* AlmaLinux system ``grubx64.efi``::
   
     $ sbverify --list /boot/efi/EFI/almalinux/grubx64.efi
     signature 1
@@ -223,6 +223,18 @@ Some examples of signatures are:
        issuer:  /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
      - subject: /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
        issuer:  /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
+
+* RockyLinux system ``grubx64.efi``::
+
+    $ sbverify --list /boot/efi/EFI/rocky/grubx64.efi 
+    signature 1
+    image signature issuers:
+     - /C=US/ST=Delaware/L=Dover/O=Rocky Enterprise Software Foundation/OU=Release engineering team/CN=Rocky Linux Secure Boot Root CA
+    image signature certificates:
+     - subject: /C=US/ST=Delaware/L=Dover/O=Rocky Enterprise Software Foundation/OU=Release engineering team/CN=Rocky Linux Grub2 Signing Cert 101
+       issuer:  /C=US/ST=Delaware/L=Dover/O=Rocky Enterprise Software Foundation/OU=Release engineering team/CN=Rocky Linux Secure Boot Root CA
+
+  
 
 =====================================================================================================
 
