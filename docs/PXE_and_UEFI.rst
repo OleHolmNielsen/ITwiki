@@ -182,7 +182,7 @@ You can verify the signature of UEFI_ secure boot images using the ``sbverify`` 
 which is installed from the Linux distrubition's *Devel* repository (which should **not** be enabled by default!)::
 
   # AlmaLinux 8 only: dnf install almalinux-release-devel
-  # AlmaLinux 9 only: dnf install epel-release
+  # AlmaLinux 9 and 10 only: dnf install epel-release
   $ dnf install sbsigntools
 
 Some examples of signatures are:
@@ -277,34 +277,36 @@ Add these options only if you need to support MTFTP_ (*Multicast TFTP*) as recom
 .. _RFC4578: https://datatracker.ietf.org/doc/html/rfc4578#section-2.1
 .. _MTFTP: https://datatracker.ietf.org/doc/html/draft-henry-remote-boot-protocol-00
 
-In the ``dhcpd.conf`` subnet section(s) define UEFI_ RFC4578_ or PXE_ (legacy) bootloader_ image types in the ``/tftpboot/uefi/`` subdirectory,
-such as ``BOOTX64.EFI``::
+In the ``dhcpd.conf`` subnet section(s) define the desired UEFI_ RFC4578_ or PXE_ (legacy)
+bootloader_ image types in the ``/tftpboot/uefi/`` subdirectory.
+
+Remember also to :ref:`Install_bootloader_images`.
+If you have any PXE boot clients with Secure_Boot_ enabled,
+you **must** serve the ``shimx64.efi`` first-stage bootloader image
+in stead of the often-cited ``BOOTX64.EFI``, see the :ref:`Secure_Boot_Setup` section.
+Note: See the article grubx64_versus_shimx64_ and the shim_ homepage.
+The ``shimx64.efi`` chainloads ``grubx64.efi`` after verifying signatures,
+and this also works on clients that have disabled the Secure_Boot_.
+
+You should therefore serve the ``shimx64.efi`` first-stage bootloader image::
 
   # UEFI x86-64 boot (RFC4578 architecture types 7, 8 and 9)
   if option arch = 00:07 {          
-        filename "uefi/BOOTX64.EFI";
+        filename "uefi/shimx64.efi";
   } else if option arch = 00:08 {
-        filename "uefi/BOOTX64.EFI";
+        filename "uefi/shimx64.efi";
   } else if option arch = 00:09 {
-        filename "uefi/BOOTX64.EFI";
+        filename "uefi/shimx64.efi";
   } else {                              
         # PXE boot
         filename "pxelinux.0";
   }
 
-Other CPU architectures than x86-64_ are listed in the UEFI_specification_ section 3.5.
-
-Remember also to :ref:`Install_bootloader_images`.
-For clients with Secure_Boot_ enabled you should serve the ``shimx64.efi`` first-stage bootloader image
-in stead of the usual ``BOOTX64.EFI``, see the :ref:`Secure_Boot_Setup` section, by configuring::
-
-  filename "uefi/shimx64.efi";
-
-Note: See the article grubx64_versus_shimx64_ and the shim_ homepage.
+Other CPU architectures besides x86-64_ are listed in the UEFI_specification_ section 3.5.
 
 Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder,
-for example ``/tftpboot/uefi/BOOTX64.EFI``,
-will cause the client host PXE_ boot process to download all further files also from that same ``uefi/`` subdirectory,
+for example in ``/tftpboot/uefi/``,
+will cause the client host PXE_ boot process to download all further files also from that same subdirectory,
 so you need to place any other files there.
 
 When you have completed configuring the ``dhcpd.conf`` file, open the firewall for DHCP_ (port 67)::
