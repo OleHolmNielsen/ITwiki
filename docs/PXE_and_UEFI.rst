@@ -152,15 +152,26 @@ Copy the boot image files from the packages installed above (remember to change 
   cp -p /boot/efi/EFI/<insert OS ID here>/shimx64.efi /tftpboot/uefi/
   chmod 644 /tftpboot/uefi/BOOTX64.EFI /tftpboot/uefi/grubx64.efi /tftpboot/uefi/shimx86.efi
 
+The shim bootloader
+.........................
+
+According to the `Cambridge Dictionary <https://dictionary.cambridge.org/dictionary/english/shim>`_ *shim* is 
+*a small object or piece of material used between two parts of something to make them fit together*.
+
+The ``shimx64.efi`` is an EFI application that functions as a first-stage bootloader for systems with Secure_Boot_ enabled.
+Additionally, ``shimx64.efi`` works within the constraints of Secure_Boot_,
+which requires all bootloaders and kernels to be signed with a trusted Microsoft key.
+It allows the user to individually trust keys provided by various Linux distributions.
+
 Further information:
 
-* The **shim** is a minimal bootloader, which is a precompiled, signed bootloader that allows the user to individually trust keys provided by Linux distributions.
 * The article grubx64_versus_shimx64_.
-* The shim_ homepage.
-* The section `Secure Boot` in the UEFI_ page on Wikipedia.
+* The shim_ source homepage.
+* The section Secure_Boot_ in the UEFI_ page on Wikipedia.
 
 .. _grubx64_versus_shimx64: https://www.baeldung.com/linux/grubx64-vs-shimx64
 .. _shim: https://github.com/rhboot/shim/blob/main/README.md
+.. _Secure_Boot: https://en.wikipedia.org/wiki/UEFI#Secure_Boot
 
 .. _Verify_signatures:
 
@@ -169,29 +180,49 @@ Verify secure boot image signature
 
 This is only optional:
 You can verify the signature of UEFI_ secure boot images using the ``sbverify`` UEFI_ secure boot verification tool,
-which is installed from the Linux distrubition's *Devel* repository (which should **not** be enabled by default!),
-for example::
+which is installed from the Linux distrubition's *Devel* repository (which should **not** be enabled by default!)::
 
   # AlmaLinux only: dnf install almalinux-release-devel
   $ dnf install sbsigntools
-  $ sbverify --list /boot/efi/EFI/BOOT/BOOTX64.EFI
-  signature 1
-  image signature issuers:
-   - /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation UEFI CA 2011
-  image signature certificates:
-   - subject: /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Windows UEFI Driver Publisher
-     issuer:  /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation UEFI CA 2011
-   - subject: /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation UEFI CA 2011
-     issuer:  /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation Third Party Marketplace Root
-  $ sbverify --list /boot/efi/EFI/almalinux/grubx64.efi
-  signature 1
-  image signature issuers:
-   - /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
-  image signature certificates:
-   - subject: /emailAddress=security@almalinux.com/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot Signing
-     issuer:  /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
-   - subject: /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
-     issuer:  /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
+
+Some examples of signatures are:
+
+* ``shimx64.efi``::
+
+    sbverify --list /boot/efi/EFI/rocky/shimx64.efi
+    warning: data remaining[832368 vs 959224]: gaps between PE/COFF sections?
+    signature 1
+    image signature issuers:
+     - /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation UEFI CA 2011
+    image signature certificates:
+     - subject: /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Windows UEFI Driver Publisher
+       issuer:  /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation UEFI CA 2011
+     - subject: /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation UEFI CA 2011
+       issuer:  /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation Third Party Marketplace Root
+
+* ``BOOTX64.EFI``::
+  
+    $ sbverify --list /boot/efi/EFI/BOOT/BOOTX64.EFI
+    signature 1
+    image signature issuers:
+     - /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation UEFI CA 2011
+    image signature certificates:
+     - subject: /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Windows UEFI Driver Publisher
+       issuer:  /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation UEFI CA 2011
+     - subject: /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation UEFI CA 2011
+       issuer:  /C=US/ST=Washington/L=Redmond/O=Microsoft Corporation/CN=Microsoft Corporation Third Party Marketplace Root
+
+* ``grubx64.efi``::
+  
+    $ sbverify --list /boot/efi/EFI/almalinux/grubx64.efi
+    signature 1
+    image signature issuers:
+     - /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
+    image signature certificates:
+     - subject: /emailAddress=security@almalinux.com/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot Signing
+       issuer:  /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
+     - subject: /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
+       issuer:  /emailAddress=security@almalinux.org/O=AlmaLinux OS Foundation/CN=AlmaLinux Secure Boot CA
 
 =====================================================================================================
 
