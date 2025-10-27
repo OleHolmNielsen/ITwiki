@@ -182,7 +182,7 @@ You can verify the signature of UEFI_ secure boot images using the ``sbverify`` 
 which is installed from the Linux distrubition's *Devel* repository (which should **not** be enabled by default!)::
 
   # AlmaLinux 8 only: dnf install almalinux-release-devel
-  # AlmaLinux 9 and 10 only: dnf install epel-release
+  # RockyLinux and AlmaLinux 9 and 10: dnf install epel-release
   $ dnf install sbsigntools
 
 Some examples of signatures are:
