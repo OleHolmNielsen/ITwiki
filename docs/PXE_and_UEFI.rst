@@ -305,11 +305,12 @@ Note: Other CPU architectures besides x86-64_ are listed in the UEFI_specificati
 The ``shimx64.efi`` chainloads ``grubx64.efi`` after the Verify_signatures_ step,
 and this also works seemlessly on clients that have disabled the Secure_Boot_ feature.
 
-Note: The ``shimx64.efi`` and ``grubx64.efi`` bootloader_ images must be copied from the
+**IMPORTANT:**:
+The ``shimx64.efi`` and ``grubx64.efi`` bootloader_ images must be copied from the
 **same Linux OS version** as the OS you are trying to install on the client,
-i.e., the PXE_ installation kernel ``vmlinuz`` (see below) **must** have the same signature.
-We have not been able to find a way to support multiple OS versions with Secure_Boot_ clients.
+i.e., the PXE_ installation Linux_kernel_ ``vmlinuz`` (see below) **must** have the same signature.
 
+We have not been able to find a way to support multiple OS versions with Secure_Boot_ clients.
 Any signature mismatch will cause the installation to fail,
 since different OS images cannot verify the image signatures of other OSes,
 for example ``RHEL`` versus ``AlmaLinux`` versus ``RockyLinux``.
