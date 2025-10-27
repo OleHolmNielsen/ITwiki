@@ -302,8 +302,8 @@ You should therefore always serve the ``shimx64.efi`` first-stage bootloader ima
 
 Note: Other CPU architectures besides x86-64_ are listed in the UEFI_specification_ section 3.5.
 
-The ``shimx64.efi`` chainloads ``grubx64.efi`` after you Verify_signatures_,
-and this also works on clients that have disabled the Secure_Boot_ feature.
+The ``shimx64.efi`` chainloads ``grubx64.efi`` after the Verify_signatures_ step,
+and this also works seemlessly on clients that have disabled the Secure_Boot_ feature.
 
 Note: The ``shimx64.efi`` and ``grubx64.efi`` bootloader_ images must be copied from the
 **same Linux OS version** as the OS you are trying to install on the client,
