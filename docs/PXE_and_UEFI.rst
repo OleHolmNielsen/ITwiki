@@ -601,9 +601,6 @@ for example ``RHEL`` versus ``AlmaLinux`` versus ``RockyLinux``.
 
 Note: See the article grubx64_versus_shimx64_ and the shim_ homepage.
 
-
-.. _Secure_Boot: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface#SECURE-BOOT
-
 Automated Kickstart installation
 -----------------------------------
 
