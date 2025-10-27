@@ -285,8 +285,6 @@ If you have any PXE boot clients with Secure_Boot_ enabled,
 you **must** serve the ``shimx64.efi`` first-stage bootloader image
 in stead of the often-cited ``BOOTX64.EFI``, see the :ref:`Secure_Boot_Setup` section.
 Note: See the article grubx64_versus_shimx64_ and the shim_ homepage.
-The ``shimx64.efi`` chainloads ``grubx64.efi`` after verifying signatures,
-and this also works on clients that have disabled the Secure_Boot_.
 
 You should therefore serve the ``shimx64.efi`` first-stage bootloader image::
 
@@ -301,6 +299,14 @@ You should therefore serve the ``shimx64.efi`` first-stage bootloader image::
         # PXE boot
         filename "pxelinux.0";
   }
+
+The ``shimx64.efi`` chainloads ``grubx64.efi`` after verifying the Secure_Boot_ signatures,
+and this also works on clients that have disabled the Secure_Boot_ feature.
+
+Note: The ``shimx64.efi`` and ``grubx64.efi`` bootloader_ images must be copied from the
+**same Linux OS version** as the OS you are trying to install on the client,
+i.e., the PXE_ installation kernel ``vmlinuz`` (see below) **must** have the same signature.
+We have not been able to find a way to support multiple OS versions with Secure_Boot_ clients.
 
 Other CPU architectures besides x86-64_ are listed in the UEFI_specification_ section 3.5.
 
