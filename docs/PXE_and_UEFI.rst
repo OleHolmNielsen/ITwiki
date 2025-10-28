@@ -62,7 +62,7 @@ and subsequently network boot the client computer,
 it will first download the bootloader_ image.
 This image is executed in the client computer's UEFI_ capable NIC_ adapter,
 and it will subsequently download the main bootloader_ image ``grubx64.efi`` from the TFTP_ server,
-which subsequently loads the Linux_kernel_ and initrd_
+which loads the installation Linux_kernel_ and initrd_
 (see the *Kernel* section in `Booting process of Linux <https://en.wikipedia.org/wiki/Booting_process_of_Linux>`_).
 
 The ``grubx64.efi`` image will now attempt to download GRUB2_ configuration files in order using the following rules,
@@ -131,8 +131,8 @@ Configure your network installation server
 
 .. _Install_bootloader_images:
 
-Install the BOOTX64.EFI and other bootloader files
--------------------------------------------------------
+Install the bootloader image files
+----------------------------------------
 
 Install the boot-image packages on your network installation server::
 
@@ -322,8 +322,7 @@ Any signature mismatch will cause the installation to fail,
 since different OS images cannot verify the image signatures of other OSes,
 for example RHEL_ versus AlmaLinux_ versus RockyLinux_.
 
-Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder,
-for example in ``/tftpboot/uefi/``,
+Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder such as ``/tftpboot/uefi/``,
 will cause the client host PXE_ boot process to download all further files also from that same subdirectory,
 so you need to place any other files there.
 
