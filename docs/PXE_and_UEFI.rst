@@ -46,8 +46,9 @@ UEFI network boot process
 In this section we describe how a computer doing an UEFI_ network PXE_ boot will download a bootloader_ image file
 from the network's TFTP_ server and execute it.
 For 64-bit UEFI_ systems with the x86-64_ architecture,
-the boot file name by convention is ``BOOTX64.EFI``.
-This file is located in the folder ``/boot/efi/`` on a bootable drive.
+the boot file name by convention is ``BOOTX64.EFI``,
+but other bootloader_ images such as ``shimx64.efi`` may be used in stead.
+The bootloader_ image file is located in the folder ``/boot/efi/`` on a bootable drive.
 Other CPU architectures than x86-64_ are listed in the UEFI_specification_ section 3.5.
 
 The Linux boot process is explained in detail in
@@ -58,7 +59,7 @@ typically by pressing the F12 or F10 Function_key_.
 
 When you :ref:`DHCP_server_UEFI_configuration`,
 and subsequently network boot the client computer,
-it will first download the bootloader_ image ``BOOTX64.EFI``.
+it will first download the bootloader_ image.
 This image is executed in the client computer's UEFI_ capable NIC_ adapter,
 and it will subsequently download the main bootloader_ image ``grubx64.efi`` from the TFTP_ server,
 which subsequently loads the Linux_kernel_ and initrd_
