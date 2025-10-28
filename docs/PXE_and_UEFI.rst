@@ -123,6 +123,7 @@ Note that this should be changed both in the prefix and in any references to the
 .. _syslinux: https://en.wikipedia.org/wiki/SYSLINUX
 .. _Linux_kernel: https://en.wikipedia.org/wiki/Linux_kernel
 .. _initrd: https://en.wikipedia.org/wiki/Initial_ramdisk
+.. _bootloader: https://en.wikipedia.org/wiki/Bootloader
 
 =====================================================================================================
 
@@ -679,7 +680,7 @@ A Legacy PXE_ BIOS_ boot file ``/tftpboot/pxelinux.cfg/default`` example using t
 Bootloader command
 ------------------
 
-The Kickstart_file_ bootloader_ command (required) specifies how the bootloader_ should be installed.
+The Kickstart_file_ bootloader_command_ (required) specifies how the bootloader_ should be installed.
 
 You should always use a password to protect your bootloader_.
 An unprotected bootloader_ can allow a potential attacker to modify the system’s boot options and gain unauthorized access to the system:
@@ -706,7 +707,7 @@ Some systems require a special partition for installing the bootloader_.
 The type and size of this partition depends on whether the disk you are installing the bootloader_ to uses the Master Boot Record (MBR) or a GUID Partition Table (GPT) schema.
 For more information, see the bootloader_ page.
 
-.. _bootloader: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#bootloader
+.. _bootloader_command: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#bootloader
 
 Automatic boot disk device selection 
 ---------------------------------------
