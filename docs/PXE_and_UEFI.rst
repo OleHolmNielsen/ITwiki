@@ -168,6 +168,7 @@ which requires all bootloaders and kernels to be signed with a trusted Microsoft
 It allows the user to individually trust keys provided by various Linux distributions.
 Further information:
 
+* `Debian SecureBoot <https://wiki.debian.org/SecureBoot>`_ page.
 * The article grubx64_versus_shimx64_.
 * The shim_ source homepage.
 * The section Secure_Boot_ in the UEFI_ page on Wikipedia.
