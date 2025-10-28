@@ -68,7 +68,7 @@ The ``grubx64.efi`` image will now attempt to download GRUB2_ configuration file
 where the appended value ``-(something)`` corresponds to a property or address of the client machine::
 
   (FWPATH)/grub.cfg-(UUID OF NIC)
-  (FWPATH)/grub.cfg-(MAC ADDRESS OF NIC)
+  (FWPATH)/grub.cfg-01-(MAC ADDRESS OF NIC)
   (FWPATH)/grub.cfg-(IPv4 OR IPv6 ADDRESS)
   (FWPATH)/grub.cfg
 
@@ -78,6 +78,8 @@ where the appended value ``-(something)`` corresponds to a property or address o
 
 - The ``grub.cfg`` file is placed in the same directory as the path output by ``grub-mknetdir`` hereafter referred to as ``(FWPATH)``.
   Note: Our setup uses ``FWPATH=/tftpboot/uefi``.
+
+- For the ``MAC ADDRESS OF NIC`` value the ``grub.html`` manual is missing a leading ``-01`` which we have added here.
 
 The client will only attempt to look up an IPv6_ address value once, however,
 it will try the smaller and smaller parts of IPv4_ address multiple times as shown below.
@@ -93,7 +95,7 @@ The concrete example below shows what would happen under the IPv4_ case:
 The GRUB2_ bootloader_ will attempt TFTP_ download of this list of configuration files in sequential order::
 
   (FWPATH)/grub.cfg-7726a678-7fc0-4853-a4f6-c85ac36a120a
-  (FWPATH)/grub.cfg-52-54-00-ec-33-81
+  (FWPATH)/grub.cfg-01-52-54-00-ec-33-81        # Note the leading "-01" which is missing in the documentation
   (FWPATH)/grub.cfg-0A000082
   (FWPATH)/grub.cfg-0A00008
   (FWPATH)/grub.cfg-0A0000
