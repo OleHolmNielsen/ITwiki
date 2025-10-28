@@ -184,7 +184,7 @@ You can verify the signature of UEFI_ secure boot images using the ``sbverify`` 
 First enable the repository:
 
 * AlmaLinux 8: dnf install almalinux-release-devel
-* RockyLinux 8: dnf config-manager --enable devel
+* RockyLinux 8: Download https://dl.rockylinux.org/pub/sig/8/core/x86_64/core-infra/Packages/s/sbsigntools-0.9.5-2.el8.core.x86_64.rpm
 * All EL9 or EL10: dnf install epel-release
 
 Install the package::
