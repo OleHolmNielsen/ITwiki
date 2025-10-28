@@ -179,12 +179,16 @@ Further information:
 Verify secure boot image signature
 ...................................
 
-This is only optional:
-You can verify the signature of UEFI_ secure boot images using the ``sbverify`` UEFI_ secure boot verification tool,
-which is installed from the Linux distrubition's *Devel* repository (which should **not** be enabled by default!)::
+This is only **optional**:
+You can verify the signature of UEFI_ secure boot images using the ``sbverify`` UEFI_ secure boot verification tool.
+First enable the repository:
 
-  # AlmaLinux 8 only: dnf install almalinux-release-devel
-  # RockyLinux and AlmaLinux 9 and 10: dnf install epel-release
+* AlmaLinux 8: dnf install almalinux-release-devel
+* RockyLinux 8: dnf config-manager --enable devel
+* All EL9 or EL10: dnf install epel-release
+
+Install the package::
+
   $ dnf install sbsigntools
 
 Some examples of signatures are:
