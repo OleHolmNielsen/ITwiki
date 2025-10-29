@@ -1,4 +1,4 @@
-.. _Kickstart:
+.. _Kickstart_installation:
 
 ======================
 Kickstart installation
@@ -82,6 +82,13 @@ A Legacy PXE_ BIOS_ boot file ``/tftpboot/pxelinux.cfg/default`` example using t
 
 .. _Anaconda: https://fedoraproject.org/wiki/Anaconda
 .. _inst.ks: https://docs.fedoraproject.org/en-US/fedora/f36/install-guide/advanced/Boot_Options/#sect-boot-options-kickstart
+.. _NFS: https://en.wikipedia.org/wiki/Network_File_System
+.. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
+.. _BIOS: https://en.wikipedia.org/wiki/BIOS
+.. _UEFI: https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface
+.. _bootloader: https://en.wikipedia.org/wiki/Bootloader
+.. _GRUB2: https://fedoraproject.org/wiki/GRUB_2
+.. _Linux_kernel: https://en.wikipedia.org/wiki/Linux_kernel
 
 Bootloader command
 ------------------
