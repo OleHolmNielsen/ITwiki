@@ -13,7 +13,7 @@ This *HowTo* guide documents how to install EL/RHEL_ Linux using PXE_ on a clien
 We will show how to support UEFI_ booting with PXE_, downloading files from your TFTP_ server.
 See also our pages:
 
-* :ref:`Kickstart_installation`.
+* :ref:`_Kickstart_installation_of_EL_Linux_systems`.
 * Legacy BIOS :ref:`PXE-booting` for Linux OS installation.
 
 Additional useful pages:

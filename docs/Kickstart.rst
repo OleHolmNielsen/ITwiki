@@ -1,13 +1,13 @@
-.. _Kickstart_installation:
+.. _Kickstart_installation_of_EL_Linux_systems:
 
-======================
-Kickstart installation
-======================
+============================================
+Kickstart installation of EL Linux systems
+============================================
 
 .. contents::
 
-Configuring Kickstart installation of EL Linux systems
-================================================================
+Configuring Kickstart 
+======================
 
 Linux OS installation of RHEL_ Linux and *EL clones* (AlmaLinux_, RockyLinux_, and more),
 as well as Fedora_,
