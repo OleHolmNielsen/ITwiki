@@ -151,7 +151,7 @@ Note that this should be changed both in the prefix and in any references to the
 
 =====================================================================================================
 
-Disable Secure Boot in client setup
+Configuring Secure Boot in client setup
 =======================================
 
 If the PXE_ client system is configured for UEFI_ Secure_Boot_
