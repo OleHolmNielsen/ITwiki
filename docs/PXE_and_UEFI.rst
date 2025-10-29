@@ -38,6 +38,10 @@ Additional useful pages:
 .. _GRUB2: https://fedoraproject.org/wiki/GRUB_2
 .. _NFS: https://en.wikipedia.org/wiki/Network_File_System
 .. _EPEL: https://fedoraproject.org/wiki/EPEL
+.. _RHEL: https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux
+.. _AlmaLinux: https://almalinux.org/
+.. _RockyLinux: https://www.rockylinux.org
+.. _Fedora: https://fedoraproject.org/
 
 =======================================================================================================
 
@@ -127,6 +131,7 @@ Note that this should be changed both in the prefix and in any references to the
 .. _Linux_kernel: https://en.wikipedia.org/wiki/Linux_kernel
 .. _initrd: https://en.wikipedia.org/wiki/Initial_ramdisk
 .. _bootloader: https://en.wikipedia.org/wiki/Bootloader
+.. _Function_key: https://en.wikipedia.org/wiki/Function_key
 
 =====================================================================================================
 
