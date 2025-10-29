@@ -12,8 +12,10 @@ Overview
 This *HowTo* guide documents how to install EL/RHEL_ Linux using PXE_ on a client host booting by UEFI_.
 
 We will show how to support UEFI_ booting with PXE_, downloading files from your TFTP_ server.
-See also our network :ref:`PXE-booting` page for Linux OS installation, 
-and the :ref:`Kickstart_installation` page.
+See also our pages:
+
+* Network :ref:`PXE-booting` page for Linux OS installation, 
+* :ref:`Kickstart_installation`.
 
 Additional useful pages:
 
