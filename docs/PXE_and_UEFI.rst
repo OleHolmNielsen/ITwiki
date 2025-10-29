@@ -127,6 +127,36 @@ Note that this should be changed both in the prefix and in any references to the
 
 =====================================================================================================
 
+Disable Secure Boot in client setup
+=======================================
+
+If the PXE_ client system is configured for UEFI_ Secure_Boot_
+then the PXE_ boot may likely fail with an error about an **invalid signature**.
+See `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_
+and `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_.
+
+If you install third party Linux_kernel_ driver modules the Secure_Boot_ may block these modules:
+
+* VirtualBox_: See `Installing Virtualbox and Secure Boot / Kernel Signing <https://forums.virtualbox.org/viewtopic.php?t=113162>`_.
+
+* NVIDIA_drivers_: `NVIDIA drivers not working while Secure Boot <https://forums.developer.nvidia.com/t/nvidia-drivers-not-working-while-secure-boot-is-enabled-after-updating-to-ubuntu-24-04/305351>`_.
+
+**Workaround:** Disable Secure_Boot_ from UEFI_ or BIOS_ settings.
+After the OS installation has completed, Secure_Boot_ may be reenabled and the OS should boot correctly in this mode,
+unless you build your own custom Linux_kernel_ due to special device drivers etc.
+
+In some cases it is actually possible to make a successful PXE_ Secure_Boot_ installation,
+see the section on DHCP_server_UEFI_configuration_.
+
+You can determine on a running system whether Secure_Boot_ is enabled or not::
+
+  $ mokutil --sb-state
+
+.. _VirtualBox: https://www.virtualbox.org/
+.. _NVIDIA_drivers: https://www.nvidia.com/en-in/drivers/
+
+=====================================================================================================
+
 Configure your network installation server
 ===============================================
 
@@ -599,34 +629,6 @@ There is a general description from the Fedora_ page:
   making it ideal for network and system administrators.
 
 .. _Secure_Boot_Setup:
-
-Disable Secure Boot in client setup
-----------------------------------------
-
-If the PXE_ client system is configured for UEFI_ Secure_Boot_
-then the PXE_ boot may likely fail with an error about an **invalid signature**.
-See `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_
-and `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_.
-
-If you install third party Linux_kernel_ driver modules the Secure_Boot_ may block these modules:
-
-* VirtualBox_: See `Installing Virtualbox and Secure Boot / Kernel Signing <https://forums.virtualbox.org/viewtopic.php?t=113162>`_.
-
-* NVIDIA_drivers_: `NVIDIA drivers not working while Secure Boot <https://forums.developer.nvidia.com/t/nvidia-drivers-not-working-while-secure-boot-is-enabled-after-updating-to-ubuntu-24-04/305351>`_.
-
-**Workaround:** Disable Secure_Boot_ from UEFI_ or BIOS_ settings.
-After the OS installation has completed, Secure_Boot_ may be reenabled and the OS should boot correctly in this mode,
-unless you build your own custom Linux_kernel_ due to special device drivers etc.
-
-In some cases it is actually possible to make a successful PXE_ Secure_Boot_ installation,
-see the section on DHCP_server_UEFI_configuration_.
-
-You can determine on a running system whether Secure_Boot_ is enabled or not::
-
-  $ mokutil --sb-state
-
-.. _VirtualBox: https://www.virtualbox.org/
-.. _NVIDIA_drivers: https://www.nvidia.com/en-in/drivers/
 
 Automated Kickstart installation
 -----------------------------------
