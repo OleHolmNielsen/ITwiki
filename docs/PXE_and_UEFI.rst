@@ -612,7 +612,7 @@ If you install third party Linux_kernel_ driver modules the Secure_Boot_ may blo
 
 * VirtualBox_: See `Installing Virtualbox and Secure Boot / Kernel Signing <https://forums.virtualbox.org/viewtopic.php?t=113162>`_.
 
-* NVIDIA_: TBD
+* NVIDIA_drivers_: `NVIDIA drivers not working while Secure Boot <https://forums.developer.nvidia.com/t/nvidia-drivers-not-working-while-secure-boot-is-enabled-after-updating-to-ubuntu-24-04/305351>`_.
 
 **Workaround:** Disable Secure_Boot_ from UEFI_ or BIOS_ settings.
 After the OS installation has completed, Secure_Boot_ may be reenabled and the OS should boot correctly in this mode,
@@ -626,6 +626,7 @@ You can determine on a running system whether Secure_Boot_ is enabled or not::
   $ mokutil --sb-state
 
 .. _VirtualBox: https://www.virtualbox.org/
+.. _NVIDIA_drivers: https://www.nvidia.com/en-in/drivers/
 
 Automated Kickstart installation
 -----------------------------------
