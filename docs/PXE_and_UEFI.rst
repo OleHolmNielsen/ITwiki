@@ -608,6 +608,12 @@ then the PXE_ boot may likely fail with an error about an **invalid signature**.
 See `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_
 and `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_.
 
+If you install third party Linux_kernel_ driver modules the Secure_Boot_ may block these modules:
+
+* VirtualBox_: See `Installing Virtualbox and Secure Boot / Kernel Signing <https://forums.virtualbox.org/viewtopic.php?t=113162>`_.
+
+* NVIDIA_: TBD
+
 **Workaround:** Disable Secure_Boot_ from UEFI_ or BIOS_ settings.
 After the OS installation has completed, Secure_Boot_ may be reenabled and the OS should boot correctly in this mode,
 unless you build your own custom Linux_kernel_ due to special device drivers etc.
@@ -618,6 +624,8 @@ see the section on DHCP_server_UEFI_configuration_.
 You can determine on a running system whether Secure_Boot_ is enabled or not::
 
   $ mokutil --sb-state
+
+.. _VirtualBox: https://www.virtualbox.org/
 
 Automated Kickstart installation
 -----------------------------------
