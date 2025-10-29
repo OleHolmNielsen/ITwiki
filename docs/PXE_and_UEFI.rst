@@ -165,7 +165,7 @@ If you install third party Linux_kernel_ driver modules the Secure_Boot_ may blo
 
 * NVIDIA_drivers_: `NVIDIA drivers not working while Secure Boot <https://forums.developer.nvidia.com/t/nvidia-drivers-not-working-while-secure-boot-is-enabled-after-updating-to-ubuntu-24-04/305351>`_.
 
-* MLNX_OFED_ Infiniband: Enrolling NVIDIA's x.509 Public Key On your Systems <https://docs.nvidia.com/networking/display/mlnxofedv24010331/uefi+secure+boot>`_
+* MLNX_OFED_ Infiniband: `Enrolling NVIDIA's x.509 Public Key On your Systems <https://docs.nvidia.com/networking/display/mlnxofedv24010331/uefi+secure+boot>`_
 
 **Workaround:** Disable Secure_Boot_ from UEFI_ or BIOS_ settings.
 After the OS installation has completed, Secure_Boot_ may be reenabled and the OS should boot correctly in this mode,
