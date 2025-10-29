@@ -13,7 +13,7 @@ This *HowTo* guide documents how to install EL/RHEL_ Linux using PXE_ on a clien
 We will show how to support UEFI_ booting with PXE_, downloading files from your TFTP_ server.
 See also our pages:
 
-* :ref:`_Kickstart_installation_of_EL_Linux_systems`.
+* :ref:`Kickstart_installation_of_EL_Linux_systems`.
 * Legacy BIOS :ref:`PXE-booting` for Linux OS installation.
 
 Additional useful pages:
@@ -433,7 +433,7 @@ and run a ``make`` command to download the boot image files.
 Create a grub.cfg file in /tftpboot/uefi/
 ---------------------------------------------
 
-Please consult the :ref:`Kickstart_installation` page for a description of automated Linux OS installation.
+Please consult the :ref:`Kickstart_installation_of_EL_Linux_systems` page for a description of automated Linux OS installation.
 
 The ``uefi/grubx64.efi`` (or the ``uefi/BOOTX64.EFI``) boot file will be looking for a
 GRUB2_ or Grub_ configuration file ``uefi/grub.cfg`` in the same subdirectory.
