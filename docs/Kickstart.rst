@@ -47,6 +47,9 @@ The :ref:`UEFI_network_boot` ensures that:
 
 .. _Kickstart: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-1-introduction
 .. _Kickstart_file: https://anaconda-installer.readthedocs.io/en/latest/kickstart.html
+.. _pxeconfig_toolkit: https://gitlab.com/surfsara/pxeconfig
+.. _pxeconfig: https://gitlab.com/surfsara/pxeconfig/-/blob/master/src/pxeconfig.py
+.. _Grub: https://en.wikipedia.org/wiki/GNU_GRUB
 .. _RHEL: https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux
 .. _AlmaLinux: https://almalinux.org/
 .. _RockyLinux: https://www.rockylinux.org
