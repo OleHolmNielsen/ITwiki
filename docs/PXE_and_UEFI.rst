@@ -179,6 +179,25 @@ You can determine on a running system whether Secure_Boot_ is enabled or not::
 .. _VirtualBox: https://www.virtualbox.org/
 .. _NVIDIA_drivers: https://www.nvidia.com/en-in/drivers/
 
+efibootmgr - manipulate the UEFI Boot Manager
+===============================================
+
+efibootmgr_ is a userspace application used to modify the UEFI_ Boot Manager.  
+This application can create and destroy boot entries, change the boot order, change the next running boot option, and more.
+
+To show the current boot order::
+
+  efibootmgr -v
+
+Some useful command options (see the efibootmgr_ page)::
+
+        -n | --bootnext XXXX   set BootNext to XXXX (hex)
+        -N | --delete-bootnext delete BootNext
+        -o | --bootorder XXXX,YYYY,ZZZZ,...     explicitly set BootOrder (hex)
+        -O | --delete-bootorder   delete BootOrder
+
+.. _efibootmgr: https://github.com/rhboot/efibootmgr
+
 =====================================================================================================
 
 Configure your network installation server
@@ -636,24 +655,3 @@ When this script is executed on the node in the post-install phase,
 the telnet_ command connects to the pxeconfigd_ service on the image server,
 and this daemon will remove the hexadecimally encoded IP-address soft-link in ``/tftpboot/uefi/``
 corresponding to the client IP-address which did the telnet_ connection.
-
-=======================================================================================================
-
-efibootmgr - manipulate the UEFI Boot Manager
-===============================================
-
-efibootmgr_ is a userspace application used to modify the UEFI_ Boot Manager.  
-This application can create and destroy boot entries, change the boot order, change the next running boot option, and more.
-
-To show the current boot order::
-
-  efibootmgr -v
-
-Some useful command options (see the efibootmgr_ page)::
-
-        -n | --bootnext XXXX   set BootNext to XXXX (hex)
-        -N | --delete-bootnext delete BootNext
-        -o | --bootorder XXXX,YYYY,ZZZZ,...     explicitly set BootOrder (hex)
-        -O | --delete-bootorder   delete BootOrder
-
-.. _efibootmgr: https://github.com/rhboot/efibootmgr
