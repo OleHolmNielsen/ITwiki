@@ -10,12 +10,11 @@ Overview
 ========
 
 This *HowTo* guide documents how to install EL/RHEL_ Linux using PXE_ on a client host booting by UEFI_.
-
 We will show how to support UEFI_ booting with PXE_, downloading files from your TFTP_ server.
 See also our pages:
 
-* Network :ref:`PXE-booting` page for Linux OS installation, 
 * :ref:`Kickstart_installation`.
+* Legacy BIOS :ref:`PXE-booting` for Linux OS installation.
 
 Additional useful pages:
 
@@ -36,7 +35,6 @@ Additional useful pages:
 .. _UEFI_specification: https://uefi.org/sites/default/files/resources/UEFI_Spec_Final_2.11.pdf
 .. _BIOS: https://en.wikipedia.org/wiki/BIOS
 .. _Legacy_BIOS_boot: https://en.wikipedia.org/wiki/Legacy_mode
-.. _PXE-booting: https://wiki.fysik.dtu.dk/niflheim/PXE-booting
 .. _GRUB2: https://fedoraproject.org/wiki/GRUB_2
 .. _NFS: https://en.wikipedia.org/wiki/Network_File_System
 .. _EPEL: https://fedoraproject.org/wiki/EPEL
