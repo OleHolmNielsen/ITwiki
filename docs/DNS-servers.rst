@@ -1,40 +1,21 @@
 .. _DNS-servers:
 
 ========================
-DNS servers at DTU Fysik
+DNS servers 
 ========================
 
 .. Contents::
 
-Domains at DTU Fysik
-------------------------
+DNS server configuration files
+==============================
 
-We serve `Domain Name Service (DNS) <http://en.wikipedia.org/wiki/Domain_Name_System>`_ information for our main domain as well as some subsidiary domains:
-
-* fysik.dtu.dk and `reverse-DNS <http://en.wikipedia.org/wiki/Reverse_DNS_lookup>`_
-
-etc.
-
-DNS server configuration
-------------------------
-
-The DNS configuration files:
+The DNS configuration files are:
 
 * Named configuration file ``/var/named/chroot/etc/named.conf`` (soft-linked as ``/etc/named.conf``).
 * Domain `DNS zone files <http://en.wikipedia.org/wiki/Zone_file>`_ for each domain are located
   in ``/var/named/chroot/var/named/`` (soft-linked as ``/etc/named/``).
 
   `Reverse-DNS <http://en.wikipedia.org/wiki/Reverse_DNS_lookup>`_ is the lookup of IP-addresses to DNS-names, configured in the files ``*.in-addr.arpa``.
-
-Our authoritative DNS server is::
-
-  <XXX>.fysik.dtu.dk (130.225.86.XX)
-
-Secondary DNS **slave servers**::
-
-  XXX.fysik.dtu.dk
-  dns1.dtu.dk
-  dns2.dtu.dk
 
 DNS serial number and Time-To-Live (TTL)
 ----------------------------------------
@@ -51,9 +32,9 @@ In each DNS zone file there is a DNS serial number and *Time-To-Live* (TTL) list
 
 
 DNS server security
--------------------
+===================
 
-For reasons of security, our authoritative DNS servers **can not** be used for 
+For reasons of security, authoritative DNS servers **should not** be used for 
 looking up other domains than our own ones (also called `recursive DNS lookups`).
 We have DNS caches on our internal networks for this purpose.
 
@@ -65,10 +46,6 @@ RedHat DNS server security
 
 RedHat Enterprise Linux uses *SELinux* to create a secure DNS server environment.
 In the *man named* man-page you will find the following description:
-
-
-Red Hat SELinux BIND Security Profile
-.....................................
 
 By default, Red Hat ships BIND with the most secure SELinux policy that will not prevent normal BIND operation and will prevent exploitation of all known BIND security vulnerabilities . See the selinux(8)
 man page for information about SElinux.
@@ -94,7 +71,7 @@ for named to be allowed to write them.
 Hiding DNS server version
 -------------------------
 
-DK-CERT recommends that the DNS server version should be hidden.
+It is recommended that the DNS server version should be hidden.
 One may look up the version of a DNS server by this command::
 
   nslookup -q=txt -class=CHAOS version.bind. XXX.fysik.dtu.dk.
@@ -118,7 +95,7 @@ If the DNS server runs the iptables firewall (recommended), then add these lines
 and restart iptables.
 
 DNS slave server fonfiguration
-------------------------------
+===================================
 
 For reasons of security the *named* daemon is **not permitted** to write to the master zone files in ``/var/named/chroot/var/named``.
 This presents a problem for DNS slave servers, which must be able to write to disk the DNS zone files for which it is a slave server.
@@ -159,20 +136,12 @@ When the migration has been completed and tested successfully (wait a few days!)
 then you should remove the short TTL value of 3600.
 
 DNS caches
-------------------------
+=============
 
 The DNS caches on our internal networks, which cannot be reached by external machines for DNS lookups, should be used by all DNS clients 
 (desktop machines as well as servers) at FYS.
 
 This is configured in ``/etc/resolv.conf`` (Linux/UNIX static IP configuration), and in ``/etc/dhcp/dhcpd.conf`` (Windows/Linux DHCP clients).
-
-The DTU Fysik DNS cache servers are::
-
-  XXX
-
-For Niflheim the cache servers are::
-
-  XXX
 
 To make a server a DNS cache server, install this RPM package::
 
@@ -180,7 +149,7 @@ To make a server a DNS cache server, install this RPM package::
 
 
 DNS root servers
-----------------
+=================
 
 The ``/etc/named.conf`` file on caching DNS servers refers to the `DNS root servers <http://en.wikipedia.org/wiki/Root_nameserver>`_ which are static servers for the *Domain Name System's* root zone. 
 Download the up-to-date root server file from ftp://ftp.internic.net/domain/named.root
