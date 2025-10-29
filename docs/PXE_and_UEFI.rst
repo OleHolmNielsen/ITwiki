@@ -14,16 +14,27 @@ We will show how to support UEFI_ booting with PXE_, downloading files from your
 See also our pages:
 
 * :ref:`Kickstart_installation_of_EL_Linux_systems`.
-* Legacy BIOS :ref:`PXE-booting` for Linux OS installation.
+* :ref:`PXE-booting` for Linux OS installation.
 
-Additional useful pages:
+Other useful pages:
 
 * https://www.gnu.org/software/grub/manual/grub/grub.html
 * https://fedoraproject.org/wiki/GRUB_2
 * https://help.ubuntu.com/community/Grub2/Passwords
-* https://wiki.fogproject.org/wiki/index.php/BIOS_and_UEFI_Co-Existence
-* https://github.com/quattor/aii/issues/216
-* UEFI security: `UEFI DEFENSIVE PRACTICES GUIDANCE <https://www.nsa.gov/portals/75/documents/what-we-do/cybersecurity/professional-resources/ctr-uefi-defensive-practices-guidance.pdf>`_.
+
+UEFI security
+-------------
+
+There is an NSA Security Report
+`UEFI DEFENSIVE PRACTICES GUIDANCE <https://www.nsa.gov/portals/75/documents/what-we-do/cybersecurity/professional-resources/ctr-uefi-defensive-practices-guidance.pdf>`_.
+with some recommendations::
+
+  Machines running legacy BIOS or UEFI in compatibility mode should be migrated to UEFI native mode to
+  take advantage of new features. UEFI should be secured using a set of administrator and user passwords
+  appropriate for a device’s capabilities and intended use. Firmware comprising UEFI should be updated
+  regularly and treated as importantly as Operating System (OS) updates. UEFI Secure Boot should be
+  enabled and configured to audit firmware modules, expansion devices, and bootable OS images. Trusted
+  Platform Module (TPM) should be leveraged to check the integrity of UEFI.
 
 .. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
 .. _TFTP: https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol
