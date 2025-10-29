@@ -26,7 +26,7 @@ UEFI security
 -------------
 
 There is an NSA Security Report
-`UEFI DEFENSIVE PRACTICES GUIDANCE <https://www.nsa.gov/portals/75/documents/what-we-do/cybersecurity/professional-resources/ctr-uefi-defensive-practices-guidance.pdf>`_.
+`UEFI DEFENSIVE PRACTICES GUIDANCE <https://media.defense.gov/2019/Jul/16/2002158107/-1/-1/0/CTR-UEFI-DEFENSIVE-PRACTICES-GUIDANCE.PDF>`_
 with some recommendations::
 
   Machines running legacy BIOS or UEFI in compatibility mode should be migrated to UEFI native mode to
@@ -35,6 +35,11 @@ with some recommendations::
   regularly and treated as importantly as Operating System (OS) updates. UEFI Secure Boot should be
   enabled and configured to audit firmware modules, expansion devices, and bootable OS images. Trusted
   Platform Module (TPM) should be leveraged to check the integrity of UEFI.
+
+See also:
+
+* `UEFI Secure Boot Customization <https://media.defense.gov/2023/Mar/20/2003182401/-1/-1/0/CTR-UEFI-SECURE-BOOT-CUSTOMIZATION-20230317.PDF>`_.
+* `Hardware and Firmware Security Guidance <https://github.com/nsacyber/Hardware-and-Firmware-Security-Guidance>`_.
 
 .. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
 .. _TFTP: https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol
