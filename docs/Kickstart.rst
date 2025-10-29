@@ -6,96 +6,286 @@ Kickstart installation
 
 .. contents::
 
+Configuring Kickstart installation of EL Linux systems
+================================================================
 
-Introduction
-=============
+Linux OS installation of RHEL_ Linux and *EL clones* (AlmaLinux_, RockyLinux_, and more),
+as well as Fedora_,
+can be made using the automated Kickstart_ method.
+There is a general description from the Fedora_ page:
 
-The ``Kickstart`` installation method provides a way to do automated installations of RedHat Linux and derivatives.
-For documentation see the Pykickstart_ page.
-See also our :ref:`PXE-booting` and :ref:`PXE_and_UEFI` pages.
+* Many system administrators would prefer to use an automated installation method to install Fedora_ or RHEL_ on their machines.
+  To answer this need, Red Hat created the Kickstart_ installation method.
+  Using Kickstart_, a system administrator can create a single file containing the answers to all the questions that would normally be asked during a typical installation.
 
-.. _Pykickstart: https://pykickstart.readthedocs.io/en/latest/
-.. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
-.. _TFTP: https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol
-.. _PXELINUX: https://wiki.syslinux.org/wiki/index.php?title=PXELINUX
-.. _DHCP: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
+* A Kickstart_file_ can be kept on a server system and read by individual computers during the installation.
+  This installation method can support the use of a single Kickstart_file_ to install Fedora_ or RHEL_ on multiple machines,
+  making it ideal for network and system administrators.
 
-Using Kickstart
-===============
+.. _Secure_Boot_Setup:
 
-``Kickstart`` is a method for Linux installation preparation,
-and it uses a ``Kickstart`` script ``ks.cfg`` to describe the steps necessary for installing Linux.
-The script as well as installation files are then provided through standard services like DHCP_ and PXE_ and TFTP_
-(or possibly using a DVD disk, even though this may be outdated).
+Automated Kickstart installation
+-----------------------------------
 
-PXE configuration
-=================
+Automated installation with PXE_ and Anaconda_ is possible using either UEFI_ or legacy BIOS_ booting.
+You can either:
 
-Network booting by PXE_ (*Preboot Execution Environment*)
-provides the ``/tftpboot`` directory on a boot server for downloading files by the TFTP_ protocol.
-The PXE_ network booting protocol is implemented in hardware/firmware by every Ethernet_ chip.
-In order to boot a machine into a Linux installation environment,
-the client computer boots the PXELINUX_ software from the boot server.
+* Configure the node's **boot order** with PXE_ network booting as the first boot device, or
 
-The boot server's PXE_/TFTP_ directory ``/tftpboot`` is organized into the following subdirectories:
+* When powering up the client computer, PXE_ network booting can be selected using the console,
+  typically by pressing the F12 or F10 Function_key_ as shown in the console.
 
- * ``/tftpboot/pxelinux.cfg/``: Contains PXE_ boot files named as ``default.XXX``,
-   as well as soft links corresponding to IP-addresses (see the PXELINUX_ page *Configuration* section)
-   to be downloaded and installed using PXE_.
+When you have installed the above pxeconfig_toolkit_ and used pxeconfig_ to setup the client boot process,
+then it is sufficient to power cycle and/or start up the client computer.
 
- * An OS-specific folder (for example, ``/tftpboot/CentOS-7.9/``) containing two files ``vmlinuz`` (a mini-kernel for PXE_ booting)
-   and ``initrd.img`` (an Initial RAM-disk_ file system).
+The :ref:`UEFI_network_boot` ensures that:
 
-The PXE_ network booting is controlled by a number of parameters in a PXE_ configuration file.
-For example, a file ``default.centos7`` for installing CentOS 7 might contain::
+* Kickstart_ OS installation will be performed automatically.
+* The installation process can be viewed in the node's console (physically or in the BMC_ web browser window).
+* The Kickstart_ method described above therefore provides a **totally automatic and hands-free** Linux OS installation of nodes,
+  suitable for a large Linux cluster and other scenarios.
 
-  label CentOS7.9.2009 minimal-x86_64
-        menu label Clean CentOS-7.9.2009-x86_64, minimal install
-        kernel CentOS-7.9.2009-x86_64/vmlinuz
-        append load_ramdisk=1 initrd=CentOS-7.9.2009-x86_64/initrd.img network ks=nfs:130.225.86.11:/u/kickstart/ks-centos-7.9.2009-minimal-x86_64.cfg
-
-Here the ``append`` parameters are documented in Anaconda_Boot_Options_.
-The name of the ``Kickstart`` file is configured by the ``ks=...`` parameter,
-which can in addition use several types of network resources such as NFS_, HTTP_, or FTP_.
-
-Possibly obsolete:
-For NFS_ installs please note that RHEL/CentOS defaults to the NFS_ version``NFSv4``.
-However, the ``ks=`` parameter also permits specifying an NFS_ mount option ``nfsvers=3`` like this::
-
-  ks=nfs:nfsvers=3:130.225.86.11:ks.cfg
-
-.. _Ethernet: https://en.wikipedia.org/wiki/Ethernet
-.. _RAM-disk: https://en.wikipedia.org/wiki/RAM_drive
-.. _NFS: https://en.wikipedia.org/wiki/Network_File_System
-.. _HTTP: https://en.wikipedia.org/wiki/HTTP
-.. _FTP: https://en.wikipedia.org/wiki/File_Transfer_Protocol
-.. _Anaconda_Boot_Options: https://anaconda-installer.readthedocs.io/en/latest/boot-options.html
-
-vmlinuz and initrd.img
-----------------------
-
-The PXE_ boot kernel and initial file system are the ``vmlinuz`` mini-kernel and the ``initrd`` Initial RAM-disk_,  respectively.
-These should be downloaded to the installation server from a mirror site, for example https://mirror.fysik.dtu.dk/linux/.
-It is **required** to download the specially configured **Kickstart images** and not the regular OS boot images, for example from
-https://mirror.fysik.dtu.dk/linux/almalinux/8/BaseOS/x86_64/kickstart/images/ for AlmaLinux_.
-
-On our internal DHCP_/PXE_ server these PXE_ files are placed in, for example,
-the ``/tftpboot/AlmaLinux-8.8-x86_64/`` directory for installation of AlmaLinux_ version 8.8.
-  
-The PXE_ boot files in the ``/tftpboot/pxelinux.cfg`` directory must contain 
-``default.XXX`` files such as ``default.install-centos-4.4-clean`` which contain a reference to the new versions 
-of `vmlinuz` and  `initrd` in ``/tftpboot/CentOS-X.Y``.
-
+.. _Kickstart: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-1-introduction
+.. _Kickstart_file: https://anaconda-installer.readthedocs.io/en/latest/kickstart.html
+.. _RHEL: https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux
 .. _AlmaLinux: https://almalinux.org/
+.. _RockyLinux: https://www.rockylinux.org
+.. _Fedora: https://fedoraproject.org/
+.. _BMC: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface#Baseboard_management_controller
+.. _Function_key: https://en.wikipedia.org/wiki/Function_key
 
-DHCP configuration file dhcpd.conf
-==================================
+Creating a Kickstart_file_
+-------------------------------
 
-The following entry in ``/etc/dhcp/dhcpd.conf`` enables PXE_ boot by means of the PXELINUX_ software::
+In the following sections we discuss relevant sections of the Kickstart_file_.
 
-  # TFTP download from intra5:
-  next-server 130.225.86.6;
-  # Start up PXELINUX:
-  filename "pxelinux.bin";
+In the ``grub.cfg`` file you can use the inst.ks_ parameter to specify the location
+(on the network, for example) of the Kickstart_file_ that you want to use.
+As an example, the following menu item may be added to the ``grub.cfg`` file 
+to download a Kickstart_file_ named ``ks-almalinux-8.10-minimal-x86_64.cfg``
+from the NFS_ (version 3) server at IP address ``10.10.10.3``::
 
-These lines are added to ``/etc/dhcp/dhcpd.conf`` on the DHCP_ servers. 
+  menuentry 'AlmaLinux 8.10 minimal Kickstart' --class centos --class gnu-linux --class gnu --class os --unrestricted {
+    linuxefi (tftp)/AlmaLinux-8.10-x86_64/vmlinuz ip=dhcp inst.ks=nfs:nfsvers=3:10.10.10.3:/u/kickstart/ks-almalinux-8.10-minimal-x86_64.cfg
+    initrdefi (tftp)/AlmaLinux-8.10-x86_64/initrd.img
+  }
+
+Setting up an NFS_ server is not discussed here, however.
+Additional example files can be found in https://github.com/OleHolmNielsen/ansible/tree/master/roles/pxeconfigd/files
+
+A Legacy PXE_ BIOS_ boot file ``/tftpboot/pxelinux.cfg/default`` example using the same Kickstart_file_ is::
+
+  label AlmaLinux8.10 minimal-x86_64
+        menu label Clean AlmaLinux-8.10-x86_64, minimal install
+        kernel AlmaLinux-8.10-x86_64/vmlinuz
+        append load_ramdisk=1 initrd=AlmaLinux-8.10-x86_64/initrd.img network inst.ks=nfs:nfsvers=3:<server-IP>:/u/kickstart/ks-almalinux-8.10-minimal-x86_64.cfg vga=792
+
+.. _Anaconda: https://fedoraproject.org/wiki/Anaconda
+.. _inst.ks: https://docs.fedoraproject.org/en-US/fedora/f36/install-guide/advanced/Boot_Options/#sect-boot-options-kickstart
+
+Bootloader command
+------------------
+
+The Kickstart_file_ bootloader_command_ (required) specifies how the bootloader_ should be installed.
+
+You should always use a password to protect your bootloader_.
+An unprotected bootloader_ can allow a potential attacker to modify the system’s boot options and gain unauthorized access to the system:
+
+* ``--password`` 
+  If using GRUB2_ as the bootloader_, this sets the bootloader_ password to the one specified.
+  This should be used to restrict access to the GRUB2_ shell, where arbitrary Linux_kernel_ options can be passed.
+  If a password is specified, GRUB2_ will also ask for a user name, and that user name is always ``root``.
+
+* ``--iscrypted`` 
+  Normally, when you specify a bootloader_ password using the ``--password=`` option,
+  it will be stored in the Kickstart_file_ in plain text,
+  but you may use this option to specify an encrypted password.
+  To generate an encrypted password use the command::
+
+    grub2-mkpasswd-pbkdf2
+
+  Enter the password you want to use, and copy the command’s output (the hash starting with ``grub.pbkdf2``) into the Kickstart_file_.
+  An example bootloader_ Kickstart_ entry with an encrypted password will look similar to the following::
+
+    bootloader --iscrypted --password=grub.pbkdf2.sha512.10000.5520C6C9832F3AC3D149AC0B24BE69E2D4FB0DBEEDBD29CA1D30A044DE2645C4C7A291E585D4DC43F8A4D82479F8B95CA4BA4381F8550510B75E8E0BB2938990.C688B6F0EF935701FF9BD1A8EC7FE5BD2333799C98F28420C5CC8F1A2A233DE22C83705BB614EA17F3FDFDF4AC2161CEA3384E56EB38A2E39102F5334C47405E
+
+Some systems require a special partition for installing the bootloader_.
+The type and size of this partition depends on whether the disk you are installing the bootloader_ to uses the Master Boot Record (MBR) or a GUID Partition Table (GPT) schema.
+For more information, see the bootloader_ page.
+
+.. _bootloader_command: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#bootloader
+
+Automatic boot disk device selection 
+---------------------------------------
+
+The client computer may have multiple disk devices, and each device may have different bus interfaces to the system such as NVME_ or SATA_.
+
+When the Kickstart_ installation starts up, the file given by inst.ks_ must select, format and partition the system boot disk.
+However, you do not want to install the Linux OS on a large disk device which might be used only for data storage!
+Another problem is that NVME_ and SATA_ devices have different device names in the Linux_kernel_, for example:
+
+* SATA_: /dev/sda 
+* NVME_: /dev/nvme0n1
+
+and the correct device name must be given to Kickstart_.
+
+A nice and flexible solution to this issue is given in the thread https://access.redhat.com/discussions/3144131.
+You configure a Kickstart_file_ ``%include`` line where you would traditionally partition the disk::
+
+  # The file /tmp/part-include is created below in the %pre section
+  %include /tmp/part-include
+  %packages
+  %end
+
+Then you define a pre-install_ section with ``%pre``, here adding a number of improvements::
+
+  # Start of the %pre section with logging into /root/ks-pre.log
+  %pre --log=/root/ks-pre.log
+  # pick the first drive that is not removable and is over MINSIZE
+  DIR="/sys/block"
+  # minimum and maximum size of hard drive needed specified in GIGABYTES
+  MINSIZE=100
+  MAXSIZE=1999
+  # The loop first checks NVME then SATA/SAS drives:
+  for d in $DIR/nvme* $DIR/sd*
+  do
+    DEV=`basename "$d"`
+    if [ -d $DIR/$DEV ]; then
+      # Note: the removable file may have an incorrect value:
+      if [[ "`cat $DIR/$DEV/removable`" = "0" ]]
+      then
+        # /sys/block/*/size is in 512 byte chunks
+        GB=$((`cat $DIR/$DEV/size`/2**21))
+        echo "Disk device $DEV has size $GB GB"
+        if [ $GB -gt $MINSIZE -a $GB -lt $MAXSIZE -a -z "$ROOTDRIVE" ]
+        then
+          ROOTDRIVE=$DEV
+          echo "Select ROOTDRIVE=$ROOTDRIVE"
+        fi
+      fi
+    fi
+  done
+  
+  if [ -z "$ROOTDRIVE" ]
+  then
+        echo "ERROR: ROOTDRIVE is undefined"
+  else
+        echo "ROOTDRIVE=$ROOTDRIVE"
+        cat << EOF > /tmp/part-include
+  zerombr
+  clearpart --drives=$ROOTDRIVE --all --initlabel
+  ignoredisk --only-use=$ROOTDRIVE
+  reqpart --add-boot
+  part swap --size 32768 --asprimary
+  part pv.01 --fstype xfs --size=1 --grow --asprimary
+  volgroup VolGroup00 pv.01
+  logvol / --fstype xfs --name=lv_root --vgname=VolGroup00 --size=32768
+  EOF
+  fi
+  %end
+
+**WARNING:** We have some old Intel Xeon Nehalem_ servers with SATA disks where ``/sys/block/sda/removable`` contains an incorrect value of 1!
+
+.. _NVME: https://en.wikipedia.org/wiki/NVM_Express
+.. _SATA: https://en.wikipedia.org/wiki/Serial_ATA
+.. _pre-install: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-4-pre-installation-script
+.. _Nehalem: https://en.wikipedia.org/wiki/Nehalem_(microarchitecture)
+
+Disk partitions
+---------------
+
+With UEFI_ systems it is **required** to configure a special ``/boot/efi`` partition in your Kickstart_file_,
+see also:
+
+* https://access.redhat.com/solutions/1369253
+* https://fedoraproject.org/wiki/Anaconda/Kickstart#bootloader
+
+It is most convenient to configure boot partitions using reqpart_: 
+
+* Automatically create partitions required by your hardware platform.
+  These include a ``/boot/efi`` for x86_64 and Aarch64 systems with UEFI_ firmware,
+  ``biosboot`` for x86_64 systems with BIOS_ firmware and GPT, and ``PRePBoot`` for IBM Power Systems.
+
+An example Kickstart_file_ section specifying disk partitions and using reqpart_ may be::
+
+  reqpart --add-boot
+  part swap --size 50000 --asprimary
+  part pv.01 --fstype xfs --size=1 --grow --asprimary
+  volgroup VolGroup00 pv.01
+  logvol / --fstype xfs --name=lv_root --vgname=VolGroup00 --size=32768
+
+.. _reqpart: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#reqpart
+
+Capture the %pre logfile
+------------------------
+
+The Kickstart_file_ ``%pre`` command can create a logfile::
+
+  # Start of the %pre section with logging into /root/ks-pre.log
+  %pre --log=/root/ks-pre.log
+
+However, this file exists **only in the memory file system** during installation,
+and the logfile will be lost after the system has rebooted.
+
+There are methods to get a copy of the ``%pre`` logfile:
+
+* https://unix.stackexchange.com/questions/78388/logging-pre-during-kickstart-logfile-doesnt-exist-after-boot
+
+Installation screen resolution
+------------------------------
+
+If you have an old server or PC where the VGA_ graphics adapter only supports screen resolutions up to 1024x768 or 1280x1024,
+then the Linux_kernel_ EL8 may select a higher, unsupported screen resolution which gives a flickering monitor with no image!
+See these pages:
+
+* https://www.systutorials.com/configuration-of-linux-kernel-video-mode/
+* https://cromwell-intl.com/open-source/grub-vga-modes.html
+* https://pierre.baudu.in/other/grub.vga.modes.html
+
+You can add a vga= directive to the Linux_kernel_ line in the GRUB file, something like the following::
+
+  linuxefi /vmlinuz-X.Y.Z vga=792 
+
+(X.Y.Z is your version)
+and you can use numbers other than ``792`` which would give a resolution of 1024×768 with 65,536 possible colors. 
+This is a partial list of the GRUB_ VGA_ Modes::
+
+  Colour depth	640x480	1024x768
+  8 (256)	769	773
+  15 (32K)	784	790
+  16 (65K)	785	791
+  24 (16M)	786	792
+
+.. _VGA: https://en.wikipedia.org/wiki/Video_Graphics_Array
+
+Linux kernel with 16-bit boot protocol
+......................................
+
+From https://www.systutorials.com/configuration-of-linux-kernel-video-mode/ we see:
+
+* Switching VESA_ modes of Linux_kernel_ at boot time can be done by using the “vga=…“ Linux_kernel_ parameter. 
+  This parameter accept the decimal value of Linux video mode numbers instead of VESA_ video mode numbers. 
+
+The video mode number of the Linux_kernel_ is the VESA_ mode number plus 0×200::
+
+  Linux_kernel_mode_number = VESA_mode_number + 0x200
+
+So the table for the Kernel mode numbers are::
+
+      | 640x480  800x600  1024x768 1280x1024
+  ----+-------------------------------------
+  256 |  0x301    0x303    0x305    0x307
+  32k |  0x310    0x313    0x316    0x319
+  64k |  0x311    0x314    0x317    0x31A
+  16M |  0x312    0x315    0x318    0x31B
+
+The decimal value of the Linux_kernel_ video mode number can be passed to the kernel in the form “vga=YYY“, where YYY is the decimal value.
+
+The parameter ``vga=ask`` is often mentioned, but is not supported by GRUB2_.
+
+Last, calculate the decimal value of the Linux video mode number. 
+This simple python command can be used to convert a hex-number 0xYYY::
+
+  python -c "print 0xYYY"
+
+.. _VESA: https://en.wikipedia.org/wiki/VESA_BIOS_Extensions
