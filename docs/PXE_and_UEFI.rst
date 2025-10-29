@@ -29,11 +29,11 @@ There is an NSA Security Report
 `UEFI DEFENSIVE PRACTICES GUIDANCE <https://media.defense.gov/2019/Jul/16/2002158107/-1/-1/0/CTR-UEFI-DEFENSIVE-PRACTICES-GUIDANCE.PDF>`_
 with some recommendations:
 
-* Machines running legacy BIOS or UEFI in compatibility mode should be migrated to UEFI native mode to take advantage of new features.
-* UEFI should be secured using a set of administrator and user passwords appropriate for a device’s capabilities and intended use.
-* Firmware comprising UEFI should be updated regularly and treated as importantly as Operating System (OS) updates.
-* UEFI Secure Boot should be enabled and configured to audit firmware modules, expansion devices, and bootable OS images.
-* Trusted Platform Module (TPM) should be leveraged to check the integrity of UEFI.
+* Machines running legacy BIOS_ or UEFI_ in compatibility mode should be migrated to UEFI_ native mode to take advantage of new features.
+* UEFI_ should be secured using a set of administrator and user passwords appropriate for a device’s capabilities and intended use.
+* Firmware comprising UEFI_ should be updated regularly and treated as importantly as Operating System (OS) updates.
+* UEFI_ Secure Boot should be enabled and configured to audit firmware modules, expansion devices, and bootable OS images.
+* *Trusted Platform Module* (TPM_) should be leveraged to check the integrity of UEFI_.
 
 See also:
 
@@ -50,6 +50,7 @@ See also:
 .. _UEFI_specification: https://uefi.org/sites/default/files/resources/UEFI_Spec_Final_2.11.pdf
 .. _BIOS: https://en.wikipedia.org/wiki/BIOS
 .. _Legacy_BIOS_boot: https://en.wikipedia.org/wiki/Legacy_mode
+.. _TPM: https://en.wikipedia.org/wiki/Trusted_Platform_Module
 .. _GRUB2: https://fedoraproject.org/wiki/GRUB_2
 .. _NFS: https://en.wikipedia.org/wiki/Network_File_System
 .. _EPEL: https://fedoraproject.org/wiki/EPEL
