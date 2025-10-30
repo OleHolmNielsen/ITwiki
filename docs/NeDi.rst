@@ -376,10 +376,10 @@ Printer supply alerts
 NeDi_ reads the printer supply levels (toner etc.) by SNMP from any printer devices monitored.
 If any supply level is below the notification limit (default value: 5%), an alert will appear in the *Discovery Notifications* E-mail sent by NeDi_
 
-To remove these often superfluous notifications go to the *Monitoring-Setup* (1.6) or *Devices-List* (1.7 or newer) page and select the desired printers.
-Then edit the *Supply Alert* threshold icon |file| field to insert a value of 0, then press the *Update* button.
+To remove these often superfluous notifications go to the *Devices-List* (1.7 or newer) page and select the desired printers.
+Then edit the *Supply Alert* threshold icon |file| field to insert a value of 0 (or what value you want), then press the *Update* button.
 
-.. |file| image:: attachments/file.png
+.. |file| image:: attachments/shar.png
 
 Discarding "Node changed IP and name" events
 --------------------------------------------
