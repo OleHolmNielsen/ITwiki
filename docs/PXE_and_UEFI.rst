@@ -398,7 +398,8 @@ Secure Boot OS-specific DHCP configuration
 ............................................
 
 **IMPORTANT:**:
-The ``shimx64.efi`` and ``grubx64.efi`` bootloader_ images must be copied from the
+If the client is configured with Secure_Boot_,
+the ``shimx64.efi`` and ``grubx64.efi`` bootloader_ images must be copied from the
 **same Linux OS version** as the OS you are trying to install on the client,
 i.e., the PXE_ installation Linux_kernel_ ``vmlinuz`` (see below) **must** have the same signature.
 
@@ -417,7 +418,7 @@ into OS specific files, for example::
   /etc/dhcp/dhcpd.conf.d/rocky.conf
   /etc/dhcp/dhcpd.conf.d/redhat.conf
 
-As usual the ``host`` lines look similar to::
+As usual the ``host`` lines in these files look similar to::
 
   host almalinux_host1 { hardware ethernet 70:5a:0f:31:c1:27; }	
 
