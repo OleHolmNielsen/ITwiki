@@ -459,6 +459,8 @@ and start the DHCP_ service::
 
 .. _x86-64: https://en.wikipedia.org/wiki/X86-64
 
+=======================================================================================================
+
 .. _Configure_TFTP_service:
 
 Configure the TFTP service
@@ -488,6 +490,8 @@ and start the service::
   systemctl restart tftp
 
 .. _in.tftpd: https://linux.die.net/man/8/in.tftpd
+
+=======================================================================================================
 
 Download Linux OS boot images
 -----------------------------
