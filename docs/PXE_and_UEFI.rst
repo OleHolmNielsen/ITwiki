@@ -400,8 +400,8 @@ Secure Boot OS-specific DHCP configuration
 **IMPORTANT:**
 If the client is configured with Secure_Boot_,
 the ``shimx64.efi`` and ``grubx64.efi`` bootloader_ images must be copied from the
-**same Linux OS version** as the OS you are trying to install on the client,
-i.e., the PXE_ installation Linux_kernel_ ``vmlinuz`` (see below) **must** have the same signature.
+**same Linux OS version** as the OS you are trying to install on the client.
+The PXE_ installation of a Linux_kernel_ image vmlinuz_ (see below) **must** have the same signature.
 
 Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder such as ``/tftpboot/uefi/``,
 will cause the client host PXE_ boot process to download all further files also from that same subdirectory,
@@ -441,6 +441,8 @@ Also :ref:`create_grub.cfg` in ``/tftpboot/uefi/almalinux/`` so that the folder 
   -rw-r--r--. 1 root root     878 Oct 31 13:40 grub.cfg
   -rw-r--r--. 1 root root 2569088 Oct 31 13:03 grubx64.efi
   -rw-r--r--. 1 root root  959208 Oct 31 13:03 shimx64.efi
+
+.. _vmlinuz: https://en.wikipedia.org/wiki/Vmlinux
   
 Firewall and dhcpd service configuration
 ..........................................
