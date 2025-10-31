@@ -410,7 +410,7 @@ Any signature mismatch will cause the installation to fail,
 since different OS images cannot verify the image signatures of other OSes,
 for example RHEL_ versus AlmaLinux_ versus RockyLinux_.
 
-To configure PXE_ Secure_Boot_ for multiple OS versions with Secure_Boot_ clients,
+If you wish to configure PXE_ Secure_Boot_ for multiple OS versions with Secure_Boot_ clients,
 you simply have to gather all ``host`` lines for clients of a given OS in ``dhcpd.conf``
 into OS specific files, for example::
 
