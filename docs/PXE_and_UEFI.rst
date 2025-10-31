@@ -362,7 +362,7 @@ Add these options only if you need to support MTFTP_ (*Multicast TFTP*) as recom
 .. _RFC4578: https://datatracker.ietf.org/doc/html/rfc4578#section-2.1
 .. _MTFTP: https://datatracker.ietf.org/doc/html/draft-henry-remote-boot-protocol-00
 
-In the ``dhcpd.conf`` subnet section(s) define the desired UEFI_ RFC4578_ or PXE_ (legacy)
+In the ``dhcpd.conf`` `subnet` section(s) define the desired UEFI_ RFC4578_ or PXE_ (legacy)
 bootloader_ image types in the ``/tftpboot/uefi/`` subdirectory.
 
 Remember also to :ref:`Install_bootloader_images`.
@@ -390,19 +390,44 @@ Note: Other CPU architectures besides x86-64_ are listed in the UEFI_specificati
 The ``shimx64.efi`` chainloads ``grubx64.efi`` after the Verify_signatures_ step,
 and this also works seemlessly on clients that have disabled the Secure_Boot_ feature.
 
+Secure Boot DHCP configuration
+..................................
+
 **IMPORTANT:**:
 The ``shimx64.efi`` and ``grubx64.efi`` bootloader_ images must be copied from the
 **same Linux OS version** as the OS you are trying to install on the client,
 i.e., the PXE_ installation Linux_kernel_ ``vmlinuz`` (see below) **must** have the same signature.
 
-We have not been able to find a way to support multiple OS versions with Secure_Boot_ clients.
+Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder such as ``/tftpboot/uefi/``,
+will cause the client host PXE_ boot process to download all further files also from that same subdirectory,
+so you need to place any other files there.
 Any signature mismatch will cause the installation to fail,
 since different OS images cannot verify the image signatures of other OSes,
 for example RHEL_ versus AlmaLinux_ versus RockyLinux_.
 
-Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder such as ``/tftpboot/uefi/``,
-will cause the client host PXE_ boot process to download all further files also from that same subdirectory,
-so you need to place any other files there.
+To configure PXE_ Secure_Boot_ for multiple OS versions with Secure_Boot_ clients,
+you simply have to gather all ``host`` lines from ``dhcpd.conf`` into OS specific files, for example::
+
+  /etc/dhcp/dhcpd.conf.d/almalinux.conf
+  /etc/dhcp/dhcpd.conf.d/rocky.conf
+  /etc/dhcp/dhcpd.conf.d/redhat.conf
+
+In ``dhcpd.conf`` you create `group objects` for each OS, for example Almalinux_::
+
+  group {
+    filename "uefi/almalinux/shimx64.efi";
+    include "/etc/dhcp/dhcpd.conf.d/almalinux.conf";
+  }
+
+and copy the bootloader_ images from the OS to the TFTP_ server::
+
+  cp /boot/efi/EFI/almalinux/shimx64.efi /boot/efi/EFI/almalinux/grubx64.efi /tftpboot/uefi/almalinux/
+  chmod 644 /tftpboot/uefi/almalinux/*.efi
+
+Also create_grub.cfg_ in the ``/tftpboot/uefi/almalinux/`` folder.
+
+Firewall and dhcpd service configuration
+..........................................
 
 When you have completed configuring the ``dhcpd.conf`` file, open the firewall for DHCP_ (port 67)::
 
