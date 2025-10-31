@@ -435,7 +435,7 @@ and copy the bootloader_ images from a running Almalinux_ host to the TFTP_ serv
   cp /boot/efi/EFI/almalinux/shimx64.efi /boot/efi/EFI/almalinux/grubx64.efi /tftpboot/uefi/almalinux/
   chmod 644 /tftpboot/uefi/almalinux/*.efi
 
-Also :ref:`create_grub.cfg` in the ``/tftpboot/uefi/almalinux/`` folder so that the folder contents are::
+Also :ref:`create_grub.cfg` in the ``/tftpboot/uefi/almalinux/`` so that the folder contents are::
 
   $ ls -l /tftpboot/uefi/almalinux/ 
   -rw-r--r--. 1 root root     878 Oct 31 13:40 grub.cfg
