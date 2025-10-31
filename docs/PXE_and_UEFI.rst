@@ -397,7 +397,7 @@ and this also works seemlessly on clients that have disabled the Secure_Boot_ fe
 Secure Boot OS-specific DHCP configuration
 ............................................
 
-**IMPORTANT:**:
+**IMPORTANT:**
 If the client is configured with Secure_Boot_,
 the ``shimx64.efi`` and ``grubx64.efi`` bootloader_ images must be copied from the
 **same Linux OS version** as the OS you are trying to install on the client,
