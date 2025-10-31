@@ -390,8 +390,8 @@ Note: Other CPU architectures besides x86-64_ are listed in the UEFI_specificati
 The ``shimx64.efi`` chainloads ``grubx64.efi`` after the Verify_signatures_ step,
 and this also works seemlessly on clients that have disabled the Secure_Boot_ feature.
 
-Secure Boot DHCP configuration
-..................................
+Secure Boot OS-specific DHCP configuration
+............................................
 
 **IMPORTANT:**:
 The ``shimx64.efi`` and ``grubx64.efi`` bootloader_ images must be copied from the
@@ -411,6 +411,10 @@ you simply have to gather all ``host`` lines from ``dhcpd.conf`` into OS specifi
   /etc/dhcp/dhcpd.conf.d/almalinux.conf
   /etc/dhcp/dhcpd.conf.d/rocky.conf
   /etc/dhcp/dhcpd.conf.d/redhat.conf
+
+As usual the ``host`` lines look similar to::
+
+  host alma_linux_host1 { hardware ethernet 70:5a:0f:31:c1:27; }	
 
 In ``dhcpd.conf`` you create `group objects` for each OS, for example Almalinux_::
 
