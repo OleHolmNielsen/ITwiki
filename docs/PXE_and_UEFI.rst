@@ -424,7 +424,7 @@ and copy the bootloader_ images from the OS to the TFTP_ server::
   cp /boot/efi/EFI/almalinux/shimx64.efi /boot/efi/EFI/almalinux/grubx64.efi /tftpboot/uefi/almalinux/
   chmod 644 /tftpboot/uefi/almalinux/*.efi
 
-Also create_grub.cfg_ in the ``/tftpboot/uefi/almalinux/`` folder.
+Also :ref:`create_grub.cfg` in the ``/tftpboot/uefi/almalinux/`` folder.
 
 Firewall and dhcpd service configuration
 ..........................................
