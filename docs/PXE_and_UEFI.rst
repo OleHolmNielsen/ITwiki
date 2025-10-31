@@ -159,13 +159,18 @@ then the PXE_ boot may likely fail with an error about an **invalid signature**.
 See `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_
 and `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_.
 
-If you install third party Linux_kernel_ driver modules the Secure_Boot_ may block these modules:
+If you install third party Linux_kernel_ driver modules or other applications,
+the Secure_Boot_ may block these modules:
 
 * VirtualBox_: See `Installing Virtualbox and Secure Boot / Kernel Signing <https://forums.virtualbox.org/viewtopic.php?t=113162>`_.
 
 * NVIDIA_drivers_: `NVIDIA drivers not working while Secure Boot <https://forums.developer.nvidia.com/t/nvidia-drivers-not-working-while-secure-boot-is-enabled-after-updating-to-ubuntu-24-04/305351>`_.
 
 * MLNX_OFED_ Infiniband: `Enrolling NVIDIA's x.509 Public Key On your Systems <https://docs.nvidia.com/networking/display/mlnxofedv24010331/uefi+secure+boot>`_
+
+* `Memtest86+ <https://www.memtest.org/>`_ states:
+
+  * The Memtest86+ binary is not signed by Microsoft, so you need to temporarily disable Secure Boot in your BIOS options. We're working on a better solution.
 
 **Workaround:** Disable Secure_Boot_ from UEFI_ or BIOS_ settings.
 After the OS installation has completed, Secure_Boot_ may be reenabled and the OS should boot correctly in this mode,
