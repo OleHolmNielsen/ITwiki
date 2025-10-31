@@ -513,6 +513,8 @@ In this directory create the following ``Makefile``::
 
 and run a ``make`` command to download the boot image files.
 
+=======================================================================================================
+
 .. _create_grub.cfg:
 
 Create a grub.cfg file 
