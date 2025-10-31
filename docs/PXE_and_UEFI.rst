@@ -414,16 +414,17 @@ you simply have to gather all ``host`` lines from ``dhcpd.conf`` into OS specifi
 
 As usual the ``host`` lines look similar to::
 
-  host alma_linux_host1 { hardware ethernet 70:5a:0f:31:c1:27; }	
+  host almalinux_host1 { hardware ethernet 70:5a:0f:31:c1:27; }	
 
-In ``dhcpd.conf`` you create `group objects` for each OS, for example Almalinux_::
+In ``dhcpd.conf`` you create `group objects` for each OS.
+For example Almalinux_::
 
   group {
     filename "uefi/almalinux/shimx64.efi";
     include "/etc/dhcp/dhcpd.conf.d/almalinux.conf";
   }
 
-and copy the bootloader_ images from the OS to the TFTP_ server::
+and copy the bootloader_ images from a running Almalinux_ host to the TFTP_ server::
 
   cp /boot/efi/EFI/almalinux/shimx64.efi /boot/efi/EFI/almalinux/grubx64.efi /tftpboot/uefi/almalinux/
   chmod 644 /tftpboot/uefi/almalinux/*.efi
