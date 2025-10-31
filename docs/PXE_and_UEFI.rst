@@ -424,7 +424,7 @@ and copy the bootloader_ images from the OS to the TFTP_ server::
   cp /boot/efi/EFI/almalinux/shimx64.efi /boot/efi/EFI/almalinux/grubx64.efi /tftpboot/uefi/almalinux/
   chmod 644 /tftpboot/uefi/almalinux/*.efi
 
-Also :ref:`create_grub.cfg` in the ``/tftpboot/uefi/almalinux/`` folder.
+Also :ref:`create_grub.cfg`, but now in the ``/tftpboot/uefi/almalinux/`` folder.
 
 Firewall and dhcpd service configuration
 ..........................................
@@ -493,8 +493,8 @@ and run a ``make`` command to download the boot image files.
 
 .. _create_grub.cfg:
 
-Create a grub.cfg file in /tftpboot/uefi/
----------------------------------------------
+Create a grub.cfg file 
+--------------------------
 
 Please consult the :ref:`Kickstart_installation_of_EL_Linux_systems` page for a description of automated Linux OS installation.
 
