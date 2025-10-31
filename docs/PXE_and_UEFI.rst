@@ -168,9 +168,9 @@ the Secure_Boot_ may block these modules:
 
 * MLNX_OFED_ Infiniband: `Enrolling NVIDIA's x.509 Public Key On your Systems <https://docs.nvidia.com/networking/display/mlnxofedv24010331/uefi+secure+boot>`_
 
-* `Memtest86+ <https://www.memtest.org/>`_ states:
+* Memtest86_ states:
 
-  * The Memtest86+ binary is not signed by Microsoft, so you need to temporarily disable Secure Boot in your BIOS options. We're working on a better solution.
+  * The Memtest86_ binary is not signed by Microsoft, so you need to temporarily disable Secure_Boot_ in your BIOS_ options. We're working on a better solution.
 
 **Workaround:** Disable Secure_Boot_ from UEFI_ or BIOS_ settings.
 After the OS installation has completed, Secure_Boot_ may be reenabled and the OS should boot correctly in this mode,
@@ -186,6 +186,7 @@ You can determine on a running system whether Secure_Boot_ is enabled or not::
 .. _VirtualBox: https://www.virtualbox.org/
 .. _NVIDIA_drivers: https://www.nvidia.com/en-in/drivers/
 .. _MLNX_OFED: https://network.nvidia.com/products/infiniband-drivers/linux/mlnx_ofed/
+.. _Memtest86+: https://www.memtest.org
 
 efibootmgr - manipulate the UEFI Boot Manager
 ===============================================
