@@ -105,3 +105,14 @@ Here you browse for the .rom file and upload it for the firmware update to start
 
 .. _Data_Center_Support: https://datacentersupport.lenovo.com/us/en
 
+SMM2_ module replacement
+------------------------
+
+If the SMM2_ module needs to be replaced, see the SMM2_replacement_ page.
+
+You should make a SMM2_ data backup and restore using a FAT32 formatted USB_flash_drive_
+via the GUI menu item `Configure->Backup and Restore Configuration`.
+In the GUI you may alternatively download the configuration to a file ``smmbackup.bk``.
+
+.. _SMM2_replacement: https://pubs.lenovo.com/dw612s_neptune_enclosure/smm_replacement
+.. _USB_flash_drive: https://pubs.lenovo.com/dw612s_neptune_enclosure/install_the_smm_usb_flash_drive
