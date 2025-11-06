@@ -28,6 +28,9 @@ Documentation
 .. _SMM2_Users_Guide: https://pubs.lenovo.com/mgt_tools_smm2/smm2_users_guide.pdf
 .. _SMM2_Messages: https://pubs.lenovo.com/dw612s_neptune_enclosure/messages_introduction
 
+System events
+-----------------
+
 The SMM2_ amber status LED indicates critical events in the *Event log*.
 Login to the SMM2_ GUI `Overview->Enclosure Rear Overview` and see if the
 `Check Log LED` has a status of **On**.
