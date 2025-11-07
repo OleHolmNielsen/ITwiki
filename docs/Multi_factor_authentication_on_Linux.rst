@@ -288,7 +288,7 @@ System administrator guide to the Radius PAM module
 
 The following sections are for **Linux system administrators only**.
 End users should skip these sections.
-DTU users should read this page on `Inside <https://www.inside.dtu.dk/da/medarbejder/it-og-telefoni/it-support-og-kontakt/guides/mfa>`_.
+DTU users should read this page on `Inside <https://www.inside.dtu.dk/en/medarbejder/it-og-telefoni/it-systemer-og-retningslinjer/it-vejledninger-og-retningslinjer/mfa>`_.
 
 A convenient MFA solution for SSH is to use an existing Radius_ server in your organization (setting up such a server is beyond the scope of this document).
 For Linux servers there is a `FreeRADIUS <https://freeradius.org/>`_ server.
