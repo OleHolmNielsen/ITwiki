@@ -35,8 +35,9 @@ You can network boot by either of these methods:
 2. When powering up the client computer, PXE_ network booting can be selected using the console,
    typically by pressing the F12 or F10 Function_key_ as shown in the console.
 
-When you have installed the above pxeconfig_toolkit_ and used pxeconfig_ to setup the client boot process,
-then it is sufficient to power cycle and/or start up the client computer.
+If you have configured :ref:`Automated_network_installation_with_pxeconfig`,
+you can use pxeconfig_ to setup the client boot process.
+Then it is sufficient to power cycle and/or start up the client computer for an automatic installation.
 
 The :ref:`UEFI_network_boot` ensures that:
 
