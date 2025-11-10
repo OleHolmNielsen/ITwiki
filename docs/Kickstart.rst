@@ -22,7 +22,7 @@ There is a general description from the Fedora_ page:
   This installation method can support the use of a single Kickstart_file_ to install Fedora_ or RHEL_ on multiple machines,
   making it ideal for network and system administrators.
 
-.. _Secure_Boot_Setup:
+=======================================================================================================
 
 Automated Kickstart installation
 -----------------------------------

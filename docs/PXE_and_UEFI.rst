@@ -151,6 +151,8 @@ Note that this should be changed both in the prefix and in any references to the
 
 =====================================================================================================
 
+.. _Secure_Boot_Setup:
+
 Configuring Secure Boot in client setup
 =======================================
 
