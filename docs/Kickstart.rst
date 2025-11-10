@@ -58,7 +58,7 @@ The :ref:`UEFI_network_boot` ensures that:
 .. _BMC: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface#Baseboard_management_controller
 .. _Function_key: https://en.wikipedia.org/wiki/Function_key
 
-Creating a Kickstart_file_
+Creating a Kickstart file
 -------------------------------
 
 In the following sections we discuss relevant sections of the Kickstart_file_.
