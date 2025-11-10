@@ -28,12 +28,12 @@ Automated Kickstart installation
 -----------------------------------
 
 Automated installation with PXE_ and Anaconda_ is possible using either UEFI_ or legacy BIOS_ booting.
-You can either:
+You can network boot by either of these methods:
 
-* Configure the node's **boot order** with PXE_ network booting as the first boot device, or
+1. Configure the node's **boot order** with PXE_ network booting as the first boot device, or
 
-* When powering up the client computer, PXE_ network booting can be selected using the console,
-  typically by pressing the F12 or F10 Function_key_ as shown in the console.
+2. When powering up the client computer, PXE_ network booting can be selected using the console,
+   typically by pressing the F12 or F10 Function_key_ as shown in the console.
 
 When you have installed the above pxeconfig_toolkit_ and used pxeconfig_ to setup the client boot process,
 then it is sufficient to power cycle and/or start up the client computer.
