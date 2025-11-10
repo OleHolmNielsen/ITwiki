@@ -61,9 +61,11 @@ The :ref:`UEFI_network_boot` ensures that:
 Creating a Kickstart file
 -------------------------------
 
-In the following sections we discuss relevant sections of the Kickstart_file_.
+A Kickstart_file_ is required for configuration of the installation process.
+In the following sections we discuss this file.
 
-In the ``grub.cfg`` file you can use the inst.ks_ parameter to specify the location
+The :ref:`UEFI_network_boot` involves a file ``grub.cfg``.
+In this file you can use the inst.ks_ parameter to specify the location
 (on the network, for example) of the Kickstart_file_ that you want to use.
 As an example, the following menu item may be added to the ``grub.cfg`` file 
 to download a Kickstart_file_ named ``ks-almalinux-8.10-minimal-x86_64.cfg``
