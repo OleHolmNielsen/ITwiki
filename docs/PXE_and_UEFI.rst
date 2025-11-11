@@ -22,6 +22,12 @@ Other useful pages:
 * https://fedoraproject.org/wiki/GRUB_2
 * https://help.ubuntu.com/community/Grub2/Passwords
 
+Configuration of UEFI_ booting is usually done in the system's *Setup* menus,
+where UEFI_ Secure_Boot_ can also be configured.
+On a running computer you can determine if the system has booted by UEFI_ by checking for the presence of this folder::
+
+  ls -d /sys/firmware/efi
+
 UEFI security
 -------------
 
@@ -68,12 +74,6 @@ UEFI network boot process
 
 In this section we describe how a computer doing an UEFI_ network PXE_ boot will download a bootloader_ image file
 from the network's TFTP_ server and execute it.
-
-Configuration of UEFI_ booting is usually done in the system's *Setup* menus,
-where UEFI_ Secure_Boot_ can also be configured.
-On a running computer you can determine if the system has booted by UEFI_ by checking for the presence of this folder::
-
-  ls -d /sys/firmware/efi
 
 For 64-bit UEFI_ systems with the x86-64_ architecture,
 the boot file name by convention (see *Table 3.4: UEFI Image Types* in the UEFI_specification_) is ``BOOTX64.EFI``,
