@@ -118,6 +118,7 @@ Other useful OneCLI_ commands are::
 
   onecli config show
   onecli config show system_prod_data
+  onecli config show BMC --redfish      # Shows BMC.FailsafePowerLimit* and other parameters
 
 Power management can be done locally or Out-of-band_, see the options::
 
