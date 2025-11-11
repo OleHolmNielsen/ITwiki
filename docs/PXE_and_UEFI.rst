@@ -171,7 +171,8 @@ and `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with er
 If you install third party Linux_kernel_ driver modules or other applications,
 the Secure_Boot_ may block these modules:
 
-* :ref:`ZFS_filesystems`: `zfs on RHEL 8 root <https://www.reddit.com/r/zfs/comments/lw3pmz/zfs_on_rhel_8_root/>`_.
+* ZFS_ filesystems:`zfs on RHEL 8 root <https://www.reddit.com/r/zfs/comments/lw3pmz/zfs_on_rhel_8_root/>`_.
+  See also :ref:`ZFS_filesystems`.
 
 * NVIDIA_drivers_: `NVIDIA drivers not working while Secure Boot <https://forums.developer.nvidia.com/t/nvidia-drivers-not-working-while-secure-boot-is-enabled-after-updating-to-ubuntu-24-04/305351>`_.
 
@@ -192,6 +193,7 @@ You can determine on a running system whether Secure_Boot_ is enabled or not::
 
   $ mokutil --sb-state
 
+.. _ZFS: https://en.wikipedia.org/wiki/ZFS
 .. _VirtualBox: https://www.virtualbox.org/
 .. _NVIDIA_drivers: https://www.nvidia.com/en-in/drivers/
 .. _MLNX_OFED: https://network.nvidia.com/products/infiniband-drivers/linux/mlnx_ofed/
