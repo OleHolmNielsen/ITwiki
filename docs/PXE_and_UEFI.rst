@@ -68,8 +68,9 @@ UEFI network boot process
 
 In this section we describe how a computer doing an UEFI_ network PXE_ boot will download a bootloader_ image file
 from the network's TFTP_ server and execute it.
+
 For 64-bit UEFI_ systems with the x86-64_ architecture,
-the boot file name by convention is ``BOOTX64.EFI``,
+the boot file name by convention (see *Table 3.4: UEFI Image Types* in the UEFI_specification_) is ``BOOTX64.EFI``,
 but other bootloader_ images such as ``shimx64.efi`` may be used in stead.
 The bootloader_ image file is located in the folder ``/boot/efi/`` on a bootable drive.
 Other CPU architectures than x86-64_ are listed in the UEFI_specification_ section 3.5.
