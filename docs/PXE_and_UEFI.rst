@@ -171,11 +171,13 @@ and `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with er
 If you install third party Linux_kernel_ driver modules or other applications,
 the Secure_Boot_ may block these modules:
 
-* VirtualBox_: See `Installing Virtualbox and Secure Boot / Kernel Signing <https://forums.virtualbox.org/viewtopic.php?t=113162>`_.
+* :ref:`ZFS_filesystems`: `zfs on RHEL 8 root <https://www.reddit.com/r/zfs/comments/lw3pmz/zfs_on_rhel_8_root/>`_.
 
 * NVIDIA_drivers_: `NVIDIA drivers not working while Secure Boot <https://forums.developer.nvidia.com/t/nvidia-drivers-not-working-while-secure-boot-is-enabled-after-updating-to-ubuntu-24-04/305351>`_.
 
 * MLNX_OFED_ Infiniband: `Enrolling NVIDIA's x.509 Public Key On your Systems <https://docs.nvidia.com/networking/display/mlnxofedv24010331/uefi+secure+boot>`_
+
+* VirtualBox_: See `Installing Virtualbox and Secure Boot / Kernel Signing <https://forums.virtualbox.org/viewtopic.php?t=113162>`_.
 
 * Memtest86_ states that the Memtest86_ binary is not signed by Microsoft, so you need to temporarily disable Secure_Boot_ in your BIOS_ options. 
 
