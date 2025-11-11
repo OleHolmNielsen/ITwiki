@@ -69,6 +69,7 @@ UEFI network boot process
 In this section we describe how a computer doing an UEFI_ network PXE_ boot will download a bootloader_ image file
 from the network's TFTP_ server and execute it.
 
+Configuration of UEFI_ boot is usually done in the system's *Setup* menus.
 On a running computer you can determine if the system has booted by UEFI_ by checking for the presence of this folder::
 
   ls -d /sys/firmware/efi
