@@ -835,3 +835,24 @@ The quota tools for Linux has absolutely no knowledge about ZFS_ quotas, nor doe
 See a hack at https://aaronsplace.co.uk/blog/2019-02-12-zfsonline-nfs-quota.html
 
 .. _rquotad: https://linux.die.net/man/8/rpc.rquotad
+
+Exporting and importing ZFS pools between systems
+=====================================================
+
+A ZFS_ storage pools can be explicitly exported to indicate that they are ready to be migrated. 
+See also zpoolconcepts_.
+
+Use zpool_export_ to export a pool so that it can be moved between systems::
+
+  zpool export <poolname>
+
+On the new system, use zpool_import_ to list pools available for import::
+
+  zpool import 
+
+To import a specific pool::
+
+  zpool import <poolname>
+
+.. _zpool_export: https://openzfs.github.io/openzfs-docs/man/master/8/zpool-export.8.html
+.. _zpool_import: https://openzfs.github.io/openzfs-docs/man/master/8/zpool-import.8.html
