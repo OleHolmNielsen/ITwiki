@@ -839,8 +839,7 @@ See a hack at https://aaronsplace.co.uk/blog/2019-02-12-zfsonline-nfs-quota.html
 Exporting and importing ZFS pools between systems
 =====================================================
 
-A ZFS_ storage pools can be explicitly exported to indicate that they are ready to be migrated. 
-See also zpool_concepts_.
+A ZFS_ storage pool (see zpool_concepts_) can be explicitly exported to indicate that it is ready to be migrated to another system. 
 
 Use zpool_export_ to export a pool so that it can be moved between systems::
 
