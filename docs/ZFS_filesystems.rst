@@ -840,7 +840,7 @@ Exporting and importing ZFS pools between systems
 =====================================================
 
 A ZFS_ storage pools can be explicitly exported to indicate that they are ready to be migrated. 
-See also zpoolconcepts_.
+See also zpool_concepts_.
 
 Use zpool_export_ to export a pool so that it can be moved between systems::
 
