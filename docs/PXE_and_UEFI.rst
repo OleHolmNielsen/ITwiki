@@ -262,7 +262,11 @@ It allows the user to individually trust keys provided by various Linux distribu
 Further information:
 
 * `Debian SecureBoot <https://wiki.debian.org/SecureBoot>`_ page.
-* The article grubx64_versus_shimx64_.
+* The article grubx64_versus_shimx64_ which explains:
+
+  * In the UEFI_ boot process, ``grubx64.efi`` and ``shimx64.efi`` are two EFI software that serve different functions.
+    The primary bootloader is ``grubx64.efi``, which loads the Linux kernel, while ``shimx64.efi`` is a first-stage bootloader that assures Secure_Boot_ compatibility.
+
 * The shim_ source homepage.
 * The section Secure_Boot_ in the UEFI_ page on Wikipedia.
 
