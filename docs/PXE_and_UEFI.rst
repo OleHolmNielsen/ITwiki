@@ -412,8 +412,12 @@ Note: Other CPU architectures besides x86-64_ are listed in the UEFI_specificati
 The ``shimx64.efi`` chainloads ``grubx64.efi`` after the Verify_signatures_ step,
 and this also works seemlessly on clients that have disabled the Secure_Boot_ feature.
 
-Secure Boot OS-specific DHCP configuration
+OS-specific Secure Boot DHCP configuration
 ............................................
+
+This section describes how to setup PXE_ network booting for Secure_Boot_ clients,
+where each OS distribution **requires** different bootloader_ images
+that have been signed by the OS vendor.
 
 **IMPORTANT:**
 If the client is configured with Secure_Boot_,
