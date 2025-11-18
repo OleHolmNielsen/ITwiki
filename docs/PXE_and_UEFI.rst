@@ -61,6 +61,7 @@ See also:
 .. _NFS: https://en.wikipedia.org/wiki/Network_File_System
 .. _EPEL: https://fedoraproject.org/wiki/EPEL
 .. _RHEL: https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux
+.. _Ubuntu: https://ubuntu.com/
 .. _AlmaLinux: https://almalinux.org/
 .. _RockyLinux: https://www.rockylinux.org
 .. _Fedora: https://fedoraproject.org/
@@ -425,10 +426,19 @@ the ``shimx64.efi`` and ``grubx64.efi`` bootloader_ images must be copied from t
 **same Linux OS version** as the OS you are trying to install on the client.
 The PXE_ installation of a Linux_kernel_ image vmlinuz_ (see below) **must** have the same signature.
 
-Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder such as ``/tftpboot/uefi/``,
-will cause the client host PXE_ boot process to download all further files also from that same subdirectory,
-so you need to place any other files there.
-Any signature mismatch will cause the installation to fail,
+The ``grubx64.efi`` bootloader_ behaves differently depending on the OS:
+
+* RHEL_ family:
+  Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder such as ``/tftpboot/uefi/``,
+  will cause the client host ``grubx64.efi`` bootloader_ to download all further files also from that same subdirectory,
+  so you need to place any other files there.
+* Ubuntu_: 
+  The ``grubx64.efi`` bootloader_ continues to download files from the TFTP_ server's ``/tftpboot`` folder,
+  even though the ``/tftpboot/uefi/grubx64.efi`` in a subfolder was used.
+  This makes it hard to distinguish between different OS versions!
+
+**NOTICE:**
+Any bootloader_ image signature mismatch will cause the installation to fail,
 since different OS images cannot verify the image signatures of other OSes,
 for example RHEL_ versus AlmaLinux_ versus RockyLinux_.
 
