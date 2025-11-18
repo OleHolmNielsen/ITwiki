@@ -430,12 +430,14 @@ The ``grubx64.efi`` bootloader_ behaves differently depending on the OS:
 
 * RHEL_ family:
   Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder such as ``/tftpboot/uefi/``,
-  will cause the client host ``grubx64.efi`` bootloader_ to download all further files also from that same subdirectory,
+  will cause the ``grubx64.efi`` bootloader_ running in the client host
+  to download all further files also from that same subdirectory,
   so you need to place any other files there.
 * Ubuntu_: 
   The ``grubx64.efi`` bootloader_ continues to download files from the TFTP_ server's ``/tftpboot`` folder,
-  even though the ``/tftpboot/uefi/grubx64.efi`` in a subfolder was used.
-  This makes it hard to distinguish between different OS versions!
+  even though the ``/tftpboot/uefi/grubx64.efi`` image file in a subfolder was used,
+  and it is hardcoded to download the file path ``/grub/grub.cfg``.
+  This behavior makes it hard to distinguish between downloads from different OS versions!
 
 **NOTICE:**
 Any bootloader_ image signature mismatch will cause the installation to fail,
