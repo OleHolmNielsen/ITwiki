@@ -451,6 +451,7 @@ into OS specific files, for example::
   /etc/dhcp/dhcpd.conf.d/almalinux.conf
   /etc/dhcp/dhcpd.conf.d/rocky.conf
   /etc/dhcp/dhcpd.conf.d/redhat.conf
+  /etc/dhcp/dhcpd.conf.d/ubuntu.conf
 
 As usual the ``host`` lines in these files look similar to::
 
@@ -475,6 +476,10 @@ Also :ref:`create_grub.cfg` in ``/tftpboot/uefi/almalinux/`` so that the folder 
   -rw-r--r--. 1 root root     878 Oct 31 13:40 grub.cfg
   -rw-r--r--. 1 root root 2569088 Oct 31 13:03 grubx64.efi
   -rw-r--r--. 1 root root  959208 Oct 31 13:03 shimx64.efi
+
+**Notice:** 
+As described above, the Ubuntu_ ``grubx64.efi`` bootloader_ does not honor the use of subfolders
+and is hardcoded to download the file path ``/grub/grub.cfg``.
 
 .. _vmlinuz: https://en.wikipedia.org/wiki/Vmlinux
   
