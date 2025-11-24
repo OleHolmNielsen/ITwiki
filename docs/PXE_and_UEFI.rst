@@ -262,8 +262,13 @@ Copy the boot image files in ``/boot/efi/EFI/`` from the packages installed abov
   cp -p /boot/efi/EFI/<insert OS ID here>/shimx64.efi /tftpboot/uefi/
   chmod 644 /tftpboot/uefi/BOOTX64.EFI /tftpboot/uefi/grubx64.efi /tftpboot/uefi/shimx86.efi
 
-**Note:** If using Secure_Boot_ in the client, it is necessary to copy the bootloader_ files
-from a computer of a compatible OS.
+Secure Boot considerations
+.................................
+
+If using Secure_Boot_ in the client, 
+the above only works when the client and server have the same OS.
+If the client OS differs from the server OS,
+it is necessary to copy the bootloader_ files from a computer running the client's OS.
 The details are explained in :ref:`OS-specific-secure-boot`.
 
 The shim bootloader
