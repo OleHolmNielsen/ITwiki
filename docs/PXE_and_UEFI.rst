@@ -373,9 +373,9 @@ see Secure_Boot_Certificate_updates_.
 This may potentially require UEFI_ (BIOS_) firmware updates from the hardware vendors
 which install the new ``Windows UEFI CA 2023`` certificate.
 
-Interestingly, the article
+The article
 `Linux Secure Boot Safe Despite Upcoming Microsoft UEFI Key Expiry <https://linuxsecurity.com/news/vendors-products/microsoft-uefi-key-expiry-linux-secure-boot-safe>`_
-analyzes the issue and states:
+analyzes the issue in details and concludes:
 
 * The short version is this: systems using existing shim bootloaders signed with the current Microsoft CA key will remain fully functional after the key expires. 
   Timestamping has your back here. 
