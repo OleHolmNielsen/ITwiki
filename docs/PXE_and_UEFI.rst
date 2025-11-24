@@ -29,6 +29,12 @@ On a running computer you can determine if the system has booted by UEFI_ by che
 
   ls -d /sys/firmware/efi
 
+You can determine whether Secure_Boot_ is enabled or not using mokutil_::
+
+  mokutil --sb-state
+
+.. _mokutil: https://www.linux.org/docs/man1/mokutil.html
+
 UEFI security
 -------------
 
@@ -166,12 +172,15 @@ Configuring Secure Boot in client setup
 =======================================
 
 If the PXE_ client system is configured for UEFI_ Secure_Boot_
-then the PXE_ boot may likely fail with an error about an **invalid signature**.
-See `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_
+then the PXE_ boot may potentially fail with an error about an **invalid signature**.
+For some explanations see `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_
 and `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_.
 
-If you install third party Linux_kernel_ driver modules or other applications,
-the Secure_Boot_ may block these modules:
+Solution: Make sure to :ref:`Install_bootloader_images` with the bootloader_
+image signatures that match the OS you are trying to install.
+
+In addition, if you install third-party_ Linux_kernel_ driver modules or other applications,
+the Secure_Boot_ may block these modules, for example:
 
 * ZFS_ filesystems: `Signing ZFS kernel module in Alma Linux for secure boot <https://luu.is/en/posts/signing-zfs-kernel-module/>`_.
   See also :ref:`ZFS_filesystems`.
@@ -184,7 +193,7 @@ the Secure_Boot_ may block these modules:
 
 * Memtest86_ states that the Memtest86_ binary is not signed by Microsoft, so you need to temporarily disable Secure_Boot_ in your BIOS_ options. 
 
-**Workaround:** Disable Secure_Boot_ from UEFI_ or BIOS_ settings.
+**Workaround:** Disable Secure_Boot_ from the client UEFI_ settings.
 After the OS installation has completed, Secure_Boot_ may be reenabled and the OS should boot correctly in this mode,
 unless you build your own custom Linux_kernel_ due to special device drivers etc.
 
@@ -195,6 +204,7 @@ You can determine on a running system whether Secure_Boot_ is enabled or not::
 
   $ mokutil --sb-state
 
+.. _third-party: https://en.wikipedia.org/wiki/Third-party_software_component
 .. _ZFS: https://en.wikipedia.org/wiki/ZFS
 .. _VirtualBox: https://www.virtualbox.org/
 .. _NVIDIA_drivers: https://www.nvidia.com/en-in/drivers/
