@@ -523,7 +523,9 @@ Also :ref:`create_grub.cfg` in ``/tftpboot/uefi/almalinux/`` so that the folder 
 **Notice:** 
 As described above, the Ubuntu_ ``grubx64.efi`` bootloader_ does not honor the use of subfolders
 and is hardcoded to download the file path ``/grub/grub.cfg``.
-A possible solution is to soft-link that file path so that it points to the Ubuntu_ subfolder.
+A possible solution is to soft-link into the Ubuntu_ subfolder::
+
+  ln -s uefi/ubuntu/grub /tftpboot/grub
 
 .. _vmlinuz: https://en.wikipedia.org/wiki/Vmlinux
   
