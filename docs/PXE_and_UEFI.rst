@@ -277,7 +277,7 @@ The shim bootloader
 According to the `Cambridge Dictionary <https://dictionary.cambridge.org/dictionary/english/shim>`_ **shim** is 
 *a small object or piece of material used between two parts of something to make them fit together*.
 
-The ``shimx64.efi`` is an EFI application that functions as a first-stage bootloader for systems with Secure_Boot_ enabled.
+The ``shimx64.efi`` is an EFI/UEFI_ application that functions as a first-stage bootloader for systems with Secure_Boot_ enabled.
 Additionally, ``shimx64.efi`` works within the constraints of Secure_Boot_,
 which requires all bootloaders and kernels to be signed with a trusted Microsoft key.
 It allows the user to individually trust keys provided by various Linux distributions.
@@ -286,7 +286,7 @@ Further information:
 * `Debian SecureBoot <https://wiki.debian.org/SecureBoot>`_ page.
 * The article grubx64_versus_shimx64_ which explains:
 
-  * In the UEFI_ boot process, ``grubx64.efi`` and ``shimx64.efi`` are two EFI software that serve different functions.
+  * In the UEFI_ boot process, ``grubx64.efi`` and ``shimx64.efi`` are two EFI/UEFI_ softwares that serve different functions.
     The primary bootloader is ``grubx64.efi``, which loads the Linux_kernel_,
     while ``shimx64.efi`` is a first-stage bootloader that assures Secure_Boot_ compatibility.
 
