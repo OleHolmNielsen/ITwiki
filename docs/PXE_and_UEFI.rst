@@ -172,7 +172,7 @@ Configuring Secure Boot in client setup
 =======================================
 
 If the PXE_ client system is configured for UEFI_ Secure_Boot_,
-you may potentially encounter aq problem where the PXE_ boot fails with an error message of **invalid signature**.
+you may potentially encounter a problem where the PXE_ boot fails with an error message of **invalid signature**.
 For some explanations see `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_
 and `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_.
 
@@ -249,17 +249,22 @@ Install the boot-image packages on your network installation server::
   mkdir /var/lib/tftpboot/uefi
   ln -s /var/lib/tftpboot /tftpboot
 
-Determine the OS family name for the subfolder in ``/boot/efi/EFI/`` by::
+Determine the OS family name of the client computer which you want to install::
 
   $ grep '^ID=' /etc/os-release
   ID="almalinux"        # Or "rocky", "rhel", "centos" or something else
 
-Copy the boot image files from the packages installed above (remember to change their permissions)::
+Copy the boot image files in ``/boot/efi/EFI/`` from the packages installed above
+(remember to also change file permissions)::
 
   cp -p /boot/efi/EFI/BOOT/BOOTX64.EFI /tftpboot/uefi/
   cp -p /boot/efi/EFI/<insert OS ID here>/grubx64.efi /tftpboot/uefi/
   cp -p /boot/efi/EFI/<insert OS ID here>/shimx64.efi /tftpboot/uefi/
   chmod 644 /tftpboot/uefi/BOOTX64.EFI /tftpboot/uefi/grubx64.efi /tftpboot/uefi/shimx86.efi
+
+**Note:** If using Secure_Boot_ in the client, it is necessary to copy the bootloader_ files
+from a computer of a compatible OS.
+The details are explained in :ref:`OS-specific-secure-boot`.
 
 The shim bootloader
 .........................
@@ -423,6 +428,8 @@ Note: Other CPU architectures besides x86-64_ are listed in the UEFI_specificati
 
 The ``shimx64.efi`` chainloads ``grubx64.efi`` after the Verify_signatures_ step,
 and this also works seemlessly on clients that have disabled the Secure_Boot_ feature.
+
+.. _OS-specific-secure-boot:
 
 OS-specific Secure Boot DHCP configuration
 ............................................
