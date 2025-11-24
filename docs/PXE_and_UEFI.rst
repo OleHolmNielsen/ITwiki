@@ -469,7 +469,7 @@ the ``shimx64.efi`` and ``grubx64.efi`` bootloader_ images must be copied from t
 **same Linux OS version** as the OS you are trying to install on the client.
 The PXE_ installation of a Linux_kernel_ image vmlinuz_ (see below) **must** have the same signature.
 
-The ``grubx64.efi`` bootloader_ behaves differently depending on the OS:
+The ``grubx64.efi`` bootloader_ downloading process behaves differently, depending on the OS:
 
 * RHEL_ family:
   Placing the boot-image file in a subdirectory of the TFTP_ server's ``/tftpboot`` folder such as ``/tftpboot/uefi/``,
@@ -480,16 +480,16 @@ The ``grubx64.efi`` bootloader_ behaves differently depending on the OS:
   The ``grubx64.efi`` bootloader_ continues to download files from the TFTP_ server's ``/tftpboot`` folder,
   even though the ``/tftpboot/uefi/grubx64.efi`` image file in a subfolder was used,
   and it is hardcoded to download the file path ``/grub/grub.cfg``.
-  This behavior makes it hard to distinguish between downloads from different OS versions!
+  This behavior unfortunately makes it hard to distinguish between downloads from different OS versions!
 
 **NOTICE:**
 Any bootloader_ image signature mismatch will cause the installation to fail,
 since different OS images cannot verify the image signatures of other OSes,
-for example RHEL_ versus AlmaLinux_ versus RockyLinux_.
+for example RHEL_ versus AlmaLinux_ versus RockyLinux_ versus Ubuntu_.
 
 If you wish to configure PXE_ Secure_Boot_ for multiple OS versions with Secure_Boot_ clients,
-you simply have to gather all ``host`` lines for clients of a given OS in ``dhcpd.conf``
-into OS specific files, for example::
+you simply need to gather all the ``host`` lines for clients of a given OS in ``dhcpd.conf``
+into OS-specific files, for example::
 
   /etc/dhcp/dhcpd.conf.d/almalinux.conf
   /etc/dhcp/dhcpd.conf.d/rocky.conf
@@ -500,8 +500,8 @@ As usual the ``host`` lines in these files look similar to::
 
   host almalinux_host1 { hardware ethernet 70:5a:0f:31:c1:27; }	
 
-In ``dhcpd.conf`` you create `group objects` for each OS.
-For example Almalinux_::
+In ``dhcpd.conf`` you can now create `group objects` for each OS.
+For example for Almalinux_ hosts::
 
   group {
     filename "uefi/almalinux/shimx64.efi";
@@ -523,6 +523,7 @@ Also :ref:`create_grub.cfg` in ``/tftpboot/uefi/almalinux/`` so that the folder 
 **Notice:** 
 As described above, the Ubuntu_ ``grubx64.efi`` bootloader_ does not honor the use of subfolders
 and is hardcoded to download the file path ``/grub/grub.cfg``.
+A possible solution is to soft-link that file path so that it points to the Ubuntu_ subfolder.
 
 .. _vmlinuz: https://en.wikipedia.org/wiki/Vmlinux
   
