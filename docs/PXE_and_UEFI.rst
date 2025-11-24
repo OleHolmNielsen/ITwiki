@@ -370,12 +370,12 @@ Microsoft 2011 certificates will expire in June 2026
 **NOTICE:** 
 The above ``Microsoft Corporation UEFI CA 2011`` certificates are going to expire in June 2026,
 see Secure_Boot_Certificate_updates_.
-This is presumably going to require UEFI_ (BIOS_) updates from the hardware vendors
+This may potentially require UEFI_ (BIOS_) firmware updates from the hardware vendors
 which install the new ``Windows UEFI CA 2023`` certificate.
 
-However, the article
+Interestingly, the article
 `Linux Secure Boot Safe Despite Upcoming Microsoft UEFI Key Expiry <https://linuxsecurity.com/news/vendors-products/microsoft-uefi-key-expiry-linux-secure-boot-safe>`_
-states:
+analyzes the isseu and states:
 
 * Let’s start with the systems you know and love—your current fleet running distros like Ubuntu, Fedora, or Rocky Linux on Secure Boot-enabled systems. 
   If those systems were already using a shim signed before the expiration date in September, there’s no change. 
