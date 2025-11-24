@@ -9,7 +9,8 @@ Install EL Linux via PXE and UEFI
 Overview
 ========
 
-This *HowTo* guide documents how to install EL/RHEL_ Linux using PXE_ on a client host booting by UEFI_.
+This *HowTo* guide documents how to install EL/RHEL_ Linux using PXE_ on a client host booting by UEFI_
+(optionally also with Secure_Boot_).
 We will show how to support UEFI_ booting with PXE_, downloading files from your TFTP_ server.
 See also our pages:
 
@@ -38,7 +39,7 @@ with some recommendations:
 * Machines running legacy BIOS_ or UEFI_ in compatibility mode should be migrated to UEFI_ native mode to take advantage of new features.
 * UEFI_ should be secured using a set of administrator and user passwords appropriate for a device’s capabilities and intended use.
 * Firmware comprising UEFI_ should be updated regularly and treated as importantly as Operating System (OS) updates.
-* UEFI_ Secure Boot should be enabled and configured to audit firmware modules, expansion devices, and bootable OS images.
+* UEFI_ Secure_Boot_ should be enabled and configured to audit firmware modules, expansion devices, and bootable OS images.
 * *Trusted Platform Module* (TPM_) should be leveraged to check the integrity of UEFI_.
 
 See also:
@@ -79,7 +80,7 @@ from the network's TFTP_ server and execute it.
 For 64-bit UEFI_ systems with the x86-64_ architecture,
 the boot file name by convention (see *Table 3.4: UEFI Image Types* in the UEFI_specification_) is ``BOOTX64.EFI``,
 but other bootloader_ images such as ``shimx64.efi`` may be used in stead.
-The bootloader_ image file is located in the folder ``/boot/efi/`` on a bootable drive.
+On a running system the bootloader_ image file is located in the folder ``/boot/efi/`` on a bootable drive.
 Other CPU architectures than x86-64_ are listed in the UEFI_specification_ section 3.5.
 
 The Linux boot process is explained in detail in
@@ -88,16 +89,16 @@ and `Booting process of Linux <https://en.wikipedia.org/wiki/Booting_process_of_
 When powering up the client computer, PXE_ network booting can be selected using the console,
 typically by pressing the F12 or F10 Function_key_.
 
-When you :ref:`DHCP_server_UEFI_configuration`,
+When you :ref:`DHCP_server_UEFI_configuration` (see below),
 and subsequently network boot the client computer,
-it will first download the bootloader_ image.
-This image is executed in the client computer's UEFI_ capable NIC_ adapter,
-and it will subsequently download the main bootloader_ image ``grubx64.efi`` from the TFTP_ server,
-which loads the installation Linux_kernel_ and initrd_
+it will first download the bootloader_ image using TFTP_.
+This image is executed in the client computer,
+and it will subsequently download the main image ``grubx64.efi`` from the TFTP_ server,
+which subsequently loads the installation Linux_kernel_ and initrd_ images
 (see the *Kernel* section in `Booting process of Linux <https://en.wikipedia.org/wiki/Booting_process_of_Linux>`_).
 
-The ``grubx64.efi`` image will now attempt to download GRUB2_ configuration files in order using the following rules,
-where the appended value ``-(something)`` corresponds to a property or address of the client machine::
+The ``grubx64.efi`` image will next attempt to download GRUB2_ configuration files in sequential,
+order using the following rules where the appended value ``-(something)`` corresponds to a property or address of the client machine::
 
   (FWPATH)/grub.cfg-(UUID OF NIC)
   (FWPATH)/grub.cfg-01-(MAC ADDRESS OF NIC)
@@ -118,11 +119,11 @@ it will try the smaller and smaller parts of IPv4_ address multiple times as sho
 The first file in this list which can be downloaded successfully will be used for network booting.
 This gives flexibility when configuring multiple client computers.
 
-The concrete example below shows what would happen under the IPv4_ case:
+The example below shows what would happen under the IPv4_ case for an example client:
 
-* UUID_: 7726a678-7fc0-4853-a4f6-c85ac36a120a
-* MAC_address_:  52:54:00:ec:33:81
-* IP_address_: 10.0.0.130 (Hexadecimal_ digits: 0A000082, see :ref:`hexadecimal_ip-address`)
+* Client UUID_: 7726a678-7fc0-4853-a4f6-c85ac36a120a
+* Client MAC_address_:  52:54:00:ec:33:81
+* Client IP_address_: 10.0.0.130 (Hexadecimal_ digits: 0A000082, see :ref:`hexadecimal_ip-address`)
 
 The GRUB2_ bootloader_ will attempt TFTP_ download of this list of configuration files in sequential order::
 
@@ -138,7 +139,7 @@ The GRUB2_ bootloader_ will attempt TFTP_ download of this list of configuration
   (FWPATH)/grub.cfg-0
   (FWPATH)/grub.cfg
 
-After GRUB2_ has started, files on the TFTP_ server will be accessible via the ``(tftp)`` device.
+After GRUB2_ has started, files on the TFTP_ server will be accessible to GRUB2_ via the ``(tftp)`` device.
 
 The TFTP_ server IP_address_ can be controlled by changing the ``(tftp)`` device name to ``(tftp,server-ip)``.
 Note that this should be changed both in the prefix and in any references to the device name in the configuration file.
