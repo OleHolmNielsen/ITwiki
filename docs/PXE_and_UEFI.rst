@@ -277,7 +277,8 @@ The shim bootloader
 According to the `Cambridge Dictionary <https://dictionary.cambridge.org/dictionary/english/shim>`_ **shim** is 
 *a small object or piece of material used between two parts of something to make them fit together*.
 
-The ``shimx64.efi`` is an EFI/UEFI_ application that functions as a first-stage bootloader for systems with Secure_Boot_ enabled.
+The ``shimx64.efi`` is an EFI/UEFI_ application that functions as a first-stage bootloader for systems with Secure_Boot_ enabled
+(it also works when Secure_Boot_ is *disabled*).
 Additionally, ``shimx64.efi`` works within the constraints of Secure_Boot_,
 which requires all bootloaders and kernels to be signed with a trusted Microsoft key.
 It allows the user to individually trust keys provided by various Linux distributions.
@@ -363,7 +364,31 @@ Some examples of signatures are:
      - subject: /C=US/ST=Delaware/L=Dover/O=Rocky Enterprise Software Foundation/OU=Release engineering team/CN=Rocky Linux Grub2 Signing Cert 101
        issuer:  /C=US/ST=Delaware/L=Dover/O=Rocky Enterprise Software Foundation/OU=Release engineering team/CN=Rocky Linux Secure Boot Root CA
 
-  
+Microsoft 2011 certificates will expire in June 2026
+.........................................................
+
+**NOTICE:** 
+The above ``Microsoft Corporation UEFI CA 2011`` certificates are going to expire in June 2026,
+see Secure_Boot_Certificate_updates_.
+This is presumably going to require UEFI_ (BIOS_) updates from the hardware vendors
+which install the new ``Windows UEFI CA 2023`` certificate.
+
+However, the article
+`Linux Secure Boot Safe Despite Upcoming Microsoft UEFI Key Expiry <https://linuxsecurity.com/news/vendors-products/microsoft-uefi-key-expiry-linux-secure-boot-safe>`_
+states:
+
+* Let’s start with the systems you know and love—your current fleet running distros like Ubuntu, Fedora, or Rocky Linux on Secure Boot-enabled systems. 
+  If those systems were already using a shim signed before the expiration date in September, there’s no change. 
+  The signed shim stays valid, the firmware trusts the established CA key, and appliances boot up just as they always did. 
+  You might never notice anything different—and many admins won’t need to touch those systems unless specific policies require firmware revocation or dbx updates.
+
+* Where problems could emerge is with systems that need new versions of the shim or distros pushing updated bootloader packages post-expiration. 
+  Any newly signed shim needs to be approved against a fresh CA certificate, and that’s where things get tricky: older hardware and firmware don’t automatically trust the new CA. 
+  If your servers or workstations don’t receive a firmware update to include the new key—or if they’ve long fallen off the update wagon—you could be staring at a 
+  Secure Boot rejection screen when installing or upgrading to newer OS versions. 
+  For legacy hardware, boot failure isn't theoretical here; it’s entirely possible, and admins need to plan ahead for it.
+
+.. _Secure_Boot_Certificate_updates: https://support.microsoft.com/en-us/help/5062713
 
 =====================================================================================================
 
