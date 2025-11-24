@@ -171,12 +171,12 @@ Note that this should be changed both in the prefix and in any references to the
 Configuring Secure Boot in client setup
 =======================================
 
-If the PXE_ client system is configured for UEFI_ Secure_Boot_
-then the PXE_ boot may potentially fail with an error about an **invalid signature**.
+If the PXE_ client system is configured for UEFI_ Secure_Boot_,
+you may potentially encounter aq problem where the PXE_ boot fails with an error message of **invalid signature**.
 For some explanations see `What is UEFI Secure Boot and how it works? <https://access.redhat.com/articles/5254641>`_
 and `Installation of RHEL8 on UEFI system with Secure Boot enabled fails with error 'invalid signature' on vmlinuz <https://access.redhat.com/solutions/3771941>`_.
 
-Solution: Make sure to :ref:`Install_bootloader_images` with the bootloader_
+**Solution:** Make sure to :ref:`Install_bootloader_images` with bootloader_
 image signatures that match the OS you are trying to install.
 
 In addition, if you install third-party_ Linux_kernel_ driver modules or other applications,
