@@ -375,18 +375,13 @@ which install the new ``Windows UEFI CA 2023`` certificate.
 
 Interestingly, the article
 `Linux Secure Boot Safe Despite Upcoming Microsoft UEFI Key Expiry <https://linuxsecurity.com/news/vendors-products/microsoft-uefi-key-expiry-linux-secure-boot-safe>`_
-analyzes the isseu and states:
+analyzes the issue and states:
 
-* Let’s start with the systems you know and love—your current fleet running distros like Ubuntu, Fedora, or Rocky Linux on Secure Boot-enabled systems. 
-  If those systems were already using a shim signed before the expiration date in September, there’s no change. 
-  The signed shim stays valid, the firmware trusts the established CA key, and appliances boot up just as they always did. 
-  You might never notice anything different—and many admins won’t need to touch those systems unless specific policies require firmware revocation or dbx updates.
-
-* Where problems could emerge is with systems that need new versions of the shim or distros pushing updated bootloader packages post-expiration. 
-  Any newly signed shim needs to be approved against a fresh CA certificate, and that’s where things get tricky: older hardware and firmware don’t automatically trust the new CA. 
-  If your servers or workstations don’t receive a firmware update to include the new key—or if they’ve long fallen off the update wagon—you could be staring at a 
-  Secure Boot rejection screen when installing or upgrading to newer OS versions. 
-  For legacy hardware, boot failure isn't theoretical here; it’s entirely possible, and admins need to plan ahead for it.
+* The short version is this: systems using existing shim bootloaders signed with the current Microsoft CA key will remain fully functional after the key expires. 
+  Timestamping has your back here. 
+  A shim signed before the expiration date retains its validity indefinitely, thanks to mechanisms baked into software signing protocols. 
+  The firmware trusts the embedded keys that Secure Boot relies on, and those keys, as a rule, don’t expire. 
+  That's great news for continuity, but there are important caveats lurking in the fine print; this isn't a "set it and forget it" moment for Secure Boot setups.
 
 .. _Secure_Boot_Certificate_updates: https://support.microsoft.com/en-us/help/5062713
 
