@@ -257,7 +257,6 @@ To save the settings and reboot:
 
 * Press F10 **Save and Exit**.
 
-
 BIOS password protection
 ------------------------
 
@@ -271,6 +270,24 @@ Huawei servers seem to have a factory default BIOS as well as iBMC_ password whi
 which you can easily find by this `Google search <https://www.google.com/search?q=huawei+server+bios+default+password>`_ or with some effort look up in the system *User Guide*.
 system
 In the BIOS setup you should select *Clear supervisor password* in order to disable this annoying password.
+
+UEFI Secure Boot configuration
+----------------------------------
+
+The UEFI_ Secure_Boot_ configuration can be set using the system console:
+
+1. Reboot the system and press F11 *Boot Manager* during startup.
+
+2. In the *Boot Manager* menu press *Continue* and select the *Administer Secure Boot* item.
+   This causes the system to restart into the *Administer Secure Boot* menu.
+
+3. Here you may select the menu item *Restore Secure Boot to Factory Settings* 
+   and select *Enabled* from the pull-down menu.
+
+4. Press F10 *Save and exit* and the system will restart in Secure_Boot_ mode.
+
+.. _UEFI: https://en.wikipedia.org/wiki/UEFI
+.. _Secure_Boot: https://en.wikipedia.org/wiki/UEFI#Secure_Boot
 
 iBMC network configuration
 --------------------------
