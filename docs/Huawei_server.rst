@@ -290,6 +290,9 @@ The UEFI_ Secure_Boot_ configuration can be set using the system console:
 
 5. Press F10 *Save and exit* and the system will restart in Secure_Boot_ mode.
 
+See also Huawei's 
+`Setting UEFI Secure Boot <https://info.support.huawei.com/hedex/api/pages/EDOC1000053358/YEF0907R/25/resources/en-us_topic_0000001193429384.html>`_ page.
+
 .. _UEFI: https://en.wikipedia.org/wiki/UEFI
 .. _Secure_Boot: https://en.wikipedia.org/wiki/UEFI#Secure_Boot
 .. _Esc_key: https://en.wikipedia.org/wiki/Esc_key
