@@ -137,6 +137,8 @@ The trick for national keyboards is to type this default password with (shift)2 
 
 Since BIOS thinks the keyboard uses a US layout, this will work correctly.
 
+.. _configure_bios:
+
 Configure BIOS settings
 -----------------------
 
@@ -148,9 +150,9 @@ Consider changing the defaults:
 
 * Go to the **Security** submenu and select **Clear supervisor password** (see below).
 
-* Go to the **Boot** submenu and select appropriate boot devices, for example:
+* Go to the **Boot** submenu and select appropriate boot devices, for example to enable UEFI_ boot:
 
-  * **Boot Type** = **Legacy Boot Type**.
+  * **Boot Type** = **UEFI Boot Type**.
 
   * Go to the **Boot Type Order** submenu and select appropriate boot order:
 
@@ -273,6 +275,8 @@ In the BIOS setup you should select *Clear supervisor password* in order to disa
 
 UEFI Secure Boot configuration
 ----------------------------------
+
+First set the system's *Boot Type* to UEFI_, see :ref:`configure_bios`.
 
 The UEFI_ Secure_Boot_ configuration can be set using the system console:
 
