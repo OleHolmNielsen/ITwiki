@@ -278,16 +278,21 @@ The UEFI_ Secure_Boot_ configuration can be set using the system console:
 
 1. Reboot the system and press F11 *Boot Manager* during startup.
 
-2. In the *Boot Manager* menu press *Continue* and select the *Administer Secure Boot* item.
-   This causes the system to restart into the *Administer Secure Boot* menu.
+2. In the *Boot Manager* menu press the Esc_key_ to ignore the *EFI* device list,
+   returning to a *Boot Manager* main menu with a list of items.
 
-3. Here you may select the menu item *Restore Secure Boot to Factory Settings* 
+3. Here select the *Administer Secure Boot* item,
+   which causes the system to restart into the *Administer Secure Boot* menu.
+
+4. Important: If enabling Secure_Boot_ for the first time, 
+   you must select the menu item *Restore Secure Boot to Factory Settings* 
    and select *Enabled* from the pull-down menu.
 
-4. Press F10 *Save and exit* and the system will restart in Secure_Boot_ mode.
+5. Press F10 *Save and exit* and the system will restart in Secure_Boot_ mode.
 
 .. _UEFI: https://en.wikipedia.org/wiki/UEFI
 .. _Secure_Boot: https://en.wikipedia.org/wiki/UEFI#Secure_Boot
+.. _Esc_key: https://en.wikipedia.org/wiki/Esc_key
 
 iBMC network configuration
 --------------------------
