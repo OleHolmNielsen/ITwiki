@@ -278,8 +278,8 @@ The UEFI_ Secure_Boot_ configuration can be set using the system console:
 
 1. Reboot the system and press F11 *Boot Manager* during startup.
 
-2. In the *Boot Manager* menu press the Esc_key_ to ignore the *EFI* device list,
-   returning to a *Boot Manager* main menu with a list of items.
+2. In the *Boot Manager* menu press the Esc_key_ to skip the *EFI* boot device list,
+   returning to a higher-level *Boot Manager* main menu with a list of action items.
 
 3. Here select the *Administer Secure Boot* item,
    which causes the system to restart into the *Administer Secure Boot* menu.
