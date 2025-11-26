@@ -22,6 +22,7 @@ XH620 V3 server
 .. _XH620_Documentation: http://support.huawei.com/enterprise/productNewOffering?idAbsPath=7919749|9856522|21782478|21149952|21456501&pid=21456501&tab=doc&docType=DOCTYPE0&productname=XH620%20V3
 .. _XH620_Downloads: http://support.huawei.com/enterprise/en/server/xh620-v3-pid-21456501/software
 .. _XH620: http://e.huawei.com/en/products/cloud-computing-dc/servers/x-series/xh620-v3
+.. _BIOS: https://en.wikipedia.org/wiki/BIOS
 
 RH2288H V3 server
 -----------------
@@ -29,7 +30,7 @@ RH2288H V3 server
 * RH2288H_User_Guide_.
 * RH2288H_Software_downloads_ are at the bottom of the RH2288H_ page *Technical Support* section.
   The latest software (topmost on the list) *Version and Patch Number* should be used.
-  The software includes drivers for supported OSes, and BIOS and iBMC_ firmware updates.
+  The software includes drivers for supported OSes, and BIOS_ and iBMC_ firmware updates.
 
 .. _RH2288H: http://e.huawei.com/en/products/cloud-computing-dc/servers/rh-series/rh2288h-v3
 .. _RH2288H_User_Guide: http://support.huawei.com/enterprise/docinforeader.action?contentId=DOC1000054727&partNo=10072
@@ -57,7 +58,7 @@ SUMMARY: How to manage a Huawei server
 
 This is a summary of the steps required to configure a factory default Huawei server so that it becomes manageable. 
 
-The most important steps are to reconfigure the BIOS and the iBMC_ management processor.
+The most important steps are to reconfigure the BIOS_ and the iBMC_ management processor.
 The sections below provide full details.
 
 Assumptions:
@@ -66,9 +67,9 @@ Assumptions:
 
 The following steps must be taken in numerical order:
 
-1. Attach a console screen and keyboard and boot the server into BIOS Setup mode (press DEL).
+1. Attach a console screen and keyboard and boot the server into BIOS_ Setup mode (press DEL).
 
-2. Remove the useless BIOS setup (supervisor) password installed by Huawei.
+2. Remove the useless BIOS_ setup (supervisor) password installed by Huawei.
 
 3. Read the server's port 1 Ethernet MAC address.
 
@@ -78,7 +79,7 @@ The following steps must be taken in numerical order:
 
    - For a X6800_ chassis only: Configure the *Aggregation* chassis management Ethernet port.
 
-5. In BIOS Setup press F10 to save the changes and exit to reset the server.
+5. In BIOS_ Setup press the F10 Function_key_ to save the changes and exit to reset the server.
 
 6. Connect Ethernet cables to the server port 1 and the iBMC_ *Mgmt* ports.
 
@@ -88,27 +89,28 @@ The following steps must be taken in numerical order:
 
    - Make sure that the iBMC_ responds to network ping_ packets.
 
-8. Use the Huawei *uMate* tool (from the FusionServer_tools_ web page) to reconfigure BIOS settings as required (*uMate* works through the iBMC_).
+8. Use the Huawei *uMate* tool (from the FusionServer_tools_ web page) to reconfigure BIOS_ settings as required (*uMate* works through the iBMC_).
 
-   - It is a good idea to update also the BIOS and iBMC_ firmware.
+   - It is a good idea to update also the BIOS_ and iBMC_ firmware.
 
-   - Note: The *uMate* is unable to set **all** required BIOS parameters, so some parameters may have to be set manually in the BIOS Setup.
+   - Note: The *uMate* is unable to set **all** required BIOS_ parameters, so some parameters may have to be set manually in the BIOS_ Setup.
 
 9. Reboot the server and perform a PXE_ network installation of operating system.
 
 .. _DHCP: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
 .. _ping: https://en.wikipedia.org/wiki/Ping_%28networking_utility%29
 .. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
+.. _Function_key: https://en.wikipedia.org/wiki/Function_key
 
 Booting and BIOS configuration
 ==============================
 
-A boot menu will be presented:
+A boot menu with Function_key_ choices will be presented:
 
 * F5 to select keyboard: Only US English and French are available!
-* DEL to enter BIOS setup
+* DEL to enter BIOS_ setup
 * F11 to Boot Manager
-* F12 to PXE boot
+* F12 to PXE_ boot
 
 The server like RH2288H will first spend some time configuring storage connected to the LSI MegaRAID_ controller, then proceed with the booting.
 
@@ -117,11 +119,11 @@ The server like RH2288H will first spend some time configuring storage connected
 BIOS keyboard layout
 --------------------
 
-Using F5 at startup, the BIOS can configured to accept one of the following national keyboard layouts: 
+Using F5 at startup, the BIOS_ can configured to accept one of the following national keyboard layouts: 
 
 * US English, French.
 
-In order to enter the BIOS setup initially, you have to type the default password: Huawei12#$
+In order to enter the BIOS_ setup initially, you have to type the default password: Huawei12#$
 
 However, this won't work with many national keyboards because the characters # and $ will be placed on different keys.
 
@@ -135,16 +137,16 @@ The trick for national keyboards is to type this default password with (shift)2 
 
 * Admin(shift)2(un-shift)9000
 
-Since BIOS thinks the keyboard uses a US layout, this will work correctly.
+Since BIOS_ thinks the keyboard uses a US layout, this will work correctly.
 
 .. _configure_bios:
 
 Configure BIOS settings
 -----------------------
 
-Press DELETE to enter the BIOS setup.
-The (silly) Huawei password **Huawei12#$** is required to enter BIOS setup!
-Press F9 to set defaults, F10 to Save and Exit.
+Press DELETE to enter the BIOS_ setup.
+The (silly) Huawei password **Huawei12#$** is required to enter BIOS_ setup!
+Press the F9 Function_key_ to set defaults, press F10 to Save and Exit.
 
 Consider changing the defaults:
 
@@ -167,7 +169,7 @@ Consider changing the defaults:
     * Go to *Processor Configuration*.  Set **Hyper-Threading** to **Disabled** for HPC computing.
 
   * Go to **PXE configuration** to write down the on-board **Ethernet MAC address**.
-    Also verify the PXE enabled/disabled settings.
+    Also verify the PXE_ enabled/disabled settings.
     Note: On the XH620_ V3 server, the Ethernet MAC address seems to be defined by the small mini-board containing the LAN ports at the server's front.
 
   * Go to **IPMI iBMC configuration** to update the iBMC_ management controller configuration:
@@ -187,7 +189,7 @@ Consider changing the defaults:
           If multiple network ports are connected, the iBMC selects a network port as the iBMC management network port based on the following priority: dedicated network port > LOM network port > PCIe extern port.
           The aggregation network port cannot be automatically selected.
 
-      - You *may* change the **iBMC password**. (**Note:** special characters will be used - remember that BIOS uses US keyboard layout!)
+      - You *may* change the **iBMC password**. (**Note:** special characters will be used - remember that BIOS_ uses US keyboard layout!)
       - Set the IPv4/IPv6 *IP Source* configuration for **DHCP**.
 
   * In *Misc configuration* you should set **Wake on LAN** to **enabled**.
@@ -198,23 +200,23 @@ Consider changing the defaults:
 Missing BIOS configuration items
 ................................
 
-The following desired BIOS settings are unavailable (as of BIOS V350):
+The following desired BIOS_ settings are unavailable (as of BIOS_ V350):
 
 * Keyboard NUMLOCK = Enabled/Disabled
 
-* There does not seem to be any way to display the iBMC_ Event Log within the BIOS setup.
+* There does not seem to be any way to display the iBMC_ Event Log within the BIOS_ setup.
   In stead you may use the iBMC_ GUI, or the command ``ipmitool sel elist`` in Linux.
 
 BIOS settings for Intel OmniPath network adapter
 ................................................
 
-If you install an Intel OmniPath network adapter, there is an Intel recommendation (BIOS dependent) to set the PCIe bus speed to **Gen2**,
+If you install an Intel OmniPath network adapter, there is an Intel recommendation (BIOS_ dependent) to set the PCIe bus speed to **Gen2**,
 see our `OmniPath page <https://wiki.fysik.dtu.dk/niflheim/OmniPath>`_.
-The default BIOS setting may be that the PCIe speed is set to Auto (may vary with BIOS). 
+The default BIOS_ setting may be that the PCIe speed is set to Auto (may vary with BIOS_). 
 For a PCIe Gen3 x16 adapter the PCIe bus speed should be 8 GT/s, whereas Gen2 speed would only be 5 GT/s. 
 Please verify your adapter's speed.
 
-In the Huawei BIOS configure this in the *Advanced->Intel RC Group->IIO Config -> IIO1*:
+In the Huawei BIOS_ configure this in the *Advanced->Intel RC Group->IIO Config -> IIO1*:
 
 * Select the correct PCIe slot, it may be the Port3A x16 port.
 * Set the link speed to **Auto**.
@@ -225,7 +227,7 @@ Optimized BIOS settings
 Download the manual *Intel® Omni-Path Performance Tuning User Guide*.
 See Chapter **2.0 BIOS Settings** about recommended settings, which are likely important for any type of network fabric.
 
-For the Huawei server BIOS configuration please first perform the above standard configurations for HPC servers.
+For the Huawei server BIOS_ configuration please first perform the above standard configurations for HPC servers.
 Then go to the **Advanced->Intel RC Group** and configure:
 
 * **Advanced Power Management Configuration**:
@@ -242,7 +244,7 @@ Then go to the **Advanced->Intel RC Group** and configure:
 
     - All ports: Link Speed = **Auto**
     - All ports: PCI-E Port Max Payload Size = **Auto**
-    - IOU Non-posted Prefetch = **Disabled** (available with BIOS V350 or later).
+    - IOU Non-posted Prefetch = **Disabled** (available with BIOS_ V350 or later).
 
   - Intel VT for Directed I/O (VT-d) = **Disabled**.
 
@@ -262,16 +264,16 @@ To save the settings and reboot:
 BIOS password protection
 ------------------------
 
-Many BIOS functions are password protected, making normal server operation quite cumbersome.
-For example, PXE booting is only permitted after typing the BIOS password!
+Many BIOS_ functions are password protected, making normal server operation quite cumbersome.
+For example, PXE_ booting is only permitted after typing the BIOS_ password!
 
-Huawei servers seem to have a factory default BIOS as well as iBMC_ password which is printed on a label on top of the chassis::
+Huawei servers seem to have a factory default BIOS_ as well as iBMC_ password which is printed on a label on top of the chassis::
 
   Huawei12#$
 
 which you can easily find by this `Google search <https://www.google.com/search?q=huawei+server+bios+default+password>`_ or with some effort look up in the system *User Guide*.
 system
-In the BIOS setup you should select *Clear supervisor password* in order to disable this annoying password.
+In the BIOS_ setup you should select *Clear supervisor password* in order to disable this annoying password.
 
 UEFI Secure Boot configuration
 ----------------------------------
@@ -280,7 +282,7 @@ First set the system's *Boot Type* to UEFI_, see :ref:`configure_bios`.
 
 The UEFI_ Secure_Boot_ configuration can be set using the system console:
 
-1. Reboot the system and press F11 *Boot Manager* during startup.
+1. Reboot the system and press the F11 Function_key_ *Boot Manager* during startup.
 
 2. In the *Boot Manager* menu press the Esc_key_ to skip the *EFI* boot device list,
    returning to a higher-level *Boot Manager* main menu with a list of action items.
@@ -315,13 +317,13 @@ The factory default static IP address of each iBMC_ is 172.31.1.128 + slot-numbe
 The netmask is 255.255.255.0.
 
 You may change the IP configuration to DHCP_, provided you have configured the iBMC_'s MAC-address in your DHCP_ server.
-This is described above under BIOS configuration.
+This is described above under BIOS_ configuration.
 Alternatively, from the Linux OS you can configure the iBMC_ to use DHCP_::
 
   ipmitool lan set 1 ipsrc dhcp
 
 If you want to use the X6800_ chassis consolidated management port (label: *Mgmt* on the chassis "ears"), you have to change the iBMC configuration.
-This is described above under BIOS configuration.
+This is described above under BIOS_ configuration.
 
 Alternatively, connect a cable temporarily to the *Dedicated* port so that the iBMC_ connects to the network and uses DHCP_.
 Now you can use SSH_ to login to the iBMC_ IP address as user *root* with the (silly) Huawei password.
@@ -386,7 +388,7 @@ See the HUAWEI Server iMana_200_User_Guide_ which explains iBMC_ GUI and CLI ope
 
 .. _iMana_200_User_Guide: http://support.huawei.com/enterprise/docinforeader.action?contentId=DOC1000038843&partNo=10072
 
-For example, iBMC_ and BIOS upgrades can be performed using the iBMC_ CLI interface via SSH login.
+For example, iBMC_ and BIOS_ upgrades can be performed using the iBMC_ CLI interface via SSH login.
 The guide instructions in *3.4.11 Upgrading the Software (upgrade)* are::
 
   iBMC:/->ipmcset -d upgrade -v /tmp/*.hpm [option]
@@ -554,7 +556,7 @@ Firmware upgrades
 
 From the XH620_downloads_ page get the firmware upgrade document named HUAWEI Rack Server *Upgrade Guide (iBMC)*.
 Unpack the zip-file to get the PDF document.
-Also download the iBMC_ and BIOS upgrade files and unzip them to separate directories (because of a conflicting file *version.xml*) on your PC (not the server).
+Also download the iBMC_ and BIOS_ upgrade files and unzip them to separate directories (because of a conflicting file *version.xml*) on your PC (not the server).
 
 The *Upgrade Guide (iBMC)* instructs the user to log in to the iBMC_ GUI.
 Use a web browser and enter the iBMC_ IP address or hostname.
@@ -563,7 +565,7 @@ Login to the GUI web page with user name *root* and password are discussed above
 **WARNING**: 
 
 * Performing firmware upgrades may require the server to be in a OS shutdown mode, since upgrades are performed through the iBMC_ interface.
-* It is apparently not possible to update BIOS, for example, while the server is operating.
+* It is apparently not possible to update BIOS_, for example, while the server is operating.
 
 iBMC IP address
 ---------------
@@ -590,17 +592,17 @@ Read the *Upgrade Guide (iBMC)* instructions:
   Do not restart the server or the iBMC_ manually during the update.
 * After a couple of minutes (when the fans go high) login to the GUI again.
 
-Subsequently upgrade the BIOS:
+Subsequently upgrade the BIOS_:
 
 * In the GUI press *System->Firmware Upgrade*.
-* In *Select Target Version:* use *Browse* to select the BIOS firmware file ``biosimage.hpm``.
+* In *Select Target Version:* use *Browse* to select the BIOS_ firmware file ``biosimage.hpm``.
 * Press *Start Update*.
-* The BIOS upgrade takes about 8 minutes.
+* The BIOS_ upgrade takes about 8 minutes.
 * If the *Upgrade Progress* shows 0% (not 100%) after completion, the upgrade has failed.
 * Check *System->Operation Logs*.
-* If the logs say *Upgrade (BIOS) with (biosimage.hpm) failed*, the *Upgrade Guide (iBMC)* says:
+* If the logs say *Upgrade (BIOS_) with (biosimage.hpm) failed*, the *Upgrade Guide (iBMC)* says:
 
-  * Power off the server (from the console) and then upgrade the BIOS (repeat the above).
+  * Power off the server (from the console) and then upgrade the BIOS_ (repeat the above).
 
 * After the upgrade power on the server from the console or the GUI *Power* pane.
 
@@ -874,12 +876,12 @@ Here there will be a list of *FusionServer Tools V100R002C00SPC301*, for example
 
 * FusionServer Tools-uMate-Linux-V128.tar.gz 
 
-  In the Linux operating system, for batch inspection, log collection, upgrade firmware, BIOS configuration, BMC configuration, HMM configuration, the power control operation. 
+  In the Linux operating system, for batch inspection, log collection, upgrade firmware, BIOS_ configuration, BMC configuration, HMM configuration, the power control operation. 
 
 uMate tool
 ----------
 
-The *uMate* is a Java-based tool used for log collection, firmware upgrade, configuration of BIOS, iBMC, HMM, and System.
+The *uMate* is a Java-based tool used for log collection, firmware upgrade, configuration of BIOS_, iBMC, HMM, and System.
 
 **WARNING:** It seems that *uMate* does not work on EL8 Linux, and that CentOS/RHEL 7 is required!
 
@@ -895,7 +897,7 @@ Go to this subdirectory and run the *uMate* GUI or CLI tool::
   uMate.sh
   uMate_CLI.sh
 
-Remember: For upgrading the BIOS, the server must be rebooted after the BIOS update.
+Remember: For upgrading the BIOS_, the server must be rebooted after the BIOS_ update.
 
 The GUI tool includes a documentation *Help window* at the ? icon.
 
@@ -910,7 +912,7 @@ uMate (version V126) has several issues:
   This occurs on Linux when you use a remote X11 display, for example using SSH login to the server.
   It often helps to **resize or refresh the window** in order to update the window contents.
 
-* A number of performance related BIOS settings are **not available** in the uMate *BIOS Config* tool:
+* A number of performance related BIOS_ settings are **not available** in the uMate *BIOS Config* tool:
 
   1. QPI Configuration: Snoop Mode Select
 
