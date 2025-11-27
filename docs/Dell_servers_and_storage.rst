@@ -11,6 +11,7 @@ This page contains information about DellEMC_ servers and storage deployed in ou
    Dell_R640
    Dell_C6420
    C8220_server
+   Dell_BIOS_settings
    Dell_ME484
 
 DellEMC_ firmware and software download pages:
