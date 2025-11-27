@@ -8,17 +8,18 @@ This page contains documentation on some hardware at our site.
    :maxdepth: 1
 
    Lenovo_servers_and_racks
-   AMD_ROCm
+   Dell_servers_and_storage
+   Dell_R650
+   Dell_R640
    Dell_C6420
    Dell_ME484
-   Dell_R640
-   Dell_R650
+   C8220_server
    DellOS6
    HPE_Proliant_SmartArray
    HP_Proliant_firmware_upgrade
-   Huawei_server
-   C8220_server
    DL160_G6
+   Huawei_server
    Intel_AMT
+   AMD_ROCm
    RaspberryPi
    Apple_TV
