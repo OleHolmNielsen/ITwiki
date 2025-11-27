@@ -33,7 +33,7 @@ DellEMC_ firmware and software download pages:
 Dell OpenManage
 ===============
 
-Download the OpenManage_ software ISO image from the R640_downloads_ page in the *Systems Management* download category.
+Download the OpenManage_ software ISO image from the server model's download page in the *Systems Management* download category.
 
 Download the *Dell EMC OpenManage Deployment Toolkit (Linux)* DTK ISO file and mount it on ``/mnt``.
 
