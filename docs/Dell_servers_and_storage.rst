@@ -37,6 +37,8 @@ Download the OpenManage_ software ISO image from the R640_downloads_ page in the
 
 Download the *Dell EMC OpenManage Deployment Toolkit (Linux)* DTK ISO file and mount it on ``/mnt``.
 
+.. _OpenManage: https://www.dell.com/support/article/us/en/04/sln310664/dell-emc-openmanage-systems-management-portfolio-overview?lang=en
+
 Monitoring CPU and power
 ========================
 
