@@ -17,6 +17,9 @@ This page contains information out Dell iDRAC_ (BMC_) controller in servers.
 .. _iDRAC: https://en.wikipedia.org/wiki/Dell_DRAC
 .. _iDRAC9_manuals: https://www.dell.com/support/home/us/en/19/products/software_int/software_ent_systems_mgmt/remote_ent_sys_mgmt/rmte_ent_sys_idrac9
 .. _OpenManage_Ansible_Modules: https://github.com/dell/dellemc-openmanage-ansible-modules
+.. _UEFI: https://en.wikipedia.org/wiki/UEFI
+.. _BIOS: https://en.wikipedia.org/wiki/BIOS
+.. _BMC: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface#Baseboard_management_controller
 
 ===============================================================================================
 
