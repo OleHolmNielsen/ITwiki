@@ -1,3 +1,5 @@
+.. _Dell_servers_and_storage:
+
 #########################
 Dell servers and storage
 #########################
@@ -27,6 +29,24 @@ DellEMC_ firmware and software download pages:
 * `R740xd2 <https://www.dell.com/support/home/en-us/product-support/product/poweredge-r740xd2/drivers>`_
 * `C6420 <https://www.dell.com/support/home/en-us/product-support/product/poweredge-c6420/drivers>`_
 * `C6400 <https://www.dell.com/support/home/en-us/dkbsdt1/product-support/product/poweredge-c6400/drivers>`_
+
+Dell OpenManage
+===============
+
+Download the OpenManage_ software ISO image from the R640_downloads_ page in the *Systems Management* download category.
+
+Download the *Dell EMC OpenManage Deployment Toolkit (Linux)* DTK ISO file and mount it on ``/mnt``.
+
+Monitoring CPU and power
+========================
+
+The turbostat_ command reports  processor  topology,  frequency, idle power-state statistics, temperature and power on X86 processors.
+Examples of usage are::
+
+  turbostat --Summary --quiet
+  turbostat --show CoreTmp,PkgTmp,PkgWatt,Bzy_MHz
+
+.. _turbostat: https://www.linux.org/docs/man8/turbostat.html
 
 .. _DellEMC: https://www.dell.com/
 
