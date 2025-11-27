@@ -33,6 +33,16 @@ Dell Support_ provides R640_ information:
 .. _iDRAC9_manuals: https://www.dell.com/support/home/us/en/19/products/software_int/software_ent_systems_mgmt/remote_ent_sys_mgmt/rmte_ent_sys_idrac9
 .. _OpenManage_Ansible_Modules: https://github.com/dell/dellemc-openmanage-ansible-modules
 
+===============================================================================================
+
+BIOS System Setup
+====================
+
+Press the **F2** Function_key_ during start-up to enter the BIOS_ *System Setup Main Menu*.
+
+.. _BIOS: https://en.wikipedia.org/wiki/BIOS
+.. _Function_key: https://en.wikipedia.org/wiki/Function_key
+
 Monitoring CPU and power
 ========================
 
@@ -52,7 +62,7 @@ Download the OpenManage_ software ISO image from the R640_downloads_ page in the
 Download the *Dell EMC OpenManage Deployment Toolkit (Linux)* DTK ISO file and mount it on ``/mnt``.
 
 Dell EMC System Update (DSU) and racadm
----------------------------------------
+===============================================================================================
 
 Dell EMC System Update (DSU_) is a script optimized update deployment tool for applying *Dell Update Packages* (DUP) to Dell EMC PowerEdge servers. 
 See the `DSU manuals <https://www.dell.com/support/home/us/en/04/product-support/product/system-update-v1.6.0/manuals>`_.
@@ -195,7 +205,7 @@ You can also reconfigure just a single setting component with the ``-c`` flag, f
 
   racadm set -t xml -f config.xml -c NIC.Integrated.1-1-1 -b NoReboot
 
-To configure the UEFI boot order::
+To configure the UEFI_ boot order::
 
   racadm set bios.biosbootsettings.UefiBootSeq NIC.PxeDevice.1-1,Disk.SATAEmbedded.A-1
 
@@ -219,16 +229,16 @@ Set the E-mail alerts destination::
 
   racadm set iDRAC.EmailAlert.Address.1 <some-email-address>
 
-View the BIOS boot mode::
+View the BIOS_ boot mode::
 
   racadm get BIOS.BiosBootSettings
 
-To set the boot mode to UEFI at the next reboot::
+To set the boot mode to UEFI_ at the next reboot::
 
   racadm set BIOS.BiosBootSettings.BootMode Uefi
   racadm jobqueue create BIOS.Setup.1-1
 
-Note: It seems that additional UEFI parameters also need to be set (TBD)::
+Note: It seems that additional UEFI_ parameters also need to be set (TBD)::
 
   UefiBootSeq NIC.PxeDevice.1-1,Disk.SATAEmbedded.A-1
   HddPlaceholder Enabled
@@ -272,6 +282,7 @@ Then you must create a job for this NIC::
 
 A new setting will only take effect after a system reboot.
 
+===============================================================================================
 
 PERC H330 RAID controller
 =========================
@@ -280,7 +291,7 @@ The R640_ comes with a PERC H330_ RAID controller.
 
 By default the installed disks are unallocated, and you have to configure their usage.
 
-Press **F2** during start-up to enter the setup menus.
+Press the **F2** Function_key_ during start-up to enter the setup menus.
 Go to the *Device Settings* menu.
 
 Configure the H330_ via the menu item *Device Settings* and select the RAID controller item:
@@ -339,13 +350,14 @@ This command shows the RAID rebuild status for controller 1::
 
   perccli /c1/eall/sall show rebuild
 
-
 .. _perccli: https://www.dell.com/support/home/us/en/04/drivers/driversdetails?driverid=f48c2
+
+===============================================================================================
 
 Booting and BIOS configuration
 ==============================
 
-Press **F2** during start-up to enter the BIOS and firmware setup menus.
+Press **F2** Function_key_ during start-up to enter the BIOS_ and firmware setup menus.
 Go to the *BIOS Settings* menu.
 
 Minimal configuration of a new server or motherboard
@@ -375,7 +387,7 @@ Go to the *System Setup* menu item *Device Settings* and select the *Integrated 
 Boot settings menu
 ------------------
 
-* **Boot Mode** = **BIOS**.
+* **Boot Mode** = **UEFI**.
 
 * In the *Boot Sequence* menu:
 
@@ -383,14 +395,28 @@ Boot settings menu
 
   * Verify that the correct devices are selected in *Boot Option Enable/Disable*.
 
-UEFI boot settings
-------------------
-
-If UEFI boot mode is selected, the following must be enabled before installing the OS for the first time:
+If UEFI_ boot mode is selected, the following must be enabled before installing the OS for the first time:
 
 * In the **Boot Setting** menu:
 
   * **Hard-disk Drive Placeholder = Enabled**
+
+UEFI Secure Boot configuration
+------------------------------------
+
+First set the system's *Boot Mode* to UEFI_, see above.
+
+The UEFI_ Secure_Boot_ configuration can be set in the *System BIOS Settings* menu:
+
+1. Click on the *System Security* item.
+
+2. Set the *Secure Boot* item to *Enabled*.
+
+3. Click on the *Finish* buttons to exit *System Setup*, and the system will restart in Secure_Boot_ mode.
+
+.. _UEFI: https://en.wikipedia.org/wiki/UEFI
+.. _Secure_Boot: https://en.wikipedia.org/wiki/UEFI#Secure_Boot
+.. _Esc_key: https://en.wikipedia.org/wiki/Esc_key
 
 Memory settings menu
 --------------------
@@ -442,7 +468,7 @@ This can make **CPU thermal throttling** less likely.
 
 Read the document `Custom Cooling Fan Options for Dell EMC PowerEdge Servers <https://downloads.dell.com/manuals/common/customcooling_poweredge_idrac9.pdf>`_.
 
-In the BIOS setup screen, select **iDRAC->Thermal** and configure **Thermal profile = Maximum performance**.
+In the BIOS_ setup screen, select **iDRAC->Thermal** and configure **Thermal profile = Maximum performance**.
 
 Read the current settings::
 
@@ -472,6 +498,8 @@ Miscellaneous Settings menu
 
 * **Keyboard NumLock** = **Off**.
 
+===============================================================================================
+
 .. _NVDIMM_Setup:
 
 NVDIMM Optane persistent memory setup
@@ -495,7 +523,7 @@ in the `server documentation <https://www.dell.com/support/home/en-uk/product-su
 * Memory mode configuration for persistent memory:
 
   - To create an NVDIMM_ goal in BIOS, go to the sub-menu ``Create Goal Config``.
-  - The BIOS options determine how the goal is created and the PMems are configured::
+  - The BIOS_ options determine how the goal is created and the PMems are configured::
 
       Operation Target: Platform - Applies the goal to all the DIMMs in the system (recommended)
       Persistent [%]: 100 - Creates a goal of 100% Persistent memory across the selected PMems
@@ -554,6 +582,8 @@ Other useful commands::
 .. _ipmctl: https://github.com/intel/ipmctl
 .. _EPEL: https://docs.fedoraproject.org/en-US/epel/
 
+===============================================================================================
+
 PXE boot setup
 ==============
 
@@ -582,6 +612,8 @@ The FreeIPMI_ command ipmi-raw_ may also be used.
 .. _IPMItool: https://github.com/ipmitool/ipmitool
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
 .. _ipmi-raw: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-raw.8.html
+
+===============================================================================================
 
 iDRAC (BMC) setup
 =================
@@ -790,7 +822,7 @@ iDRAC or LifeCycle Controller errors
 
 If the iDRAC controller seems frozen, or if the LifeCycle Controller (LCC) has errors, one should try to perform a *deep power drain*.
 
-We have seen the R640 LCC going into a **Recovery Mode** preventing the setting of BIOS parameters using racadm_, and an error message on the console::
+We have seen the R640 LCC going into a **Recovery Mode** preventing the setting of BIOS_ parameters using racadm_, and an error message on the console::
 
   Couldn't locate device handle for MAS001.. System rebooting 
 
@@ -815,14 +847,14 @@ After you replace the motherboard on your server, Easy Restore allows you to aut
 • System Service Tag
 • Asset Tag
 • Licenses data
-• UEFI Diagnostics application
+• UEFI_ Diagnostics application
 • System configuration settings—BIOS, iDRAC, and NIC
 
 Easy Restore uses the Easy Restore flash memory to back up the data. When you replace the motherboard and power on the system, the
-BIOS queries the iDRAC and prompts you to restore the backed-up data. The first BIOS screen prompts you to restore the Service Tag,
-licenses, and UEFI diagnostic application. The second BIOS screen prompts you to restore system configuration settings. If you choose not
-to restore data on the first BIOS screen and if you do not set the Service Tag by another method, the first BIOS screen is displayed again.
-The second BIOS screen is displayed only once.
+BIOS_ queries the iDRAC and prompts you to restore the backed-up data. The first BIOS_ screen prompts you to restore the Service Tag,
+licenses, and UEFI_ diagnostic application. The second BIOS_ screen prompts you to restore system configuration settings. If you choose not
+to restore data on the first BIOS_ screen and if you do not set the Service Tag by another method, the first BIOS_ screen is displayed again.
+The second BIOS_ screen is displayed only once.
 
 Resetting the iDRAC
 -------------------
