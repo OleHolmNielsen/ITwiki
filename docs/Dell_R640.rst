@@ -65,7 +65,7 @@ Go to the *System Setup* menu item *Device Settings* and select the *Integrated 
 
 *Boot Sequence* menu:
 
-  * Click the **Boot Sequence** item to move PXE boot up above the hard disk boot.
+  * Click the **Boot Sequence** item to move PXE_ boot up above the hard disk boot.
 
 Boot settings menu
 ------------------
@@ -77,7 +77,7 @@ Go to the *BIOS Settings* menu.
 
 * In the *Boot Sequence* menu:
 
-  * Click the **Boot Sequence** item to move PXE boot up above the hard disk boot (if desired).
+  * Click the **Boot Sequence** item to move PXE_ boot up above the hard disk boot (if desired).
 
   * Verify that the correct devices are selected in *Boot Option Enable/Disable*.
 
@@ -598,16 +598,17 @@ Go to the *System Setup* menu item *Device Settings* and select the *Integrated 
 
 * Set the **Boot Retry Count = 3** if desired.
 
-* Disable PXE boot for all unused NICs (port 1).
+* Disable PXE_ boot for all unused NICs (port 1).
 
 Press *Finish* to save all settings.
 
-It is possible to request a one-time PXE boot from the BMC using this IPMItool_ raw command::
+It is possible to request a one-time PXE_ boot from the BMC using this IPMItool_ raw command::
 
   ipmitool -I lanplus -H <BMC-address> -U <username> -P <password> raw 0x00 0x08 0x05 0xa0 0x04 0x00 0x00 0x00
 
 The FreeIPMI_ command ipmi-raw_ may also be used.
 
+.. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
 .. _IPMItool: https://github.com/ipmitool/ipmitool
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
 .. _ipmi-raw: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-raw.8.html
