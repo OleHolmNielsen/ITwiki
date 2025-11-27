@@ -12,6 +12,8 @@ see the main page :ref:`Dell_servers_and_storage`.
 This page contains information out Dell PowerEdge R640_ could servers which we have deployed in our cluster.
 
 .. _R640: https://www.dell.com/en-us/work/shop/povw/poweredge-r640
+.. _BIOS: https://en.wikipedia.org/wiki/BIOS
+.. _racadm: https://www.dell.com/support/manuals/us/en/04/idrac9-lifecycle-controller-v3.0-series/idrac_3.00.00.00_racadm/introduction
 
 Documentation and software
 ==========================
@@ -35,6 +37,7 @@ Dell Support_ provides R640_ information:
 .. _iDRAC: https://en.wikipedia.org/wiki/Dell_DRAC
 .. _iDRAC9_manuals: https://www.dell.com/support/home/us/en/19/products/software_int/software_ent_systems_mgmt/remote_ent_sys_mgmt/rmte_ent_sys_idrac9
 .. _OpenManage_Ansible_Modules: https://github.com/dell/dellemc-openmanage-ansible-modules
+.. _Function_key: https://en.wikipedia.org/wiki/Function_key
 
 ===============================================================================================
 
