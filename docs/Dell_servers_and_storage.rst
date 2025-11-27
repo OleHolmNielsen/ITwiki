@@ -7,12 +7,13 @@ This page contains information about DellEMC_ servers and storage deployed in ou
 .. toctree::
    :maxdepth: 1
 
+   Dell_BIOS_settings
+   Dell_iDRAC
+   Dell_DSU_and_racadm
    Dell_R650
    Dell_R640
    Dell_C6420
    C8220_server
-   Dell_BIOS_settings
-   Dell_iDRAC
    Dell_ME484
 
 DellEMC_ firmware and software download pages:
