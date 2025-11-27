@@ -38,8 +38,7 @@ Dell Support_ provides R640_ information:
 Booting and BIOS configuration
 ==============================
 
-Press the **F2** Function_key_ during start-up to enter the BIOS_ and firmware setup menus.
-Go to the *BIOS Settings* menu.
+Press the **F2** Function_key_ during start-up to enter system setup menus.
 
 .. _BIOS: https://en.wikipedia.org/wiki/BIOS
 .. _Function_key: https://en.wikipedia.org/wiki/Function_key
@@ -70,6 +69,9 @@ Go to the *System Setup* menu item *Device Settings* and select the *Integrated 
 
 Boot settings menu
 ------------------
+
+Press the **F2** Function_key_ during start-up to enter the BIOS_ and firmware setup menus.
+Go to the *BIOS Settings* menu.
 
 * **Boot Mode** = **UEFI**.
 
