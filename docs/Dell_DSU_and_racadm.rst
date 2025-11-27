@@ -47,6 +47,9 @@ To apply Dell upgrades::
 
 .. _DSU: http://linux.dell.com/repo/hardware/dsu/
 .. _Yum: https://en.wikipedia.org/wiki/Yum_(software)
+.. _UEFI: https://en.wikipedia.org/wiki/UEFI
+.. _BIOS: https://en.wikipedia.org/wiki/BIOS
+.. _iDRAC: https://en.wikipedia.org/wiki/Dell_DRAC
 
 Installing the racadm package
 ----------------------------------
