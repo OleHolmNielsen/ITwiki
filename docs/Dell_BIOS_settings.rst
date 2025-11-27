@@ -48,6 +48,35 @@ Go to the *System Setup* menu item *Device Settings* and select the *Integrated 
 .. _racadm: https://www.dell.com/support/manuals/us/en/04/idrac9-lifecycle-controller-v3.0-series/idrac_3.00.00.00_racadm/introduction
 .. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
 
+PXE boot setup
+----------------------
+
+Go to the *System Setup* menu item *Device Settings* and select the *Integrated NIC* items:
+
+* In the NIC *Main Configuration Page* select *NIC Configuration*.  We use **NIC port 3** (1 Gbit) as the system's NIC.
+
+* Read the NIC **Ethernet MAC Address** from this page for configuring the DHCP server.
+
+* Select the **Legacy Boot Protocol** item **PXE**.
+
+* Set **Wake On LAN** to **Enabled**.
+
+* Set the **Boot Retry Count = 3** if desired.
+
+* Disable PXE_ boot for all unused NICs (port 1).
+
+Press *Finish* to save all settings.
+
+It is possible to request a one-time PXE_ boot from the BMC using this IPMItool_ raw command::
+
+  ipmitool -I lanplus -H <BMC-address> -U <username> -P <password> raw 0x00 0x08 0x05 0xa0 0x04 0x00 0x00 0x00
+
+The FreeIPMI_ command ipmi-raw_ may also be used.
+
+.. _IPMItool: https://github.com/ipmitool/ipmitool
+.. _FreeIPMI: https://www.gnu.org/software/freeipmi/
+.. _ipmi-raw: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-raw.8.html
+
 Boot settings menu
 ------------------
 
