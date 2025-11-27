@@ -227,7 +227,7 @@ To apply Dell upgrades::
 .. _DSU: http://linux.dell.com/repo/hardware/dsu/
 
 Installing the racadm package
-.............................
+----------------------------------
 
 The ``racadm`` package is no longer contained in the dell-system-update.repo (Dec. 2024).
 You have to download the ``Dell iDRAC Tools for Linux`` tar-ball file (currently v11.2.1.0) 
