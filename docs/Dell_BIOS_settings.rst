@@ -44,6 +44,10 @@ Go to the *System Setup* menu item *Device Settings* and select the *Integrated 
 
   * Click the **Boot Sequence** item to move PXE_ boot up above the hard disk boot.
 
+.. _iDRAC: https://en.wikipedia.org/wiki/Dell_DRAC
+.. _racadm: https://www.dell.com/support/manuals/us/en/04/idrac9-lifecycle-controller-v3.0-series/idrac_3.00.00.00_racadm/introduction
+.. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
+
 Boot settings menu
 ------------------
 
