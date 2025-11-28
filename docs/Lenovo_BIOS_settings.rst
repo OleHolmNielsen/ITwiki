@@ -12,7 +12,7 @@ Booting and BIOS configuration
 ==============================
 
 * Press ``F1`` during start-up to enter the BIOS and firmware setup menus.
-  In the BMC GUI you may also press ``Quick Actions`` and select the *Power Action* ``Boot Server to System Setup``.
+  In the BMC_ GUI you may also press ``Quick Actions`` and select the *Power Action* ``Boot Server to System Setup``.
 * Press ``F10`` for PXE_ network boot.
 * Press ``F12`` for a one-time boot menu with all available selections.
 
@@ -23,6 +23,8 @@ Note: The Lenovo UEFI_ boot goes through PEI_ and DXE_ phases before booting the
 .. _DXE: https://uefi.org/specs/PI/1.8/V2_Overview.html
 .. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
 .. _MAC_address: https://en.wikipedia.org/wiki/MAC_address
+.. _BMC: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface#Baseboard_management_controller
+.. _DHCP: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
 
 Ethernet MAC address from BMC GUI
 ===================================
@@ -40,7 +42,7 @@ This can be read from the BMC_ GUI interface:
 XClarity Provisioning Manager
 ==================================
 
-Initial BMC login credentials are::
+Initial BMC_ login credentials are::
 
   Username: USERID
   Password: PASSW0RD   (Note the zero!)
@@ -51,7 +53,7 @@ Notes:
   By default the password must be at least 10 characters long and have some complexity.
 
 * If using SSH login and you have several SSH_ authentication key files (``$HOME/.ssh/id_*``) they will be tried in turn, 
-  and since the BMC accepts a maximum of 5 failed login attempts, SSH_ logins may fail with the error::
+  and since the BMC_ accepts a maximum of 5 failed login attempts, SSH_ logins may fail with the error::
 
     Received disconnect from 10.x.x.x port 22:2: Too many authentication failures
 
@@ -67,10 +69,10 @@ Minimal configuration of the BMC of a new server or replaced motherboard
 At our site the following minimal settings are required to configure a new server
 or a replacement motherboard in an existing server.  
 
-The BMC setup is accessed via the physical console or BMC web GUI.
+The BMC_ setup is accessed via the physical console or BMC_ web GUI.
 Login with the above credentials.
 
-Note: These settings were made with XCC/BMC firmware versions dated from the fall of 2025.
+Note: These settings were made with XCC/BMC_ firmware versions dated from the fall of 2025.
 Older or newer firmwares may behave slightly differently.
 
 BMC user configuration
@@ -85,9 +87,9 @@ Click on ``Global Settings``:
 3. Set ``Minimum password length`` to ``8`` (or according to your site security policies).
 4. Change ``Minimum password change interval`` to ``0`` so that you can change the password as needed.
 
-In the ``User/LDAP`` menu it is preferable to change the BMC local ``User name``
+In the ``User/LDAP`` menu it is preferable to change the BMC_ local ``User name``
 from the factory default value of ``USERID`` to ``root``.
-Unfortunately, it is **no longer possible** to change a BMC user name while that user is logged in!
+Unfortunately, it is **no longer possible** to change a BMC_ user name while that user is logged in!
 
 Therefore a complicated procedure is required for the user name change:
 
@@ -98,14 +100,14 @@ Therefore a complicated procedure is required for the user name change:
 
     ipmitool user list 2
 
-* Logout user ``USERID`` from the BMC GUI, and login again as the ``root3`` user.
+* Logout user ``USERID`` from the BMC_ GUI, and login again as the ``root3`` user.
 
 * Go to the ``User/LDAP`` menu and change the original user name ``USERID`` into ``root``.
   In ``User accessible interface`` use the pull-down menu to add also ``IPMI over Lan``.
   After this you are requested to enter a new password for the renamed ``root`` user.
   Then click ``Apply``.
 
-* Logout user ``root3`` of the BMC GUI, and login again as the ``root`` user.
+* Logout user ``root3`` of the BMC_ GUI, and login again as the ``root`` user.
 
 * Recommended for security: In the ``User/LDAP`` menu delete the temporary ``root3`` user.
 
@@ -131,11 +133,11 @@ You may change the ``BMC Configuration->Network`` settings:
   Note that the ports' MAC_address_ are different for the different Ethernet ports!
 
 * Select ``Obtain Hostname from DHCP``.
-  Alternatively, change the ``Host Name`` field to the BMC's DNS_ name. 
+  Alternatively, change the ``Host Name`` field to the BMC_'s DNS_ name. 
 
 * In the ``Ethernet Configuration`` field ``Method`` menu change the setting to ``DHCP enabled``
   in stead of the default ``First DHCP, then static IP``
-  so that the BMC does not fall back to an unreachable private IP-address!
+  so that the BMC_ does not fall back to an unreachable private IP-address!
 
 * Set ``IPv6`` to ``Disabled``.
 
@@ -149,8 +151,8 @@ Modify the ``DNS and DDNS`` settings:
 
 * Disable ``Use DNS to discover Lenovo XClarity Administrator``.
 
-  Explanation: By default the BMC will periodically search DNS_ for a SRV_record_ ``_lxca._tcp`` in your DNS_ domain.
-  If an LXCA_ instance is found, the BMC will attempt to announce its presence to the selected address of LXCA_ instance.
+  Explanation: By default the BMC_ will periodically search DNS_ for a SRV_record_ ``_lxca._tcp`` in your DNS_ domain.
+  If an LXCA_ instance is found, the BMC_ will attempt to announce its presence to the selected address of LXCA_ instance.
 
   Note: Your network may have a DNS_ configuration which advertises the address of a *Lenovo XClarity Administrator* (LXCA_) instance.
   Lenovo offers a **90 days trial license** for LXCA_.
@@ -158,7 +160,7 @@ Modify the ``DNS and DDNS`` settings:
 * When done press ``Apply``.
 
 Optional: If your server is actually up and running a Linux OS,
-you can also use OneCLI_ to configure BMC network parameters,
+you can also use OneCLI_ to configure BMC_ network parameters,
 see the :ref:`XClarity_Essentials_OneCLI` page.
 
 .. _DDNS: https://en.wikipedia.org/wiki/Dynamic_DNS
@@ -179,19 +181,19 @@ When using the Linux FreeIPMI_ CLI commands use the `-I CIPHER-SUITE-ID` option,
 
   ipmipower -I 17 -D LAN_2_0 ....
 
-**NOTE:** Some BMC brands (HPE, SuperMicro) unfortunately only support the default cipher suite ``-I 3`` and will reject connections with ``-I 17``.
+**NOTE:** Some BMC_ brands (HPE, SuperMicro) unfortunately only support the default cipher suite ``-I 3`` and will reject connections with ``-I 17``.
 
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
 
 Configuration using the console
 ==================================
 
-While many settings can be performed in the BMC Web GUI,
+While many settings can be performed in the BMC_ Web GUI,
 processor and boot UEFI_ settings must be configured in the system console.
 
-The BMC GUI has a ``Remote Console`` menu to open a console in a new browser tab.
+The BMC_ GUI has a ``Remote Console`` menu to open a console in a new browser tab.
 Press ``F1`` during start-up to enter the BIOS and firmware setup menus.
-In the BMC GUI you may also press ``Quick Actions`` and select the *Power Action* ``Boot Server to System Setup``.
+In the BMC_ GUI you may also press ``Quick Actions`` and select the *Power Action* ``Boot Server to System Setup``.
 
 UEFI Setup
 ----------------
