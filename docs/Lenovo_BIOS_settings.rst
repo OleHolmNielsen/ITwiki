@@ -22,6 +22,20 @@ Note: The Lenovo UEFI_ boot goes through PEI_ and DXE_ phases before booting the
 .. _PEI: https://uefi.org/specs/PI/1.8/V1_Services_PEI.html
 .. _DXE: https://uefi.org/specs/PI/1.8/V2_Overview.html
 .. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
+.. _MAC_address: https://en.wikipedia.org/wiki/MAC_address
+
+Ethernet MAC address from BMC GUI
+===================================
+
+The system's Ethernet MAC_address_ required for configuring the server's
+Linux Ethernet interface(s) in DHCP_.
+This can be read from the BMC_ GUI interface:
+
+* Login to the BMC_ and click on the menu item ``Server Configuration``
+  and click on the ``Adapters`` menu.
+
+* Identify the desired network adapter and read the MAC_address_ from the ``Permanent Address`` heading.
+  The MAC_address_ must be added to the DHCP_ server's configuration.
 
 XClarity Provisioning Manager
 ==================================
@@ -147,7 +161,6 @@ Optional: If your server is actually up and running a Linux OS,
 you can also use OneCLI_ to configure BMC network parameters,
 see the :ref:`XClarity_Essentials_OneCLI` page.
 
-.. _MAC_address: http://en.wikipedia.org/wiki/MAC_address
 .. _DDNS: https://en.wikipedia.org/wiki/Dynamic_DNS
 .. _LXCA: https://sysmgt.lenovofiles.com/help/index.jsp?topic=%2Fcom.lenovo.lxca.doc%2Flxca_overview.html
 .. _DNS: https://en.wikipedia.org/wiki/Domain_Name_System
