@@ -212,10 +212,14 @@ that are unique to each server and must not be replicated:
     SYSTEM_PROD_DATA.SysInfoUUID=xxx
     SYSTEM_PROD_DATA.SysEncloseAssetTag=
 
-* Delete the boot order device lines containing specific hard disk and network identifiers::
+* If any boot order device lines contain specific hard disk and network identifiers,
+  then such lines should be deleted::
 
     BootOrder.HardDiskBootOrder=UEFI xxx
     BootOrder.NetworkBootOrder=UEFI xxx
+
+  Alternatively, one can configure the :ref:`Lenovo_UEFI_Setup` ``System Settings -> Network``
+  to disable PXE_ booting from unwanted network devices.
 
 Upload system logs to Lenovo
 ------------------------------
