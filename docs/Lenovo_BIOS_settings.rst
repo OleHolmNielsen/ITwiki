@@ -210,6 +210,8 @@ The BMC_ GUI has a ``Remote Console`` menu to open a console in a new browser ta
 Press ``F1`` during start-up to enter the BIOS and firmware setup menus.
 In the BMC_ GUI you may also press ``Quick Actions`` and select the *Power Action* ``Boot Server to System Setup``.
 
+.. _Lenovo_UEFI_Setup:
+
 UEFI Setup
 ----------------
 
