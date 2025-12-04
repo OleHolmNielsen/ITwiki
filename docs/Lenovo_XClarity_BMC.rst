@@ -220,6 +220,8 @@ that are unique to each server and must not be replicated:
 
   Alternatively, one can configure the :ref:`Lenovo_UEFI_Setup` ``System Settings -> Network``
   to disable PXE_ booting from unwanted network devices.
+  Unfortunately, this configuration is unavailable in the XCC GUI
+  and must be performed in the :ref:`Lenovo_UEFI_Setup`.
 
 .. _PXE: https://en.wikipedia.org/wiki/Preboot_Execution_Environment
 
