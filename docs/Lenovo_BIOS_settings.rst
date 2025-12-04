@@ -75,6 +75,21 @@ Login with the above credentials.
 Note: These settings were made with XCC/BMC_ firmware versions dated from the fall of 2025.
 Older or newer firmwares may behave slightly differently.
 
+BMC date and time configuration
+-------------------------------------
+
+The BMC_ internal date and time configuration is made by clicking on the *clock icon* in the 
+GUI's upper right corner.
+You can choose to:
+
+* Sync date and time with the server's OS or with an NTP_ server.
+
+* Select the *Time Zone Offset* (our systems are in *Central Europe Time* UTC+01:00).
+
+* Automatically adjust for *Daylight Saving Time* (DST).
+
+.. _NTP: https://en.wikipedia.org/wiki/Network_Time_Protocol
+
 BMC user configuration
 ------------------------
 
