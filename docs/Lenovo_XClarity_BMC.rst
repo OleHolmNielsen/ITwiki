@@ -169,22 +169,41 @@ Replicating the system configuration from a file::
 
   onecli config replicate --file <filename> [<options>] # Replicate the settings to ANOTHER system
 
+Optional: The ``noreplicate`` parameters may be printed by the command::
+
+  onecli config show noreplicate
+
 **Important**:
 
 * Use the ``onecli config restore`` command **only** to restore previous settings on the **same** server.
 
-* If you made a ``onecli config save`` file, make sure to delete the line with ``IMM.IMMInfo_Name`` from that file because it 
-  will be overwritten by the *replicate* command.
+Edit the XCC system configuration file
+.......................................
 
-* In the ``onecli config replicate`` log file you should identify all **VPD setting** parameters and delete those from the file, for example::
+If you created a ``onecli config save`` file, make sure to delete a number of lines
+that are unique to each server and must not be replicated:
 
-    Some settings are failed to set with some reason. The settings and reasons are as following:
-    SYSTEM_PROD_DATA.SysInfoSerialNum
-          Reason:SYSTEM_PROD_DATA.SysInfoSerialNum is skipped since this is VPD setting
+* Delete the lines with ``IMM.IMMInfo_*``, for example::
 
-Optional: The ``noreplicate`` parameters may be printed by the command::
+    IMM.IMMInfo_Name=xxxx
+    IMM.IMMInfo_Contact=
+    ...
 
-  onecli config show noreplicate
+* Delete the lines with ``IMM*`` networking information, for example::
+
+    IMM.HostName1=xxxx
+    IMM.HostIPAddress1=172.29.101.1
+    IMM.HostIPSubnet1=255.255.0.0
+    IMM.GatewayIPAddress1=0.0.0.0
+    IMM.SNMPv3EngineId=XCC-xxx-xxxx
+
+* Delete the ``SYSTEM_PROD_DATA`` lines, for example::
+
+    SYSTEM_PROD_DATA.SysInfoProdName=xxx
+    SYSTEM_PROD_DATA.SysInfoProdIdentifier=xxx
+    SYSTEM_PROD_DATA.SysInfoSerialNum=xxx
+    SYSTEM_PROD_DATA.SysInfoUUID=xxx
+    SYSTEM_PROD_DATA.SysEncloseAssetTag=
 
 Upload system logs to Lenovo
 ------------------------------
