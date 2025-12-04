@@ -169,6 +169,13 @@ Replicating the system configuration from a file::
 
   onecli config replicate --file <filename> [<options>] # Replicate the settings to ANOTHER system
 
+A summary output will be printed and a log file created, for example::
+
+  Summary:450 setting(s) succeeded replicating
+	2 setting(s) fails replicating
+
+If any settings failed replicating, you should look for the reason in the log file.
+
 Optional: The ``noreplicate`` parameters may be printed by the command::
 
   onecli config show noreplicate
