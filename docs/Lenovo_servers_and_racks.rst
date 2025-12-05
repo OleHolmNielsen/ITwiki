@@ -31,6 +31,15 @@ Lenovo product pages:
 .. _Lenovo_Neptune: https://www.lenovo.com/us/en/servers-storage/neptune/
 .. _EveryScale_Best_Recipes: https://support.lenovo.com/us/en/solutions/HT510136
 
+Lenovo firmware and software download pages:
+
+* `SD665 V3 <https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sd665-v3/7d9p/downloads/driver-list/>`_
+* `SD650N V3 <https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sd650nv3/7d7n/downloads/driver-list/>`_
+* `SD650N V2 <https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sd650-n-v2/7d1n/downloads/driver-list/>`_
+* `SR630 V3 <https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sr630v3/7d73/downloads/driver-list/>`_
+* `SR645 V3 <https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sr645v3/7d9c/downloads/driver-list/>`_
+* `SR850 V3 <https://datacentersupport.lenovo.com/us/en/products/servers/thinksystem/sr850v3/7d96/downloads/driver-list/>`_
+
 Server firmware upgrades
 ==========================
 
