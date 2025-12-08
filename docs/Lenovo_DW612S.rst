@@ -63,7 +63,7 @@ After logging in to the SMM2_ Web GUI click on the **Configuration** tab:
 
 * **Network Configuration**:
 
-  * Define the SMM2_'s DNS_ ``Host Name`` and ``Domain Name``.
+  * Define the SMM2_'s DNS_ Hostname_ and Domain_name_.
   * You should leave IPv6_ as enabled for future management access.
   * Click on the **Advanced Settings** network ``eth0`` name and define:
 
@@ -90,6 +90,8 @@ After logging in to the SMM2_ Web GUI click on the **Configuration** tab:
     Note: Correct network configuration of DNS_ server is required!
 
 .. _DNS: https://en.wikipedia.org/wiki/Domain_Name_System
+.. _Domain_name: https://en.wikipedia.org/wiki/Domain_name
+.. _Hostname: https://en.wikipedia.org/wiki/Hostname
 .. _IPv6: http://en.wikipedia.org/wiki/Ipv6
 
 SMM2_ ipmitool commands
