@@ -63,7 +63,7 @@ After logging in to the SMM2_ Web GUI click on the **Configuration** tab:
 
 * **Network Configuration**:
 
-  * Define the SMM2_'s DNS ``Host Name`` and ``DNS Domain Name``.
+  * Define the SMM2_'s DNS_ ``Host Name`` and ``DNS Domain Name``.
   * You should leave IPv6_ as enabled for future management access.
   * Click on the **Advanced Settings** network ``eth0`` name and define:
 
@@ -83,12 +83,13 @@ After logging in to the SMM2_ Web GUI click on the **Configuration** tab:
   * Destination Email Addresses for alert recipients.
   * **SMTP (email) Server Settings**:
    
-    * Set ``SMTP IP address`` (can be a DNS name!) and ``SMTP Port Number``.
+    * Set ``SMTP IP address`` (can be a DNS_ name!) and ``SMTP Port Number``.
     * If needed by your site, define the ``SMTP Authentication`` settings.
 
   * Test SMTP by ``Send Alert 1``
-    Note: Correct network configuration of DNS server is required!
+    Note: Correct network configuration of DNS_ server is required!
 
+.. _DNS: https://en.wikipedia.org/wiki/Domain_Name_System
 .. _IPv6: http://en.wikipedia.org/wiki/Ipv6
 
 SMM2_ ipmitool commands
