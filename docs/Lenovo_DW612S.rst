@@ -45,7 +45,12 @@ and the password may be the default *PASSW0RD* or something else configured by L
 
 After logging in to the SMM2_ Web GUI click on the **Configuration** tab:
 
-* **Account Security**: Change *Minimum password length* and *Minimum password reuse cycle* as needed.
+* **Account Security**: Change these parameters and then click *Apply*:
+ 
+  * *Minimum password length* as needed.
+  * *Minimum password reuse cycle* = 0 or as needed.
+  * *Password expiration period (in days)* = 0.
+  * *Minimum password change interval (in hours)* = 0.
 
 * **User account**: Change the login name (if desired),
   and/or add and enable your site's login username/password with **Administrator** priviledges.
