@@ -64,31 +64,34 @@ Read the IP v4/v6 information::
   racadm get iDRAC.IPv4
   racadm get iDRAC.IPv6
 
-If DHCP is enabled on iDRAC and you want to use the DNS server IP provided by the DHCP server::
+If DHCP is enabled on iDRAC and you want to use the DNS_ server IP provided by the DHCP server::
 
   racadm set iDRAC.IPv4.DNSFromDHCP 1
   racadm set iDRAC.NIC.DNSDomainFromDHCP 1
   racadm set iDRAC.NIC.DNSDomainNameFromDHCP 1
 
-The iDRAC DNS Name **cannot be obtained from DHCP!**
-Therefore you must always set the DNS name manually::
+The iDRAC DNS_ Name **cannot be obtained from DHCP!**
+Therefore you must always set the DNS_ name manually::
 
     racadm set iDRAC.NIC.DNSRacName <iDRACNAME>
 
-Manual DNS settings:
+Manual DNS_ settings:
 
-* Set iDRAC domain name::
+* Set iDRAC DNS_ Domain_name_::
 
     racadm set iDRAC.NIC.DNSDomainName <DOMAIN.NAME>
 
-* Set iDRAC DNS Server::
+* Set iDRAC DNS_ Server::
 
     racadm config -g cfgLanNetworking -o cfgDNSServer1 x.x.x.x
     racadm config -g cfgLanNetworking -o cfgDNSServer2 y.y.y.y
 
-* Set the server's DNS hostname by::
+* Set the server's DNS_ hostname by::
 
     racadm  set System.ServerOS.HostName <Server-DNS-name>
+
+.. _DNS: https://en.wikipedia.org/wiki/Domain_Name_System
+.. _Domain_name: https://en.wikipedia.org/wiki/Domain_name
 
 iDRAC web-server security Host Header enforcement
 -------------------------------------------------
@@ -99,8 +102,8 @@ This is a security issue recorded in `CVE-2021-21510 <https://nvd.nist.gov/vuln/
 
   Dell iDRAC8 versions prior to 2.75.100.75 contain a host header injection vulnerability. A remote unauthenticated attacker may potentially exploit this vulnerability by injecting arbitrary ‘Host’ header values to poison a web-cache or trigger redirections
 
-This means that you **cannot** use the iDRAC's DNS name to access its web-server!
-However, you can still connect to the IP-address in stead of the DNS name.
+This means that you **cannot** use the iDRAC's DNS_ name to access its web-server!
+However, you can still connect to the IP-address in stead of the DNS_ name.
 
 Please read the Dell *Knowledge Base article 000193619* 
 `HTTP/HTTPS FQDN Connection Failures On iDRAC9 firmware version 5.10.00.00 <https://www.dell.com/support/kbdoc/en-us/000193619/http-https-fqdn-connection-failures-on-idrac9-firmware-version-5-10-00-00?lwp=rt>`_.
@@ -153,13 +156,13 @@ View the server's Inlet temperature history::
 SMTP alerts from iDRAC
 ----------------------
 
-First you must configure the DNS name of the iDRAC. 
+First you must configure the DNS_ name of the iDRAC. 
 Then see the guide
 `PowerEdge: How to Configure iDRAC Email Alerts <https://www.dell.com/support/article/us/en/04/sln309388/dell-idrac-how-to-configure-the-email-notifications-for-system-alerts-on-idrac-7-8-and-9?lang=en>`_.
 
 Use the iDRAC web GUI:
 
-* In *iDRAC Settings->Connectivity->Network->Common Settings* configure the iDRAC's hostname and DNS domain name.
+* In *iDRAC Settings->Connectivity->Network->Common Settings* configure the iDRAC's hostname and DNS_ Domain_name_.
 
 * In *iDRAC Settings->Settings->SMTP (Email) Server Settings* configure your ``SMTP (Email) Server IP Address or FQDN / DNS Name``.
 
