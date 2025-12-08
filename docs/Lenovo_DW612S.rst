@@ -103,9 +103,7 @@ Using the Serial Number,
 
 In the Data_Center_Support_ page search for the Serial Number.
 Download firmware from the *Software&Drivers* menu.
-Download the *payload* firmware zip file (for example, `lnvgy_fw_smm2_umsm12o-1.16_anyos_noarch.zip`)
-and unzip it.
-The required firmware file is the ``.rom`` file (for example, ``lnvgy_fw_smm2_umsm12v-1.20_anyos_noarch.rom``).
+Download the *payload* firmware ``.rom`` file (for example, ``lnvgy_fw_smm2_umsm12v-1.20_anyos_noarch.rom``).
 
 After logging in to the SMM2_ Web Gui click on the *Configuration* tab and select *Firmware update*.
 Here you browse for the .rom file and upload it for the firmware update to start.
