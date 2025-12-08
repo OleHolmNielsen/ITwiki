@@ -44,7 +44,7 @@ otherwise the SMM2_ will default to a static IP-address.
 The MAC_address_ is printed on the SMM2_ module board.
 You might ask Lenovo to provide a MAC_address_ list for your SMM2_ modules.
 
-Add the SMM2_ Ethernet MAC_address_ to the DHCP server, then go to the SMM2_ login page.
+Add the SMM2_ Ethernet MAC_address_ to the DHCP_ server, then go to the SMM2_ login page.
 The default administrator username may be *admin* or *USERID*,
 and the password may be the default *PASSW0RD* or something else configured by Lenovo.
 
