@@ -125,6 +125,10 @@ The MAC_address_ is printed on the SMM2_ module board.
 The default administrator username is *USERID* with password *PASSW0RD*.
 It is required to change the password at first login (min. 10 chars).
 
+**IMPORTANT:** 
+Check that the firmware version is up to date, see the above section,
+and upgrade if necessary.
+
 You should make a SMM2_ data backup and restore using a FAT32 formatted USB_flash_drive_
 via the GUI menu item `Configure->Backup and Restore Configuration`.
 
