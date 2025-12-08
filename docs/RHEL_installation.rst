@@ -44,7 +44,7 @@ The ``--add-boot`` creates a separate ``/boot`` partition, so you should **not**
 Automatic installation
 ===========================
 
-Fysik Linux Workstations are installed using :ref:`Kickstart` booting from the
+Fysik Linux Workstations are installed using Kickstart_ booting from the
 network with PXE_ (*Preboot Execution Environment*).
 In this way we are able to make an automated and fast setup on different types of hardware.
 
