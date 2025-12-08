@@ -39,7 +39,12 @@ Then check the *Event log*.
 Configuration of the DW612S System Management Module 2 (SMM2_)
 ---------------------------------------------------------------
 
-Add the SMM2_ Ethernet MAC address to the DHCP server, then go to the SMM2_ login page.
+First you must configure the SMM2_ MAC_address_ in your DHCP_ server,
+otherwise the SMM2_ will default to a static IP-address.
+The MAC_address_ is printed on the SMM2_ module board.
+You might ask Lenovo to provide a MAC_address_ list for your SMM2_ modules.
+
+Add the SMM2_ Ethernet MAC_address_ to the DHCP server, then go to the SMM2_ login page.
 The default administrator username may be *admin* or *USERID*,
 and the password may be the default *PASSW0RD* or something else configured by Lenovo.
 
