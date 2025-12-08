@@ -119,8 +119,8 @@ SMM2_ module replacement
 If the SMM2_ module needs to be replaced, see the SMM2_replacement_ page.
 
 Note: You must configure the new SMM2_ MAC_address_ in your DHCP_ server,
-otherwise the SMM2_ will default to a statuc IP-address.
-The MAC_address_ should be printed on the SMM2_ module.
+otherwise the SMM2_ will default to a static IP-address.
+The MAC_address_ is printed on the SMM2_ module board.
 
 You should make a SMM2_ data backup and restore using a FAT32 formatted USB_flash_drive_
 via the GUI menu item `Configure->Backup and Restore Configuration`.
