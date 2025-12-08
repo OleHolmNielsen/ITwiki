@@ -22,7 +22,7 @@ Disks over 2 TB with GPT
 If the machine's boot disk is 2 TB or larger, it will have a *GUID Partition Table* (GPT_).
 BIOS based machines will in this case require an extra biosboot_ partition, see https://lists.centos.org/pipermail/centos/2016-August/160561.html
 
-In the :ref:`Kickstart` file you may define an extra first partition::
+In the Kickstart_file_ you may define an extra first partition::
 
   part biosboot --fstype=biosboot --size=1
 
@@ -38,6 +38,7 @@ The ``--add-boot`` creates a separate ``/boot`` partition, so you should **not**
 .. _GPT: https://en.wikipedia.org/wiki/GUID_Partition_Table
 .. _biosboot: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-disk-partitioning-setup-x86.html
 .. _reqpart: http://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#reqpart
+.. _Kickstart_file: https://anaconda-installer.readthedocs.io/en/latest/kickstart.html
 
 Automatic installation
 ===========================
@@ -45,8 +46,6 @@ Automatic installation
 Fysik Linux Workstations are installed using :ref:`Kickstart` booting from the
 network with PXE_ (*Preboot Execution Environment*).
 In this way we are able to make an automated and fast setup on different types of hardware.
-
-.. _Kickstart: https://docs.fedoraproject.org/en-US/fedora/latest/install-guide/advanced/Kickstart_Installations/
 
 .. warning::
    Do not try to remember any of these steps, always follow the guide step by step! If your disagree with the guide, change the guide, but do not stray from the path of the guide. Missing a step leads to inconsistency, inconsistency leads to insecurity, insecurity leads to suffering...
