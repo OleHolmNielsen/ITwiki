@@ -38,6 +38,7 @@ The ``--add-boot`` creates a separate ``/boot`` partition, so you should **not**
 .. _GPT: https://en.wikipedia.org/wiki/GUID_Partition_Table
 .. _biosboot: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-disk-partitioning-setup-x86.html
 .. _reqpart: http://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#reqpart
+.. _Kickstart: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-1-introduction
 .. _Kickstart_file: https://anaconda-installer.readthedocs.io/en/latest/kickstart.html
 
 Automatic installation
