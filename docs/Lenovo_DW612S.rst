@@ -118,9 +118,18 @@ SMM2_ module replacement
 
 If the SMM2_ module needs to be replaced, see the SMM2_replacement_ page.
 
+Note: You must configure the new SMM2_ MAC_address_ in your DHCP_ server,
+otherwise the SMM2_ will default to a statuc IP-address.
+The MAC_address_ should be printed on the SMM2_ module.
+
 You should make a SMM2_ data backup and restore using a FAT32 formatted USB_flash_drive_
 via the GUI menu item `Configure->Backup and Restore Configuration`.
+
+Next go to the `System Information` section, select `Enclosure VPD` and perform data backup.
+
 In the GUI you may alternatively download the configuration to a file ``smmbackup.bk``.
 
 .. _SMM2_replacement: https://pubs.lenovo.com/dw612s_neptune_enclosure/smm_replacement
 .. _USB_flash_drive: https://pubs.lenovo.com/dw612s_neptune_enclosure/install_the_smm_usb_flash_drive
+.. _DHCP: https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
+.. _MAC_address: https://en.wikipedia.org/wiki/MAC_address
