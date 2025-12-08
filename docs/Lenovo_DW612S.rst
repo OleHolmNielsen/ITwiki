@@ -52,6 +52,7 @@ After logging in to the SMM2_ Web GUI click on the **Configuration** tab:
 
 * **Account Security**: Change these parameters and then click *Apply*:
  
+  * *Password Complexity Rules* = 3 or as needed.
   * *Minimum password length* as needed.
   * *Minimum password reuse cycle* = 0 or as needed.
   * *Password expiration period (in days)* = 0.
