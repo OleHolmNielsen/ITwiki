@@ -182,8 +182,9 @@ image signatures that match the OS you are trying to install.
 In addition, if you install third-party_ Linux_kernel_ driver modules or other applications,
 the Secure_Boot_ may block these modules, for example:
 
-* ZFS_ filesystems: `Signing ZFS kernel module in Alma Linux for secure boot <https://luu.is/en/posts/signing-zfs-kernel-module/>`_.
-  See also `Fedora 41 secure boot with kmod <https://openzfs.github.io/openzfs-docs/Developer%20Resources/Custom%20Packages.html#fedora-41-secure-boot-with-kmod>`_.
+* ZFS_ filesystems:
+  * `Fedora 41 secure boot with kmod <https://openzfs.github.io/openzfs-docs/Developer%20Resources/Custom%20Packages.html#fedora-41-secure-boot-with-kmod>`_.
+  * `Signing ZFS kernel module in Alma Linux for secure boot <https://luu.is/en/posts/signing-zfs-kernel-module/>`_.
 
 * NVIDIA_drivers_: `NVIDIA drivers not working while Secure Boot <https://forums.developer.nvidia.com/t/nvidia-drivers-not-working-while-secure-boot-is-enabled-after-updating-to-ubuntu-24-04/305351>`_.
 
