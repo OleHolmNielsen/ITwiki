@@ -35,7 +35,7 @@ You can determine whether Secure_Boot_ is enabled or not using mokutil_::
 
 See also:
 
-* RHEL 8 `Signing a kernel and modules for Secure Boot <https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/signing-a-kernel-and-modules-for-secure-boot_managing-monitoring-and-updating-the-kernel>`.
+* RHEL 8 `Signing a kernel and modules for Secure Boot <https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/signing-a-kernel-and-modules-for-secure-boot_managing-monitoring-and-updating-the-kernel>`_.
 * `What Is Machine Owner Key (MOK) in Linux? <https://www.baeldung.com/linux/mok-machine-owner-key>`_.
 
 .. _mokutil: https://www.linux.org/docs/man1/mokutil.html
