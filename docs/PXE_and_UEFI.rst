@@ -29,6 +29,9 @@ On a running computer you can determine if the system has booted by UEFI_ by che
 
   ls -d /sys/firmware/efi
 
+UEFI Secure Boot
+----------------------
+
 You can determine whether Secure_Boot_ is enabled or not using mokutil_::
 
   mokutil --sb-state
