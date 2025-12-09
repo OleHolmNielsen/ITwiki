@@ -183,6 +183,7 @@ In addition, if you install third-party_ Linux_kernel_ driver modules or other a
 the Secure_Boot_ may block these modules, for example:
 
 * ZFS_ filesystems:
+
   * `Fedora 41 secure boot with kmod <https://openzfs.github.io/openzfs-docs/Developer%20Resources/Custom%20Packages.html#fedora-41-secure-boot-with-kmod>`_.
   * `Signing ZFS kernel module in Alma Linux for secure boot <https://luu.is/en/posts/signing-zfs-kernel-module/>`_.
 
