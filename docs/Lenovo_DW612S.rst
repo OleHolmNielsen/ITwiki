@@ -130,6 +130,12 @@ SMM2_ module replacement
 
 If the SMM2_ module needs to be replaced, see the SMM2_replacement_ page.
 
+You should first make a SMM2_ data backup and restore using a FAT32 formatted USB_flash_drive_
+via the GUI menu item `Configure->Backup and Restore Configuration`.
+
+Next go to the `System Information` section, select `Enclosure VPD` and perform data backup.
+In the GUI you may alternatively download the configuration to a file ``smmbackup.bk``.
+
 Note: You must configure the new SMM2_ MAC_address_ in your DHCP_ server,
 otherwise the SMM2_ will default to a static IP-address.
 The MAC_address_ is printed on the SMM2_ module board.
@@ -138,15 +144,16 @@ The default administrator username is *USERID* with password *PASSW0RD*.
 It is required to change the password at first login (min. 10 chars).
 
 **IMPORTANT:** 
-Check that the firmware version is up to date, see the above section,
-and upgrade if necessary.
 
-You should make a SMM2_ data backup and restore using a FAT32 formatted USB_flash_drive_
-via the GUI menu item `Configure->Backup and Restore Configuration`.
+* Check that the firmware version is up to date, see the above section, and upgrade if necessary.
 
-Next go to the `System Information` section, select `Enclosure VPD` and perform data backup.
+* Check if old, state configuration data and serial number is in the replacement SMM2_ module.
+  If so, reset to factory defaults:
 
-In the GUI you may alternatively download the configuration to a file ``smmbackup.bk``.
+  * Web GUI method: Go to `Configuration -> Reset to Default` and confirm.
+    The process takes about 2 minutes, after which the module reboots and is ready for restore.
+  * Physical button method: Press and hold the reset button for >4 seconds (less than 4 seconds only reboots).
+    Holding for more than 4 seconds triggers a full reset to defaults.
 
 .. _SMM2_replacement: https://pubs.lenovo.com/dw612s_neptune_enclosure/smm_replacement
 .. _USB_flash_drive: https://pubs.lenovo.com/dw612s_neptune_enclosure/install_the_smm_usb_flash_drive
