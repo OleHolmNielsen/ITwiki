@@ -25,7 +25,8 @@ You may find a ZFS_web_archive_ copy of this documentation.
 
 * Getting_Started_ with ZFS_ including an RHEL-based-distro_ guide.
 
-* `DKMS vs kmod: The Essential Guide for ZFS on Linux <https://klarasystems.com/articles/dkms-vs-kmod-the-essential-guide-for-zfs-on-linux/>`_.
+* `Klara articles <https://klarasystems.com/articles/>`_
+  including `DKMS vs kmod: The Essential Guide for ZFS on Linux <https://klarasystems.com/articles/dkms-vs-kmod-the-essential-guide-for-zfs-on-linux/>`_.
 
 * First time OpenZFS users are encouraged to check out Aaron_Toponce_ ’s excellent documentation.
 
