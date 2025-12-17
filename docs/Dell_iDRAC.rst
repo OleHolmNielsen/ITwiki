@@ -46,10 +46,11 @@ Press *Finish* to save all settings.
 Dell iDRAC Tools 
 ----------------------
 
-Install the *Dell iDRAC Tools for Linux* by searching the servers *Downloads* page for 
-the *Systems Management* category.
+Install the *Dell iDRAC Tools for Linux* by searching the server's
+*Downloads* page for the *Systems Management* category.
 A tar-ball such as ``Dell-iDRACTools-Web-LX-11.4.0.0-1435_A00.tar.gz`` may be downloaded
 and used to install the Linux tools.
+The iDRAC tool packages are provided for a number of Linux distributions.
 
 SSH login to iDRAC
 ------------------
