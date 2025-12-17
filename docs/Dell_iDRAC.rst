@@ -43,6 +43,14 @@ Press *Finish* to save all settings.
 
 .. _iDRAC9: https://www.dell.com/support/article/us/en/04/sln311300/idrac9-home?lang=en
 
+Dell iDRAC Tools 
+----------------------
+
+Install the *Dell iDRAC Tools for Linux* by searching the servers *Downloads* page for 
+the *Systems Management* category.
+A tar-ball such as ``Dell-iDRACTools-Web-LX-11.4.0.0-1435_A00.tar.gz`` may be downloaded
+and used to install the Linux tools.
+
 SSH login to iDRAC
 ------------------
 
