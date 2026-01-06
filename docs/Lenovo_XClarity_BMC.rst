@@ -116,7 +116,7 @@ For example, you can use OneCLI_ to configure some desirable XCC networking para
 
 You may want to enable **IPMI over LAN** access defined as:
 
-  The **IPMI over LAN** specification defines how IPMI_ messages
+  The IPMI_ over LAN_ specification defines how messages
   for system health monitoring and hardware control are encapsulated in
   *Remote Management Control Protocol* (RMCP) UDP packets (port 623) for network transmission,
   enabling out-of-band management via the Baseboard Management Controller (BMC).
@@ -170,6 +170,7 @@ Enable promoting the primary BMC firmware to the backup firmware::
 .. _Out-of-band: https://en.wikipedia.org/wiki/Out-of-band_management
 .. _Virtual_Reseat: https://pubs.lenovo.com/mgt_tools_smm2/c_chassis_front_overview
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
+.. _LAN: https://en.wikipedia.org/wiki/Local_area_network
 
 Replicating UEFI configuration parameters
 ------------------------------------------
