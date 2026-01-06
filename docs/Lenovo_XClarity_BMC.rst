@@ -127,6 +127,7 @@ or by using OneCLI_::
 
   onecli misc portctrl ipmilan on
 
+See the ipmilan_ documentation.
 The **IPMI over LAN** configuration can be checked by::
 
   # onecli config show | grep IPMI
@@ -177,6 +178,7 @@ Enable promoting the primary BMC firmware to the backup firmware::
 .. _Virtual_Reseat: https://pubs.lenovo.com/mgt_tools_smm2/c_chassis_front_overview
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 .. _LAN: https://en.wikipedia.org/wiki/Local_area_network
+.. _ipmilan: https://pubs.lenovo.com/lxce-onecli/misc_portctrl_ipmilan_command
 
 Replicating UEFI configuration parameters
 ------------------------------------------
