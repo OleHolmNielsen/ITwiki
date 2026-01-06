@@ -116,9 +116,10 @@ For example, you can use OneCLI_ to configure some desirable XCC networking para
 
 You may want to enable **IPMI over LAN** access defined as:
 
-  The IPMI over LAN specification defines how Intelligent Platform Management Interface (IPMI_) messages,
-  for system health monitoring and hardware control, are encapsulated in Remote Management Control Protocol (RMCP)
-  UDP packets (port 623) for network transmission, enabling out-of-band management via the Baseboard Management Controller (BMC).
+  The **IPMI over LAN** specification defines how IPMI_ messages
+  for system health monitoring and hardware control are encapsulated in
+  *Remote Management Control Protocol* (RMCP) UDP packets (port 623) for network transmission,
+  enabling out-of-band management via the Baseboard Management Controller (BMC).
 
 This can be configured in the XClarity_ Controller GUI, see
 `How to enable IPMI over LAN within Lenovo XClarity Controller <https://support.lenovo.com/dk/da/solutions/ht514330-ipmi-over-lan-xcc>`_,
