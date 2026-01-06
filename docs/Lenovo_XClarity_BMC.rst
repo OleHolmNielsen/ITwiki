@@ -114,9 +114,9 @@ For example, you can use OneCLI_ to configure some desirable XCC networking para
   onecli config set IMM.MinPasswordLen 8
   onecli config set IMM.DDNS_Enable Disabled
 
-You may want to enable *IPMI over LAN* access::
+You may want to enable **IPMI over LAN** access defined as:
 
-  The IPMI over LAN specification defines how Intelligent Platform Management Interface (IPMI) messages,
+  The IPMI over LAN specification defines how Intelligent Platform Management Interface (IPMI_) messages,
   for system health monitoring and hardware control, are encapsulated in Remote Management Control Protocol (RMCP)
   UDP packets (port 623) for network transmission, enabling out-of-band management via the Baseboard Management Controller (BMC).
 
