@@ -127,6 +127,12 @@ or by using OneCLI_::
 
   onecli misc portctrl ipmilan on
 
+The **IPMI over LAN** configuration can be checked by::
+
+  # onecli config show | grep IPMI
+  IMM.Accessible_Interfaces.1=Web|SSH|Redfish|IPMI
+  IMM.CMMIPMIPortControl=Open
+
 Other useful OneCLI_ commands are::
 
   onecli config show
@@ -189,6 +195,9 @@ A summary output will be printed and a log file created, for example::
 	2 setting(s) fails replicating
 
 If any settings failed replicating, you should look for the reason in the log file.
+
+Unfortunately, the **IPMI over LAN** configuration explained above is **NOT** recorded in the output file,
+so this setting must be done manually.
 
 Optional: The ``noreplicate`` parameters may be printed by the command::
 
