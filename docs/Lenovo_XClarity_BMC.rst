@@ -114,6 +114,18 @@ For example, you can use OneCLI_ to configure some desirable XCC networking para
   onecli config set IMM.MinPasswordLen 8
   onecli config set IMM.DDNS_Enable Disabled
 
+You may want to enable *IPMI over LAN* access::
+
+  The IPMI over LAN specification defines how Intelligent Platform Management Interface (IPMI) messages,
+  for system health monitoring and hardware control, are encapsulated in Remote Management Control Protocol (RMCP)
+  UDP packets (port 623) for network transmission, enabling out-of-band management via the Baseboard Management Controller (BMC).
+
+This can be configured in the XClarity_ Controller GUI, see
+`How to enable IPMI over LAN within Lenovo XClarity Controller <https://support.lenovo.com/dk/da/solutions/ht514330-ipmi-over-lan-xcc>`_,
+or by using OneCLI_::
+
+  onecli misc portctrl ipmilan on
+
 Other useful OneCLI_ commands are::
 
   onecli config show
