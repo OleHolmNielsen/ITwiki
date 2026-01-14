@@ -198,16 +198,16 @@ A summary output will be printed and a log file created, for example::
 
 If any settings failed replicating, you should look for the reason in the log file.
 
-Unfortunately, the **IPMI over LAN** configuration explained above is **NOT** recorded in the output file,
-so this setting must be done manually.
+**Important**: Use the ``onecli config restore`` command **only** to restore previous settings on the **same** server.
 
-Optional: The ``noreplicate`` parameters may be printed by the command::
+The parameters which **cannot be replicated** may be printed by the command::
 
   onecli config show noreplicate
 
-**Important**:
+**Notice:** The **IPMI over LAN** configuration explained above **cannot** be replicated!
+You must set this parameter manually by::
 
-* Use the ``onecli config restore`` command **only** to restore previous settings on the **same** server.
+  onecli misc portctrl ipmilan on
 
 Edit the XCC system configuration file
 .......................................
