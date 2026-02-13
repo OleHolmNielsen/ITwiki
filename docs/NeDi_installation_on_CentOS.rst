@@ -33,7 +33,7 @@ Install these packages::
 
   dnf install gcc httpd mod_ssl php php-mysqlnd mariadb-server mariadb-devel php-snmp php-gd php-process patch net-snmp net-snmp-utils rrdtool rrdtool-perl tcpdump
   dnf install perl-Algorithm-Diff perl-Net-Telnet perl-Net-DNS perl-Socket6 perl-Test-Exception perl-DBD-MySQL perl-Module-Build perl-Net-SNMP
-  dnf install perl-CPAN perl-App-cpanminus
+  dnf install perl-CPAN perl-App-cpanminus perl-LWP-Protocol-https
 
 Now you can install the required CPAN_ modules::
 
