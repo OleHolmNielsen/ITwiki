@@ -113,7 +113,8 @@ Please read the section :ref:`list-disks` below.
 List HPE server's disks
 -----------------------------
 
-If using a HPE HBA controller, the disks in the system can be displayed using the ``ssacli`` command from the *ssacli* RPM package.
+If using a HPE HBA controller, the disks in the system can be displayed using the ``ssacli`` command from the *ssacli* RPM package,
+see :ref:`hpe_proliant_smartarray`.
 See the :ref:`hpe_proliant_smartarray` page.
 
 Example usage may be::
@@ -640,6 +641,16 @@ The RHEL page `How to rescan the SCSI bus to add or remove a SCSI device without
 has useful information about ``Adding a Storage Device or a Path``.
 You may scan the system for disk changes using ``/usr/bin/rescan-scsi-bus.sh`` from the `sg3_utils` package.
 Unfortunately, it may sometimes be necessary to reboot the server so that the OS will discover the replaced ``/dev/sd???`` disk device.
+
+Check HPE SmartArray disk status
+..................................
+
+The ssacli_ command (:ref:`hpe_proliant_smartarray`)
+can be used to list the status of all HPE SmartArray disks::
+
+  ssacli ctrl slot=1 pd all show status
+
+Grep for the string ``fail`` to identify any disk errors.
 
 Identify the broken disk
 ...........................
