@@ -645,7 +645,7 @@ Unfortunately, it may sometimes be necessary to reboot the server so that the OS
 Check HPE SmartArray disk status
 ..................................
 
-The ssacli_ command (:ref:`hpe_proliant_smartarray`)
+The ``ssacli`` command (from :ref:`hpe_proliant_smartarray`)
 can be used to list the status of all HPE SmartArray disks::
 
   ssacli ctrl slot=1 pd all show status
