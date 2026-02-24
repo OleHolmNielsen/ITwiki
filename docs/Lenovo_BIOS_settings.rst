@@ -75,6 +75,38 @@ Login with the above credentials.
 Note: These settings were made with XCC/BMC_ firmware versions dated from the fall of 2025.
 Older or newer firmwares may behave slightly differently.
 
+Most settings can be made using the ``onecli config replicate`` command during our automated OS installation
+(the script name is ``83_Lenovo_OneCLI``).
+However, some of the settings **must** be made manually in the BMC GUI 
+because the ``onecli config replicate`` command cannot perform these tasks.
+
+You **must** change the ``BMC Configuration->Network`` settings:
+
+* Select ``Obtain Hostname from DHCP``.
+  Alternatively, change the ``Host Name`` field to the BMC_'s DNS_ name. 
+
+* In the ``Ethernet Configuration`` field ``Method`` menu change the setting to ``DHCP enabled``
+  in stead of the default ``First DHCP, then static IP``
+  so that the BMC_ does not fall back to an unreachable private IP-address!
+
+* Set ``IPv6`` to ``Disabled``.
+
+* When done press ``Apply``.
+
+* Go to the ``User/LDAP`` menu.
+  Edit the user ``root`` (a small pencil icon).
+  In ``User accessible interface`` use the pull-down menu to add also ``IPMI over Lan``.
+  After this you are requested to enter a new password for the renamed ``root`` user.
+  Then click ``Apply``.
+
+MANUAL configuration of the BMC of a new server or replaced motherboard
+=============================================================================
+
+Most settings can be made using the ``onecli config replicate`` command during our automated OS installation
+(the script name is ``83_Lenovo_OneCLI``),
+but if you need to perform manual configurations,
+all the steps are listed below.
+
 BMC date and time configuration
 -------------------------------------
 
@@ -117,8 +149,9 @@ Therefore a complicated procedure is required for the user name change:
 
 * Logout user ``USERID`` from the BMC_ GUI, and login again as the ``root3`` user.
 
-* Go to the ``User/LDAP`` menu and change the original user name ``USERID`` into ``root``.
-  In ``User accessible interface`` use the pull-down menu to add also ``IPMI over Lan``.
+* Go to the ``User/LDAP`` menu and edit the user (a small pencil icon) to
+  change the original user name ``USERID`` into ``root``.
+  In user's ``User accessible interface`` use the pull-down menu to add also ``IPMI over Lan``.
   After this you are requested to enter a new password for the renamed ``root`` user.
   Then click ``Apply``.
 
