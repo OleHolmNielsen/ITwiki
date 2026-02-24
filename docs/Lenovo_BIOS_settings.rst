@@ -35,12 +35,11 @@ This can be read from the BMC_ GUI interface:
 
 * In the BMC_ web GUI go to ``Inventory->PCI Adapters`` and locate the desired Ethernet interface for the Linux OS.
   Click the right-arrow on the adapter, then select ``Physical ports`` and locate the ``Burned-in Address`` (MAC_address_).
-
-* It *may* be possible afterwards to find the adapter MAC_address_ in the menu item ``Server Configuration``
-  and click on the ``Adapters`` menu.
-
-* Identify the desired network adapter and read the MAC_address_ the ``Permanent Address`` heading.
   The MAC_address_ must be added to the DHCP_ server's configuration.
+
+* Optional: It *may* be possible afterwards to find the adapter MAC_address_ in the menu item ``Server Configuration``
+  and click on the ``Adapters`` menu.
+  Identify the desired network adapter and read the MAC_address_ the ``Permanent Address`` heading.
 
 XClarity Provisioning Manager
 ==================================
