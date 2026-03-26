@@ -155,9 +155,17 @@ You can also reconfigure just a single setting component with the ``-c`` flag, f
 
   racadm set -t xml -f config.xml -c NIC.Integrated.1-1-1 -b NoReboot
 
-To configure the UEFI_ boot order::
+Boot Order
+...................
 
-  racadm set bios.biosbootsettings.UefiBootSeq NIC.PxeDevice.1-1,Disk.SATAEmbedded.A-1
+Get system UEFI_ Boot Border::
+
+  racadm get bios.biosbootsettings.uefibootseq
+
+To set system UEFI_ Boot Border to PXE,Disk (reboot required)::
+
+  racadm set BIOS.BiosBootSettings.UefiBootSeq NIC.PxeDevice.1-1,Disk.SATAEmbedded.A-1
+  racadm jobqueue create BIOS.Setup.1-1
 
 or configure this setting in the `config.xml` file::
 
