@@ -258,6 +258,18 @@ Check the status of the pools::
 .. _VDEV: https://www.45drives.com/community/articles/how-zfs-organizes-its-data/
 .. _Hot_spare: https://en.wikipedia.org/wiki/Hot_spare
 
+Special Allocation Class
+----------------------------
+
+Allocations in the Special_class_ are dedicated to specific block types.
+By default, this includes all metadata, the indirect blocks of user data, intent log (in absence of separate log device), and deduplication tables.
+The class can also be provisioned to accept small file blocks or zvol blocks on a per dataset granularity.
+
+Pros and cons of the Special_class_ is also discussed in 
+`OpenZFS – Understanding ZFS vdev Types <https://klarasystems.com/articles/openzfs-understanding-zfs-vdev-types/>`_.
+
+.. _Special_class: https://openzfs.github.io/openzfs-docs/man/master/7/zpoolconcepts.7.html#Special_Allocation_Class
+
 Adding disks for an SLOG
 ------------------------------
 
