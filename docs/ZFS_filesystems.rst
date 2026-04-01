@@ -67,14 +67,14 @@ You may find a ZFS_web_archive_ copy of this documentation.
 Installation of ZFS
 =========================
 
-We assume an EL8_ OS in this page.
-Following the RHEL-based-distro_ guide, enable the *zfs-release* repo from ZFS_on_Linux_::
+We assume an RHEL_ family OS in this page.
+Following the RHEL-based-distro_ guide, enable the *zfs-release* version 3-0 repo from ZFS_on_Linux_::
 
-  dnf install https://zfsonlinux.org/epel/zfs-release-2-2$(rpm --eval "%{dist}").noarch.rpm
+  dnf install https://zfsonlinux.org/epel/zfs-release-3-0$(rpm --eval "%{dist}").noarch.rpm
 
-(The ``rpm --eval "%{dist}"`` command simply prints ``.el8`` or similar for your OS).
+(The ``rpm --eval "%{dist}"`` command simply prints ``.el8``, ``.el9`` or similar for your OS).
 
-Use the DKMS_ kernel module installation method::
+Use the DKMS_ kernel module installation method to get the current ZFS_ version::
 
   dnf install epel-release
   dnf install kernel-devel
@@ -87,7 +87,7 @@ Then activate the ZFS_ kernel module::
 The alternative *kABI-tracking kmod* installation method may break the ZFS_on_Linux_ software after kernel upgrades.
 
 .. _DKMS: https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support
-.. _EL8: https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives
+.. _RHEL: https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives
 
 Ansible management of ZFS
 ==============================
