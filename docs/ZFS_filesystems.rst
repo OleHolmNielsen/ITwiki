@@ -74,11 +74,11 @@ Following the RHEL-based-distro_ guide, enable the *zfs-release* version 3-0 rep
 
 (The ``rpm --eval "%{dist}"`` command simply prints ``.el8``, ``.el9`` or similar for your OS).
 
-Use the DKMS_ kernel module installation method to get the current ZFS_ version::
+Use the DKMS_ kernel module installation method to get the current ZFS_ version 2.4::
 
   dnf install epel-release
   dnf install kernel-devel
-  dnf install zfs
+  dnf install zfs-2.4
 
 Then activate the ZFS_ kernel module::
 
