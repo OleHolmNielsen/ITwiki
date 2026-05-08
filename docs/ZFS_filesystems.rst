@@ -795,13 +795,21 @@ The following command allows a normal user to print disk usage and quotas::
 Default quotas
 ------------------
 
-Unfortunately, the OpenZFS_ has no **default user quota** option,
-this is only available in the Oracle_Solaris_ZFS_ implementation, see the defaultuserquota_ page::
+Starting with OpenZFS_releases_ 2.4.0 there is finally a **default user quota** option,
+similar to what has been available in the Oracle_Solaris_ZFS_ implementation, see the defaultuserquota_ page.
+The details are reported in
+`Implement default user/group/project quotas including object quotas#17130 <https://github.com/openzfs/zfs/pull/17130>`_.
+
+Usage of quotas are in the manual pages for these commands::
 
   zfs set defaultuserquota=30gb <pool-name>
+  zfs userspace <pool-name>
 
-So with Linux OpenZFS_ you must set disk quotas individually for each user as shown above.
+The ``zfs userspace``, ``zfs groupspace``, and ``zfs projectspace`` commands display default quotas when no per-ID quotas exist.
 
+With earlier releases of OpenZFS_ prior to 2.4.0 you must set disk quotas individually for each user as shown above.
+
+.. _ZFS_releases: https://github.com/openzfs/zfs/releases
 .. _defaultuserquota: https://docs.oracle.com/cd/E53394_01/html/E54801/gazvb.html#SVZFSgpwey
 
 NFS sharing ZFS file systems
