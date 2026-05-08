@@ -806,6 +806,7 @@ Usage of quotas are in the manual pages for these commands::
   zfs userspace <pool-name>
 
 The ``zfs userspace``, ``zfs groupspace``, and ``zfs projectspace`` commands display default quotas when no per-ID quotas exist.
+Unfortunately, the ``zfs set`` manual page doesn't reflect the **defaultuserquota** option.
 
 With earlier releases of OpenZFS_ prior to 2.4.0 you must set disk quotas individually for each user as shown above.
 
