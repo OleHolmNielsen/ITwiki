@@ -810,7 +810,7 @@ Unfortunately, the ``zfs set`` manual page doesn't reflect the **defaultuserquot
 
 With earlier releases of OpenZFS_ prior to 2.4.0 you must set disk quotas individually for each user as shown above.
 
-.. _ZFS_releases: https://github.com/openzfs/zfs/releases
+.. _OpenZFS_releases: https://github.com/openzfs/zfs/releases
 .. _defaultuserquota: https://docs.oracle.com/cd/E53394_01/html/E54801/gazvb.html#SVZFSgpwey
 
 NFS sharing ZFS file systems
