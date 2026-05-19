@@ -183,11 +183,11 @@ Enable promoting the primary BMC firmware to the backup firmware::
 Replicating UEFI configuration parameters
 ------------------------------------------
 
-Saving the system configuration to a file::
+**Saving** the system configuration to a file::
 
   onecli config save --file <savetofilename> [--group <groupname>] [--excbackupctl] [<options>] # Save the current settings
 
-Replicating the system configuration from a file::
+**Replicating** the system configuration from a file::
 
   onecli config replicate --file <filename> [<options>] # Replicate the settings to ANOTHER system
 
