@@ -15,6 +15,7 @@ This page contains documentation on some hardware at our site.
    Dell_ME484
    C8220_server
    DellOS6
+   Supermicro_servers
    HPE_Proliant_SmartArray
    HP_Proliant_firmware_upgrade
    DL160_G6
