@@ -477,7 +477,7 @@ In order to backup the entire NeDi_ server to a different location (for disaster
      USER=root
      PWD='**********'
      DUMP_ARGS="--opt --flush-logs --quote-names"
-     DATABASES="--all-databases"
+     DATABASES="-B nedi"
      /usr/bin/mysqldump --host=$HOST --user=$USER --password=$PWD $DUMP_ARGS --result-file=$BACKUPFILE $DATABASES
 
    Write permission to $BACKUPFILE is required.
