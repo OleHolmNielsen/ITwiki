@@ -43,6 +43,8 @@ The commands to backup and restore XFS filesystems are installed by::
 
   yum install xfsdump
 
+.. _label_disk_with_parted:
+
 Label disk for large filesystems
 ==========================================
 
@@ -266,9 +268,11 @@ Extend a Logical Volume and XFS filesystem
 =======================================================
 
 To add additional disks to a logical volume the procedure is as follows.
-We assume that a new disk ``/dev/sdc1`` is available.
 
-Initialize the disk for LVM and add it to the volume group::
+First the disk must be labelled for LVM_ and XFS_ as described in :ref:`label_disk_with_parted`.
+This example assumes that a new disk ``/dev/sdc1`` is available.
+
+Initialize the disk for LVM_ and add it to a volume group named *vgxfs*::
 
   pvcreate /dev/sdc1
   vgextend vgxfs /dev/sdc1
@@ -277,12 +281,16 @@ Now that the Volume Group has available free space, the easiest way to extend th
 
   system-config-lvm
 
-If you prefer to do this with manual commands, here is an example:
-Add 80% of the newly added disk to the previously created Logical Volume::
+If you prefer to do this with manual commands, here are some examples::
 
-  lvextend -l +80%FREE /dev/mapper/vgxfs-lvxfs
+  lvextend -r --size 100T /dev/mapper/vgxfs-lvxfs
+  lvextend -r -l +80%FREE /dev/mapper/vgxfs-lvxfs
 
-Use the flag ``lvextend -r`` to resize the filesystem automatically.
+Notes:
+
+* The flag ``-r`` resizes the filesystem automatically.
+* The option *--size 100T* changes the filesystem size to the value indicated.
+* The option *+80%FREE* adds only 80% of the free disk space in the volume.
 
 The XFS filesystem can now be extended to occupy all of the available disk space added above.
 Assume that the XFS filesystem is mounted on ``/u3/raid``, then it is extended to occupy all available free disk space by::
