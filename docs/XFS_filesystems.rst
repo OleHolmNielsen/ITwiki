@@ -272,7 +272,7 @@ To add additional disks to a logical volume the procedure is as follows.
 First the disk must be labelled for LVM_ and XFS_ as described in :ref:`label_disk_with_parted`.
 This example assumes that a new disk ``/dev/sdc1`` is available.
 
-Initialize the disk for LVM_ and add it to a volume group named *vgxfs*::
+Initialize the disk as an LVM_ **physical volume** (PV) and add it to a volume group named *vgxfs*::
 
   pvcreate /dev/sdc1
   vgextend vgxfs /dev/sdc1
@@ -288,7 +288,7 @@ If you prefer to do this with manual commands, here are some examples::
 
 Notes:
 
-* The flag ``-r`` resizes the filesystem automatically.
+* The flag ``-r`` resizes the XFS_ filesystem automatically after expansion.
 * The option *--size 100T* changes the filesystem size to the value indicated.
 * The option *+80%FREE* adds only 80% of the free disk space in the volume.
 
