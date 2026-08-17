@@ -724,6 +724,11 @@ Remember to set the SELinux_ context::
 
   restorecon -v /usr/local/sbin/pxeconfigd
 
+Enable this service by::
+
+  systemctl enable pxeconfigd.socket
+  systemctl start pxeconfigd.socket
+
 .. _pxeconfig_toolkit: https://gitlab.com/surfsara/pxeconfig
 .. _pxeconfigd: https://gitlab.com/surfsara/pxeconfig/-/blob/master/src/pxeconfigd.py
 .. _pxeconfig: https://gitlab.com/surfsara/pxeconfig/-/blob/master/src/pxeconfig.py
