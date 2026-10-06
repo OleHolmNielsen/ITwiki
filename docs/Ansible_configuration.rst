@@ -102,6 +102,11 @@ Some useful Galaxy_ packages include:
 
     ansible-galaxy install linux-system-roles.network
 
+* `linux-system-roles.timesync <https://galaxy.ansible.com/ui/standalone/roles/linux-system-roles/timesync/install/>`_ Configure NTP and/or PTP
+  Install by::
+
+    ansible-galaxy role install linux-system-roles.timesync
+
 To upgrade a version from Galaxy_,
 you have to install it with the ``--force`` option::
 
