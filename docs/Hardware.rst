@@ -9,12 +9,6 @@ This page contains documentation on some hardware at our site.
 
    Lenovo_servers_and_racks
    Dell_servers_and_storage
-   Dell_R650
-   Dell_R640
-   Dell_C6420
-   Dell_ME484
-   C8220_server
-   DellOS6
    Supermicro_servers
    HPE_Proliant_SmartArray
    HP_Proliant_firmware_upgrade
