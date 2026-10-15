@@ -9,6 +9,7 @@ This page contains documentation on some hardware at our site.
 
    Lenovo_servers_and_racks
    Dell_servers_and_storage
+   DellOS6
    Supermicro_servers
    HPE_Proliant_SmartArray
    HP_Proliant_firmware_upgrade
