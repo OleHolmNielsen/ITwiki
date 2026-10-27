@@ -247,10 +247,6 @@ Add the Systemd_ services::
   systemctl status nedi-monitor.service
   systemctl status nedi-syslog.service
 
-On **EL7 systems** you must first install these scripts:
-
-* :download:`nedi-monitor <attachments/nedi-monitor>`
-* :download:`nedi-syslog <attachments/nedi-syslog>`
 * Copy files::
 
     chmod 755 nedi-monitor nedi-syslog 
@@ -348,8 +344,6 @@ When the Apache configuration test is OK, start the *httpd* service::
   systemctl enable httpd
   systemctl start httpd
   systemctl status httpd
-
-A nice introduction is `RHEL7: How to get started with Firewalld <https://www.certdepot.net/rhel7-get-started-firewalld/>`_.
 
 Configure firewalld_ rules for HTTP/HTTPS (ports 80,443) by adding::
 
