@@ -1,4 +1,4 @@
-.. _NeDi_installation_on_CentOS:
+.. _NeDi_installation_on_EL_Linux:
 
 ======================================================================
 NeDi installation and upgrading on RHEL EL8 and EL9 Linux (and clones)
@@ -262,7 +262,6 @@ We will use the Apache_ web server provided by the *httpd* RPM package.
 .. _Apache: https://httpd.apache.org/
 
 An SSL-encrypted NeDi_ web-page must be configured because critical information such as login passwords are used.
-For an introduction see `Setting up an SSL secured Webserver with CentOS <https://wiki.centos.org/HowTos/Https>`_.
 The unencrypted HTTP service on port 80 should be redirected to the SSL-encrypted port 443 (see https://wiki.apache.org/httpd/RedirectSSL) as shown in the example below.
 
 You may either use a self-signed SSL certificate, or use a commercial SSL certificate valid for your web server according to your site's security policies.
