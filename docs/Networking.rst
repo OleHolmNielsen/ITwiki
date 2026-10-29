@@ -8,7 +8,7 @@ Networking documentation
    Libreswan_IPsec_VPN
    Linux_firewall_configuration
    NeDi
-   NeDi_installation_on_CentOS
+   NeDi_installation_on_EL_Linux
    IPv6_configuration
    IPv6_deployment
    OpenSSH_configuration
