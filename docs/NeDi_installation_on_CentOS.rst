@@ -67,10 +67,6 @@ may be used to set up your own playbook for installing NeDi_ with Ansible_.
 NeDi installation on EL9 
 ------------------------------
 
-**WARNING:** At the time of writing (June 2023) NeDi version 2.3 does not yet support the MariaDB version 10.5,
-which is part of EL9 (RHEL 9 and clones).
-You have to use EL8 with MariaDB 10.3 in stead.
-
 The EL9 MariaDB_ database is version 10.5.
 See the 10.5 release notes at https://mariadb.com/kb/en/changes-and-improvements-in-mariadb-10-5/
 Note this new driver::
@@ -476,6 +472,9 @@ In order to backup the entire NeDi_ server to a different location (for disaster
 
    Write permission to $BACKUPFILE is required.
 
+   **IMPORTANT:** Only the ``nedi`` database should be backed up with ``-B nedi``,
+   if you include *all* databases in the dump you will get an error while restoring the database.
+
 Make regular database dumps, for example by a *crontab* job::
 
   # MySQL database backup
@@ -509,10 +508,6 @@ If you for some reason need to drop the existing MySQL_ database, the NeDi_ comm
 
 Upgrade of MySQL/MariaDB
 ..........................
-
-NOTE: At the time of writing (June 2023) NeDi version 2.3 does not yet support the MariaDB version 10.5,
-which is part of EL9 (RHEL 9 and clones).
-You have to use EL8 with MariaDB 10.3.
 
 If you restore a database dump onto a different server running a **newer MySQL or MariaDB version**
 there are some extra steps:
