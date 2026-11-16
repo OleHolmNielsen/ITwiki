@@ -31,6 +31,20 @@ Startup menus:
 
 **Note:** The NIC MAC addresses must be read from the BMC web interface, or from the printed server configuration report.
 
+Setting a one-time PXE boot
+----------------------------
+
+Setting a one-time UEFI PXE boot using ipmitool_::
+
+  ipmitool -I lanplus -H <BMC_IP_ADDRESS> -U <USERNAME> -P <PASSWORD> chassis bootdev pxe options=efiboot
+
+and restart the server.
+It is possible to restart the server with::
+
+  ipmitool chassis power reset 
+
+.. _ipmitool: https://sourceforge.net/projects/ipmitool/
+
 Boot menu
 ---------
 

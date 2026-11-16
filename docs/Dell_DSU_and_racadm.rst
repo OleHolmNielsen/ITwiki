@@ -155,6 +155,17 @@ You can also reconfigure just a single setting component with the ``-c`` flag, f
 
   racadm set -t xml -f config.xml -c NIC.Integrated.1-1-1 -b NoReboot
 
+Setting a one-time PXE boot
+...............................
+
+You can make a one-time PXE boot::
+
+  racadm set iDRAC.ServerBoot.FirstBootDevice PXE
+
+and reboot the server.oThis may also be done with::
+
+  racadm serveraction powercycle
+
 Boot Order
 ...................
 

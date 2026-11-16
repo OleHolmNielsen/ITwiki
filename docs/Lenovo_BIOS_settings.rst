@@ -18,6 +18,18 @@ Booting and BIOS configuration
 
 Note: The Lenovo UEFI_ boot goes through PEI_ and DXE_ phases before booting the OS.
 
+Setting one-time boot device from the BMC CLI
+------------------------------------------------
+
+If you can login to the BMC_ CLI, you can set a one-time boot device::
+
+  # ssh -i .ssh/id_dsa <BMC-address>
+  Password:
+  system> pxeboot -en enabled
+  ok
+
+Note that you may have to specify a single, working SSH key.
+
 .. _UEFI: https://en.wikipedia.org/wiki/UEFI
 .. _PEI: https://uefi.org/specs/PI/1.8/V1_Services_PEI.html
 .. _DXE: https://uefi.org/specs/PI/1.8/V2_Overview.html
