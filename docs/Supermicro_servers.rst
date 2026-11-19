@@ -36,7 +36,8 @@ Setting a one-time PXE boot
 
 Setting a one-time UEFI PXE boot using ipmitool_::
 
-  ipmitool -I lanplus -H <BMC_IP_ADDRESS> -U <USERNAME> -P <PASSWORD> chassis bootdev pxe options=efiboot
+  ipmitool chassis bootdev pxe options=efiboot          # Local
+  ipmitool -I lanplus -H <BMC_IP_ADDRESS> -U <USERNAME> -P <PASSWORD> chassis bootdev pxe options=efiboot       # Via network
 
 and restart the server.
 It is possible to restart the server with::
