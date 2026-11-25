@@ -907,18 +907,29 @@ explains checking if the DKMS_ key actually enrolled and loaded::
   sudo keyctl list %:.platform
 
 You should see the DKMS_ module signing key in one of the two keyrings.
-If not, import the MOK_ key::
+If not, make a MOK_ key import request::
 
   sudo mokutil --import /var/lib/dkms/mok.pub 
+
+A (temporary) password for the key must be input,
+and it will be required for the `MokManager` screen below.
 
 Reboot the server.
 You can enable `Secure Boot`_ in the BIOS at this point.
 
-Before the OS is started, the BIOS will present a blue `MokManager` screen to **Enroll MOK**
-for the DKMS_ module imported above:
+Before the OS is started, the BIOS will present a blue `MokManager` (*shim UEFI key manager*) screen
+to **Enroll MOK** for the DKMS_ module imported above.
+
+Quickly press the ``Enroll MOK`` item, then press to enroll the key where you enter the above password.
+When the import is complete, `MokManager` requests a reboot of the server.
+
+Notes:
 
 * `MokManager` is a UEFI_ utility launched by the Linux shim_ bootloader to manage Machine Owner Keys (MOK_)
   and binary hashes when UEFI_ `Secure Boot`_ is enabled.
+
+* The `MokManager` tool has a timeout of 10 seconds and if the timeout is exceeded,
+  the server boots normally and you must then repeat the above MOK_ key import request.
 
 When the server is booted, the ZFS_ kernel modules will be loaded correctly.
 You can use the above ``mokutil`` and ``keyctl`` commands to verify the keys.
