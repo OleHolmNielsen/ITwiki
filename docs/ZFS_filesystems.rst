@@ -897,7 +897,7 @@ When you enable `Secure Boot`_ in the system BIOS,
 any ZFS_ kernel modules will by default be rejected because they are unsigned in the BIOS.
 
 With ZFS_ version 2.4 (and perhaps earlier?) `Secure Boot`_ configuration can be setup.
-The ZFS_ installation creates a signing key ``/var/lib/dkms/mok.pub`` which can be imported into the BIOS.
+The ZFS_ installation creates a DKMS_ signing key ``/var/lib/dkms/mok.pub`` which can be imported into the BIOS.
 The article `OpenZFS work with secure boot <https://www.reddit.com/r/zfs/comments/1y06xmb/need_help_making_openzfs_work_with_secure_boot_on/>`_
 explains checking if the DKMS_ key actually enrolled and loaded::
 
@@ -917,21 +917,22 @@ and it will be required for the `MokManager` screen below.
 Reboot the server.
 You can enable `Secure Boot`_ in the BIOS at this point.
 
-Before the OS is started, the BIOS will present a blue `MokManager` (*shim UEFI key manager*) screen
-to **Enroll MOK** for the DKMS_ module imported above.
+When the OS is booting, the BIOS will present a blue `MokManager` (*shim UEFI key manager*) screen
+to ``Enroll MOK`` for the DKMS_ module imported above.
 
-Quickly press the ``Enroll MOK`` item, then press to enroll the key where you enter the above password.
+Quickly press the ``Enroll MOK`` item, then press to enroll the DKMS_ key where you have to enter the above password.
 When the import is complete, `MokManager` requests a reboot of the server.
 
 Notes:
 
-* `MokManager` is a UEFI_ utility launched by the Linux shim_ bootloader to manage Machine Owner Keys (MOK_)
+* `MokManager` is a UEFI_ utility launched by the Linux shim_ bootloader to manage *Machine Owner Keys* (MOK_)
   and binary hashes when UEFI_ `Secure Boot`_ is enabled.
 
-* The `MokManager` tool has a timeout of 10 seconds and if the timeout is exceeded,
-  the server boots normally and you must then repeat the above MOK_ key import request.
+* The `MokManager` tool has a timeout of 10 seconds, and if the timeout is exceeded
+  the server boots normally 
+  Then you must repeat the above MOK_ key import request process.
 
-When the server is booted, the ZFS_ kernel modules will be loaded correctly.
+When the server has been booted, the ZFS_ kernel modules will be loaded correctly.
 You can use the above ``mokutil`` and ``keyctl`` commands to verify the keys.
 
 .. _Secure Boot: https://en.wikipedia.org/wiki/UEFI#Secure_Boot
