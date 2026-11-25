@@ -895,6 +895,7 @@ Secure Boot and ZFS
 
 When you enable `Secure Boot`_ in the system BIOS, 
 any ZFS_ kernel modules will by default be rejected because they are unsigned in the BIOS.
+Any ZFS_ pools in the system will consequently be unavailable, and you need to take some actions.
 
 With ZFS_ version 2.4 (and perhaps earlier?) `Secure Boot`_ configuration can be setup.
 The ZFS_ installation creates a DKMS_ signing key ``/var/lib/dkms/mok.pub`` which can be imported into the BIOS.
