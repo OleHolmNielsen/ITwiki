@@ -889,3 +889,41 @@ To import a specific pool::
 
 .. _zpool_export: https://openzfs.github.io/openzfs-docs/man/master/8/zpool-export.8.html
 .. _zpool_import: https://openzfs.github.io/openzfs-docs/man/master/8/zpool-import.8.html
+
+Secure Boot and ZFS
+=======================
+
+When you enable `Secure Boot`_ in the system BIOS, 
+any ZFS_ kernel modules will by default be rejected because they are unsigned in the BIOS.
+
+With ZFS 2.4_ (maybe earlier) `Secure Boot`_ configuration can be setup.
+The ZFS_ installation creates a signing key ``/var/lib/dkms/mok.pub`` which can be imported into the BIOS.
+The article `OpenZFS work with secure boot <https://www.reddit.com/r/zfs/comments/1y06xmb/need_help_making_openzfs_work_with_secure_boot_on/>`_
+explains checking if the DKMS_ key actually enrolled and loaded::
+
+  mokutil --sb-state
+  mokutil --test-key /var/lib/dkms/mok.pub
+  sudo keyctl list %:.machine
+  sudo keyctl list %:.platform
+
+You should see the DKMS_ module signing key in one of the two keyrings.
+If not, import the MOK_ key::
+
+  sudo mokutil --import /var/lib/dkms/mok.pub 
+
+Reboot the server.
+You can enable `Secure Boot`_ in the BIOS at this point.
+
+Before the OS is started, the BIOS will present a blue `MokManager` screen to **Enroll MOK**
+for the DKMS_ module imported above:
+
+* `MokManager` is a UEFI_ utility launched by the Linux shim_ bootloader to manage Machine Owner Keys (MOK_)
+  and binary hashes when UEFI_ `Secure Boot`_ is enabled.
+
+When the server is booted, the ZFS_ kernel modules will be loaded correctly.
+You can use the above ``mokutil`` and ``keyctl`` commands to verify the keys.
+
+.. _Secure Boot: https://en.wikipedia.org/wiki/UEFI#Secure_Boot
+.. _UEFI: https://en.wikipedia.org/wiki/UEFI
+.. _shim: https://github.com/rhboot/shim/blob/main/README.md
+.. _MOK: https://www.baeldung.com/linux/mok-machine-owner-key
