@@ -15,9 +15,10 @@ The concept is to have DKMS_ modules automatically rebuilt when a new kernel is 
 Dynamic Kernel Modules are typically used for:
 
 * GPU drivers (NVIDIA/AMD/...)
-* :ref:`ZFS_filesystems`
+* ZFS_ filesystems (see :ref:`ZFS_filesystems`)
 * Infiniband_ network adapters
 
+.. _ZFS: https://en.wikipedia.org/wiki/ZFS
 .. _Infiniband: https://en.wikipedia.org/wiki/InfiniBand
 
 Secure Boot and DKMS
