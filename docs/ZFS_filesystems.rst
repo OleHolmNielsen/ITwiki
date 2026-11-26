@@ -897,7 +897,7 @@ When you enable `Secure Boot`_ in the system UEFI_/BIOS,
 any ZFS_ kernel modules will by default be rejected because they are unsigned in the UEFI_/BIOS.
 Any ZFS_ pools in the system will consequently be unavailable, and you need to take some actions.
 
-Please see the DKMS_Kernel_Module_Support_ page for further details on configuration.
+Please see the :ref:`DKMS_Kernel_Module_Support` page for further details on configuration.
 
 .. _Secure Boot: https://en.wikipedia.org/wiki/UEFI#Secure_Boot
 .. _UEFI: https://en.wikipedia.org/wiki/UEFI
