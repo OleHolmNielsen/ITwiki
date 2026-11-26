@@ -36,67 +36,19 @@ UEFI Secure Boot and signed kernel modules
 ---------------------------------------------
 
 * `Installing Virtualbox and Secure Boot / Kernel Signing <https://forums.virtualbox.org/viewtopic.php?t=113162>`_.
-* DKMS_ `Module signing <https://github.com/dkms-project/dkms#module-signing>`_.
-  See also the file ``/etc/dkms/framework.conf``.
 
-This procedure for signing kernel modules may work:
+When you enable `Secure Boot`_ in the system UEFI_/BIOS,
+any kernel modules will by default be rejected because they are unsigned in the UEFI_/BIOS.
 
-1. Generate an X509_ key pair (with a lifetime of 100 years) to the ``/var/lib/shim-signed/mok`` folder::
+You will need to take some actions.
+Please see the :ref:`DKMS_Kernel_Module_Support` page for further details on configuration.
 
-     openssl req -nodes -new -x509 -newkey rsa:2048 -outform DER -addext "extendedKeyUsage=codeSigning" -keyout /var/lib/shim-signed/mok/MOK.priv -out /var/lib/shim-signed/mok/MOK.der -days 36500 -subj "/CN=LOCALMOK/"
-     openssl x509 -inform DER -in /var/lib/shim-signed/mok/MOK.der -text -noout
-
-2. Collect the following files and form an enrolling request to shim. The files must be in DER_ format::
-
-     mokutil --import /var/lib/shim-signed/mok/MOK.der
-
-3. Reboot the server.
-   During startup the server's UEFI_ menu will start, allowing to enroll keys to UEFI_,
-   see `Machine Owner Key Enrollment <https://docs.fedoraproject.org/en-US/quick-docs/mok-enrollment/>`_.
-
-   Security Implications:
-   Note that the enrolled machine owner key will be used to sign any future updates to the module or 
-   any other module you will decide to install and they will be implicitly trusted.
-   All future updates will happen transparently with no interaction and/or authorization.
-   Therefore, it’s recommended to delete the machine owner key when it’s no longer needed.
-
-4. The following script will sign the VirtualBox.org_ kernel modules::
-
-     #!/bin/bash
-     readonly dir=/var/lib/shim-signed/mok
-     readonly key="$dir/MOK.priv"
-     readonly x509="$dir/MOK.der"
-     readonly hash_algo="sha256"
-     [ -z "${KBUILD_SIGN_PIN}" ] && read -sp "Passphrase for ${key}: " KBUILD_SIGN_PIN
-     export KBUILD_SIGN_PIN
-     sign_file="/usr/src/kernels/$(uname -r)/scripts/sign-file"
-     libdir="/usr/lib/modules/$(uname -r)/misc"
-     echo "Files are:"
-     ls -la $sign_file $libdir
-     $sign_file "${hash_algo}" "${key}" "${x509}" "$libdir/vboxdrv.ko"
-     $sign_file "${hash_algo}" "${key}" "${x509}" "$libdir/vboxnetflt.ko"
-     $sign_file "${hash_algo}" "${key}" "${x509}" "$libdir/vboxnetadp.ko"
-     echo "Loading modules:"
-     modprobe vboxdrv
-     modprobe vboxnetflt
-     modprobe vboxnetadp
-     echo "Verify modules:"
-     lsmod | grep vbox
-
-DKMS MOK keys
-..................
-
-An alternative for DKMS_ may be to generate keys::
-
-  # dkms generate_mok
-  Signing key: /var/lib/dkms/mok.key
-  Public certificate (MOK): /var/lib/dkms/mok.pub
-
-Enroll the keys as described in the DKMS_ `Secure Boot <https://github.com/dkms-project/dkms#secure-boot>`_ page.
-
-.. _UEFI: https://en.wikipedia.org/wiki/UEFI
 .. _X509: https://en.wikipedia.org/wiki/X.509
 .. _DER: https://www.ssl.com/guide/pem-der-crt-and-cer-x-509-encodings-and-conversions/
+.. _Secure Boot: https://en.wikipedia.org/wiki/UEFI#Secure_Boot
+.. _UEFI: https://en.wikipedia.org/wiki/UEFI
+.. _shim: https://github.com/rhboot/shim/blob/main/README.md
+.. _MOK: https://www.baeldung.com/linux/mok-machine-owner-key
 
 Test builds
 ===========
