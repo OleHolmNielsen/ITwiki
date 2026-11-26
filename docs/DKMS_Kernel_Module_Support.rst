@@ -21,11 +21,14 @@ Dynamic Kernel Modules are typically used for:
 Secure Boot and DKMS
 =======================
 
-When you enable `Secure Boot`_ in the system BIOS, 
+When you enable `Secure Boot`_ in the system BIOS for the first time, 
 any DKMS_ kernel modules will by default be rejected because they are unsigned in the BIOS.
-Some actions need to be taken.
+As described in the `DKMS project`_ page,
+on an UEFI_ system with `Secure Boot`_ enabled, modules require signing before they can be loaded,
+and the firmware of the system must know the correct public certificate to verify the module signature.
 
-The DKMS_ installation creates a DKMS_ signing key ``/var/lib/dkms/mok.pub`` which can be imported into the BIOS.
+The DKMS_ software installation (``dkms generate_mok``)
+creates a DKMS_ signing key ``/var/lib/dkms/mok.pub`` which can be imported into the BIOS.
 The article `OpenZFS work with secure boot <https://www.reddit.com/r/zfs/comments/1y06xmb/need_help_making_openzfs_work_with_secure_boot_on/>`_
 explains how to check whether the DKMS_ key is actually enrolled and loaded in UEFI_/BIOS::
 
@@ -34,8 +37,12 @@ explains how to check whether the DKMS_ key is actually enrolled and loaded in U
   sudo keyctl list %:.machine
   sudo keyctl list %:.platform
 
+You can list the enrolled certificate with the mokutil_ command::
+
+  mokutil --list-enrolled | grep DKMS
+
 You should see the DKMS_ module signing key in one of the two keyrings.
-If not, make a MOK_ key import request to the UEFI_/BIOS::
+If not, use mokutil_ to make a MOK_ key import request to the UEFI_/BIOS::
 
   sudo mokutil --import /var/lib/dkms/mok.pub 
 
@@ -68,3 +75,5 @@ You can use the above ``mokutil`` and ``keyctl`` commands to verify the keys.
 .. _UEFI: https://en.wikipedia.org/wiki/UEFI
 .. _shim: https://github.com/rhboot/shim/blob/main/README.md
 .. _MOK: https://www.baeldung.com/linux/mok-machine-owner-key
+.. _mokutil: https://man.archlinux.org/man/extra/mokutil/mokutil.1.en
+.. _DKMS project: https://github.com/dkms-project/dkms/blob/main/README.md#secure-boot
