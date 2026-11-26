@@ -71,7 +71,7 @@ Notes:
   and binary hashes when UEFI_ `Secure Boot`_ is enabled.
 
 * The `MokManager` tool has a timeout of 10 seconds, and if the timeout is exceeded
-  the server boots normally 
+  the server boots normally.
   Then you must repeat the above MOK_ key import request process.
 
 When the server has been booted, the DKMS_ kernel modules will be loaded correctly.
