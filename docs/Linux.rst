@@ -20,6 +20,7 @@ Linux public documentation
    DNS-servers
    XFS_filesystems
    ZFS_filesystems
+   DKMS
    Samba
    Docker_containers
    VirtualBox
