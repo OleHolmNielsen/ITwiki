@@ -31,8 +31,8 @@ As described in the `DKMS project`_ page,
 on an UEFI_ system with `Secure Boot`_ enabled, modules require signing before they can be loaded,
 and the firmware of the system must know the correct public certificate to verify the module signature.
 
-The DKMS_ software installation uses ``dkms generate_mok`` to create a DKMS_ signing key ``/var/lib/dkms/mok.pub``
-which can be imported into the UEFI_/BIOS.
+The DKMS_ software installation executes the command ``dkms generate_mok``
+to create a DKMS_ signing key ``/var/lib/dkms/mok.pub`` which can be imported into the UEFI_/BIOS.
 The article `OpenZFS work with secure boot <https://www.reddit.com/r/zfs/comments/1y06xmb/need_help_making_openzfs_work_with_secure_boot_on/>`_
 explains how to check whether the DKMS_ key is actually enrolled and loaded in UEFI_/BIOS::
 
@@ -44,6 +44,8 @@ explains how to check whether the DKMS_ key is actually enrolled and loaded in U
 You can list the enrolled certificate with the mokutil_ command::
 
   mokutil --list-enrolled | grep DKMS
+        Issuer: CN=DKMS module signing key
+        Subject: CN=DKMS module signing key
 
 You should see the DKMS_ module signing key in one of the two keyrings.
 If not, use mokutil_ to make a MOK_ key import request to the UEFI_/BIOS::
