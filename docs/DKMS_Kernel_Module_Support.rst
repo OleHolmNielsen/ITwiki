@@ -59,7 +59,8 @@ Reboot the server.
 You can enable `Secure Boot`_ in the BIOS at this point.
 
 When the OS is booting, the BIOS will present a blue `MokManager` (*shim UEFI key manager*) screen
-to ``Enroll MOK`` for the DKMS_ module imported above.
+to ``Enroll MOK`` for the DKMS_ module imported above,
+as documented in the `DKMS project`_ page.
 
 Quickly press the ``Enroll MOK`` item, then press to enroll the DKMS_ key where you have to enter the above password.
 When the import is complete, `MokManager` requests a reboot of the server.
